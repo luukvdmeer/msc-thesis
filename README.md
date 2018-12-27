@@ -1,4 +1,4 @@
-# Master thesis for the Master of Science in Geospatial Technologies
+# Thesis for the Master of Science in Geospatial Technologies
 
 Documentation of my master thesis **Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems**. The master thesis is the final part of the master program in [Geospatial Technologies](http://mastergeotech.info/).
 
