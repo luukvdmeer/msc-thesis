@@ -1,0 +1,177 @@
+---
+title: "A Spatiotemporal Prediction Model for Dockless Bike Sharing Systems"
+subtitle: "Master Thesis Presentation II"
+author: "Lucas van der Meer"
+date: "November 14, 2018"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r loaddata, include=FALSE}
+load('Pres2.RData')
+```
+
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Just to remember..
+
+### Predict the distance to the nearest available bike
+
+```{r, echo = FALSE, fig.width=12}
+knitr::include_graphics("images/distance.png")
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+class: center, middle
+
+# Today: Experimental setup
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Select a number of points
+
+```{r echo=FALSE, message=FALSE, fig.width=14}
+require(tmap)
+tmap_mode('view')
+
+locationmap
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Query historical data
+
+```{r echo=FALSE, message=FALSE, fig.width=14}
+require(tsibble)
+require(fable)
+require(ggplot2)
+require(dplyr)
+
+ts_tsibble %>% filter(id == 'FD_1') %>% autoplot(distance)
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Cluster based on similarity
+
+```{r echo=FALSE, message=FALSE, fig.width=14}
+tmap_mode('view')
+clustermap
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Identify patterns
+
+```{r echo=FALSE, message=FALSE, fig.width=14}
+require(plotly)
+
+ggplotly(weekplot)
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Challenges of the data
+
+### - Multiple seasonality (both daily and weekly patterns)
+### - But not everywhere!
+### - Non-negativity (you can’t have negative distance)
+### - Lots of data!
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Multiple seasonality
+
+```{r, message=FALSE, echo=FALSE, fig.width=14}
+require(forecast)
+
+decomposeplot
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Multiple seasonality
+
+```{r, echo=FALSE, fig.width=15}
+forecastplot
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Lots of data
+
+### Fitting a good model at each prediction request will probably be too timeconsuming
+
+.pull-left[
+### Option 1
+
+- One fitted model per cluster
+- New data will take model parameters from its clusters model
+]
+
+.pull-right[
+
+### Option 2
+- Fitted models for a limited number of points
+- New data will take model parameters from its closest points model
+]
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 90% 4%
+
+# Wrap up
+
+```{r, echo = FALSE, fig.width=11}
+knitr::include_graphics("images/Workflow.png")
+```
+
+---
+background-image: url('images/logo.png')
+background-size: 100px
+background-position: 50% 30%
+
+class: center, middle
+
+# Thank you!
