@@ -1,0 +1,39 @@
+---
+title: "Setup"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter 1: Introduction
+## 1.1 Context
+## 1.2 Related work
+## 1.3 Research objectives
+## 1.4 Outline
+
+# Chapter 2: Theoretical background
+## 2.1 Time series definition
+## 2.2 Time series characteristics
+## 2.3 Time series components
+## 2.4 Time series clustering
+
+# Chapter 3: Model architecture
+## 3.1 Overall design
+## 3.2 Cluster loop
+## 3.3 Model loop
+## 3.4 Forecast loop
+
+# Chapter 4: Data
+## 4.1 Data sources
+## 4.2 Exploratory data analysis
+
+# Chapter 5: Experimental design
+
+# Chapter 6: Results & Discussion
+## 6.1 Period length
+## 6.2 Model evaluation
+## 6.3 Forecast accuracy
+
+# Chapter 7: Conclusions & Future work
