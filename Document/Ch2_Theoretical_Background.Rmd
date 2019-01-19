@@ -225,7 +225,7 @@ $$
 
 Where $\nabla^{d}y_{t}$ is the $d$-th order difference of $y_{t}$. Note here that ARIMA($p$, $d$, $q$) is a general form of all the other models discussed earlier in this section. For example, an AR(1) model can also be written as ARIMA(1,0,0), an ARMA(2,1) as ARIMA(1,0,2), and so on.
 
-The process of finding an appropriate ARIMA($p$, $d$, $q$) model that represents an time series is known as the Box-Jenkins modelling procedure and consists of three stages, named model selection, parameter estimation and model checking. All these stages are described seperately in the next three subsections.
+The process of finding an appropriate ARIMA($p$, $d$, $q$) model that represents a time series is known as the Box-Jenkins modelling procedure and consists of three stages, named model selection, parameter estimation and model checking. All these stages are described seperately in the next three subsections.
 
 ### 2.4.2.2 Model selection
 ### 2.4.2.3 Parameter estimation
@@ -236,3 +236,42 @@ The process of finding an appropriate ARIMA($p$, $d$, $q$) model that represents
 ## 2.4.4 Transformations
 
 # 2.5 Time series clustering
+## 2.5.1 Dissimilarity measures
+Time series clustering is a specific domain within the field of time series analysis. Given a set of individual time series, its objective is to group similar time series into the same cluster [@keogh2005]. Logically, this involves the calculation of a measure that represents the similarity, or dissimilarity, between two time series. Whenever the time series are of the same length, and observed at the same timestamps, a simple dissimilarity measure can be calculated by summing the ordered point-to-point distances between them. The most used distance function, in this sense, is the Euclidean distance, as defined in Equation 2.x [@cassisi2012].
+
+$$ d(Y,X) = \sqrt{\sum_{t=1}^{n}(y_{t}-x_{t})^{2}} $$
+
+Where $d(X,Y)$ is the dissimilarity value between time series $Y$ and $X$, $y_{t}$ and $x_{t}$ are the observations in respectively $Y$ and $X$ at time $t$, and $n$ is the length of $Y$ and $X$. A higher value of $d(X,Y)$ implies less similar time series. By definition, $d(X,Y) \geq 0$.
+
+Using Euclidean distance as a dissimilarity measure is simple, but has drawbacks for certain applications. For example, it can not handle time series of different length, it is sensitive to outliers, and it can not capture out-of-phase similarities, which occur when two time series show similar patterns, but shifted over time. To deal with one or more of these drawbacks, several other dissimilarity measures for time series were developed, of which the *dynamic time warping distance* is best known. Dynamic time warping is based on classical algorithms for comparing discrete sequences with continuous sequences, and basically replaces the one-to-one comparison of Euclidean distances with a many-to-one comparison. However, despite its simplicity, the Euclidean distance approach still turns out to be very competitive with the more complex methods [@cassisi2012].
+
+Once the dissimilarity values for all possible combinations between the analyzed time series are calculated, they are stored in an $n \times n$ matrix, where $n$ is the number of analyzed time series, and the diagonal entries equal zero. Such a matrix is commonly refered to as a dissimilarity matrix. Its elements can be clustered by using conventional clustering algorithms. In time series analysis, k-means clustering and hierarchical clustering are the most popular options for this task [@wang2006]. The latter is used in this thesis, and its theory will be summarized briefly in the next sub-section, based on @gan2007, Chapter 7 and Chapter 17.
+
+## 2.5.2 Hierarchical clustering
+Hierarchical clustering algorithms divide a set of data points into a sequence of nested partitions, where each partition consists of a different number of clusters. Two main types are distinguished: *agglomerative* hierarchical clustering, and *divisive* hierarchical clustering. In the first, the starting point is a partition in which all data points form a cluster on their own. Then, the two closest clusters, based on a pre-defined dissimilarity measure, are merged. This process is repeated until all data points are in one single cluster. The divisive method works the other way around: all data points start in the same cluster, which is split repeatedly, until the number of clusters equals the number of data points. Agglomerative hierarchical clustering is the most popular of the two types, and will be the focus of this section.
+
+Again, defining a suitable dissimilarity measure is a core task in the process. The simplest way of doing so, is known as the *single link method*, where the dissimilarity value between two clusters is defined as the shortest possible distance from a data point in the first cluster, to a data point in the second cluster. In contradiction, the *complete link method* calculates the dissimilarity value as being the longest possible distance from a data point in the first cluster, to a data point in the second cluster. Other methods include the *group average method*, which calculates the average of the shortest distances between all possible pairs of data points, and the *centroid method*, which calculates the shortest distance between the cluster centroids. In all cases, the Euclidean distance is usually used as the distance function.
+
+A slightly more sophisticated approach is known as the *Ward method*, developed by @ward1963. In this method, the dissimilarity between two clusters is defined as the loss of information when the clusters are merged. The information loss of a merge between two clusters is quantified with Equation 2.x.
+
+$$ \Delta I = ESS(C_{m}) - ESS(C_{1}) - ESS(C_{2}) $$
+
+Where $\Delta I$ is the information loss, $C_{m}$ is the merge between clusters $C_{1}$ and $C_{2}$, and $ESS$ stands for the *error sum of squares*. The $ESS$ of a cluster $C$ can be calculated with Equation 2.x.
+
+$$ ESS(C) = \sum_{i = 1}^{n} (c_{i} - \mu(C))^{2} $$
+
+Where $c_{i}$ are the data points in $C$, $\mu(C)$ is the centroid of $C$, and $n$ is the number of data points in $C$.
+
+Since a hierarchical clustering algorithm produces a sequence of partitions, it is not needed to define the desired number of clusters, $k$, in advance. However, if one is interested in obtaining only one single partition, it is necessary to find a suitable value of $k$. It is common practice to do so by visually interpreting the dendrogram of the hierarchical clustering, which is a diagram representing the output in a tree structure, but automated approaches have been developed as well. Most of them are based on the idea that in an ideal situation, clusters are compact and clearly seperated from each other. However, minimizing the variance within the clusters will always favor the situation where each data point forms a cluster on its own, while maximizing the variance between the clusters will always favor the situation where all data points are together in one cluster. Therefore, most approaches combine those two operations, in order to find the best possible partition.
+
+An example of such an approach is the *Dunn Index*, developed by @dunn1974. For a specific partition into $k$ clusters, it calculates the ratio of the smallest distance between two data points that are not in the same cluster to the largest distance between two data points that are in the same cluster. This is shown in Equation 2.x.
+
+$$ V(\Lambda_{k}) = \min \Bigg\{ \min \Bigg(\frac{D(C_{i}, C_{j})}{\max diam(C_{l})} \Bigg) \Bigg\} $$
+
+Where $V(\Lambda_{k})$ is the Dunn Index of a partition $\Lambda_{k}$ with $k$ clusters, $1 \leq i, j, l \leq k$, $D(C_{i}, C_{j})$ is the shortest Euclidean distance between a data point in cluster $C_{i} \in \Lambda_{k}$ and a data point in cluster $C_{j} \in \Lambda_{k}$, given that $C_{i} \neq C_{j}$, and $diam(C_{l})$ is the largest Euclidean distance  between two data points in cluster $C_{l} \in \Lambda_{k}$. To find the optimal partition $\Lambda_{k}^*$, the Dunn Index should be maximized.
+
+## 2.5.3 Spatially constrained hierarchical clustering
+
+\newpage
+
+# References
