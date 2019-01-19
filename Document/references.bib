@@ -1,9 +1,62 @@
-@book{iliffe2008,
-author = {Iliffe, J and Lott, R},
-isbn = {9781420070415},
-publisher = {Whittles Pub.},
-title = {{Datums and Map Projections: For Remote Sensing, GIS and Surveying}},
+@article{clValid,
+author = {Brock, Guy and Pihur, Vasyl and Datta, Susmita and Datta, Somnath},
+journal = {Journal of Statistical Software},
+number = {4},
+pages = {1--22},
+title = {{clValid: An R Package for Cluster Validation}},
+url = {http://www.jstatsoft.org/v25/i04/},
+volume = {25},
 year = {2008}
+}
+@article{dunn1974,
+author = {Dunn, J. C.},
+doi = {10.1080/01969727408546059},
+journal = {Journal of Cybernetics},
+number = {1},
+pages = {95--104},
+publisher = {Taylor {\&} Francis},
+title = {{Well-Separated Clusters and Optimal Fuzzy Partitions}},
+url = {https://doi.org/10.1080/01969727408546059},
+volume = {4},
+year = {1974}
+}
+@article{ward1963,
+author = {{Ward Jr.}, Joe H.},
+doi = {10.1080/01621459.1963.10500845},
+journal = {Journal of the American Statistical Association},
+number = {301},
+pages = {236--244},
+publisher = {Taylor {\&} Francis},
+title = {{Hierarchical Grouping to Optimize an Objective Function}},
+url = {https://www.tandfonline.com/doi/abs/10.1080/01621459.1963.10500845},
+volume = {58},
+year = {1963}
+}
+@book{gan2007,
+author = {Gan, Guojun and Ma, Chaoqun and Wu, Jianhong},
+isbn = {9780898716238},
+publisher = {Society for Industrial and Applied Mathematics},
+series = {ASA-SIAM Series on Statistics and Applied Probability},
+title = {{Data Clustering: Theory, Algorithms, and Applications}},
+year = {2007}
+}
+@article{wang2006,
+author = {Wang, Xiaozhe Catherine and Smith, Kate Amanda and Hyndman, Rob J.},
+doi = {10.1007/s10618-005-0039-x},
+issn = {1384-5810},
+journal = {Data Mining and Knowledge Discovery},
+number = {3},
+pages = {335--364},
+publisher = {Springer},
+title = {{Characteristic-based clustering for time series data}},
+volume = {13},
+year = {2006}
+}
+@inbook{cassisi2012,
+author = {Cassisi, Carmelo and Montalto, Placido and Aliotta, Marco and Cannata, Andrea and Pulvirenti, Alfredo},
+doi = {10.5772/49941},
+title = {{Similarity Measures and Dimensionality Reduction Techniques for Time Series Data Mining}},
+year = {2012}
 }
 @article{forecast,
 author = {Hyndman, Rob J and Khandakar, Yeasmin},
@@ -15,6 +68,35 @@ url = {http://www.jstatsoft.org/article/view/v027i03},
 volume = {26},
 year = {2008}
 }
+@manual{rlanguage,
+address = {Vienna, Austria},
+author = {{R Core Team}},
+organization = {R Foundation for Statistical Computing},
+title = {{R: A Language and Environment for Statistical Computing}},
+url = {http://www.r-project.org/},
+year = {2013}
+}
+@manual{RPostgreSQL,
+annote = {R package version 0.6-2},
+author = {Conway, Joe and Eddelbuettel, Dirk and Nishiyama, Tomoaki and Prayaga, Sameer Kumar and Tiffin, Neil},
+title = {{RPostgreSQL: R Interface to the 'PostgreSQL' Database System}},
+url = {https://cran.r-project.org/package=RPostgreSQL},
+year = {2017}
+}
+@manual{tsibble,
+annote = {R package version 0.5.3.9000},
+author = {Wang, Earo and Cook, Di and Hyndman, Rob J.},
+title = {{tsibble: Tidy Temporal Data Frames and Tools}},
+url = {https://pkg.earo.me/tsibble},
+year = {2018}
+}
+@article{sf,
+author = {Pebesma, Edzer},
+journal = {The R Journal},
+title = {{Simple Features for R: Standardized Support for Spatial Vector Data}},
+url = {https://journal.r-project.org/archive/2018/RJ-2018-009/index.html},
+year = {2018}
+}
 @article{lubridate,
 author = {Grolemund, Garrett and Wickham, Hadley},
 journal = {Journal of Statistical Software},
@@ -25,27 +107,6 @@ url = {http://www.jstatsoft.org/v40/i03/},
 volume = {40},
 year = {2011}
 }
-@manual{RPostgreSQL,
-annote = {R package version 0.6-2},
-author = {Conway, Joe and Eddelbuettel, Dirk and Nishiyama, Tomoaki and Prayaga, Sameer Kumar and Tiffin, Neil},
-title = {{RPostgreSQL: R Interface to the 'PostgreSQL' Database System}},
-url = {https://cran.r-project.org/package=RPostgreSQL},
-year = {2017}
-}
-@article{sf,
-author = {Pebesma, Edzer},
-journal = {The R Journal},
-title = {{Simple Features for R: Standardized Support for Spatial Vector Data}},
-url = {https://journal.r-project.org/archive/2018/RJ-2018-009/index.html},
-year = {2018}
-}
-@manual{tsibble,
-annote = {R package version 0.5.3.9000},
-author = {Wang, Earo and Cook, Di and Hyndman, Rob},
-title = {{tsibble: Tidy Temporal Data Frames and Tools}},
-url = {https://pkg.earo.me/tsibble},
-year = {2018}
-}
 @article{clustgeo,
 author = {Chavent, Marie and Kuentz-Simonet, Vanessa and Labenne, Amaury and Saracco, J{\'{e}}r{\^{o}}me},
 doi = {10.1007/s00180-018-0791-1},
@@ -55,6 +116,22 @@ pages = {1799--1822},
 title = {{ClustGeo: an R package for hierarchical clustering with spatial constraints}},
 volume = {33},
 year = {2018}
+}
+@book{iliffe2008,
+author = {Iliffe, J and Lott, R},
+isbn = {9781420070415},
+publisher = {Whittles Pub.},
+title = {{Datums and Map Projections: For Remote Sensing, GIS and Surveying}},
+year = {2008}
+}
+@article{keogh2005,
+author = {Keogh, Eamonn and Lin, Jessica},
+doi = {10.1007/s10115-004-0172-7},
+journal = {Knowledge and Information Systems},
+pages = {154--177},
+title = {{Clustering of time-series subsequences is meaningless: Implications for previous and future research}},
+volume = {8},
+year = {2005}
 }
 @book{box1970,
 author = {Box, George E. P. and Jenkins, Gwilym M.},
@@ -75,6 +152,15 @@ url = {https://www.tandfonline.com/doi/abs/10.1080/01621459.1988.10478639},
 volume = {83},
 year = {1988}
 }
+@book{Shumway2011,
+author = {Shumway, Robert H. and Stoffer, David S.},
+edition = {3},
+file = {:C$\backslash$:/Users/meer/Documents/Master GeoTech/Thesis/Sources/Time Series Analysis/Time Series Analysis and Its Applications.pdf:pdf},
+isbn = {9781441978646},
+publisher = {Springer},
+title = {{Time Series Analysis and its Applications: With R Examples}},
+year = {2011}
+}
 @book{shumway2011,
 author = {Shumway, Robert H. and Stoffer, David S.},
 booktitle = {Time Series Analysis and its Applications: With R Examples},
@@ -92,14 +178,11 @@ url = {https://people.duke.edu/{~}rnau/411diff.htm},
 urldate = {2019-01-04},
 year = {2018}
 }
-@book{brockwell2002,
-author = {Brockwell, Peter J. and Davis, Richard A.},
-booktitle = {Technometrics},
-doi = {10.1007/978-1-4757-2526-1},
-file = {:C$\backslash$:/Users/meer/Documents/Master GeoTech/Thesis/Sources/Time Series Analysis/Introduction to Time Series and Forecasting.pdf:pdf},
-title = {{An Introduction to Time Series and Forecasting}},
-volume = {39},
-year = {2002}
+@techreport{Grinberg2014,
+author = {Grinberg, Josh and Jain, Arzav and Choksi, Vivek},
+file = {:C$\backslash$:/Users/meer/Documents/Master GeoTech/Thesis/Sources/Taxi Demand Prediction/Predicting Taxi Pickups in New York City.pdf:pdf},
+title = {{Predicting Taxi Pickups in New York City}},
+year = {2014}
 }
 @book{hyndman2018fpp,
 author = {Hyndman, Rob J. and Athanasopoulos, George},
@@ -108,6 +191,15 @@ publisher = {OTexts},
 title = {{Forecasting: principles and practice}},
 url = {https://otexts.org/fpp2/},
 year = {2018}
+}
+@book{brockwell2002,
+author = {Brockwell, Peter J. and Davis, Richard A.},
+booktitle = {Technometrics},
+doi = {10.1007/978-1-4757-2526-1},
+file = {:C$\backslash$:/Users/meer/Documents/Master GeoTech/Thesis/Sources/Time Series Analysis/Introduction to Time Series and Forecasting.pdf:pdf},
+title = {{An Introduction to Time Series and Forecasting}},
+volume = {39},
+year = {2002}
 }
 @book{woodward2017,
 author = {Woodward, Wayne A. and Gray, Henry L. and Elliott, Alan C.},
@@ -131,12 +223,4 @@ author = {PostgreSQL},
 title = {{PostgreSQL: The world's most advanced open source database}},
 url = {http://www.postgresql.org/},
 year = {2014}
-}
-@manual{rlanguage,
-address = {Vienna, Austria},
-author = {{R Core Team}},
-organization = {R Foundation for Statistical Computing},
-title = {{R: A Language and Environment for Statistical Computing}},
-url = {http://www.r-project.org/},
-year = {2013}
 }
