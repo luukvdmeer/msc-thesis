@@ -22,7 +22,7 @@ The most time consuming part of the system is the selection of an appropriate mo
 
 The approach of building models only at a limited number of locations, involves the selection of those locations. In DBAFS, this is done by dividing the service area of the dockless bike sharing system into spatially contiguous clusters, where each cluster contains the areas that show similar weekly patterns in the historical data. Then, each cluster is represented by a single *model point*, which is a location where a model is build. An individual forecast takes the model structure and paramaters of the model point that is in the same cluster as the location of the forecast.
 
-The clustering, model building process and forecasting processes can be seen as three distinct processing loops, that together make up DBAFS. The forecast loop runs every time a user makes a forecast request. The model loop only runs every $n_{m}$ weeks, and the cluster loop every $n_{c}$ weeks. The cluster, model and forecast loops are all completely automated and do not require any manual interventions. The overall design of DBAFS is summarized graphically in Figure 3.1. The detailed methodologies of the three loops are discussed in section 3.4, 3.5 and 3.6, respectively.
+The clustering, model building and forecasting processes can be seen as three distinct processing loops, that together make up DBAFS. The forecast loop runs every time a user makes a forecast request. The model loop only runs every $n_{m}$ weeks, and the cluster loop every $n_{c}$ weeks. The cluster, model and forecast loops are all completely automated and do not require any manual interventions. The overall design of DBAFS is summarized graphically in Figure 3.1. The detailed methodologies of the three loops are discussed in section 3.4, 3.5 and 3.6, respectively.
 
 ```{r overalldesign}
 knitr::include_graphics('Figures/Workflow.png')
@@ -34,6 +34,7 @@ The underlying code of DBAFS is written in the R programming languague [@rlangua
 On top of functions that are included in R by default, DBAFS makes use of several extentions, as listed below.
 
 * The `ClustGeo` package, for spatially constrained clustering [@clustgeo].
+* The `clValid` package, for calculating the Dunn Index [@clValid].
 * The `forecast` package, for building forecasting models, decomposing time series, and forecasting time series [@forecast].
 * The `lubridate` package, for processing dates and timestamps [@lubridate].
 * The `RPostgreSQL` package, for connecting to a PostgreSQL database and running SQL code on the database server [@RPostgreSQL].
@@ -52,7 +53,7 @@ The geographical location of a bike is spatial data, and should be stored as suc
 Data are pre-processed on the database server, and only the data that are needed, are loaded into memory. In DBAFS, this pre-processing step involves two different procedures. The first one leads to data that contain information about the distance to the nearest bike for several timestamps in the past, and is discussed in the next sub-section, while the latter produces a dataset with all the bicycle pick-ups in the database, and is discussed in section 3.3.2.
 
 ## 3.3.1 Distance data
-For a given location, the distance from that location to the nearest available bike is calculated for each timestamp $t \in T$, where $T$ is a regulary spaced time interval containing timestamps within the timespan of the historical data. The temporal resolution of $T$ equals $i_{s}$ minutes, where $i_{s} \geq i_{d}$. The nearest available bike is found by a nearest neighbor searching process that uses spatial indices on the geometries. In practice, this means that it is not needed to first compute the distances to all available bikes, which would slow down the process vastly. If no bike can be found, for example due to a server shutdown at that timestamp, the corresponding feature will be inserted in the data, with a non-available distance value, $NA$.
+For a given location, the distance from that location to the nearest available bike is calculated for each timestamp $t \in T$, where $T$ is a regulary spaced time interval containing timestamps within the timespan of the historical data. The temporal resolution of $T$ equals $i_{s}$ minutes, where $i_{s} \geq i_{d}$. The nearest available bike is found by a nearest neighbor searching process that uses spatial indices on the geometries. In practice, this means that it is not needed to first compute the distances to all available bikes, which would slow down the process vastly. If no bike can be found, for example due to a server shutdown at that timestamp, the corresponding feature will be inserted in the data, with a non-available distance value, $NA$. That is, after pre-processing, the resulting time series will always be regular, with all timestamps $t \in T$ present. This also means that when data are queried for several locations at the same times, the resulting time series will always have the same length.
 
 The calculated distances are great-circle distances assuming a spherical earth a radius equal to the mean radius of the WGS84 ellipsoid, as showed in Equation 3.1.
 
@@ -78,17 +79,19 @@ Obviously, the procedure described in this sub-section has some deficiencies. Th
 # 3.4 Cluster loop
 The main purpose of the cluster loop is to find suitable locations for the model points. The loop starts by laying a grid with square cells of $p \times p$ meters over the service area of the dockless bike sharing system, such that each location in the service area is part of one of those grid cells. Then, the geographical coordinates of the centroids of the grid cells are calculated, and $m_{c}$ weeks of distance data are queried for each of those centroids. 
 
-The result of this query operation is a set of $n$ time series, where $n$ is the number of cells in the overlaying grid. Each of those time series is simplified by averaging its values per hour of the week. This is followed by a min-max normalization, such that time series that show the same patterns over time, but with different means, will be considered similar. The normalized values are calculated with Equation 3.2.
+The result of this query operation is a set of $n$ time series, where $n$ is the number of cells in the overlaying grid. To reduce the dimensionality of the clustering task, each of those time series is simplified by averaging its values per hour of the week. This is followed by a min-max normalization, such that time series that show the same patterns over time, but with different means, will be considered similar. The normalized values are calculated with Equation 3.2.
 
 $$ \hat{y_{t}} = \frac{y_{t} - y_{min}}{y_{max} - y_{min}} $$
 
 Where $\hat{y_{t}}$ is the normalized value of $y_{t}$, $y_{min}$ is the minimum value in the time series, and $y_{max}$ is the maximum value in the time series. By definition, $0 \leq \hat{y_{t}} \leq 1$.
 
-For all possible combinations of the $n$ averaged, normalized time series, a dissimilarity value is calculated based on the Euclidean distance between the two series, as defined in Equation 2.x. Euclidean distance is chosen over dynamic time warping, for the sake of simplicity. All dissimilarity values are stored together in a $n \times n$ matrix and form the time series dissimilarity matrix $A$. At the same time, a spatial dissimilarity matrix $B$ is created. This matrix is equal to $1-C$, where $C$ is the adjacency matrix of the $n$ grid cells. That is, $B$ is a $n \times n$ matrix in which $b_{i,j} = 0$ when grid cells $i$ and $j$ are neighbors, and $b_{i,j} = 1$ otherwise.
+For all possible combinations of the $n$ averaged, normalized time series, a dissimilarity value is calculated based on the Euclidean distance between the two series, as defined in Equation 2.x. Since all time series have the same length, and observations at the same timestamps, the Euclidean approach is appropriate, and for the sake of simplicity, chosen over dynamic time warping. Furthermore, since out-of-phase similarities are ignored, areas where similar peaks and valleys in the data occur at different times of the week, will be grouped into different clusters, which gives a better representation of the spatio-temporal dynamics of the bike sharing system.
+
+All Euclidean dissimilarity values are stored together in a $n \times n$ matrix and form the time series dissimilarity matrix $A$. At the same time, a spatial dissimilarity matrix $B$ is created. This matrix is equal to $1-C$, where $C$ is the adjacency matrix of the $n$ grid cells. That is, $B$ is a $n \times n$ matrix in which $b_{i,j} = 0$ when grid cells $i$ and $j$ are neighbors, and $b_{i,j} = 1$ otherwise.
 
 $A$ and $B$ are used as the dissimilarity matrices of respectively the feature space and the constraint space in a spatially constrained hierarchical clustering procedure, which was introduced in section 2.5.x. Before the final clustering procedure can start, the number of clusters $k$ and the value of the mixing parameter $\alpha$ need to be set. To do so, @clustgeo propose a manual approach that involves visual interpretations of several plots, but in this thesis, a fully automated approach is used instead.
 
-Firstly, only the dissimilarity values in the feature space are clustered, i.e. a spatially constrained hierarchical clustering with $\alpha = 0$ is performed, and $k$ is chosen such that the CH-index of the resulting clusters, as defined in Equation 2.x, is minimized. Obviously, the CH-index is not calculated for all possible values of $k$, but only for those $k \in K$, where $K$ is a finite set of strictly positive integers. The optimal value of $k$ will be refered to as $k^{*}$.
+Firstly, only the dissimilarity values in the feature space are clustered, i.e. a spatially constrained hierarchical clustering with $\alpha = 0$ is performed, which results in a sequence of partitions {$\Lambda_{k}$}. For each $k \in K$, where $K$ is a finite set of strictly positive integers, the Dunn Index $V(\Lambda_{k})$ of a specific partition $\Lambda_{k}$ is calculated with Equation 2.x. Then, value of $k$ that maximizes $V(\Lambda_{k})$ is chosen as the optimal value of $k$, and is refered to as $k^{*}$.
 
 Secondly, for each $\lambda \in \Lambda$, where $\Lambda =$ {$0, 0.1, 0.2, ..., 1$}, a spatially constrained hierarchical clustering with $k = k^{*}$ and $\alpha = \lambda$ is performed. Then, ..... The optimal value of $\alpha$ will be refered to as $\alpha^{*}$.
 
@@ -115,3 +118,7 @@ knitr::include_graphics('Figures/clusterloop.png')
 $n_{m}$ should be chosen such that new models are build when the patterns in the historical data have changed considerably. Based on real-world data, which are presented later in this thesis, it is recommended to update the models every month. That is, $n_{m}$ = 4.
 
 $n_{c}$ should be chosen such that new clusters are defined when the spatial distribution of the weekly patterns in the historical data has changed considerably. The real-world data used in this thesis were not long enough to define a recommended value for $n_{c}$, but in most cases, it will be much larger than $n_{m}$.
+
+\newpage
+
+# References
