@@ -45,9 +45,9 @@ Where $\gamma(h)$ is the autocovariance function of the sample at lag $h$, as de
 
 $$ \gamma(h) = n^{-1}\sum_{t=1}^{n-|h|}(y_{t+|h|} - \bar{y})(y_{t} - \bar{y}), \quad -n < h < n $$
 
-Where $n$ is the length of the sample, $y_{t}$ is the data value at time $t$, $y_{t-|h|}$ is the data value at time $t$ minus $|h|$ time periods, and $\bar{y}$ is the mean of the sample. Whenever a time series {$Y_{t}$} is stationary, a concept that is introduced in the next section, the ACF of the sample {$y_{t}$} can be used as an estimate for the ACF of {$Y_{t}$}.
+Where $n$ is the length of the sample, $y_{t}$ is the data value at time $t$, $y_{t-|h|}$ is the data value at time $t$ minus $|h|$ time periods, and $\bar{y}$ is the mean of the sample. Whenever a time series {$Y_{t}$} is stationary, a concept that is introduced in the next section, the ACF of the sample {$y_{t}$} can be used as an estimate for the ACF of {$Y_{t}$}. A time series without autocorrelation, with zero mean and finite variance, is called *white noise*.
 
-Conventional statistical methods can not be appropriately applied to data that exhibit autocorrelation, since the independency assumption is violated. The primary objective of time series analysis, therefore, is to develop mathematical models that are appropriate to use for data with a temporal autocorrelation structure [@shumway2011]. Furthermore, autocorrelation can be used as an advantage, since an internal dependence structure implies that past observations be used adequately to forecast future values.
+Conventional statistical methods can not be appropriately applied to data that exhibit autocorrelation, since the independency assumption is violated. The primary objective of time series analysis, therefore, is to develop mathematical models that are appropriate to use for data with a temporal autocorrelation structure [@shumway2011]. Furthermore, autocorrelation can be used as an advantage, since an internal dependence structure implies that past observations can be used adequately to forecast future values.
 
 ## 2.2.2 Stationarity
 In time series analysis, a key role is played by time series whose statistical properties do not vary with time [@brockwell2002]. Such time series are refered to as *stationary time series*. The most restrictive form of stationarity is defined in Definition 4 [@woodward2017].
@@ -201,7 +201,7 @@ $$ y_{t} = c + \phi_{1}y_{t-1} + \phi_{2}y_{t-2} + ... + \phi_{p}y_{t-p} + \epsi
 
 Where $y_{t}$ is the current value of the time series at time period $t$, $\epsilon_{t}$ is the random error (i.e. white noise) at time $t$, $\phi_{1},...,\phi_{p}$ are model parameters and $c$ is a constant. $c = 0$ whenever $\mu = 0$, given that $\mu$ is the mean of $y_{t}$. If $\mu \neq 0$, $c = \mu(1 - \phi_{1} - \phi_{2} - ... - \phi_{p})$.
 
-A moving average model of order $q$, commonly refered to as an MA($q$) model, is based on the assumption that the current value of a time series is a linear combination of $q$ previous forecast errors, as showed in Equation 14.
+A moving average model of order $q$, commonly refered to as an MA($q$) model, is based on the assumption that the current value of a time series is a linear combination of $q$ previous noise values, as showed in Equation 14.
 
 $$ y_{t} = \epsilon_{t} + \theta_{1}\epsilon_{t-1} + \theta_{2}\epsilon_{t-2} + ... + \theta_{q}\epsilon_{t-q} $$
 
@@ -277,20 +277,21 @@ $$ e_{t} = y_{t} - \hat{y_{t}} $$
 
 A model that fits the data well, should have uncorrelated residuals with mean zero. If autocorrelation is present in the residuals, this means that there is still information left in the data, which could be used to create more accurate forecasts. A non-zero mean will lead to biased forecasts. 
 
-Autocorrelation in the residuals can be detected by a visual interpretation of the residual ACF plot, which will always show some autocorrelation, due to random variation. Therefore, given that $n$ is the length of the modelled time series, and assuming that a normal distribution, the residuals can be considered to be uncorrelated when for at least 95% of the time lags, the residual ACF lies within the interval $[-1.96/\sqrt{n}, 1.96/\sqrt{n}]$. Instead, the Ljung-Box test can be used, which tests the null hypothesis that the residuals are independent, againt the alternative that they are not. The detailed mathematics underlying the test can be found in @ljung1978.
+Autocorrelation in the residuals can be detected by a visual interpretation of the residual ACF plot, which will always show some autocorrelation, due to random variation. Therefore, given that $n$ is the length of the modelled time series, and assuming a normal distribution, the residuals are considered to be uncorrelated when for at least 95% of the time lags, the residual ACF lies within the interval $[-1.96/\sqrt{n}, 1.96/\sqrt{n}]$. Instead, the Ljung-Box test can be used, which tests the null hypothesis that the residuals are independent, againt the alternative that they are not. The detailed mathematics underlying the test can be found in @ljung1978.
 
 ### 2.4.2.5 Forecasting
 A fitted ARIMA($p$, $d$, $q$) model can then be used to forecast the future values of a time series. To do so, Equation 2.x is rewritten, such that the current value of the time series, $y_{t}$, is replaced by a future value of the time series, $y_{t+h}$, as shown in Equation 2.x.
 
 $$ 
-\nabla^{d}y_{t+h} = \hat{c} + \hat\phi_{1}\nabla^{d}y_{t+h-1} + ... + \hat\phi_{p}\nabla^{d}y_{t+h-p} +\hat\theta_{1}\epsilon_{t+h-1} + ... + \hat\theta_{q}\epsilon_{t+h-q} + \epsilon_{t+1} 
+\nabla^{d}y_{t+h} = c + \hat\phi_{1}\nabla^{d}y_{t+h-1} + ... + \hat\phi_{p}\nabla^{d}y_{t+h-p} +\hat\theta_{1}\epsilon_{t+h-1} + ... + \hat\theta_{q}\epsilon_{t+h-q} + \epsilon_{t+1} 
 $$
 
-Where $h$ is the forecasting window, i.e. the number of time lags into the future at which the forecast is made, $p$, $d$ and $q$ are known and constant, and $\hat{c}$, $\hat\phi_{1},...,\hat\phi_{p}$ and $\hat\theta_{1},...,\hat\theta_{q}$ are the estimated parameter values, which are also constant.
+Where $h$ is the forecasting window, i.e. the number of time lags into the future at which the forecast is made, $p$, $d$ and $q$ are known and constant, and $\hat\phi_{1},...,\hat\phi_{p}$ and $\hat\theta_{1},...,\hat\theta_{q}$ are the estimated parameter values, which are also constant.
 
 ### 2.4.2.6 Accuracy evaluation
 ### 2.4.2.7 Transformations
 ## 2.4.3 Seasonality
+
 
 # 2.5 Time series clustering
 ## 2.5.1 Dissimilarity measures
