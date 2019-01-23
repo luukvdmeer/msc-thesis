@@ -1,0 +1,249 @@
+require(ggplot2)
+require(grid)
+require(dplyr)
+require(sf)
+require(dockless)
+
+# Load data
+distancedata_models = readRDS('RDS Files/distancedata_models.rds')
+models = readRDS('RDS Files/models.rds')
+
+## ------------------------ TIME PLOTS ------------------------------
+
+# Add model information to each data frame of distance data
+f = function(x, y) {
+  x$model = y
+  return(x)
+}
+
+model_vector = as.factor(c(1,2,3,4))
+data = mapply(f, distancedata_models, model_vector, SIMPLIFY = FALSE)
+
+# Bind all data frames together
+newdata = do.call(rbind, data)
+
+# Plot
+timeplot = ggplot(
+  data = newdata,
+  mapping = aes(x = time, y = distance)
+) +
+  geom_line() +
+  labs(
+    x = 'Time',
+    y = 'Distance to the nearest bike (m)'
+  ) +
+  theme(
+    text = element_text(family = 'serif')
+  ) +
+  facet_grid(
+    model ~ .,
+    labeller = as_labeller(
+      c(
+        '1' = 'Bayview', 
+        '2' = 'Downtown', 
+        '3' = 'Residential', 
+        '4' = 'Presidio'
+      )
+    )
+  )
+
+# Color the facet backgrounds (code from https://github.com/tidyverse/ggplot2/issues/2096)
+timegrid = ggplot_gtable(ggplot_build(timeplot))
+stripr = which(grepl('strip-r', timegrid$layout$name))
+colors = dockless_colors(categorical = TRUE)
+k = 1
+for (i in stripr) {
+  j = which(grepl('rect', timegrid$grobs[[i]]$grobs[[1]]$childrenOrder))
+  timegrid$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill = colors[k]
+  k = k + 1
+}
+
+ggsave(
+  'Document/Figures/timeplots.png',
+  plot = timegrid,
+  scale = 1.5,
+  dpi = 600
+)
+
+rm(model_vector, data, f, stripr, colors, k, i, j, timeplot, timegrid)
+
+## ------------------ RESIDUAL TIME PLOTS ---------------------------
+
+# Get the residuals from each model as a vector
+residuals = lapply(models, function(x) as.vector(x$residuals))
+
+# Combine those vectors
+residuals_combined = do.call('c', residuals)
+
+# Add as column to newdata
+newdata$residuals = residuals_combined
+
+# Plot
+residual_timeplot = ggplot(
+  data = newdata,
+  mapping = aes(x = time, y = residuals)
+) +
+  geom_line() +
+  labs(
+    x = 'Time',
+    y = 'Residuals'
+  ) +
+  theme(
+    text = element_text(family = 'serif')
+  ) +
+  facet_grid(
+    model ~ .,
+    labeller = as_labeller(
+      c(
+        '1' = 'Bayview', 
+        '2' = 'Downtown', 
+        '3' = 'Residential', 
+        '4' = 'Presidio'
+      )
+    )
+  )
+
+# Color the facet backgrounds (code from https://github.com/tidyverse/ggplot2/issues/2096)
+residual_timegrid = ggplot_gtable(ggplot_build(residual_timeplot))
+stripr = which(grepl('strip-r', residual_timegrid$layout$name))
+colors = dockless_colors(categorical = TRUE)
+k = 1
+for (i in stripr) {
+  j = which(grepl('rect', residual_timegrid$grobs[[i]]$grobs[[1]]$childrenOrder))
+  residual_timegrid$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill = colors[k]
+  k = k + 1
+}
+
+ggsave(
+  'Document/Figures/residual_timeplots.png',
+  plot = residual_timegrid,
+  scale = 1.5,
+  dpi = 600
+)
+
+rm(residuals, residuals_combined, f, stripr, colors, k, i, j, 
+   residual_timeplot, residual_timegrid)
+
+## ------------------ RESIDUAL AUTOCORRELATION ----------------------
+
+# Get the residuals from each model as a vector
+acfdata = newdata %>%
+  tsibble::as_tsibble(key = id(model)) %>%
+  tsibblestats::ACF(value = residuals, lag.max = 672, na.action = na.pass)
+
+# Plot
+residual_acfplot = ggplot(
+  data = acfdata,
+  mapping = aes(x = lag, y = acf)
+) +
+  geom_hline(
+    mapping = aes(yintercept = 1.96 / sqrt(nrow(newdata %>% filter(model == 1)))),
+    linetype = 'dashed',
+    col = 'orange',
+    lwd = 1
+  ) +
+  geom_hline(
+    mapping = aes(yintercept = -1.96 / sqrt(nrow(newdata %>% filter(model == 1)))),
+    linetype = 'dashed',
+    col = 'orange',
+    lwd = 1
+  ) +
+  geom_line() +
+  labs(
+    x = 'Time lag',
+    y = 'Autocorrelation'
+  ) +
+  scale_x_continuous(
+    breaks = seq(0, nrow(acfdata), 96)
+  ) +
+  theme(
+    text = element_text(family = 'serif')
+  ) +
+  facet_grid(
+    model ~ .,
+    labeller = as_labeller(
+      c(
+        '1' = 'Bayview', 
+        '2' = 'Downtown', 
+        '3' = 'Residential', 
+        '4' = 'Presidio'
+      )
+    )
+  )
+
+# Color the facet backgrounds (code from https://github.com/tidyverse/ggplot2/issues/2096)
+residual_acfgrid = ggplot_gtable(ggplot_build(residual_acfplot))
+stripr = which(grepl('strip-r', residual_acfgrid$layout$name))
+colors = dockless_colors(categorical = TRUE)
+k = 1
+for (i in stripr) {
+  j = which(grepl('rect', residual_acfgrid$grobs[[i]]$grobs[[1]]$childrenOrder))
+  residual_acfgrid$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill = colors[k]
+  k = k + 1
+}
+
+ggsave(
+  'Document/Figures/residual_acfplots.png',
+  plot = residual_acfgrid,
+  scale = 1.5,
+  dpi = 600
+)
+
+rm(acfdata, stripr, colors, k, i, j, residual_acfplot, residual_acfgrid)
+
+## -------------------- RESIDUAL HISTOGRAMS -------------------------
+
+# Plot
+residual_histogram = ggplot(
+  data = newdata,
+  mapping = aes(x = residuals)
+) +
+  geom_histogram(
+    fill = 'black',
+    binwidth = 0.1
+  ) +
+  geom_rug(
+    sides = 'b',
+    col = 'orange'
+  ) +
+  labs(
+    x = 'Residuals',
+    y = 'Count'
+  ) +
+  theme(
+    text = element_text(family = 'serif')
+  ) +
+  facet_wrap(
+    ~ model,
+    scales = 'free',
+    labeller = as_labeller(
+      c(
+        '1' = 'Bayview', 
+        '2' = 'Downtown', 
+        '3' = 'Residential', 
+        '4' = 'Presidio'
+      )
+    )
+  )
+
+# Color the facet backgrounds (code from https://github.com/tidyverse/ggplot2/issues/2096)
+residual_histogrid = ggplot_gtable(ggplot_build(residual_histogram))
+stripr = which(grepl('strip-', residual_histogrid$layout$name))
+colors = dockless_colors(categorical = TRUE)
+k = 1
+for (i in stripr) {
+  j = which(grepl('rect', residual_histogrid$grobs[[i]]$grobs[[1]]$childrenOrder))
+  residual_histogrid$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill = colors[k]
+  k = k + 1
+}
+
+ggsave(
+  'Document/Figures/residual_histograms.png',
+  plot = residual_histogrid,
+  scale = 1.5,
+  dpi = 600
+)
+
+rm(stripr, colors, k, i, j, residual_histogram, residual_histogrid)
+
+rm(distancedata_models, models, newdata)
