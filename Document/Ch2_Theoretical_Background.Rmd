@@ -187,40 +187,40 @@ knitr::include_graphics('Figures/STL.png')
 ## 2.4.1 Forecasting models
 Often, the main aim of time series analysis is to forecast future values of a time series. In some cases, this can be done by using external exploratory variables. One could for example try to forecast the profit of ice cream sales by using air temperature as an exploratory variable in a linear regression model. However, there are several reasons not to forecast time series in this way, as summed up by @hyndman2018fpp. Firstly, the underlying system of the forecasted time series may not be sufficiently understood, and even if it is, the relations with exploratory variables may be too complex. Secondly, when forecasting future values of a time series, also the future values of the exploratory variables should be known, which means that each exploratory variable should be forecasted seperately before the response variable can be forecasted. This may be too difficult to do accurately, and even when it is possible, it remains a very time consuming task. Especially when the only aim is to know what will happen, and not why it will happen, it is not worth the effort. Finally, modeling a time series with convential statistical method like linear regression will likely result in model errors that exhibit autocorrelation, which implies that such models are not able to capture all the dynamics of the data. Thus, produced forecast are not as efficient, and, probably, not as accurate as can be.
 
-Instead, in time series analysis, the internal dependence structure of a time series is used to forecast future values as a function of the current and past values [@shumway2011]. Obviously, this primarily requires a good understanding of that structure, which is obtained by describing the data with a time series model, as defined in Defintion 7, adapted from @brockwell2002.
+Instead, in time series analysis, the internal dependence structure of a time series is used to forecast future values as a function of the current and past values [@shumway2011]. Obviously, this primarily requires a good understanding of that structure, which is obtained by describing the process that generated the data with a time series model, as defined in Defintion 7, adapted from @brockwell2002.
 
 **Definition 7** A *time series model* for an observed realization {$y_{t}$} of a time series {$Y_{t}$} is a specification of the joint distributions, or possibly only the means, variances and covariances, of the random variables that {$Y_{t}$} comprises. $\blacksquare$
 
-One of the most famous and widely used group of time series models is known as the *autoregressive integrated moving average* (ARIMA) models, developed by @box1970. In this thesis, ARIMA is used as well. The next section gives an extensive summary of its theory, based on @shumway2011, Chapter 3, @hyndman2018fpp, Chapter 8, and @forecast.
+One of the most famous and widely used group of time series models is known as the *autoregressive integrated moving average* (ARIMA) models, developed by @box1970. In this thesis, ARIMA is used as well. The next section gives a summary of its theory, based on @brockwell2002, Chapter 5, @shumway2011, Chapter 3, @hyndman2018fpp, Chapter 8, and @forecast.
 
 ## 2.4.2 ARIMA
 ### 2.4.2.1 Structure
 An ARIMA model is a combination of an *autoregressive* (AR) and *moving average* (MA) model, preceded by a differencing operation on the original data. An autoregressive model of order $p$, commonly refered to as an AR($p$) model, is based on the assumption that the current value of a time series is a linear combination of $p$ previous values, as showed in Equation 13.
 
-$$ y_{t} = c + \phi_{1}y_{t-1} + \phi_{2}y_{t-2} + ... + \phi_{p}y_{t-p} + \epsilon_{t} $$
+$$ y_{t} = \phi_{1}y_{t-1} + \phi_{2}y_{t-2} + ... + \phi_{p}y_{t-p} + \epsilon_{t} $$
 
-Where $y_{t}$ is the current value of the time series at time period $t$, $\epsilon_{t}$ is the random error (i.e. white noise) at time $t$, $\phi_{1},...,\phi_{p}$ are model parameters and $c$ is a constant. $c = 0$ whenever $\mu = 0$, given that $\mu$ is the mean of $y_{t}$. If $\mu \neq 0$, $c = \mu(1 - \phi_{1} - \phi_{2} - ... - \phi_{p})$.
+Where $y_{t}$ is the current value of the time series at time period $t$, $\epsilon_{t}$ is the random error (i.e. white noise) at time $t$, $\phi_{1},...,\phi_{p}$ are model parameters.
 
-A moving average model of order $q$, commonly refered to as an MA($q$) model, is based on the assumption that the current value of a time series is a linear combination of $q$ previous noise values, as showed in Equation 14.
+A moving average model of order $q$, commonly refered to as an MA($q$) model, is based on the assumption that the current value of a time series is a linear combination of $q$ previous errors, as showed in Equation 14.
 
 $$ y_{t} = \epsilon_{t} + \theta_{1}\epsilon_{t-1} + \theta_{2}\epsilon_{t-2} + ... + \theta_{q}\epsilon_{t-q} $$
 
-Where $y_{t}$ is the current value of the time series at time period $t$, $\epsilon_{t}$ is the forecast error at time period $t$, which is assumed to be white noise, $\theta_{1},...,\theta_{q}$ are model parameters.
+Where $y_{t}$ is the current value of the time series at time period $t$, $\epsilon_{t}$ is the error at time period $t$, which is assumed to be white noise, $\theta_{1},...,\theta_{q}$ are model parameters.
 
-AR($p$) and MA($q$) models can be combined into an autoregressive moving average model of order ($p$, $q$), commonly refered to as ARMA($p$, $q$). That is, in such a model, the current value of a time series is a linear combination of both $p$ previous values and $q$ previous forecast errors, as showed in Equation 15.
+AR($p$) and MA($q$) models can be combined into an autoregressive moving average model of order ($p$, $q$), commonly refered to as ARMA($p$, $q$). That is, in such a model, the current value of a time series is a linear combination of both $p$ previous values and $q$ previous errors, as showed in Equation 15.
 
 $$ 
-y_{t} = c + \phi_{1}y_{t-1} + ... + \phi_{p}y_{t-p} + \theta_{1}\epsilon_{t-1} + ... + \theta_{q}\epsilon_{t-q} + \epsilon_{t} 
+y_{t} = \phi_{1}y_{t-1} + ... + \phi_{p}y_{t-p} + \theta_{1}\epsilon_{t-1} + ... + \theta_{q}\epsilon_{t-q} + \epsilon_{t} 
 $$
 
 ARMA($p$, $q$) models require the forecasted time series to be stationary. When working with non-stationary time series, it is often possible to stationarize the series by differencing it one or more times. The first order difference of a time series is the series of changes from one time period to the next, as shown in Equation 16.
 
 $$ \nabla y_{t} = y_{t} - y_{t-1} $$
 
-Where $\nabla y_{t}$ is the first order difference of $y_{t}$. When the first order difference is still non-stationary, the second order difference $\nabla^{2}y_{t}$ can be computed by taking again the first order difference of $\nabla y_{t}$, and so on. The original non-stationary time series that needed to be differenced in order to get stationary, is called an *integrated* version of the stationary series. That is why a model that first stationarizes the data by applying a $d$-th order difference, before fitting an ARMA($p$, $q$) model, is called an autoregressive integrated moving average model of order ($p$, $d$, $q$), commonly refered to as ARIMA($p$, $d$, $q$). That is, in such a model, the current value of the $d-$th order difference of a time series is a linear combination of both $p$ previous values and $q$ previous forecast errors, as showed in Equation 17.
+Where $\nabla y_{t}$ is the first order difference of $y_{t}$. When the first order difference is still non-stationary, the second order difference $\nabla^{2}y_{t}$ can be computed by taking again the first order difference of $\nabla y_{t}$, and so on. The original non-stationary time series that needed to be differenced in order to get stationary, is called an *integrated* version of the stationary series. That is why a model that first stationarizes the data by applying a $d$-th order difference, before fitting an ARMA($p$, $q$) model, is called an autoregressive integrated moving average model of order ($p$, $d$, $q$), commonly refered to as ARIMA($p$, $d$, $q$). That is, in such a model, the current value of the $d-$th order difference of a time series is a linear combination of both $p$ previous values and $q$ previous errors, as showed in Equation 17.
 
 $$ 
-\nabla^{d}y_{t} = c + \phi_{1}\nabla^{d}y_{t-1} + ... + \phi_{p}\nabla^{d}y_{t-p} + \theta_{1}\epsilon_{t-1} + ... + \theta_{q}\epsilon_{t-q} + \epsilon_{t} 
+\nabla^{d}y_{t} = \phi_{1}\nabla^{d}y_{t-1} + ... + \phi_{p}\nabla^{d}y_{t-p} + \theta_{1}\epsilon_{t-1} + ... + \theta_{q}\epsilon_{t-q} + \epsilon_{t} 
 $$
 
 Where $\nabla^{d}y_{t}$ is the $d$-th order difference of $y_{t}$. Note here that ARIMA($p$, $d$, $q$) is a general form of all the other models discussed earlier in this section. For example, an AR(1) model can also be written as ARIMA(1,0,0), an ARMA(2,1) as ARIMA(1,0,2), and so on.
@@ -237,7 +237,7 @@ Once $d$ has been set, either $p$ or $q$ can be selected by inspecting the autoc
 
 When dealing with ARIMA($p$, $d$, $q$) processes where both $p > 0$ and $q > 0$, the ACF plot and PACF plot will both tail off, and finding appropriate values for $p$ and $q$ turns into a trial-and-error approach, where models with different combinations of $p$ and $q$ are compared.
 
-The methodology as described above is used often, but involves a lot of manual interventions. This makes it a rather subjective way of working, that is labor intensive, especially when a large number of time series needs to be modelled, and requires expert knowledge. Therefore, several automated approaches to select $p$, $d$ and $q$ have been proposed. One of them is the Hyndman-Khandakar algorithm, developed by @forecast. Its stepwise methodology is described below.
+The methodology as described above is used often, but involves a lot of manual interventions. This makes it a rather subjective way of working, that is labor intensive, especially when a large number of time series needs to be modelled, and requires expert knowledge. Therefore, several automated approaches to select $p$, $d$ and $q$ have been proposed. One of them is the Hyndman-Khandakar algorithm, which methodology is summarized below, in a simplified way. For the full details, see @forecast.
 
 **Step 1.** To define $d$,  the Hyndman-Khandakar algorithm uses the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, which is a statistical test used to determine stationarity of a time series. Only if there is enough statistical evidence, the null hypothesis that the time series is stationary will be rejected, and the time series is instead considered to be non-stationary. The detailed mathematics underlying the test can be found in @kwiat1992.
 
@@ -250,47 +250,57 @@ Using the KPSS test, first, the original data $y_{t}$ are tested for stationarit
 * An ARIMA($0$, $d$, $1$) model.
 * An ARIMA($2$, $d$, $2$) model.
 
-If $d \leq 1$, these models are fitted with a non-zero constant, while no constant is used if $d > 1$. Then, the model with the lowest AIC is selected. AIC, which stands for Aikake's Information Criterion, is a measure for the goodness-of-fit of a model, and can be calculated with Equation 2.x.
+Then, the model with the lowest AIC is selected. AIC, which stands for Aikake's Information Criterion, is a measure for the goodness-of-fit of a model, and can be calculated with Equation 2.x.
 
 $$ AIC = -2 \log(L) + 2k$$
 
-Where $L$ is likelihood of the data, and $k$ is the number of free parameters in the model. In this case, $k = p + q + l + 1$, where $l = 1$ when a non-zero constant is included, and $l = 0$ otherwise. The '$+1$' term is included, since the variance of the residuals is also a parameter. To find the best fitting model, AIC should be minimized. The idea behind AIC is the following. The likelihood monotonically increases when more parameters are added to the model, and therefore, only maximizing the likelihood would favor a model that overfits the data. AIC prevents such overfiting, by penalizing the likelihood with a term that is proportional to the number of parameters used in the model.
+Where $L$ is the likelihood of the data, and $k$ is the number of free parameters in the model. In this case, $k = p + q + l + 1$, where $l = 1$ when a non-zero constant is included, and $l = 0$ otherwise. The '$+1$' term is included, since the variance of the residuals is also a parameter. To find the best fitting model, AIC should be minimized. The idea behind AIC is the following. The likelihood monotonically increases when more parameters are added to the model, and therefore, only maximizing the likelihood would favor a model that overfits the data. AIC prevents such overfiting, by penalizing the likelihood with a term that is proportional to the number of parameters used in the model.
 
-**Step 3.** In the third step, several variations of the model that was selected in step 2, are fitted to the $d$-times differenced data.
+**Step 3.** In the third step, several variations of the model that was selected in step 2, are fitted to the $d$-times differenced data. These variations include:
 
 * Models where either $p$ or $q$ vary $\pm 1$ from the selected model, given that $p, q \ngtr 5$.
 * Models where both $p$ and $q$ vary $\pm 1$ from the selected model, given that $p, q \ngtr 5$.
-* A model in which a constant is included, if the selected model did not have a constant.
-* A model in which the constant is excluded, if the selected model had a constant.
 
 From the selected model and all its variations, the model with the lowest AIC is chosen to be the new selected model, and step 3 is repeated. The algorithm stops when there are no variations of the selected model that have a lower AIC. In that case, the selected model is the optimal model, and forms the output of the Hyndman-Khandakar algorithm. The complete methodology of the algorithm as described above is summarized in Figure x.
 
 ### 2.4.2.3 Parameter estimation
-When $p$, $d$ and $q$ are defined, the model parameters $\phi_{1},...,\phi_{p}$ and $\theta_{1},...,\theta_{q}$ need to be estimated. Usually, this is done with *maximum likelihood estimation*. The likelihood is the probability of obtaining the observed data, given the model and specific parameter values. The parameter values that maximize the likelihood are also called the maximum likelihood estimators of the true parameters, and will be used as the parameter estimates in the fitted ARIMA($p$,$d$,$q$) model. The detailed mathematical description of maximum likelihood estimation for ARIMA models can be found in @brockwell2002, section 5.2.
+When $p$, $d$ and $q$ are defined, the model parameters $\phi_{1},...,\phi_{p}$ and $\theta_{1},...,\theta_{q}$ need to be estimated. Usually, this is done with *maximum likelihood estimation* (MLE). The likelihood is the probability of obtaining the observed data, given the model and specific parameter values. The parameter values that maximize the likelihood are called the maximum likelihood estimators of the true parameters, and will be used as the parameter estimates in the fitted ARIMA($p$,$d$,$q$) model, which then is refered to as the maximum likelihood ARIMA($p$,$d$,$q$) model. The detailed mathematical description of MLE for ARIMA models can be found in @brockwell2002, section 5.2.
 
 Note here that the Hyndman-Khandakar algorithm already produces a fitted model as output, and the parameter estimation as described in this section is done inside the algorithm, each time a model is fitted to the $d$-times differenced data.
 
 ### 2.4.2.4 Model checking
-Model checking involves identifying if the fitted model is adequate. This is done by inspecting its residuals, which are defined as the difference between the actual observations and the correpsonding fitted values, as shown in Equation 2.x.
+Model checking involves identifying if the fitted model is adequate. This is done by inspecting its residuals, which are defined as the difference between the actual observations and the corresponding fitted values, as shown in Equation 2.x.
 
 $$ e_{t} = y_{t} - \hat{y_{t}} $$
 
-A model that fits the data well, should have uncorrelated residuals with mean zero. If autocorrelation is present in the residuals, this means that there is still information left in the data, which could be used to create more accurate forecasts. A non-zero mean will lead to biased forecasts. 
+If the maximum likelihood ARIMA($p$,$d$,$q$) model is the true process that generated the data, the residuals should be completely white noise. Recall, however, that the model is an estimation of the true process. Therefore, a good model that fits the data well, should have residuals with properties that *approximately* reflect those of white noise, i.e. a zero mean and no autocorrelation. If autocorrelation is present in the residuals, this means that there is still information left in the data, which could be used to create more accurate forecasts. A non-zero mean will lead to biased forecasts. 
 
-Autocorrelation in the residuals can be detected by a visual interpretation of the residual ACF plot, which will always show some autocorrelation, due to random variation. Therefore, given that $n$ is the length of the modelled time series, and assuming a normal distribution, the residuals are considered to be uncorrelated when for at least 95% of the time lags, the residual ACF lies within the interval $[-1.96/\sqrt{n}, 1.96/\sqrt{n}]$. Instead, the Ljung-Box test can be used, which tests the null hypothesis that the residuals are independent, againt the alternative that they are not. The detailed mathematics underlying the test can be found in @ljung1978.
+Autocorrelation in the residuals can be detected by a visual interpretation of the residual ACF plot, which will always show some autocorrelation, due to random variation. Therefore, given that $n$ is the length of the modelled time series, and assuming a normal distribution, the residuals are considered to be uncorrelated when for at least 95% of the time lags, the residual ACF lies within the interval $[-1.96/\sqrt{n}, 1.96/\sqrt{n}]$. Instead, the Ljung-Box test can be used, which tests the null hypothesis that the residuals are independent, against the alternative that they are not. The detailed mathematics underlying the test can be found in @ljung1978.
+
+Usually, several computations within the model fitting and forecasting process build on the assumption that the data come from a normally distributed population. For example, in MLE and the calculation of AIC, Gaussian likelihood is commonly used. Furthermore, prediction intervals of forecasts are in general derived from the normal distribution. Normally distributed residuals indicate that these assumptions were valid, and are therefore a valuable property of a model. However, as stated by @brockwell2002, using Gaussian likelihood is sensible even when the data are not normally distributed.
 
 ### 2.4.2.5 Forecasting
 A fitted ARIMA($p$, $d$, $q$) model can then be used to forecast the future values of a time series. To do so, Equation 2.x is rewritten, such that the current value of the time series, $y_{t}$, is replaced by a future value of the time series, $y_{t+h}$, as shown in Equation 2.x.
 
 $$ 
-\nabla^{d}y_{t+h} = c + \hat\phi_{1}\nabla^{d}y_{t+h-1} + ... + \hat\phi_{p}\nabla^{d}y_{t+h-p} +\hat\theta_{1}\epsilon_{t+h-1} + ... + \hat\theta_{q}\epsilon_{t+h-q} + \epsilon_{t+1} 
+\nabla^{d}y_{t+h} = \hat\phi_{1}\nabla^{d}y_{t+h-1} + ... + \hat\phi_{p}\nabla^{d}y_{t+h-p} +\hat\theta_{1}\epsilon_{t+h-1} + ... + \hat\theta_{q}\epsilon_{t+h-q} + \epsilon_{t+1} 
 $$
 
-Where $h$ is the forecasting window, i.e. the number of time lags into the future at which the forecast is made, $p$, $d$ and $q$ are known and constant, and $\hat\phi_{1},...,\hat\phi_{p}$ and $\hat\theta_{1},...,\hat\theta_{q}$ are the estimated parameter values, which are also constant.
+Where $h$ is the forecast horizon, i.e. the number of time lags ahead at which the forecast is made, $p$, $d$ and $q$ are known and constant, and $\hat\phi_{1},...,\hat\phi_{p}$ and $\hat\theta_{1},...,\hat\theta_{q}$ are the estimated parameter values, which are also constant.
+
+When $h > 1$, more than one forecast has to be made. For example, the forecast of $\nabla^{d}y_{t+2}$, the value of the time series two time lags ahead, is based on $\nabla^{d}y_{t+2-1}$, the value of the time series one time lag ahead. Therefore, $\nabla^{d}y_{t+2-1}$ needs to be forecasted first, before $\nabla^{d}y_{t+2}$ can be forecasted. In general, this means that the uncertainty of the forecasts increases as $h$ increases. This uncertainty is expressed by means of a prediction interval. Most often, the 95% prediction interval is use. Assuming normally distributed residual, the lower and upper bound of the 95% prediction interval for the $h$-step forecast can be calculated by Equation 2.x and 2.x, respectively.
+
+$$ \ell = \hat{y}_{t+h} - 1.96\hat\sigma_{h}$$
+$$ \upsilon = \hat{y}_{t+h} + 1.96\hat\sigma_{h}$$
+
+Where $\ell$ is the lower bound of the 95% prediction interval, $\upsilon$ is the upper bound of the 95% prediction interval, $\hat{y}_{t+h}$ is the forecasted value $h$ time lags ahead. $\hat\sigma_{h}$ is the estimated standard deviation of the forecast distribution $h$ time lags ahead, which is explained below. The 95% prediction interval can be interpreted as follows: there is a 95% probability that $\ell \leq {y}_{t+h} \leq \upsilon$.
+
+Recall that in Defintion 1, a time series was defined as a collection of random variables. In fact, to state it statistically correct, it is the distribution of the random variable $h$ time lags ahead that is forecasted, rather than an individual value. This distribution is refered to as the forecast distribution, and the forecasted value, also known as the point forecast, is then taken to be the mean of the forecast distribution. In Equation 2.x and 2.x, $\hat\sigma_{h}$ is the estimated standard deviation of the forecasted distribution, assuming it is a normal distribution with mean ${y}_{t+h}$ and variance $\sigma_{h}^{2}$. When $h = 1$, the residual standard deviation $\sigma_{\epsilon}$ is a good estimate for $\sigma_{h}$. However, for $h > 1$, computation get more complex. For a detailed description, see @shumway2011, section 3.5. 
 
 ### 2.4.2.6 Accuracy evaluation
 ### 2.4.2.7 Transformations
-## 2.4.3 Seasonality
+## 2.4.3 Naïve forecasts
+## 2.4.4 Seasonality
 
 
 # 2.5 Time series clustering
