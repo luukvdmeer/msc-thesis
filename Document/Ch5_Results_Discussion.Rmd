@@ -24,10 +24,14 @@ knitr::include_graphics(c('Figures/grid.png', 'Figures/pickups.png'))
 
 The automatic procedure of defining the number of clusters $k$ and the mixing parameter $\alpha$ in the spatially constrained hierarchical clustering, lead to a definition of $k = 4$ and $\alpha = 0.6$. This resulted in a partition containing four fully spatial contiguous clusters. The geographical outlines of these clusters are shown in Figure 5.2a. The centroid of all grid cell centroids in each cluster, weighted by the number of pick-ups in the corresponding grid cells, are shown in Figure 5.2b. These weighted centroids serve as the model points in DBAFS.
 
-Roughly speaking, and based on a large study of neighborhood indicators in San Francisco [@sfindicator], the four clusters can be characterized as follows. The blue cluster mainly contains neigborhoods where the residential density is high compared to the job density, and the area zoned for commercial usage is relatively small. The blue cluster forms the city center of San Francisco, containing the neighborhoods with the highest population densities, but also with a relatively high job density compared to the residential density, and large areas zoned for commercial usage. The orange cluster covers the Bayview/Hunters Point neighborhood, which is a rather isolated area, with a high percentage of low-income households and relatively high crime rates. Finally, the green cluster covers the Presidio Park, a recreational area with few inhabitants, and a relatively high number of bike lanes. For the sake of clarity, the purple, blue, orange and green clusters are from now on refered to as the *Residential*, *Central*, *Bayview* and *Presidio* clusters, respectively.
+Roughly speaking, and based on a large study of neighborhood indicators in San Francisco [@sfindicator], the four clusters can be characterized as follows. The orange cluster covers the Bayview/Hunters Point neighborhood, which is a rather isolated area, with a high percentage of low-income households and relatively high crime rates. The blue cluster forms the city center of San Francisco, containing the neighborhoods with the highest population densities, but also with a relatively high job density compared to the residential density, and large areas zoned for commercial usage. The purple cluster mainly contains neigborhoods where the residential density is high compared to the job density, and the area zoned for commercial usage is relatively small. Finally, the green cluster covers the Presidio Park, a recreational area with few inhabitants, and a relatively high number of bike lanes. For the sake of clarity, the orange, blue and green clusters are from now on refered to as the *Bayview*, *Downtown*, *Residential* and *Presidio* clusters, respectively.
 
 ```{r clusters, out.width = '50%', fig.show = 'hold'}
 knitr::include_graphics(c('Figures/clusters.png', 'Figures/modelpoints.png'))
+```
+
+```{r patterns}
+knitr::include_graphics('Figures/clusterplots.png')
 ```
 
 # 5.2 Model building
