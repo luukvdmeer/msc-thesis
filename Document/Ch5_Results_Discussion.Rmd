@@ -1,0 +1,24 @@
+---
+title: 'Chapter 5: Results & Discussion'
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+subtitle: Draft version
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = "\\textwidth")
+```
+
+This chapter presents and discusses the results of the experiment described in Chapter 4. It is structured as follows. The first section shows the clusters that resulted from the cluster loop, along with their main characteristics. Section two provides the structure of the models that were build in the model loop, and the residual diagnostics for each them. Then, the third section covers the accuracy of the forecasts, while in the fourth and last section, the limitations of DBAFS are discussed, and recommendations for possible improvements are given.
+
+# 5.1 Clustering
+
+# 5.2 Model building
+
+# 5.3 Forecasting
+
+# 5.4 Limitations & Recommendations
