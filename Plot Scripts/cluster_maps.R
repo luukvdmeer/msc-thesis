@@ -1,6 +1,7 @@
 require(rosm)
 require(ggspatial)
 require(ggplot2)
+require(sf)
 require(dockless)
 
 ## ------------------------ SYSTEM AREA -----------------------------
@@ -14,9 +15,6 @@ systemarea = ggplot() +
     col = 'orange',
     lwd = 1,
     alpha = 0.7
-  ) +
-  labs(
-    title = 'System area of JUMP Bikes in San Francisco'
   ) +
   theme(
     text = element_text(family = 'serif'),
@@ -57,9 +55,6 @@ grid = ggplot() +
     col = 'black',
     size = 0.5
   ) +
-  labs(
-    title = 'Overlaying grid with centroids'
-  ) +
   theme(
     text = element_text(family = 'serif'),
     plot.title = element_text(hjust = 0.5)
@@ -98,9 +93,6 @@ pickups = ggplot() +
     name = 'pick-ups',
     colours = dockless_colors(20)
   ) +
-  labs(
-    title = 'Number of pick-ups per grid cell'
-  ) +
   theme(
     text = element_text(family = 'serif'),
     plot.title = element_text(hjust = 0.5),
@@ -135,10 +127,7 @@ clusters = ggplot() +
   scale_fill_manual(
     name = 'Cluster',
     values = dockless_colors(categorical = TRUE),
-    labels = c('Bayview', 'Central', 'Residential', 'Presidio')
-  ) +
-  labs(
-    title = 'Clusters'
+    labels = c('Bayview', 'Downtown', 'Residential', 'Presidio')
   ) +
   theme(
     text = element_text(family = 'serif'),
@@ -178,10 +167,7 @@ modelpoints = ggplot() +
   scale_color_manual(
     name = 'Model point',
     values = dockless_colors(categorical = TRUE),
-    labels = c('Bayiew', 'Central', 'Residential', 'Presidio')
-  ) +
-  labs(
-    title = 'Model points'
+    labels = c('Bayiew', 'Downtown', 'Residential', 'Presidio')
   ) +
   theme(
     text = element_text(family = 'serif'),
