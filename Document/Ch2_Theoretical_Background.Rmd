@@ -39,11 +39,11 @@ Analyzing time series raises unique problems in statistical modeling and inferen
 
 Given a sample {$y_{1}, y_{2}, ... , y_{n}$} of a time series, the degree of dependence in the data can be assesed by computing the *autocorrelation function* (ACF), for each lag $h$, as defined in Equation 1 [@brockwell2002].
 
-$$ \rho(h) = \frac{\gamma(h)}{\gamma(0)}, \quad -n < h < n $$
+$$ \hat\rho(h) = \frac{\hat\gamma(h)}{\hat\gamma(0)}, \quad -n < h < n $$
 
-Where $\gamma(h)$ is the autocovariance function of the sample at lag $h$, as defined in Equation 2.
+Where $\hat\gamma(h)$ is the autocovariance function of the sample at lag $h$, as defined in Equation 2.
 
-$$ \gamma(h) = n^{-1}\sum_{t=1}^{n-|h|}(y_{t+|h|} - \bar{y})(y_{t} - \bar{y}), \quad -n < h < n $$
+$$ \hat\gamma(h) = n^{-1}\sum_{t=1}^{n-|h|}(y_{t+|h|} - \bar{y})(y_{t} - \bar{y}), \quad -n < h < n $$
 
 Where $n$ is the length of the sample, $y_{t}$ is the data value at time $t$, $y_{t-|h|}$ is the data value at time $t$ minus $|h|$ time periods, and $\bar{y}$ is the mean of the sample. Whenever a time series {$Y_{t}$} is stationary, a concept that is introduced in the next section, the ACF of the sample {$y_{t}$} can be used as an estimate for the ACF of {$Y_{t}$}. A time series without autocorrelation, with zero mean and finite variance, is called *white noise*.
 
@@ -230,7 +230,7 @@ The process of finding an appropriate ARIMA($p$, $d$, $q$) model that represents
 ### 2.4.2.2 Model selection
 In the model selection stage, $p$, $d$ and $q$ are chosen. In this process, $d$ is selected first, such that the choice of $p$ and $q$ will be based on a stationary time series. An appropriate value for $d$ can be found by inspecting the plotted data $y_{t}$, with time on the x-axis, and define visually if the data are stationary. If not, then difference the data once, and inspect the plot of $\nabla y_{t}$. If $\nabla y_{t}$ does not seem stationary either, take the second-order difference $\nabla^{2} y_{t}$, and so on. In general, however, it is not recommended to difference more than two times. As an addition to the time plots, plotting the sample autocorrelation function of the data can help to identify stationarity. Non-stationary data show a slow decay in autocorrelation as the time lag increases, while for stationary data, the autocorrelation will drop to zero relatively fast. 
 
-Once $d$ has been set, either $p$ or $q$ can be selected by inspecting the autocorrelation function plot and the partial autocorrelation function plot of the differenced data. The partial autocorrelation function (PACF) is the relationship between an observation at time $t$ and and observation at time $t-k$, removing the effects of all time lags inbetween, i.e. $1, 2, ..., k-1$. Then, appropriate values for either $p$ or $q$ are found with the following rules of thumb:
+Once $d$ has been set, either $p$ or $q$ can be selected by inspecting the autocorrelation function plot and the partial autocorrelation function plot of the differenced data, which respectively plot the sample autocorrelation function (ACF), defined in Equation 2.x, and the sample partial autocorrelation function (PACF), for several lags $h$. The PACF is the relationship between an observation at time $t$ and and observation at time $t-k$, removing the effects of all time lags inbetween, i.e. $1, 2, ..., k-1$. Then, appropriate values for either $p$ or $q$ are found with the following rules of thumb:
 
 * The PACF plot of an ARIMA($p$,$d$,$0$) process cuts of after lag $p$, and the ACF plot tails off.
 * The ACF plot of an ARIMA($0$,$d$,$q$) process cuts of after lag $q$, and the PACF plot tails off.
@@ -275,7 +275,7 @@ $$ e_{t} = y_{t} - \hat{y_{t}} $$
 
 If the maximum likelihood ARIMA($p$,$d$,$q$) model is the true process that generated the data, the residuals should be completely white noise. Recall, however, that the model is an estimation of the true process. Therefore, a good model that fits the data well, should have residuals with properties that *approximately* reflect those of white noise, i.e. a zero mean and no autocorrelation. If autocorrelation is present in the residuals, this means that there is still information left in the data, which could be used to create more accurate forecasts. A non-zero mean will lead to biased forecasts. 
 
-Autocorrelation in the residuals can be detected by a visual interpretation of the residual ACF plot, which will always show some autocorrelation, due to random variation. Therefore, given that $n$ is the length of the modelled time series, and assuming a normal distribution, the residuals are considered to be uncorrelated when for at least 95% of the time lags, the residual ACF lies within the interval $[-1.96/\sqrt{n}, 1.96/\sqrt{n}]$. Instead, the Ljung-Box test can be used, which tests the null hypothesis that the residuals are independent, against the alternative that they are not. The detailed mathematics underlying the test can be found in @ljung1978.
+Autocorrelation in the residuals can be detected by a visual interpretation of the residual ACF plot, which will always show some autocorrelation, due to random variation. Therefore, given that $n$ is the length of the modelled time series, and assuming a normal distribution, the residuals are considered to be uncorrelated when for at least 95% of the time lags, the residual ACF lies within the interval $[-1.96/\sqrt{n}, 1.96/\sqrt{n}]$.
 
 Usually, several computations within the model fitting and forecasting process build on the assumption that the data come from a normally distributed population. For example, in MLE and the calculation of AIC, Gaussian likelihood is commonly used. Furthermore, prediction intervals of forecasts are in general derived from the normal distribution. Normally distributed residuals indicate that these assumptions were valid, and are therefore a valuable property of a model. However, as stated by @brockwell2002, using Gaussian likelihood is sensible even when the data are not normally distributed.
 
