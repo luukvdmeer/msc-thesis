@@ -100,7 +100,7 @@ ggsave(
   dpi = 600
 )
 
-rm(model_vector, data, f, stripr, colors, k, i, j, timeplot, timegrid)
+rm(model_vector, data, f, stripr, colors, k, i, j, timeplot, timegrid, weekend)
 
 ## ------------------ RESIDUAL TIME PLOTS ---------------------------
 
@@ -183,7 +183,12 @@ residual_acfplot = ggplot(
     col = 'orange',
     lwd = 1
   ) +
-  geom_line() +
+  geom_hline(
+    mapping = aes(yintercept = mean(acfdata$acf, na.rm = TRUE))
+  ) +
+  geom_segment(
+    mapping = aes(xend = lag, yend = mean(acfdata$acf, na.rm = TRUE))
+  ) +
   labs(
     x = 'Time lag',
     y = 'Autocorrelation'
@@ -239,7 +244,7 @@ residual_histogram = ggplot(
   ) +
   geom_rug(
     sides = 'b',
-    col = 'orange'
+    col = 'darkgrey'
   ) +
   labs(
     x = 'Residuals',
