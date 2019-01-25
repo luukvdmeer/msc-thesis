@@ -108,9 +108,11 @@ Finally, what strikes, is the large period of missing data in the last week of t
 knitr::include_graphics('Figures/timeplots.png', auto_pdf = TRUE)
 ```
 
-The structures of the models that were fitted on the four model point time series are shown in Table 5.2. The automatic seasonality detection resulted, as expected, in a double seasonal pattern for the Downtown data. For the Residential data, only a daily pattern was detected, while also the Bayview data were considered seasonal by the cross-validation process. Only Presidio data were labeled non-seasonal, and skipped the decomposition process sequence. Additionaly to the seasonal periods, Table 5.2 also shows the strength of the corresponding seasonal patterns. The daily pattern in the Bayview data is quite weak, just as the weekly pattern in the Downtown data. The daily patterns in the Downtown data and the Residential data are larger, but none of them can be considered very strong.
+The structures of the models that were fitted on the four model point time series are shown in Table 5.2. The automatic seasonality detection resulted, as expected, in a double seasonal pattern for the Downtown data. For the Residential data, only a daily pattern was detected, while also the Bayview data were considered seasonal by the cross-validation process. Only Presidio data were labeled non-seasonal, and skipped the decomposition process sequence. Additionaly to the seasonal periods, Table 5.2 also shows the strength $F_{s}$ of the corresponding seasonal patterns, calculated with Equation 2.x. The daily pattern in the Bayview data is weak, just as the weekly pattern in the Downtown data. The seasonal strengths of the daily patterns in the Downtown data and the Residential data are larger, but still, none of them can be considered very strong.
 
 In the ARIMA($p$, $d$, $q$) models for the Bayview and Downtown data, no autoregressive terms are included. Instead, they contain a high order of moving average terms. All datasets passed the KPSS test for stationarity after one differencing operation. The full details of the components and fitted models, including parameter estimates, can be found in Appendix C.
+
+Figure 5.5 shows the residuals of each model, plotted over time. All models have residuals with an approximately zero mean, and the variances look approximately constant. Comparing the residual time plot with the data time plot of Figure 5.4, it can be seen that in for the less dynamic data of the Bayview and Presidio model points, the models struggle to find a good fit for the peaks and valleys in the data, while the flat sections are explained accurately.
 
 ```{r modelstructure}
 library(kableExtra)
@@ -161,7 +163,30 @@ column_spec(
 )
 ```
 
+```{r residualtimeplots, fig.cap='Time plots of the model residuals', fig.pos='H'}
+knitr::include_graphics('Figures/residual_timeplots.png', auto_pdf = TRUE)
+```
+
+The autocorrelations at several time lags in the residuals are shown in Figure 5.6. Since the data have a temporal resolution of 15 minutes, 96 time lags correspond to one day, and 672 time lags, the total span of the x-axis in the figure, to one week. The dotted orange lines form the lower and upper 95% confidence bounds, assuming a normal distribution. This means that the residuals are considered to be a realization of a white noise process when at least 95% of the autocorrelation values fall within these bounds. It is important to note here that when working with real-world data, finding perfectly random model residuals is an exception, especially when the data have a high entropy. Taking that into account, the autocorrelation plot of the Downtown model look good, and their residuals seem to approximate white noise. 
+
+However, for the Bayview and Residential models, and in lower extent also the Presidio model, autocorrelations show peaks at several lags that correspond to full days. This implies that there is still some information left in those data that the models did not capture. Recall that no weekly seasonal pattern was included in the Bayview and Residential models. Only using a daily seasonality, systematic differences between weekdays will not be explained, which could be a possible reason for the significant autocorrelations that show up. In the Presidio, no seasonal pattern was identified at all. However, the seasonal patterns were chosen such that the RMSE of the forecasts in the cross-validation process was minimized, and in the end, minimizing these forecast errors is the real aim of DBAFS.
+
+```{r residualacf, fig.cap='ACF plot of the model residuals', fig.pos='H'}
+knitr::include_graphics('Figures/residual_acfplots.png', auto_pdf = TRUE)
+```
+
+Finally, Figure 5.6 shows the histograms of the model residual distributions. As expected, for the Bayview and Presidio models, most values are clustered closely around the zero mean, with the tails being extremely thin and long, especially for the Bayview model. The residuals of the Downtown and Residential models follow a distribution that comes closer to a normal one, but also here, the tails are wide. 
+
+As discussed in section 2.4.2.4, using Gaussian likelihood is sensible even when non-normally distributed residuals show up. Of course, it could be a possibility to try different likelihood functions, but this will make the process much more complex and much slower, for, probably, only a little gain in forecast accuracy. The non-normality of the residuals does have an effect on the validity of the prediction intervals, however. When 95% prediction intervals are calculated, assuming normality of the forecast distribution, they can not be interpreted as such. This issue will be covered further in the next section.
+
+```{r residualhist, fig.cap='Histograms of the model residuals', fig.pos='H'}
+knitr::include_graphics('Figures/residual_histograms.png', auto_pdf = TRUE)
+```
+
 # 5.3 Forecasting
+Figure 5.6a shows the geographical locations of the test points. The full information on the test set, with all unique location-timestamp combinations, can be found in Appendix D. Table 5.3 lists the average RMSE of the forecasts, both of DBAFS and the naïve method, for respectively the total system area, and per cluster. 
+
+
 
 # 5.4 Limitations & Recommendations
 
