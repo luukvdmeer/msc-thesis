@@ -22,12 +22,47 @@ data = mapply(f, distancedata_models, model_vector, SIMPLIFY = FALSE)
 # Bind all data frames together
 newdata = do.call(rbind, data)
 
+# Function to find start and end times of weekends
+weekend = function(x) {
+  saturdaystart = x %>%
+    mutate(saturday = lubridate::wday(.$time, week_start = 1) == 6) %>%
+    filter(saturday) %>%
+    filter(lubridate::hour(.$time) == 0 & lubridate::minute(.$time) == 0) %>%
+    select(-saturday)
+  
+  sundayend = x %>%
+    mutate(sunday = lubridate::wday(.$time, week_start = 1) == 7) %>%
+    filter(sunday) %>%
+    filter(lubridate::hour(.$time) == 23 & lubridate::minute(.$time) == 45) %>%
+    select(-sunday)
+  
+  if(nrow(sundayend) == (nrow(saturdaystart)-1)) {
+    sundayend = rbind(sundayend, x[nrow(x),])
+  } else if (nrow(saturdaystart) == (nrow(sundayend)-1)) {
+    saturdaystart = rbind(x[1,], saturdaystart)
+  }
+  
+  weekend = bind_cols(saturdaystart, sundayend) %>%
+    select(time, time1)
+}
+
 # Plot
-timeplot = ggplot(
-  data = newdata,
-  mapping = aes(x = time, y = distance)
-) +
-  geom_line() +
+timeplot = ggplot() +
+  geom_rect(
+    data = weekend(newdata),
+    mapping = aes(
+      xmin = time, 
+      xmax = time1, 
+      ymin = -Inf, 
+      ymax = Inf
+    ),
+    fill = 'darkgrey',
+    alpha = 0.2
+  ) +
+  geom_line(
+    data = newdata,
+    mapping = aes(x = time, y = distance)
+  ) +
   labs(
     x = 'Time',
     y = 'Distance to the nearest bike (m)'

@@ -155,16 +155,19 @@ modelpoints = ggplot() +
   ) +
   ggspatial::layer_spatial(
     data = readRDS('RDS Files/clusters.rds'),
-    col = 'black',
+    col = 'grey',
     lwd = 1,
-    fill = NA
+    alpha = 0.4
   ) +
   ggspatial::layer_spatial(
     data = (readRDS('RDS Files/modelpoints.rds')),
-    mapping = aes(col = cluster),
+    mapping = aes(fill = cluster),
+    color = 'black',
+    shape = 21,
+    stroke = 2,
     size = 4
   ) +
-  scale_color_manual(
+  scale_fill_manual(
     name = 'Model point',
     values = dockless_colors(categorical = TRUE),
     labels = c('Bayiew', 'Downtown', 'Residential', 'Presidio')
@@ -174,6 +177,9 @@ modelpoints = ggplot() +
     plot.title = element_text(hjust = 0.5),
     legend.position = c(0.1, 0.15),
     legend.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(override.aes = list(shape = 21))
   )
 
 ggsave(
