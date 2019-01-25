@@ -6,6 +6,7 @@ output:
     df_print: paged
 subtitle: Draft version
 bibliography: references.bib
+
 ---
 
 ```{r setup, include=FALSE}
@@ -18,23 +19,147 @@ This chapter presents and discusses the results of the experiment described in C
 # 5.1 Clustering
 Figure 5.1a shows the grid overlaying the JUMP Bikes system area in San Francisco, including the centroids of all the grid cells. In total, the grid contains 249 grid cells, each 500 meter high and 500 meter wide. Figure 5.1b shows the calculated number of pick-ups per grid cell, during the training period. On average, there were 938 pick-ups per grid cell. The maximum number of pick-ups in a grid cell was 8189, while in 14 of the 249 grid cells, there were no pick-ups at all. It can be seen that high counts of pick-ups occur in the grid cells along the diagonal axis from south-west to north-east. Mainly in the south-eastern corner of the system area, the usage intensity is very low.
 
-```{r mapandgrid, out.width = '50%', fig.show = 'hold'}
-knitr::include_graphics(c('Figures/grid.png', 'Figures/pickups.png'))
+```{r mapandgrid, out.width = '50%', fig.show = 'hold', fig.cap = 'a) grid overlaying the system area; b) number of pick-ups per grid cell', fig.pos = 'H'}
+knitr::include_graphics(c('Figures/grid.png', 'Figures/pickups.png'), auto_pdf = TRUE)
 ```
 
-The automatic procedure of defining the number of clusters $k$ and the mixing parameter $\alpha$ in the spatially constrained hierarchical clustering, lead to a definition of $k = 4$ and $\alpha = 0.6$. This resulted in a partition containing four fully spatial contiguous clusters. The geographical outlines of these clusters are shown in Figure 5.2a. The centroid of all grid cell centroids in each cluster, weighted by the number of pick-ups in the corresponding grid cells, are shown in Figure 5.2b. These weighted centroids serve as the model points in DBAFS.
+Recall that for each grid cell centroid, a time series of historical distance data was queried, and that the average weekly, normalized patterns in these data were clustered using spatially constrained hierarchical clustering. The automatic procedure of defining the number of clusters $k$ and the mixing parameter $\alpha$, lead to a definition of $k = 4$ and $\alpha = 0.6$. This resulted in a partition containing four fully spatial contiguous clusters. The geographical outlines of these clusters are shown in Figure 5.2a. The centroid of all grid cell centroids in each cluster, weighted by the number of pick-ups in the corresponding grid cells, are shown in Figure 5.2b. These weighted centroids serve as the model points in DBAFS.
 
-Roughly speaking, and based on a large study of neighborhood indicators in San Francisco [@sfindicator], the four clusters can be characterized as follows. The orange cluster covers the Bayview/Hunters Point neighborhood, which is a rather isolated area, with a high percentage of low-income households and relatively high crime rates. The blue cluster forms the city center of San Francisco, containing the neighborhoods with the highest population densities, but also with a relatively high job density compared to the residential density, and large areas zoned for commercial usage. The purple cluster mainly contains neigborhoods where the residential density is high compared to the job density, and the area zoned for commercial usage is relatively small. Finally, the green cluster covers the Presidio Park, a recreational area with few inhabitants, and a relatively high number of bike lanes. For the sake of clarity, the orange, blue and green clusters are from now on refered to as the *Bayview*, *Downtown*, *Residential* and *Presidio* clusters, respectively.
+Roughly speaking, and based on a large study of neighborhood indicators in San Francisco [@sfindicator], the four clusters can be characterized as follows. The orange cluster covers the Bayview/Hunters Point neighborhood, which is a rather isolated area, with a high percentage of low-income households and relatively high crime rates. The blue cluster forms the city center of San Francisco, containing the neighborhoods with the highest population densities, but also with a relatively high job density compared to the residential density, and large areas zoned for commercial usage. The purple cluster mainly contains neigborhoods where the residential density is high compared to the job density, and the area zoned for commercial usage is relatively small. Finally, the green cluster covers the Presidio Park, a recreational area with few inhabitants, and a relatively high number of bike lanes. For the sake of clarity, the orange, blue, purple and green clusters are from now on refered to as the *Bayview*, *Downtown*, *Residential* and *Presidio* clusters, respectively. Consistently, the four corresponding model points will be called the *Bayview*, *Downtown*, *Redisential* and *Presidio* model points, respectively.
 
-```{r clusters, out.width = '50%', fig.show = 'hold'}
-knitr::include_graphics(c('Figures/clusters.png', 'Figures/modelpoints.png'))
+```{r clusters, out.width = '50%', fig.show = 'hold', fig.cap = 'a) geographical outline of the clusters; b) geographical locations of the model points', fig.pos = 'H'}
+knitr::include_graphics(c('Figures/clusters.png', 'Figures/modelpoints.png'), auto_pdf = TRUE)
 ```
 
-```{r patterns}
-knitr::include_graphics('Figures/clusterplots.png')
+Table 1 presents some descriptive statistics of the time series, averaged per cluster, and averaged over the whole system area. From the 249 grid cells, almost half are located within the Residential cluster. The Bayview and Downtown cluster are both medium sized, while the Presidio cluster is by far the smallest of the four. 
+
+During the training period, the nearest available bike was on average located 529 meters from the grid cell centroids. In the Bayview cluster, this distance was more than twice as high as in the other clusters, that did not vary much between each other. The Bayview cluster also showed the largest variation in the data, with a high average standard deviation compared to the other clusters, and an average range that spans more than four kilometers. This can possibly be explained by the low usage intensity of the bike sharing system in this part of the system area. When the number of bikes in an area is low, the nearest available bike and the second nearest available bike are more likely to be far away from each other. In that case, when the closest of them gets picked-up, the distance to the nearest available bike will suddenly increase substantially. The other way around, when all available bikes are far away, and one bike gets dropped-off inside the area, the distance to the nearest available bike will suddenly decrease substantially. 
+
+Although not as extreme as the Bayview cluster, also the other clusters had on average high ranges when compared to the mean and standard deviation. However, the standard deviation itself turned out to be rather small relative to the mean. This implies either the presence of outliers, or population distributions with thin, but wide tails.
+
+The first order autocorrelation measures the average dependency between data values at time $t$ and correpsonding data values at time $t-1$. In the whole system area, this dependency was strong, especially in the Bayview and Presidio clusters. These high autocorrelation values are important, since they imply that the data are not random, and it is reasonable to use past observations when forecasting future ones. However, the calculated spectral entropy values show that in general, the data are also very complex, and the forecastability is low. This mainly concerns the Downtown and Residential clusters, which contain, as could be seen in Figure 5.1b, the areas where the pick-up density is high. In such areas, the data are more dynamic, since bikes get picked-up and dropped off constantly, and the location of the nearest available bike will change often. In most cases, the more dynamic the data, the harder to forecast.
+
+```{r clusterstats}
+library(kableExtra)
+
+cluster_stats = readRDS('Results/cluster_stats.rds')
+colnames(cluster_stats) = c(
+  "$N$",
+  "$\\mu$",
+  "$range$",
+  "$\\sigma$",
+  "$\\rho(1)$",
+  "$H$"
+)
+
+knitr::kable(
+  cluster_stats,
+  align = 'l',
+  booktabs = TRUE,
+  digits = c(0, 0, 0, 0, 2, 2),
+  escape = FALSE,
+  caption = 'Descriptive statistics of the grid cell centroids distance data'
+) %>%
+kable_styling(
+  latex_options = 'hold_position',
+  full_width = TRUE
+) %>%
+column_spec(
+  1,
+  bold = TRUE,
+  width = '5cm'
+) %>%
+footnote(
+  general = 'Except $N$, all metrics are calculated for each time series seperately, and averaged afterwards.',
+  number = c(
+    "$N$ is the total number of grid cell centroids",
+    "$\\\\mu$ is the mean of the data, in meters",
+    "$range$ is the difference between the maximum and minimum data value, in meters",
+    "$\\\\sigma$ is the standard deviation of the data, in meters",
+    "$\\\\rho(1)$ is the first order autocorrelation, see section 2.x",
+    "$H$ is the spectral entropy, see section 2.x"
+  ),
+  escape = FALSE
+)
+```
+
+Figure 5.3 shows the normalized, average weekly patterns of the time series, averaged once again per cluster. The patterns can be explained intuitively. The Bayview cluster has a low usage intensity, and although there are peaks in the data every day, a clear and consistent pattern is absent. 
+
+The Downtown cluster has a high density of jobs and commercial activities. During working hours, the demand for bikes is low, which leads to a high number of available bikes, and consequently, short distances to the nearest available bike. In the afternoon, just after working hours, the demand starts increasing, and it gets harder to find an available bike nearby. Later in the evening, the demand decreases again. In the weekends, the daily peaks are less clear, an spread out over a longer timespan.
+
+The Residential cluster shows the exact opposite pattern. In the morning rush hours, commuters use the bike to get to work, and not many available bikes are left in the residential areas. Hence, in those areas, the distance to the nearest available bike is higher during working hours. In the afternoon, commuters come back from work, and leave the bikes in the residential areas, causing a decrease in distance to the nearest available bike. Just as in the Downtown cluster, the peaks and valleys in the weekends are less strong. Furhtermore, they happen later on the day, corresponding to the same periods as the Downtown cluster.
+
+Finally, the Presidio cluster is mainly a recreational area. There are a lot of bikes, but during weekdays, they are used less, leading to small and constant distances to the nearest available bike. In weekends, and mainly on Sunday afternoon, the usage intensity is high, and it takes longer to find an available bike.
+
+```{r patterns, fig.cap='Normalized, average weekly patterns of the grid cell distance data, averaged per cluster', fig.pos='H'}
+knitr::include_graphics('Figures/clusterplots.png', auto_pdf = TRUE)
 ```
 
 # 5.2 Model building
+Figure 5.4 shows the time plots of the distance data that were queried for each of the model points in Figure 5.2b, with the darkgrey shaded areas representing weekends. The plots endorse the findings in the previous sections. The data corresponding to the Bayview modelpoint show large variation, interspersed with flat sections, and lack a clear repeating pattern. The variance decreases to the end of the training period, together with the mean. 
+
+The data corresponding to the Downtown and Residential modelpoints are most dynamic. A daily pattern shows for both of them, and in the Downtown data, the peaks in the weekend are generally lower than those on weekdays. For the Residential modelpoint, however, this difference is less visible. In both datasets, the dialy peaks vary considerably in height from day to day, and look far less smooth than the averaged weekly patterns shown in Figure 5.3.  Although not as noticable as for the Bayview modelpoint, the variances of the Downtown and Residential data seem to decrease slightly towards the end of the training period, together with the mean. This justifies the use of a multiplicative decomposition, rather than an additive one.
+
+The Presidio modelpoint shows the most constant data, with a low mean and long flat sections. In the first part of the training period, the Sundays stand out clearly, but later, the peaks in the data get smaller, and seem to occur more randomly.
+
+Finally, what strikes, is the large period of missing data in the last week of the training period. These data are missing in all datasets, probably caused by problems on the JUMP Bikes server. Some smaller periods of missing data occur in the first weekend of the training period, and during the second week of November. Again, the data for all four time series are missing in these periods. Recall here that both STL and the implementation of ARIMA in R, as used by DBAFS, automatically handle missing values. Hence, the periods of missing data are not problematic for neither the model fitting nor the forecasting process.
+
+```{r timeplots, fig.cap='Time plots of the model points distance data', fig.pos='H'}
+knitr::include_graphics('Figures/timeplots.png', auto_pdf = TRUE)
+```
+
+The structures of the models that were fitted on the four model point time series are shown in Table 5.2. The automatic seasonality detection resulted, as expected, in a double seasonal pattern for the Downtown data. For the Residential data, only a daily pattern was detected, while also the Bayview data were considered seasonal by the cross-validation process. Only Presidio data were labeled non-seasonal, and skipped the decomposition process sequence. Additionaly to the seasonal periods, Table 5.2 also shows the strength of the corresponding seasonal patterns. The daily pattern in the Bayview data is quite weak, just as the weekly pattern in the Downtown data. The daily patterns in the Downtown data and the Residential data are larger, but none of them can be considered very strong.
+
+In the ARIMA($p$, $d$, $q$) models for the Bayview and Downtown data, no autoregressive terms are included. Instead, they contain a high order of moving average terms. All datasets passed the KPSS test for stationarity after one differencing operation. The full details of the components and fitted models, including parameter estimates, can be found in Appendix C.
+
+```{r modelstructure}
+library(kableExtra)
+
+model_structure = data.frame(
+  seasonality = c('daily', 'daily and weekly', 'daily', 'none'),
+  seas_strength = c('0.25', '0.40, 0.27', '0.47', '-'),
+  p = c(0, 0, 2, 1),
+  d = c(1, 1, 1, 1),
+  q = c(5, 5, 1, 1)
+)
+rownames(model_structure) = c(
+  'Bayview', 
+  'Downtown', 
+  'Residential', 
+  'Presidio'
+)
+colnames(model_structure) = c(
+  "seasonality",
+  "$F_{s}$",
+  "$p$",
+  "$d$",
+  "$q$"
+)
+
+knitr::kable(
+  model_structure,
+  align = c('c', 'c', 'c', 'c', 'c'),
+  booktabs = TRUE,
+  escape = FALSE,
+  caption = 'Model structures'
+) %>%
+kable_styling(
+  latex_options = 'hold_position',
+  full_width = TRUE
+) %>%
+add_header_above(
+  c(" " = 1, "STL" = 2, "ARIMA" = 3)
+) %>%
+column_spec(
+  1,
+  bold = TRUE,
+  width = '5cm'
+) %>%
+column_spec(
+  2,
+  width = '3cm'
+)
+```
 
 # 5.3 Forecasting
 
