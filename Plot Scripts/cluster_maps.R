@@ -24,8 +24,8 @@ systemarea = ggplot() +
 ggsave(
   'Document/Figures/systemarea.png',
   plot = systemarea,
-  width = 7,
-  height = 7,
+  width = 5,
+  height = 5,
   units = 'in',
   dpi = 600
 )
@@ -63,8 +63,8 @@ grid = ggplot() +
 ggsave(
   'Document/Figures/grid.png',
   plot = grid,
-  width = 7,
-  height = 7,
+  width = 5,
+  height = 5,
   units = 'in',
   dpi = 600
 )
@@ -103,8 +103,8 @@ pickups = ggplot() +
 ggsave(
   'Document/Figures/pickups.png',
   plot = pickups,
-  width = 7,
-  height = 7,
+  width = 5,
+  height = 5,
   units = 'in',
   dpi = 600
 )
@@ -139,8 +139,8 @@ clusters = ggplot() +
 ggsave(
   'Document/Figures/clusters.png',
   plot = clusters,
-  width = 7,
-  height = 7,
+  width = 5,
+  height = 5,
   units = 'in',
   dpi = 600
 )
@@ -185,8 +185,8 @@ modelpoints = ggplot() +
 ggsave(
   'Document/Figures/modelpoints.png',
   plot = modelpoints,
-  width = 7,
-  height = 7,
+  width = 5,
+  height = 5,
   units = 'in',
   dpi = 600
 )

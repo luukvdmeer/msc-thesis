@@ -57,7 +57,7 @@ timeplot = ggplot() +
       ymax = Inf
     ),
     fill = 'darkgrey',
-    alpha = 0.2
+    alpha = 0.1
   ) +
   geom_line(
     data = newdata,
