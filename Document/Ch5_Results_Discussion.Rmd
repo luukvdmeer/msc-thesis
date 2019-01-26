@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = "\\textwidth")
 ```
 
-This chapter presents and discusses the results of the experiment described in Chapter 4. It is structured as follows. The first section shows the clusters that resulted from the cluster loop, along with their main characteristics, and the chosen locations of the model points. Section two provides the structure of the  models that were build in the model loop, and the residual diagnostics for each them. Then, the third section covers the accuracy of the forecasts, while in the fourth and last section, the limitations of DBAFS are discussed, and recommendations for possible improvements are given.
+This chapter presents and discusses the results of the experiment described in Chapter 4. It is structured as follows. The first section shows the clusters that resulted from the cluster loop, along with their main characteristics, and the chosen locations of the model points. Section two provides the structure of the  models that were build in the model loop, and the residual diagnostics for each them. Then, the third section covers the accuracy of the forecasts produced by DBAFS, compared to the baseline, defined by the Näive forecastsing method. In section four, the computing times of the forecasts are presented and compared. Finally, in the fifth section, the limitations of DBAFS are discussed, and recommendations for possible improvements are given.
 
 # 5.1 Clustering
 Figure 5.1a shows the grid overlaying the JUMP Bikes system area in San Francisco, including the centroids of all the grid cells. In total, the grid contains 249 grid cells, each 500 meter high and 500 meter wide. Figure 5.1b shows the calculated number of pick-ups per grid cell, during the training period. On average, there were 938 pick-ups per grid cell. The maximum number of pick-ups in a grid cell was 8189, while in 14 of the 249 grid cells, there were no pick-ups at all. It can be seen that high counts of pick-ups occur in the grid cells along the diagonal axis from south-west to north-east. Mainly in the south-eastern corner of the system area, the usage intensity is very low.
@@ -175,7 +175,7 @@ However, for the Bayview and Residential models, and in lower extent also the Pr
 knitr::include_graphics('Figures/residual_acfplots.png', auto_pdf = TRUE)
 ```
 
-Finally, Figure 5.6 shows the histograms of the model residual distributions. As expected, for the Bayview and Presidio models, most values are clustered closely around the zero mean, with the tails being extremely thin and long, especially for the Bayview model. The residuals of the Downtown and Residential models follow a distribution that comes closer to a normal one, but also here, the tails are wide. 
+Finally, Figure 5.7 shows the histograms of the model residual distributions. As expected, for the Bayview and Presidio models, most values are clustered closely around the zero mean, with the tails being extremely thin and long, especially for the Bayview model. The residuals of the Downtown and Residential models follow a distribution that comes closer to a normal one, but also here, the tails are wide. 
 
 As discussed in section 2.4.2.4, using Gaussian likelihood is sensible even when non-normally distributed residuals show up. Of course, it could be a possibility to try different likelihood functions, but this will make the process much more complex and much slower, for, probably, only a little gain in forecast accuracy. The non-normality of the residuals does have an effect on the validity of the prediction intervals, however. When 95% prediction intervals are calculated, assuming normality of the forecast distribution, they can not be interpreted as such. This issue will be covered further in the next section.
 
@@ -184,11 +184,63 @@ knitr::include_graphics('Figures/residual_histograms.png', auto_pdf = TRUE)
 ```
 
 # 5.3 Forecasting
-Figure 5.6a shows the geographical locations of the test points. The full information on the test set, with all unique location-timestamp combinations, can be found in Appendix D. Table 5.3 lists the average RMSE of the forecasts, both of DBAFS and the naïve method, for respectively the total system area, and per cluster. 
+Figure 5.8a shows the geographical locations of the 1000 test points. As planned, areas with high usage intensity have more test points, with almost 95% located in the Downtown and Residential clusters. Figure 5.8b shows the time stamps of the test points, counted per hour. The whole two week period is covered, with less test points during working times, and more during rush hours and in the evenening. What strikes, is a high peak in the afternoon of the 4th of december, and the fact that relatively many test points during the night. The full information on the test set, with all unique location-time combinations, can be found in Appendix D. The root mean squared error (RMSE) and the mean absolute error (MAE), both described in section 2.x, are calculated for the forecasts of each individual test point seperately. Then, these values are averaged, either over the whole system area, or per cluster.
 
+Table 5.3 lists those averaged RMSE's and MAE's of the forecasts produced by DBAFS, and of the forecasts produced with the naïve method. DBAFS outperforms the naïve method, but the accuracy gain is minimal. Where the average RMSE of DBAFS is 241 meters, the naïve method produces forecasts with RMSE's that are on average only 45 meters lower. In the Bayview cluster, an area with long flat sections in the data, the naïve method even outperforms DBAFS, with the sidenote that only ten test points were located here.
 
+The range of RMSE values is much higher for naïve forecasts when compared to DBAFS. For some test points the naïve method manages to produce perfect forecasts, implying that the data were completely flat during that day. When a seasonal pattern is identified, DBAFS expects such a pattern to continue over time, and will forecast peaks even when the real data remains flat. However, there are also time points for which the naïve forecast resulted in an RMSE of almost 1.5 kilometers. For DBAFS, the RMSE is lower than 900 meters at all test points. Both in DBAFS and the naïve method, the average RMSE is considerably larger in the Downtown and Residential clusters, just as the range between the minimum and maximum RMSE. This was expected, since those clusters showed the most dynamic and complex data.
 
-# 5.4 Limitations & Recommendations
+The MAE can be interpreted more intuitive. When DBAFS produces a forecast, on average over the whole system area, the nearest available bike will either be 185 meters further, or 185 meters closer. Using the naïve methods, this distance is 222 meters.
+
+```{r forecastresults}
+library(kableExtra)
+
+forecast_results = readRDS('Results/forecast_results.rds')
+
+knitr::kable(
+  forecast_results,
+  align = 'l',
+  digits = 0,
+  booktabs = TRUE,
+  caption = 'Forecast results'
+) %>%
+kable_styling(
+  latex_options = 'hold_position',
+  full_width = TRUE
+) %>%
+add_header_above(
+  c(" " = 2, "RMSE" = 3, "MAE" = 3, "RMSE" = 3, "MAE" = 3)
+) %>%
+add_header_above(
+  c(" " = 2, "DBAFS" = 6, "NAÏVE" = 6)
+) %>%
+column_spec(
+  1,
+  bold = TRUE
+)
+```
+
+```{r testpoints, out.width = '50%', fig.show = 'hold', fig.cap = 'a) geographical locations of the test points; b) time stamps of the test points, counted per hour', fig.pos = 'H'}
+knitr::include_graphics(c('Figures/testpoints_locations.png', 'Figures/testpoints_time.png'), auto_pdf = TRUE)
+```
+
+The spatial and temporal patterns of the forecast RMSE values are shown together in Figure 5.9, where each point represents the RMSE of a single forecasted test point. The points are plotted with time, with the time values corresponding to the starting time of each forecast. The shaded areas are weekends. The patterns that show endorse the findings above. In the Bayview cluster, only a few forecasts are made, all with a relatively low RMSE, and little difference between DBAFS and the Naïve method. To less extent, the same yields for the Presidio cluster. In the Downtown and Residential clusters, where the majority of the forecasts are made, the average RMSE of the forecasts with DBAFS is only slightly lower than of those with the Naïve method, but they are clearly more compact. Mainly later on the day, the Naïve method starts to give higher errors. Especially in the Downtown cluster, the RMSE's of forecasts in the weekend are lower than during weekdays, both for DBAFS and the Naïve method.
+
+```{r spacetime, fig.cap='Spatio-temporal patterns of the forecast RMSEs', fig.pos='H'}
+knitr::include_graphics('Figures/spacetime.png', auto_pdf = TRUE)
+```
+
+Figure 5.10a shows the average RMSE per hour of the day. During the night time, the errors are low for both DBAFS and the Naïve method, followed by a strong increase during the morning peak hour. The afternoon peak hour shows lower RMSE's, and again more similarity between the two methods. During times where the average RMSE is high, and apparently, the data get more complex and less forecastable, DBAFS performs considerably better than the naïve method. 
+
+Figure 5.10b shows the average RMSE per forecast lag. For the naïve method, the RMSE at lag $0$ is always $0$, since it simply forecast the last known value of the time series. For DBAFS, this it not the case, since it add the corresponding seasonal term of that time stamp to the forecast, which turns out to be not reliable enough to be appropriate everywhere. Therefore, in short term forecasting, the Naïve method performs slightly better, although for both methods the RMSE increases very fast during the first lags. After about two hours, the increase of RMSE for DBAFS starts to get flatter, while for the Naïve method, it keeps increasing. Further into the furture, the average RMSE's converge to the mean absolute error of the corresponding methods.
+
+```{r timeandlag, fig.show = 'hold', fig.cap = 'a) RMSE averaged per hour of the day; b) RMSE averaged per forecast lag', fig.pos = 'H'}
+knitr::include_graphics('Figures/hourlag.png', auto_pdf = TRUE)
+```
+
+# 5.4 Benchmark
+
+# 5.5 Limitations & Recommendations
 
 \newpage
 
