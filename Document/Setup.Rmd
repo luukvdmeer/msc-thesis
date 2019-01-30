@@ -1,39 +1,107 @@
 ---
-title: "Setup"
-output: pdf_document
+title: 'Content'
+header-includes:
+- \usepackage{float}
+- \floatplacement{figure}{H}
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+subtitle: Draft version
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = "\\textwidth")
 ```
 
 # Chapter 1: Introduction
 ## 1.1 Context
+  
+## 1.2 Research gap
+  
 ## 1.2 Related work
-## 1.3 Research objectives
+  
+## 1.3 Objectives
+  
 ## 1.4 Outline
-
+  
 # Chapter 2: Theoretical background
 ## 2.1 Time series definition
+  
 ## 2.2 Time series characteristics
+### 2.2.1 Autocorrelation
+### 2.2.2 Stationarity
+### 2.2.3 Spectral entropy
+  
 ## 2.3 Time series components
-## 2.4 Time series clustering
-
-# Chapter 3: Model architecture
+### 2.3.1 Definitions
+### 2.3.2 Classical decomposition
+### 2.3.3 STL decomposition
+### 2.3.4 Strength of trend and seasonal component
+  
+## 2.4 Time series forecasting
+### 2.4.1 Forecasting models
+### 2.4.2 ARIMA
+#### 2.4.2.1 Structure
+#### 2.4.2.2 Model selection
+#### 2.4.2.3 Parameter estimation
+#### 2.4.2.4 Model checking
+#### 2.4.2.5 Forecasting
+#### 2.4.2.6 Accuracy evaluation
+#### 2.4.2.7 Transformations
+### 2.4.3 Naïve forecasts
+### 2.4.4 Seasonality
+## 2.5 Time series clustering
+### 2.5.1 Dissimilarity measures
+### 2.5.2 Hierarchical clustering
+### 2.5.3 Spatially constrained hierarchical clustering
+  
+# Chapter 3: System architecture
 ## 3.1 Overall design
-## 3.2 Cluster loop
-## 3.3 Model loop
-## 3.4 Forecast loop
-
-# Chapter 4: Data
-## 4.1 Data sources
-## 4.2 Exploratory data analysis
-
-# Chapter 5: Experimental design
-
-# Chapter 6: Results & Discussion
-## 6.1 Period length
-## 6.2 Model evaluation
-## 6.3 Forecast accuracy
-
-# Chapter 7: Conclusions & Future work
+  
+## 3.2 Software
+  
+## 3.3 System area
+  
+## 3.4 Database
+### 3.4.1 Distance data
+### 3.4.2 Usage data
+  
+## 3.5 Forecast request
+  
+## 3.6 Cluster loop
+  
+## 3.7 Model loop
+  
+## 3.8 Forecast loop
+  
+# Chapter 4: Data & Experimental Design
+## 4.1 Data source
+  
+## 4.2 Data pre-processing
+  
+## 4.3 Experimental desing
+### 4.3.1 Training period
+### 4.3.2 Test period
+### 4.3.3 Benchmark
+  
+# Chapter 5: Results & Discussion
+## 5.1 Clustering
+  
+## 5.2 Model building
+  
+## 5.3 Forecasting
+  
+## 5.4 Computation times
+  
+## 5.5 Limitations and recommendations
+  
+# Chapter 6: Conclusion
+  
+# Appendices
+## Appendix A: Code
+## Appendix B: Drivers
+## Appendix C: Models
+## Appendix D: Test points
