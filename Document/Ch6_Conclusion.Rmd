@@ -1,0 +1,19 @@
+---
+title: 'Chapter 6: Conclusion'
+header-includes:
+- \usepackage{float}
+- \floatplacement{figure}{H}
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+subtitle: Draft version
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = "\\textwidth")
+```
+
+`*NOTE: To be written at the end*`
