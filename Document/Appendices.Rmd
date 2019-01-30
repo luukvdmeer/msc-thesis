@@ -1,0 +1,39 @@
+---
+title: 'Appendices'
+header-includes:
+- \usepackage{float}
+- \floatplacement{figure}{H}
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+subtitle: Draft version
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = "\\textwidth")
+```
+
+# Appendix A: Code
+All code underlying DBAFS is bundled in the R package `dockless`, available on github through the following link: https://github.com/luukvdmeer/dockless. For now, the code is optimized for the case study in San Francisco, but can easily be generalized to be used in any dockless bike sharing system.
+
+# Appendix B: Models
+```{r, warning=FALSE}
+require(forecast)
+
+models = readRDS('C:/Users/meer/Documents/Master GeoTech/Thesis/Documentation/msc-thesis/RDS Files/models.rds')
+
+models[[1]]$model
+models[[2]]$model
+models[[3]]$model
+models[[4]]
+```
+
+# Appendix C: Test points
+```{r}
+testpoints = readRDS('C:/Users/meer/Documents/Master GeoTech/Thesis/Documentation/msc-thesis/RDS Files/testpoints.rds')
+
+testpoints
+```
