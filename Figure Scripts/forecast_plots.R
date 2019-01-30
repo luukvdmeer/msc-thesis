@@ -4,6 +4,7 @@ require(ggplot2)
 require(grid)
 require(gridExtra)
 require(lubridate)
+require(tibble)
 
 # Load data
 testpoints = readRDS('RDS Files/testpoints.rds')
@@ -255,4 +256,105 @@ ggsave(
 
 rm(rmse_dbafs, rmse_naive, rmse_hourofday, rmse_lag, hourofday, lag, g,
    testpoints, forecasts_dbafs, forecasts_naive)
+
+## ------------------ INDIVIDUAL FORECASTS --------------------------
+
+# Randomly sample two indices per cluster from testpoints
+selection = testpoints %>%
+  rowid_to_column %>%
+  group_by(cluster) %>%
+  sample_n(1)
+  
+indices = selection %>%
+  pull(rowid)
+
+# Select the corresponding forecasts, both for naïve and DBAFS
+dbafs = forecasts_dbafs[indices]
+naive = forecasts_naive[indices]
+obser = forecasts_dbafs[indices]
+
+# Add cluster number and number to each dockless_fc
+for(i in c(1:length(indices))) {
+  
+  dbafs[[i]]$cluster = (selection$cluster)[i]
+  dbafs[[i]]$color = 'orange'
+  naive[[i]]$cluster = (selection$cluster)[i]
+  naive[[i]]$color = 'tan'
+  obser[[i]]$cluster = (selection$cluster)[i]
+  obser[[i]]$color = 'black'
+  
+}
+
+# Bind all together
+dbafs_combined = do.call('rbind', dbafs)
+naive_combined = do.call('rbind', naive)
+obser_combined = do.call('rbind', obser)
+
+# Plot
+forecastplot = ggplot() +
+  geom_line(
+    data = obser_combined,
+    mapping = aes(x = time, y = observation, col = color),
+    size = 2
+  ) +
+  geom_line(
+    data = naive_combined,
+    mapping = aes(x = time, y = forecast, col = color),
+    size = 2
+  ) +
+  geom_line(
+    data = dbafs_combined,
+    mapping = aes(x = time, y = forecast, col = color),
+    size = 2
+  ) +
+  scale_color_manual(
+    name = " ",
+    values = c('black', 'orange', 'tan'),
+    labels = c('observation', 'DBAFS forecast', 'naïve forecast')
+  ) +
+  labs(
+    x = 'Time',
+    y = 'Distance to the nearest available bike (m)'
+  ) +
+  theme(
+    text = element_text(family = 'serif'),
+    axis.title.x = element_blank(),
+    legend.position = 'bottom'
+  ) +
+  facet_wrap(
+    ~ cluster,
+    ncol = 1,
+    scales = 'free',
+    strip.position = 'right',
+    labeller = as_labeller(
+      c(
+        '1' = 'Bayview',
+        '2' = 'Downtown',
+        '3' = 'Residential', 
+        '4' = 'Presidio' 
+      )
+    )
+  )
+
+# Color the facet backgrounds (code from https://github.com/tidyverse/ggplot2/issues/2096)
+forecastgrid = ggplot_gtable(ggplot_build(forecastplot))
+stripr = which(grepl('strip-', forecastgrid$layout$name))
+colors = dockless_colors(categorical = TRUE)
+k = 1
+for (i in stripr) {
+  j = which(grepl('rect', forecastgrid$grobs[[i]]$grobs[[1]]$childrenOrder))
+  forecastgrid$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill = colors[k]
+  k = k + 1
+}
+
+ggsave(
+  'Document/Figures/forecastplot.png',
+  plot = forecastgrid,
+  scale = 1.5,
+  dpi = 600
+)
+
+rm(selection, indices, dbafs, naive, obser, forecastplot, forecastgrid, i,
+   j, k, stripr, colors, dbafs_combined, naive_combined,
+   obser_combined, forecasts_dbafs, forecasts_naive, testpoints)
 
