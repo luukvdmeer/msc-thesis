@@ -5,7 +5,7 @@ require(sf)
 require(dockless)
 
 # Load data
-distancedata_clusters = readRDS('RDS Files/distancedata_clusters.rds')
+distancedata_clusters = readRDS('RDS Files/distancedata_centroids_train.rds')
 gridcells = readRDS('RDS Files/gridcells.rds')
 
 # Aggregate all data frames by weekhour
@@ -61,7 +61,7 @@ clusterplot = ggplot(
     cluster ~ .,
     labeller = as_labeller(
       c(
-      '1' = 'Bayview', 
+      '1' = 'Bayview',
       '2' = 'Downtown', 
       '3' = 'Residential', 
       '4' = 'Presidio'

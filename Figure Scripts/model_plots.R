@@ -5,7 +5,7 @@ require(sf)
 require(dockless)
 
 # Load data
-distancedata_models = readRDS('RDS Files/distancedata_models.rds')
+modeldata = readRDS('RDS Files/distancedata_modelpoints.rds')
 models = readRDS('RDS Files/models.rds')
 
 ## ------------------------ TIME PLOTS ------------------------------
@@ -17,7 +17,7 @@ f = function(x, y) {
 }
 
 model_vector = as.factor(c(1,2,3,4))
-data = mapply(f, distancedata_models, model_vector, SIMPLIFY = FALSE)
+data = mapply(f, modeldata, model_vector, SIMPLIFY = FALSE)
 
 # Bind all data frames together
 newdata = do.call(rbind, data)
@@ -72,9 +72,10 @@ timeplot = ggplot() +
   ) +
   facet_grid(
     model ~ .,
+    scale = 'free_y',
     labeller = as_labeller(
       c(
-        '1' = 'Bayview', 
+        '1' = 'Bayview',
         '2' = 'Downtown', 
         '3' = 'Residential', 
         '4' = 'Presidio'
@@ -130,7 +131,7 @@ residual_timeplot = ggplot(
     model ~ .,
     labeller = as_labeller(
       c(
-        '1' = 'Bayview', 
+        '1' = 'Bayview',
         '2' = 'Downtown', 
         '3' = 'Residential', 
         '4' = 'Presidio'
@@ -203,7 +204,7 @@ residual_acfplot = ggplot(
     model ~ .,
     labeller = as_labeller(
       c(
-        '1' = 'Bayview', 
+        '1' = 'Bayview',
         '2' = 'Downtown', 
         '3' = 'Residential', 
         '4' = 'Presidio'
@@ -253,12 +254,12 @@ residual_histogram = ggplot(
   theme(
     text = element_text(family = 'serif')
   ) +
-  facet_wrap(
-    ~ model,
-    scales = 'free',
+  facet_grid(
+    . ~ model,
+    scale = 'free',
     labeller = as_labeller(
       c(
-        '1' = 'Bayview', 
+        '1' = 'Bayview',
         '2' = 'Downtown', 
         '3' = 'Residential', 
         '4' = 'Presidio'
@@ -286,4 +287,4 @@ ggsave(
 
 rm(stripr, colors, k, i, j, residual_histogram, residual_histogrid)
 
-rm(distancedata_models, models, newdata)
+rm(modeldata, models, newdata)

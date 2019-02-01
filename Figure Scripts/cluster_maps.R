@@ -5,14 +5,14 @@ require(sf)
 require(dockless)
 
 ## ------------------------ SYSTEM AREA -----------------------------
-systemarea = ggplot() +
+systemarea_map = ggplot() +
   ggspatial::annotation_map_tile(
     type = 'cartolight',
     zoom = 13
   ) +
   ggspatial::layer_spatial(
     data = readRDS('RDS Files/systemarea.rds'),
-    col = 'orange',
+    col = '#fc8c01',
     lwd = 1,
     alpha = 0.7
   ) +
@@ -23,17 +23,17 @@ systemarea = ggplot() +
 
 ggsave(
   'Document/Figures/systemarea.png',
-  plot = systemarea,
+  plot = systemarea_map,
   width = 5,
   height = 5,
   units = 'in',
   dpi = 600
 )
 
-rm(systemarea)
+rm(systemarea_map)
 
 ## --------------------------- GRID ---------------------------------
-grid = ggplot() +
+grid_map = ggplot() +
   ggspatial::annotation_map_tile(
     type = 'cartolight',
     zoom = 13
@@ -46,7 +46,7 @@ grid = ggplot() +
   ) +
   ggspatial::layer_spatial(
     data = readRDS('RDS Files/gridcells.rds'),
-    col = 'orange',
+    col = '#fc8c01',
     lwd = 1,
     alpha = 0.7
   ) +
@@ -62,17 +62,17 @@ grid = ggplot() +
 
 ggsave(
   'Document/Figures/grid.png',
-  plot = grid,
+  plot = grid_map,
   width = 5,
   height = 5,
   units = 'in',
   dpi = 600
 )
 
-rm(grid)
+rm(grid_map)
 
 ## ------------------------- PICK-UPS -------------------------------
-pickups = ggplot() +
+pickups_map = ggplot() +
   ggspatial::annotation_map_tile(
     type = 'cartolight',
     zoom = 13
@@ -85,7 +85,7 @@ pickups = ggplot() +
   ) +
   ggspatial::layer_spatial(
     data = readRDS('RDS Files/gridcells.rds'),
-    mapping = aes(fill = npickup),
+    mapping = aes(fill = intensity),
     lwd = NA,
     alpha = 0.7
   ) +
@@ -96,29 +96,29 @@ pickups = ggplot() +
   theme(
     text = element_text(family = 'serif'),
     plot.title = element_text(hjust = 0.5),
-    legend.position = c(0.1, 0.15),
+    legend.position = c(0.1, 0.2),
     legend.background = element_blank()
   )
 
 ggsave(
   'Document/Figures/pickups.png',
-  plot = pickups,
+  plot = pickups_map,
   width = 5,
   height = 5,
   units = 'in',
   dpi = 600
 )
 
-rm(pickups)
+rm(pickups_map)
 
 ## --------------------------- CLUSTERS -----------------------------
-clusters = ggplot() +
+clusters_map = ggplot() +
   ggspatial::annotation_map_tile(
     type = 'cartolight',
     zoom = 13
   ) +
   ggspatial::layer_spatial(
-    data = (readRDS('RDS Files/clusters.rds')),
+    data = (readRDS('RDS Files/clusters.rds'))$outlines,
     mapping = aes(fill = cluster),
     col = 'black',
     lwd = 1,
@@ -138,23 +138,23 @@ clusters = ggplot() +
 
 ggsave(
   'Document/Figures/clusters.png',
-  plot = clusters,
+  plot = clusters_map,
   width = 5,
   height = 5,
   units = 'in',
   dpi = 600
 )
 
-rm(clusters)
+rm(clusters_map)
 
 ## ------------------------- MODEL POINTS ---------------------------
-modelpoints = ggplot() +
+modelpoints_map = ggplot() +
   ggspatial::annotation_map_tile(
     type = 'cartolight',
     zoom = 13
   ) +
   ggspatial::layer_spatial(
-    data = readRDS('RDS Files/clusters.rds'),
+    data = (readRDS('RDS Files/clusters.rds'))$outlines,
     col = 'grey',
     lwd = 1,
     alpha = 0.4
@@ -184,11 +184,11 @@ modelpoints = ggplot() +
 
 ggsave(
   'Document/Figures/modelpoints.png',
-  plot = modelpoints,
+  plot = modelpoints_map,
   width = 5,
   height = 5,
   units = 'in',
   dpi = 600
 )
 
-rm(modelpoints)
+rm(modelpoints_map)

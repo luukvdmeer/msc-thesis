@@ -12,14 +12,14 @@ testpoints_locations = ggplot() +
     zoom = 13
   ) +
   ggspatial::layer_spatial(
-    data = readRDS('RDS Files/clusters.rds'),
+    data = (readRDS('RDS Files/clusters.rds'))$outlines,
     col = 'grey',
     lwd = 1,
     alpha = 0.4
   ) +
   ggspatial::layer_spatial(
     data = readRDS('RDS Files/testpoints.rds'),
-    col = 'orange',
+    col = '#fc8c01',
     alpha = 0.7
   ) +
   theme(
