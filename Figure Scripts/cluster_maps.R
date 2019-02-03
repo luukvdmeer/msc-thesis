@@ -17,7 +17,7 @@ systemarea_map = ggplot() +
     alpha = 0.7
   ) +
   theme(
-    text = element_text(family = 'serif'),
+    text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5)
   )
 
@@ -56,7 +56,7 @@ grid_map = ggplot() +
     size = 0.5
   ) +
   theme(
-    text = element_text(family = 'serif'),
+    text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5)
   )
 
@@ -94,7 +94,7 @@ pickups_map = ggplot() +
     colours = dockless_colors(20)
   ) +
   theme(
-    text = element_text(family = 'serif'),
+    text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5),
     legend.position = c(0.1, 0.2),
     legend.background = element_blank()
@@ -130,7 +130,7 @@ clusters_map = ggplot() +
     labels = c('Bayview', 'Downtown', 'Residential', 'Presidio')
   ) +
   theme(
-    text = element_text(family = 'serif'),
+    text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5),
     legend.position = c(0.1, 0.15),
     legend.background = element_blank()
@@ -173,7 +173,7 @@ modelpoints_map = ggplot() +
     labels = c('Bayiew', 'Downtown', 'Residential', 'Presidio')
   ) +
   theme(
-    text = element_text(family = 'serif'),
+    text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5),
     legend.position = c(0.1, 0.15),
     legend.background = element_blank()

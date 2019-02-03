@@ -1,6 +1,7 @@
 require(ggplot2)
 require(grid)
 require(dplyr)
+require(tidyr)
 require(sf)
 require(dockless)
 
@@ -67,8 +68,12 @@ timeplot = ggplot() +
     x = 'Time',
     y = 'Distance to the nearest bike (m)'
   ) +
+  scale_x_datetime(
+    date_breaks = '1 weeks',
+    date_labels = c('Oct 15', 'Sep 17', 'Sep 24', 'Oct 1', 'Oct 8')
+  ) +
   theme(
-    text = element_text(family = 'serif')
+    text = element_text(family = 'sans')
   ) +
   facet_grid(
     model ~ .,
@@ -124,8 +129,12 @@ residual_timeplot = ggplot(
     x = 'Time',
     y = 'Residuals'
   ) +
+  scale_x_datetime(
+    date_breaks = '1 weeks',
+    date_labels = c('Oct 15', 'Sep 17', 'Sep 24', 'Oct 1', 'Oct 8')
+  ) +
   theme(
-    text = element_text(family = 'serif')
+    text = element_text(family = 'sans')
   ) +
   facet_grid(
     model ~ .,
@@ -198,7 +207,7 @@ residual_acfplot = ggplot(
     breaks = seq(0, nrow(acfdata), 96)
   ) +
   theme(
-    text = element_text(family = 'serif')
+    text = element_text(family = 'sans')
   ) +
   facet_grid(
     model ~ .,
@@ -252,7 +261,7 @@ residual_histogram = ggplot(
     y = 'Count'
   ) +
   theme(
-    text = element_text(family = 'serif')
+    text = element_text(family = 'sans')
   ) +
   facet_grid(
     . ~ model,
@@ -286,5 +295,79 @@ ggsave(
 )
 
 rm(stripr, colors, k, i, j, residual_histogram, residual_histogrid)
+
+## ------------------------ STL PLOTS -------------------------------
+
+## MODEL 2
+stl = models[[2]]$stl %>%
+  as_tibble() %>%
+  gather() %>%
+  mutate(key = factor(.$key, levels = c('Data', 'Trend', 'Seasonal96', 'Remainder'))) %>%
+  mutate(time = rep(modeldata[[2]]$time, length(unique(.$key))))
+
+stlplot_2 = ggplot() +
+  geom_line(
+    data = stl,
+    mapping = aes(x = time, y = value)
+  ) +
+  labs(
+    x = 'Time',
+    y = 'Log transformed distance to the nearest bike'
+  ) +
+  scale_x_datetime(
+    date_breaks = '1 weeks',
+    date_labels = c('Oct 15', 'Sep 17', 'Sep 24', 'Oct 1', 'Oct 8')
+  ) +
+  theme(
+    text = element_text(family = 'sans'),
+    strip.background = element_rect(fill = dockless_colors(categorical = TRUE)[2])
+  ) +
+  facet_grid(
+    key ~ .,
+    scale = 'free_y'
+  )
+
+ggsave(
+  'Document/Figures/stlplot_model2.png',
+  plot = stlplot_2,
+  scale = 1.5,
+  dpi = 600
+)
+
+## MODEL 3
+stl = models[[3]]$stl %>%
+  as_tibble() %>%
+  gather() %>%
+  mutate(key = factor(.$key, levels = c('Data', 'Trend', 'Seasonal96', 'Remainder'))) %>%
+  mutate(time = rep(modeldata[[3]]$time, length(unique(.$key))))
+
+stlplot_3 = ggplot() +
+  geom_line(
+    data = stl,
+    mapping = aes(x = time, y = value)
+  ) +
+  labs(
+    x = 'Time',
+    y = 'Log transformed distance to the nearest bike'
+  ) +
+  scale_x_datetime(
+    date_breaks = '1 weeks',
+    date_labels = c('Oct 15', 'Sep 17', 'Sep 24', 'Oct 1', 'Oct 8')
+  ) +
+  theme(
+    text = element_text(family = 'sans'),
+    strip.background = element_rect(fill = dockless_colors(categorical = TRUE)[3])
+  ) +
+  facet_grid(
+    key ~ .,
+    scale = 'free_y'
+  )
+
+ggsave(
+  'Document/Figures/stlplot_model3.png',
+  plot = stlplot_3,
+  scale = 1.5,
+  dpi = 600
+)
 
 rm(modeldata, models, newdata)

@@ -55,7 +55,7 @@ clusterplot = ggplot(
     y = 'Average normalized distance to nearest bike'
   ) +
   theme(
-    text = element_text(family = 'serif')
+    text = element_text(family = 'sans')
   ) +
   facet_grid(
     cluster ~ .,

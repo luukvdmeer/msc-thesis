@@ -21,11 +21,14 @@ jumpgo = ggplot() +
     y = 'Trips per bike per day'
   ) +
   theme(
-    text = element_text(family = 'serif')
+    text = element_text(family = 'sans')
   )
 
 ggsave(
-  'Document/Figures/jumpgo.png',
+  'Document/Figures/jumpgo_blank.png',
   plot = jumpgo,
+  width = 5.978,
+  height = 3.998,
+  unit = 'in',
   dpi = 600
 )
