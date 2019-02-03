@@ -1,0 +1,42 @@
+.full-width {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 20px;
+}
+
+.full-width .remark-slide-number {
+  display: none;
+}
+
+.pull-left-logo {
+  float: left;
+  width: 80%;
+}
+.pull-right-logo {
+  float: right;
+  width: 15%;
+}
+
+.pull-right-logo ~ * {
+  clear: both;
+}
+
+.col-one {
+  float: left;
+  width: 33%;
+}
+.col-two {
+  float: left;
+  /*position: relative;*/
+    width: 33%;
+  /*margin-left: 33%;*/
+}
+.col-three {
+  float: left;
+  width: 33%;
+}
+
+.col-three ~ * {
+  clear: all;
+}

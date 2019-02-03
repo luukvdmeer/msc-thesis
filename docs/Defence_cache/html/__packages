@@ -1,0 +1,6 @@
+base
+leaflet
+sf
+jsonlite
+dockless
+kableExtra
