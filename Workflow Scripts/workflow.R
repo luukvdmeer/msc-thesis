@@ -76,7 +76,7 @@ models = dockless::build_models(
 
 ## OPERATOR PERSPECTIVE
 # Load distance data for grid cell centroids during test period
-distancedata_centroids_test = readRDS('distancedata_centroids_test.rds')
+distancedata_centroids_test = readRDS('RDS Files/distancedata_centroids_test.rds')
 
 # Forecast with DBAFS
 t_start = Sys.time()
@@ -105,8 +105,6 @@ forecasts_operator_nfs = dockless::forecast_multiple(
 t_end = Sys.time()
 duration_operator_nfs = t_end - t_start
 
-t_start = Sys.time()
-
 # Forecast with EFS
 t_start = Sys.time()
 
@@ -120,12 +118,71 @@ forecasts_operator_efs = dockless::forecast_multiple(
 t_end = Sys.time()
 duration_operator_efs = t_end - t_start
 
+## USER PERSPECTIVE
+# Load test points
+testpoints = readRDS('testpoints.rds')
+
+# Load distance data for the testpoints
+distancedata_testpoints = readRDS('RDS Files/distancedata_testpoints.rds')
+
+# Forecast with DBAFS
 t_start = Sys.time()
 
+forecasts_user_dbafs = dockless::forecast_multiple(
+  data = distancedata_testpoints,
+  method = 'DBAFS',
+  perspective = 'user',
+  points = testpoints,
+  models = models
+)
 
-## USER PERSPECTIVE
-# Load usage data during test period
-usagedata_test = readRDS('RDS Files/usagedata_test.rds')
+t_end = Sys.time()
+duration_user_dbafs = t_end - t_start
 
-# Load test points
-testpoints = readRDS('RDS Files/testpoints.rds')
+# Forecast with NFS
+t_start = Sys.time()
+
+forecasts_user_nfs = dockless::forecast_multiple(
+  data = distancedata_testpoints,
+  method = 'NFS',
+  perspective = 'user',
+  points = testpoints
+)
+
+t_end = Sys.time()
+duration_user_nfs = t_end - t_start
+
+# Forecast with EFS
+t_start = Sys.time()
+
+forecasts_user_efs1 = dockless::forecast_multiple(
+  data = distancedata_testpoints[1:230],
+  method = 'EFS',
+  perspective = 'user',
+  points = testpoints[1:230,]
+)
+
+t_end = Sys.time()
+duration_user_efs1 = t_end - t_start
+
+## MODELPOINTS
+
+# Load distance data for the modelpoints during the test period
+distancedata_modelpoints_test = readRDS('RDS Files/distancedata_modelpoints_test.rds')
+
+# Forecast with DBAFS
+forecasts_modelpoints_dbafs = dockless::forecast_multiple(
+  data = distancedata_modelpoints_test,
+  method = 'DBAFS',
+  perspective = 'operator',
+  points = modelpoints,
+  models = models
+)
+
+# Forecast with NFS
+forecasts_modelpoints_nfs = dockless::forecast_multiple(
+  data = distancedata_modelpoints_test,
+  method = 'NFS',
+  perspective = 'operator',
+  points = modelpoints
+)
