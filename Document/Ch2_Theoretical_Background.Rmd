@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = "\\textwidth")
 ```
 
-This chapter presents a brief introduction to the theory of time series analysis. It is meant to serve as a theoretical foundation of the concepts used in this thesis. Thus, the focus is clearly on those specific concepts, and the chapter should to no means be considered a thorough overview of the complete field of study.
+This chapter presents a brief introduction to the theory of time series analysis. It is meant to serve as a theoretical foundation of the concepts used in this thesis. Therefore, the focus is clearly on those specific concepts, and the chapter should to no means be considered a thorough overview of the complete field of study.
 
 The chapter is divided into five sections. In the first section, a formal definition of time series is given. The second section discusses the main characteristics of time series. Section three describes the different components of time series data and presents methods to split a time series into these components. The fourth section introduces statistical models to forecast time series, in particular the *autoregressive integrated moving average* (ARIMA) class of models. Finally, the fifth section focuses on a specific niche within time series analysis that is used in this thesis, namely time series clustering.
 
@@ -33,7 +33,7 @@ From the context it will be clear whether the term time series refers to the pro
 
 # 2.2 Time series characteristics
 ## 2.2.1 Autocorrelation
-Analyzing time series raises unique problems in statistical modeling and inference. In conventional statistics, methods rely on the assumptions of independent and identically distributed random variables. However, in time series analysis, observations made at nearby moments in time are likely to be related. That is, it is likely that there exist internal relationships within a time series. If these relationships are linear, they are called autocorrelation, as defined in Definition 3 [@shumway2011]. 
+Analyzing time series raises unique problems in statistical modelling and inference. In conventional statistics, methods rely on the assumptions of independent and identically distributed random variables. However, in time series analysis, observations made at nearby moments in time are likely to be related. That is, it is likely that there exist internal relationships within a time series. If these relationships are linear, they are called autocorrelation, as defined in Definition 3 [@shumway2011]. 
 
 **Defintion 3** *Autocorrelation* measures the linear correlation between two points on the same time series observed at different times. $\blacksquare$
 
@@ -47,7 +47,7 @@ $$ \hat\gamma(h) = n^{-1}\sum_{t=1}^{n-|h|}(y_{t+|h|} - \bar{y})(y_{t} - \bar{y}
 
 Where $n$ is the length of the sample, $y_{t}$ is the data value at time $t$, $y_{t-|h|}$ is the data value at time $t$ minus $|h|$ time periods, and $\bar{y}$ is the mean of the sample. Whenever a time series {$Y_{t}$} is stationary, a concept that is introduced in the next section, the ACF of the sample {$y_{t}$} can be used as an estimate for the ACF of {$Y_{t}$}. A time series without autocorrelation, with zero mean and finite variance, is called *white noise*.
 
-Conventional statistical methods can not be appropriately applied to data that exhibit autocorrelation, since the independency assumption is violated. The primary objective of time series analysis, therefore, is to develop mathematical models that are appropriate to use for data with a temporal autocorrelation structure [@shumway2011]. Furthermore, autocorrelation can be used as an advantage, since an internal dependence structure implies that past observations can be used adequately to forecast future values.
+Conventional statistical methods can not be appropriately applied to data that exhibit autocorrelation, since the independency assumption is violated. The primary objective of time series analysis, therefore, is to develop mathematical models that are appropriate to use for data with a temporal autocorrelation structure [@shumway2011]. Furthermore, autocorrelation is in some cases an advantage, since an internal dependence structure implies that past observations can be used adequately to forecast future values.
 
 ## 2.2.2 Stationarity
 In time series analysis, a key role is played by time series whose statistical properties do not vary with time [@brockwell2002]. Such time series are referred to as *stationary time series*. The most restrictive form of stationarity is defined in Definition 4 [@woodward2017].
@@ -71,7 +71,13 @@ Stationarity is important, since in real-world problems, it is common that only 
 In most practical applications, non-stationary time series are the rule rather than the exception. Luckily, by applying mathematical transformations, it often possible to render a non-stationary time series as, approximately, stationary. This process is referred to as *stationarizing* a time series [@nau2018]. Stationarizing is used a lot in statistical forecasting methods, which are discussed in section 2.4.
 
 ## 2.2.3 Spectral entropy
-`*NOTE: Describe the frequency domain approach to time series analysis, where time series are analyzed with spectral analysis methods. Most importantly, show how the spectral entropy is calculated.*`
+Often, two separate approaches to time series analysis are defined. The first, referred to as the *time domain*, deals primarily with the internal dependence structure in time series data, where current values can be explained in terms of a dependence on past values, as discussed in section 2.2.1. The second, referred to as the *frequency domain*, works with a spectral representation of the time series, in which the original data is expressed as a weighted sum of sine and cosine waveforms, each with their own frequency. Named after the French mathematician Jean-Baptiste Joseph Fourier, such a representation is commonly known as a *Fourier representation* or *Fourier series*, and its corresponding sine and cosine terms as *Fourier terms*.  Forecasting is inherently tied to the time domain of time series analysis, which will therefore be the focus of this thesis. However, there is no schism dividing the two approaches. That is, some frequency domain techniques can be useful even in the time domain, and vice versa [@shumway2011].
+
+One of such techniques is the calculation of the spectral entropy of a time series, which describes the order and regularity of a time series, based on its Fourier representation. The spectral entropy of a time series can be calculated with Equation 2.x.
+
+$$ H = \int_{-\pi}^{\pi} \hat{f}(\lambda)\log \hat{f}(\lambda)d\lambda$$
+
+Where $\hat{f}_{y}(\lambda)$ is the estimated spectral density function, which describes the importance of the different frequencies in the Fourier representation of the time series. Usually, $H$ is normalized to the range of values between 0 and 1. For a detailed description of the calculations, see @goerg2013. Spectral entropy is useful in forecasting, since it can serve as a quantative measure of the forecastability of a time series. Data that are easy to forecast, will have a small value of $H$, while very noisy data will have a large value of $H$ [@talagala2018].
 
 # 2.3 Time series components
 ## 2.3.1 Definitions
@@ -79,11 +85,11 @@ A time series can consist of various underlying patterns. Each of those patterns
 
 @hyndman2018fpp define three main components of a time series: a trend-cycle component, a seasonal component and a remainder component. For simplicity, the trend-cycle component is usually called just the trend component, which is done in this thesis as well.
 
-**Defintion 4** The *trend component* is the combination of the trend and cyclical pattern of a time series. A trend exists when there is a long-term, not necessarily linear, increase or decrease in the data. A cyclical pattern occurs when the data exhibit rises and falls that are not of a fixed frequency. $\blacksquare$
+**Definition 4** The *trend component* is the combination of the trend and cyclical pattern of a time series. A trend exists when there is a long-term, not necessarily linear, increase or decrease in the data. A cyclical pattern occurs when the data exhibit rises and falls that are not of a fixed frequency. $\blacksquare$
 
-**Defintion 5** The *seasonal component* contains the seasonal pattern of a time series. A seasonal pattern occurs when a time series is affected by seasonal factors such as the time of the year or the day of the week. Seasonality is always of a fixed and known frequency. $\blacksquare$
+**Definition 5** The *seasonal component* contains the seasonal pattern of a time series. A seasonal pattern occurs when a time series is affected by seasonal factors such as the time of the year or the day of the week. Seasonality is always of a fixed and known frequency. $\blacksquare$
 
-**Defintion 6** The *remainder component* is the remaining variation in a time series after the trend and seasonal components are removed. $\blacksquare$ 
+**Definition 6** The *remainder component* is the remaining variation in a time series after the trend and seasonal components are removed. $\blacksquare$ 
 
 There exist several different methods for the decomposition of a time series. Most of them are based on the classical decomposition method, which is discussed in the next section. A more sophisticated approach is known as STL, and is covered in section 2.2.2.3.
 
@@ -188,13 +194,13 @@ knitr::include_graphics('Figures/STL.png')
 
 # 2.4 Time series forecasting
 ## 2.4.1 Forecasting models
-Often, the main aim of time series analysis is to forecast future values of a time series. In some cases, this can be done by using external exploratory variables. One could for example try to forecast the profit of ice cream sales by using air temperature as an exploratory variable in a linear regression model. However, there are several reasons not to forecast time series in this way, as summed up by @hyndman2018fpp. Firstly, the underlying system of the forecasted time series may not be sufficiently understood, and even if it is, the relations with exploratory variables may be too complex. Secondly, when forecasting future values of a time series, also the future values of the exploratory variables should be known, which means that each exploratory variable should be forecasted separately before the response variable can be forecasted. This may be too difficult to do accurately, and even when it is possible, it remains a very time consuming task. Especially when the only aim is to know what will happen, and not why it will happen, it is not worth the effort. Finally, modeling a time series with conventional statistical method like linear regression will likely result in model errors that exhibit autocorrelation, which implies that such models are not able to capture all the dynamics of the data. Thus, produced forecast are not as efficient, and, probably, not as accurate as can be.
+Often, the main aim of time series analysis is to forecast future values of a time series. In some cases, this can be done by using external exploratory variables. One could for example try to forecast the profit of ice cream sales by using air temperature as an exploratory variable in a linear regression model. However, there are several reasons not to forecast time series in this way, as summed up by @hyndman2018fpp. Firstly, the underlying system of the forecasted time series may not be sufficiently understood, and even if it is, the relations with exploratory variables may be too complex. Secondly, when forecasting future values of a time series, also the future values of the exploratory variables should be known, which means that each exploratory variable should be forecasted separately before the response variable can be forecasted. This may be too difficult to do accurately, and even when it is possible, it remains a very time consuming task. Especially when the only aim is to know what will happen, and not why it will happen, it is not worth the effort. Finally, modelling a time series with conventional statistical method like linear regression will likely result in model errors that exhibit autocorrelation, which implies that such models are not able to capture all the dynamics of the data. Thus, produced forecast are not as efficient, and, probably, not as accurate as can be.
 
 Instead, in time series analysis, the internal dependence structure of a time series is used to forecast future values as a function of the current and past values [@shumway2011]. Obviously, this primarily requires a good understanding of that structure, which is obtained by describing the process that generated the data with a time series model, as defined in Definition 7, adapted from @brockwell2002.
 
 **Definition 7** A *time series model* for an observed realization {$y_{t}$} of a time series {$Y_{t}$} is a specification of the joint distributions, or possibly only the means, variances and covariances, of the random variables that {$Y_{t}$} comprises. $\blacksquare$
 
-One of the most famous and widely used group of time series models is known as the *autoregressive integrated moving average* (ARIMA) models, developed by @box1970. In this thesis, ARIMA is used as well. The next section gives a summary of its theory, based on @brockwell2002, Chapter 5, @shumway2011, Chapter 3, @hyndman2018fpp, Chapter 8, and @forecast.
+One of the most famous and widely used groups of time series models is known as the *autoregressive integrated moving average* (ARIMA) class of models, developed by @box1970. In this thesis, ARIMA is used as well. The next section gives a summary of its theory, based on @brockwell2002, Chapter 5, @shumway2011, Chapter 3, and @hyndman2018fpp, Chapter 3 and 8.
 
 ## 2.4.2 ARIMA
 ### 2.4.2.1 Structure
@@ -208,7 +214,7 @@ A moving average model of order $q$, commonly referred to as an MA($q$) model, i
 
 $$ y_{t} = \epsilon_{t} + \theta_{1}\epsilon_{t-1} + \theta_{2}\epsilon_{t-2} + ... + \theta_{q}\epsilon_{t-q} $$
 
-Where $y_{t}$ is the current value of the time series at time period $t$, $\epsilon_{t}$ is the error at time period $t$, which is assumed to be white noise, $\theta_{1},...,\theta_{q}$ are model parameters.
+Where $y_{t}$ is the current value of the time series at time period $t$, $\epsilon_{t}$ is the error at time period $t$, which is assumed to be white noise, and $\theta_{1},...,\theta_{q}$ are model parameters.
 
 AR($p$) and MA($q$) models can be combined into an autoregressive moving average model of order ($p$, $q$), commonly referred to as ARMA($p$, $q$). That is, in such a model, the current value of a time series is a linear combination of both $p$ previous values and $q$ previous errors, as showed in Equation 15.
 
@@ -240,7 +246,7 @@ Once $d$ has been set, either $p$ or $q$ can be selected by inspecting the autoc
 
 When dealing with ARIMA($p$, $d$, $q$) processes where both $p > 0$ and $q > 0$, the ACF plot and PACF plot will both tail off, and finding appropriate values for $p$ and $q$ turns into a trial-and-error approach, where models with different combinations of $p$ and $q$ are compared.
 
-The methodology as described above is used often, but involves a lot of manual interventions. This makes it a rather subjective way of working, that is labor intensive, especially when a large number of time series needs to be modelled, and requires expert knowledge. Therefore, several automated approaches to select $p$, $d$ and $q$ have been proposed. One of them is the Hyndman-Khandakar algorithm, which methodology is summarized below, in a simplified way. For the full details, see @forecast.
+The methodology as described above is used often, but involves a lot of manual interventions. This makes it a rather subjective way of working, that is labour intensive, especially when a large number of time series needs to be modelled, and requires expert knowledge. Therefore, several automated approaches to select $p$, $d$ and $q$ have been proposed. One of them is the Hyndman-Khandakar algorithm, which methodology is summarized below, in a simplified way. For the full details, see @forecast.
 
 **Step 1.** To define $d$,  the Hyndman-Khandakar algorithm uses the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test, which is a statistical test used to determine stationarity of a time series. Only if there is enough statistical evidence, the null hypothesis that the time series is stationary will be rejected, and the time series is instead considered to be non-stationary. The detailed mathematics underlying the test can be found in @kwiat1992.
 
@@ -266,26 +272,28 @@ Where $L$ is the likelihood of the data, and $k$ is the number of free parameter
 
 From the selected model and all its variations, the model with the lowest AIC is chosen to be the new selected model, and step 3 is repeated. The algorithm stops when there are no variations of the selected model that have a lower AIC. In that case, the selected model is the optimal model, and forms the output of the Hyndman-Khandakar algorithm. The complete methodology of the algorithm as described above is summarized in Figure 2.x.
 
-`*NOTE: Insert figure that summarizes the Hyndman-Khandakar algorithm*`
+```{r hyndman, fig.cap = 'Summary of the Hyndman-Khandakar algorithm', fig.pos = 'h'}
+knitr::include_graphics('Figures/hyndman.png')
+```
 
 ### 2.4.2.3 Parameter estimation
-When $p$, $d$ and $q$ are defined, the model parameters $\phi_{1},...,\phi_{p}$ and $\theta_{1},...,\theta_{q}$ need to be estimated. Usually, this is done with *maximum likelihood estimation* (MLE). The likelihood is the probability of obtaining the observed data, given the model and specific parameter values. The parameter values that maximize the likelihood are called the maximum likelihood estimators of the true parameters, and will be used as the parameter estimates in the fitted ARIMA($p$,$d$,$q$) model, which then is referred to as the maximum likelihood ARIMA($p$,$d$,$q$) model. The detailed mathematical description of MLE for ARIMA models can be found in @brockwell2002, section 5.2.
+When $p$, $d$ and $q$ are defined, the model parameters $\phi_{1},...,\phi_{p}$ and $\theta_{1},...,\theta_{q}$ need to be estimated. Usually, this is done with *maximum likelihood estimation* (MLE). The likelihood is the probability of obtaining the observed data, given the model and specific parameter values. The parameter values that maximize the likelihood are called the maximum likelihood estimators of the true parameters, and will be used as the parameter estimates in the fitted ARIMA($p$, $d$, $q$) model, which then is referred to as the maximum likelihood ARIMA($p$, $d$, $q$) model. The detailed mathematical description of MLE for ARIMA models can be found in @brockwell2002, section 5.2.
 
 Note here that the Hyndman-Khandakar algorithm already produces a fitted model as output, and the parameter estimation as described in this section is done inside the algorithm, each time a model is fitted to the $d$-times differenced data.
 
 ### 2.4.2.4 Model checking
 Model checking involves identifying if the fitted model is adequate. This is done by inspecting its residuals, which are defined as the difference between the actual observations and the corresponding fitted values, as shown in Equation 2.x.
 
-$$ e_{t} = y_{t} - \hat{y_{t}} $$
+$$ \epsilon_{t} = y_{t} - \hat{y}_{t} $$
 
-If the maximum likelihood ARIMA($p$,$d$,$q$) model is the true process that generated the data, the residuals should be completely white noise. Recall, however, that the model is an estimation of the true process. Therefore, a good model that fits the data well, should have residuals with properties that *approximately* reflect those of white noise, i.e. a zero mean and no autocorrelation. If autocorrelation is present in the residuals, this means that there is still information left in the data, which could be used to create more accurate forecasts. A non-zero mean will lead to biased forecasts. 
+If the maximum likelihood ARIMA($p$, $d$, $q$) model is the true process that generated the data, the residuals should be completely white noise. Recall, however, that the model is an estimation of the true process. Therefore, a good model that fits the data well, should have residuals with properties that *approximately* reflect those of white noise, i.e. a zero mean and no autocorrelation. If autocorrelation is present in the residuals, this means that there is still information left in the data, which could be used to create more accurate forecasts. A non-zero mean will lead to biased forecasts. 
 
 Autocorrelation in the residuals can be detected by a visual interpretation of the residual ACF plot, which will always show some autocorrelation, due to random variation. Therefore, given that $n$ is the length of the modelled time series, and assuming a normal distribution, the residuals are considered to be uncorrelated when for at least 95% of the time lags, the residual ACF lies within the interval $[-1.96/\sqrt{n}, 1.96/\sqrt{n}]$.
 
 Usually, several computations within the model fitting and forecasting process build on the assumption that the data come from a normally distributed population. For example, in MLE and the calculation of AIC, Gaussian likelihood is commonly used. Furthermore, prediction intervals of forecasts are in general derived from the normal distribution. Normally distributed residuals indicate that these assumptions were valid, and are therefore a valuable property of a model. However, as stated by @brockwell2002, using Gaussian likelihood is sensible even when the data are not normally distributed.
 
 ### 2.4.2.5 Forecasting
-A fitted ARIMA($p$, $d$, $q$) model can then be used to forecast the future values of a time series. To do so, Equation 2.x is rewritten, such that the current value of the time series, $y_{t}$, is replaced by a future value of the time series, $y_{t+h}$, as shown in Equation 2.x.
+A fitted ARIMA($p$, $d$, $q$) model can then be used to forecast the future values of a time series. To do so, Equation 2.x is rewritten, such that the current value of the time series, $y_{t}$, is replaced by a future value of the time series, $y_{t+h}$, as showed in Equation 2.x.
 
 $$ 
 \nabla^{d}y_{t+h} = \hat\phi_{1}\nabla^{d}y_{t+h-1} + ... + \hat\phi_{p}\nabla^{d}y_{t+h-p} +\hat\theta_{1}\epsilon_{t+h-1} + ... + \hat\theta_{q}\epsilon_{t+h-q} + \epsilon_{t+1} 
@@ -293,26 +301,55 @@ $$
 
 Where $h$ is the forecast horizon, i.e. the number of time lags ahead at which the forecast is made, $p$, $d$ and $q$ are known and constant, and $\hat\phi_{1},...,\hat\phi_{p}$ and $\hat\theta_{1},...,\hat\theta_{q}$ are the estimated parameter values, which are also constant.
 
-When $h > 1$, more than one forecast has to be made. For example, the forecast of $\nabla^{d}y_{t+2}$, the value of the time series two time lags ahead, is based on $\nabla^{d}y_{t+2-1}$, the value of the time series one time lag ahead. Therefore, $\nabla^{d}y_{t+2-1}$ needs to be forecasted first, before $\nabla^{d}y_{t+2}$ can be forecasted. In general, this means that the uncertainty of the forecasts increases as $h$ increases. This uncertainty is expressed by means of a prediction interval. Most often, the 95% prediction interval is use. Assuming normally distributed residual, the lower and upper bound of the 95% prediction interval for the $h$-step forecast can be calculated by Equation 2.x and 2.x, respectively.
+When $h > 1$, more than one forecast has to be made. For example, the forecast of $\nabla^{d}y_{t+2}$, the value of the time series two time lags ahead, is based on $\nabla^{d}y_{t+2-1}$, the value of the time series one time lag ahead. Therefore, $\nabla^{d}y_{t+2-1}$ needs to be forecasted first, before $\nabla^{d}y_{t+2}$ can be forecasted. In general, this means that the uncertainty of the forecasts increases as $h$ increases. This uncertainty is expressed by means of a prediction interval. Most often, the 95% prediction interval is used. Assuming normally distributed residuals, the lower and upper bound of the 95% prediction interval for the $h$-step forecast can be calculated with Equation 2.x and 2.x, respectively.
 
 $$ \ell = \hat{y}_{t+h} - 1.96\hat\sigma_{h}$$
 $$ \upsilon = \hat{y}_{t+h} + 1.96\hat\sigma_{h}$$
 
 Where $\ell$ is the lower bound of the 95% prediction interval, $\upsilon$ is the upper bound of the 95% prediction interval, $\hat{y}_{t+h}$ is the forecasted value $h$ time lags ahead. $\hat\sigma_{h}$ is the estimated standard deviation of the forecast distribution $h$ time lags ahead, which is explained below. The 95% prediction interval can be interpreted as follows: there is a 95% probability that $\ell \leq {y}_{t+h} \leq \upsilon$.
 
-Recall that in Definition 1, a time series was defined as a collection of random variables. In fact, to state it statistically correct, it is the distribution of the random variable $h$ time lags ahead that is forecasted, rather than an individual value. This distribution is referred to as the forecast distribution, and the forecasted value, also known as the point forecast, is then taken to be the mean of the forecast distribution. In Equation 2.x and 2.x, $\hat\sigma_{h}$ is the estimated standard deviation of the forecasted distribution, assuming it is a normal distribution with mean ${y}_{t+h}$ and variance $\sigma_{h}^{2}$. When $h = 1$, the residual standard deviation $\sigma_{\epsilon}$ is a good estimate for $\sigma_{h}$. However, for $h > 1$, computation get more complex. For a detailed description, see @shumway2011, section 3.5. 
+Recall that in Definition 1, a time series was defined as a collection of random variables. In fact, to state it statistically correct, it is the distribution of the random variable $h$ time lags ahead that is forecasted, rather than an individual value. This distribution is referred to as the forecast distribution, and the single forecasted value, also known as the *point forecast*, is then taken to be the mean of the forecast distribution. In Equation 2.x and 2.x, $\hat\sigma_{h}$ is the estimated standard deviation of the forecasted distribution, assuming it is a normal distribution with mean ${y}_{t+h}$ and variance $\sigma_{h}^{2}$. When $h = 1$, the residual standard deviation $\sigma_{\epsilon}$ is a good estimate for $\sigma_{h}$. However, for $h > 1$, computations get more complex. For a detailed description, see @shumway2011, section 3.5. 
 
 ### 2.4.2.6 Accuracy evaluation
-`*NOTE: Provide formulas for calculating the RMSE and MAE of forecasts. Also mention the RMSLE*`
+A good model fit, does not necessarily lead to accurate forecasts. Therefore, when evaluating its performance, the forecasting model should be used to forecast multiple values of new data that were not included in the model building process. The error of each individual forecast can be calculated with Equation 2.x.
+
+$$ e_{t+h} = y_{t+h} - \hat{y}_{t+h} $$
+
+Where $y_{t+h}$ is the observed data value $h$ time lags into the future, and $\hat{y}_{t+h}$ is the forecasted data value $h$ time lags into the future. Obviously, future in this sense is relative to the model building period.
+
+When making $k$ different forecasts, the corresponding forecast errors $e_{1}, e_{2}, ..., e_{k}$, can be summarized with an error metric. Several of those metrics exist. Some of them are only applicable to errors that all have the same units, while others may also be used when errors with different units are compared. Since all forecasts in this thesis are distances, the unit-dependent errors are adequate. Most commonly used are the Mean Absolute Error (MAE), which can be calculated with Equation 2.x, and the Root Mean Squared Error (RMSE), which can be calculated with Equation 2.x. Both of them return values that are in the same scale as the original data.
+
+$$ MAE = \frac{\sum_{i = 1}^k |e_{i}|}{k} $$
+$$ RMSE = \sqrt{\frac{\sum_{i = 1}^k e_{i}^{2}}{k}} $$
+
+In some of the works discussed in section 1.3, such as @li2015, @yang2016 and @lozano2018, the Root Mean Squared Logarithmic Error (RMSLE) is reported instead of the RMSE. Here, the natural logarithms of the observed and forecasted data values are used in the forecast error computation. The main reason for doing so, is that larger errors, usually occuring during peak hours or in areas/stations with a high usage intensity, do not dominate smaller errors.
 
 ### 2.4.2.7 Transformations
-`*NOTE: Discuss transformations. Why are they sometimes needed? Focus in particular on log transformation. Also, explain why bias adjustment is needed when transforming back to the original scale, and give formula for this bias adjustment as used in R*`
+Often, forecasts can be improved by using mathematical transformations, such that the original data is adjusted for some known patterns causing non-stationary and/or non-linear behaviour. That is, the data are transformed in advance, and the modelling and forecasting procedures are applied to the transformed data. After forecasting the transformed data, forecasted values on the original scale are obtained based upon the inverse transformation, a process that is commonly called *back transforming*. A particularly useful transformation is the *log transformation*, which suppresses larger fluctuations that occur when the level of the time series increases. Furthermore, they guarantee strictly positive forecasted values. The log transformed data $\omega_{t}$, is derived by taking the natural logarithm of the original data $y_{t}$, as showed in Equation 2.x.
+
+$$ \omega_{t} = \log y_{t} $$
+
+However, care has to be taken when back transforming a log transformed forecast to the original scale. Intuitively, one would obtain the back transformed forecast $\hat{y}_{t+h}$ by setting it equal to $e^{\hat{\omega}_{t+h}}$, where $e$ is Euler's number. However, assuming that the forecast distribution of $\omega_{t+h}$, $\Omega_{t+h}$, is normal, with mean $\mu_{\Omega_{t+h}}$ and variance $\sigma_{\Omega_{t+h}}^{2}$, then the forecast distribution of $y_{t+h}$, $Y_{t+h}$, follows a log-normal distribution, with mean $\mu_{Y_{t+h}}$ as defined in Equation 2.x.
+
+$$ \mu_{Y_{t+h}} = e^{(\mu_{\Omega_{t+h}} + 0.5 \sigma_{\Omega_{t+h}}^{2})} $$
+
+For the proof of this theorem, see @dambolena2009. @hyndman2018fpp refer to $\mu_{Y_{t+h}}$ as the *bias-adjusted point forecast*.
 
 ## 2.4.3 Naïve forecasts
-`*NOTE: Explain the concept of naïve forecasts*`
+It is common practice to compare the errors of forecasts obtained with a fitted model to those of forecasts obtained with a very simple forecasting method. Such a simple method, is in that case refered to as a *baseline method*. If the more sophisticated model does not lead to considerably better forecast accuracies than the baseline, it can be dismissed [@hyndman2018fpp]. 
 
-## 2.4.4 Seasonality
-`*NOTE: Explain seasonal ARIMA(p,d,q)(P,D,Q) models, en explain why they are not suitable for data with long and complex seasonal patterns. Describe the approach of Hyndman and Athanasopolous of first decomposing the data, then forecasting the non-seasonal part with a time series model, and the seasonal part with a seasonal naïve method.*`
+One of the simplest forecast methods around, often used as a baseline, is known as the naïve method. When forecasting with the naïve method, all forecasted values will be equal to the last observation, no matter how far the forecasting window $h$ reaches, as shown in Equation 2.x.
+
+$$ \hat{y}_{t+h} = y_{t} $$
+
+Where $\hat{y}_{t+h}$ is the forecasted data value $h$ time lags into the future, and $y_{t}$ is the last observed data value.
+
+## 2.4.4 Seasonal forecasts
+ARIMA models as described in section 2.4.2 are designed for data without a seasonal component. With some modifications, they can be applied to seasonal data as well. That works as follows. Instead of an ARIMA($p$, $d$, $q$) model, an ARIMA($p$, $d$, $q$)($P$, $D$, $Q$) model is fitted to the data. The ($P$, $D$, $Q$) part of the model works in a similar fashion as the ($p$, $d$, $q$) part, but relates to the seasonal component of the data. Hence, $P$ is the number of seasonal autoregressive terms in the model, $D$ is the order of seasonal differencing, and $Q$ is the number of seasonal moving average terms. Where $p = 1$ means that the past observation $y_{t-1}$ is used to model the current value $y_{t}$, setting $P = 1$ means that the past observation $y_{t-m}$ is used to model the current value $y_{t}$, with $m$ being the number of observations per seasonal cycle. The same holds for $Q$: setting $Q = 1$, means that the past error $\epsilon_{t-m}$ is used to model the current value $y_{t}$. Regarding the seasonal differencing parameter $D$, the first order seasonal difference of a time series is the series of changes from one seasonal period to the next [@shumway2011].
+
+However, ARIMA($p$, $d$, $q$)($P$, $D$, $Q$), as well as several other commonly used seasonal models such as Holt Winters exponential smoothing, have two main limitations which make them unsuitable for some kind of data. Firstly, they were primarily designed to work with shorter seasonal periods, such as monthly data with patterns that repeat every year (i.e. $m = 12$). In the case of longer seasonal periods, which may occur for example in daily and sub-daily data, modelling becomes inefficient. In the R statistical software, for example, the `forecast` package [@forecast] only allows seasonal periods up to $m = 350$ [@hyndmanblog]. 
+
+Secondly, these models can not handle more than one seasonal pattern at a time. Again, this can be problematic especially for daily data, in which both a weekly and yearly pattern may exist, and sub-daily data, in which even a daily, weekly and yearly pattern may exist. One of the alternative approaches proposed by @hyndman2018fpp works as follows. First, the data is decomposed into a trend, seasonal and remainder component. Then, the trend and remainder component are together modelled by a non-seasonal model, such as ARIMA($p$, $d$, $q$), and forecasted accordingly. The seasonal component, in turn, can be forecasted with a seasonal naïve method, meaning that the forecasted value will be equal to the last observed value from the same season of the year. That is, the seasonal forecast for timestamp $y_{t+h}$ will be equal to the last observed value in the sequence {$y_{t+h-m \times 1}, y_{t+h-m \times 2}, ...$}. Then, the non-seasonal and seasonal forecasts are added back together, to obtain a single forecasted value.
 
 # 2.5 Time series clustering
 ## 2.5.1 Dissimilarity measures
@@ -362,7 +399,7 @@ $$
 
 Where $c_{i}$ are the data points in $C$, with normalized values taken from the feature space dissimilarity matrix, and $\mu(C)$ is the center of mass of $C$, computed with those values. $c_{i}^{*}$ are the same data points, but with normalized values taken from the constraint space dissimilarity matrix, and $\mu^{*}(C)$ is the center of mass of $C$, computed with those values. Furthermore, $n$ is the number of data points in $C$ and $\alpha$ is the mixing parameter, where $0 \leq \alpha \leq 1$. @clustgeo also present more general approaches, in which the calculated distances in Equation 2.x are not necessarily Euclidean, and where observations can be weighted, but these are not covered in this thesis.
 
-With the information criterion of a single cluster calculated as in Equation 2.x, the information loss is of a merge between two clusters is calculated in the same way as in regular Ward hierarchical clustering (Equation 2.x). Then, at each merging step, two clusters are merged such that the loss of information is minimized.
+With the information criterion of a single cluster calculated as in Equation 2.x, the information loss of a merge between two clusters is calculated in the same way as in regular Ward hierarchical clustering (Equation 2.x). Then, at each merging step, two clusters are merged such that the loss of information is minimized.
 
 The mixing parameter $\alpha$ plays a key role in spatially constrained hierarchical clustering. It sets the importance that is given to the spatial constraint. The higher $\alpha$, the more the result of the clustering procedure is influenced by the spatial locations of the data points. When $\alpha = 0$, the data are clustered without any spatial constraint, while $\alpha = 1$ leads to a clustering only based on the spatial location of the data points. Therefore, it is important to determine a suitable value for $\alpha$. @clustgeo propose the following approach. First, $alpha$ is set to zero, and a hierarchical clustering without spatial constraint is performed. The resulting sequence of partitions is rendered as a dendrogram, and the optimal number of clusters $k^{*}$ is defined visually. Then, several spatially constrained hierarchical clustering procedures are performed, each with a different value of $\alpha$, and $k = k^{*}$. Since $k$ is fixed, the outputs are always single partitions. For each cluster in such a partition the information criterion regarding the feature data (i.e. the first part of Equation 2.x) and the information criterion regarding the constraint data (i.e. the second part of Equation 2.x), are calculated separately, and also summed separately over all clusters in the partition. These two summed values are then plotted, with $\alpha$ on the x-axis. In the end, this lead to a plot that shows the loss of information in the feature space and the gain of information in the constraint space, as $\alpha$ gets larger. With such a plot, $\alpha$ can be chosen such that the trade-off between the loss and gain of information in the two spaces is considered acceptable.
 
