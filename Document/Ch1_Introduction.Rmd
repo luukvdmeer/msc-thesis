@@ -17,28 +17,276 @@ knitr::opts_chunk$set(out.width = "\\textwidth")
 ```
 
 # 1.1 Context
-`*NOTE: First, talk about the advantages of sustainable mobility in cities. Then, explain what bike sharing systems are, and describe the different generations of bike sharing systems. Then, cover in more detail how dockless bike sharing systems function. Mention that in the past year, they have rapidly expanded over the whole world. Mention advantages, but also problems.*`
+Over the past decades, the world has been urbanizing at a rapid pace. Where in 1950, 30% of the world's population lived in urban areas, this grew to 55% by 2018. It is a development of which the end is not yet in sight. By 2050, the urban population is projected to have increased to 68% [@un2018]. Managing the urban growth in a sustainable manner, balancing economical, social and environmental factors, forms a tremendous challenge. One of the cores of this challenge relates to transportation. Nowadays, urban transport policies still have a strong focus on the private car as leading transportation mode. However, neither from the economical, social nor environmental perspective, this is sustainable. Air pollution, resource depletion, fuel costs, congestion, noise, accidents and space requirements are among the elements that set limits to a car-oriented urban environment [@hickman2014]. Therefore, on our way towards more sustainable cities, with a high quality of life, a drastic shift of focus is required, which includes the integration of transport modes that provide feasible alternatives to car usage. Although changing travel behaviours is a complex and slow process, more and more cities across the world are acknowledging this need, and start acting upon it.
 
-In order to offer a serious alternative for motorized transport, bike sharing systems need to be reliable. For station-based systems, this means that situations in which a user either can not start a trip at the desired time and location because of an empty docking station, or can not end a trip at the desired time and location because of a full docking station, should be avoided. In dockless bike sharing systems, the latter is not an issue, since bikes can be left anywhere and anytime. The first, however, remains a challenge. A user does not have the certainty of finding an available bike near the desired trip origin, at the desired time of departure.
+As argued by @pucher2017, the most sustainable and functional mode of transport in urban areas, is probably the bicycle. It can be used for short and medium distance trips, that form a large part of everyday city travel. Since it causes no air pollution, is healthy, has low usage and infrastructure costs, and requires little space, cycling is sustainable in both the economical, social and environmental sense. Not for nothing, it receives increasing attention in cities all over the world. The share of trips done by bicycle, has risen sharply in recent years, also in cities without a cycling tradition, and investments are made to improve the bicycle infrastructure. Furthermore, urban cycling is becoming a hot topic in academia as well, with a strong growth in the number of publications related to this topic over the last few years [@pucher2017; @fishman2016].
+
+Public bike sharing systems (PBSS) form an important part of the shift towards more cycling-oriented cities. They are build on the concept of a shared utilization of bicycle fleets, in which individuals can use bicycles whenever they need them, eliminating the costs and responsibilities that come with private bike ownership [@shaheen2010]. Especially in cities without a cycling tradition, PBSS can normalize the image of cycling as a legitimate mode of everyday transport [@goodman2014]. Furthermore, the flexibility of PBSS make them a suitable way to improve the first and last mile connection to other transit modes [@yang2018]. 
+
+The number of PBSS worldwide grew from 5 in 2005 to 1571 in 2018 [@schmidt2018]. Although this extraordinary growth is a relatively recent development, PBSS have been around for much longer. Already in 1965, the first one started in Amsterdam. This system, known as *Witte Fietsen* (White Bikes), consisted of fifty permanently unlocked, white painted bikes that were scattered throughout the city, could be freely used, and left in any location. However, due to theft and vandalism, the experiment became a failure, and the system was shut down within days. It took 25 years before a new generation of PBSS entered the stage, in Denmark, 1991. In these systems, bikes had to be picked up and dropped off at designated docking stations, and payments were done with coin deposits. Because of the anonymity of the users, theft remained an issue. This lead to the third generation PBSS, which really took hold when Lyon's Velo'v system was introduced in 2005. Third generation PBSS used more advanced technologies, including electronic docking stations, information tracking, and electronic, dynamic payments with smartcards [@demaio2009; @shaheen2010]. Over time, this evolved into the station-based bike sharing systems as we know them now, with the smartcard being replaced by mobile applications.
+
+The modern, station-based systems are organized and well manageable. However, the accessibility of docking stations forms a large barrier for its usage: either there are no docking stations close enough to the desired trip origin, either there are no docking stations close enough to the desired trip destination [@fishman2014]. The possibilities of increasing the number of docking stations are generally limited, due to high costs and space requirements. As an answer to this inconveniences, so-called *dockless bike sharing systems*, in some literature also referred to as *free floating bike sharing sytems* or *flexible bike sharing systems*, have rapidly gained popularity in the last few years. In 2018, an estimated 16 to 18 million dockless shared bikes were in use, compared to 3.7 million station-based shared bikes [@schmidt2018]. The dockless systems build on the philosophy behind the first generation PBSS, with bikes that can be picked up and dropped off at any location in the city. They are, however, supported by new technologies that limit the risk of theft and vandalism. The bicycles generally have integrated GPS tracking and an electronic lock. Usage is simple and convenient. Users download a mobile application and create a profile, which they link to their credit card, or charge with money from their bank account. On the app, they find an available bike, which they can unlock with their smartphone, usually by scanning a QR code. The ride can be ended anywhere, and a mobile payment is made, with the price depending on the travel time [@shen2018].
+
+The revival of dockless bike sharing systems started in 2015, when two Chinese start-up companies, Mobike and Ofo, introduced them to several cities in China [@sun2018]. Since that moment, the expansion evolved extremely fast. Within one year, Mobike was present in eighteen Chinese cities with more than a million bikes in total, and other bike sharing start-ups emerged to follow their example [@guardian1]. From 2017 on, the systems spread across the world. In most cases, they were not welcomed with open arms by the local authorities and inhabitants, since regulations did not exist, and the companies simply dumped bikes throughout the cities, fighting for the highest market share. *BBC* talked about the dockless bikes that are 'flooding the world' [@bbc], *The New York Times* named it 'the bike sharing explosion' [@nytimes], and *The Guardian* even used the term 'bike war' [@guardian2]. Currently, the peak of the storm seems to have passed, and more and more cities have defined rules to control the dockless bike sharing expansion. These include requirements for operators to obtain a permit before entering the market, designated 'system areas' in which the bikes can be used, limits to the fleet size and restrictions to allowed parking spots [@itf2018]. Thus, cities embrace dockless bike sharing in a well balanced way, take advantage of its convenience, and make it an important part of the strive to a more sustainable urban environment.
+
+# 1.2 Objective
+In order to become a serious alternative for motorized transport, PBSS need to be reliable. For station-based systems, this means that situations in which a user either can not start a trip at the desired time and location because of an empty docking station, or can not end a trip at the desired time and location because of a full docking station, should be avoided. In dockless bike sharing systems, the latter is not an issue, since bikes can be left anywhere and anytime. The first, however, remains a challenge. A user does not have the certainty of finding an available bike near the desired trip origin, at the desired time of departure.
 
 Accurate, short-term forecasts of the distribution of available bikes both over space and time, enable system operators to anticipate on imbalances between supply and demand, such that the occurrence of situations as described above is limited to a minimum. Furthermore, users can take advantage of these forecasts also in a direct way, to plan their trips effectively, and reduce the time spend on searching for a bike. Hence, forecasting bike availability is of great importance when turning the shared bike into a reliable, pleasant and uncomplicated mode of transport.
 
-# 1.2 Objective
-Several approaches have been developed to forecast the bike availability in station-based bike sharing systems. However, dockless bike sharing systems remain fairly unexplored in that sense, since their rapid expansion only started recently, and in contradiction to the station-based system, large historical data sets are not widely and openly available. 
+Several approaches have been developed to forecast the bike availability in station-based bike sharing systems. However, dockless bike sharing systems remain fairly unexplored in that sense, since their rapid expansion only started very recently, and in contradiction to the station-based system, large historical data sets are not widely and openly available. 
 
 Furthermore, the spatio-temporal nature of dockless bike sharing data brings additional challenges to the forecasting task. In station-based systems, forecasts are only required at fixed spatial locations, and although some works include spatio-temporal relationships between stations, they can mostly be treated as distinct entities, with different forecasting models for each station. In dockless bike sharing systems, however, available bikes can be at any spatial location inside the system area. Besides, the bike availability not only has a spatial dependence, with more bikes being available in certain areas, and a temporal dependence, with more bikes being available at certain times, but those dependencies are also linked to each other. That is, temporal patterns may differ over space, and vice versa. 
 
 The objective of this thesis is to deal with those challenges, and develop a generally applicable methodology for bike availability forecasting in dockless bike sharing systems. 
 
 # 1.3 Related work
-`*NOTE: Literature review is done, but needs to be summarized and structured in text. Cover the following topics: forecasts in station based systems, forecasts in dockless systems, forecasts in other transportation areas, like car sharing, taxis, public transport, et cetera, influences on the usage of bike sharing systems (weather, etc), descriptions of the spatio temporal dynamics of dockless bike sharing system, studies on user profiles of bike sharing system users*`
+@pal2018 define two main categories in which publications related to PBSS can be classified. The first category involves the studies whose primary objective is to forecast the system's future bike availability, bike demand, or similar. The second category involves the studies whose primary objective is to understand and describe the system, so that either its service level can be improved or the system can be expanded. Since this thesis aims to forecast bike availability, publications of the first category are the ones of interest. In essence, they all deal with time series analysis, and a wide range of forecasting methods has already been applied, primarily focused on station-based PBSS. These are covered in section 1.3.1, while the first attempts targeting dockless PBSS are reviewed in section 1.3.2.
+
+## 1.3.1 Forecasting in station-based systems
+One of the first works on bike availability forecasting was published ten years ago, by @froehlich2009. The study had an exploratory approach, focused on gaining a better understanding of the spatio-temporal patterns in station-based bike sharing systems and the factors that influence forecasts of those patterns. Some forecasting models were selected, ranging from very simple (e.g. a Last Value Predictor) to slightly more complex (e.g. a Bayesian Network). The most accurate forecasts were made at stations with a low usage, where the variability in the data was small. The Bayesian Network started outperforming the simpler methods at stations with a higher usage, and a corresponding large variability in the data. Usage intensity did not only vary over space, but also over time. The same conclusions were drawn in this sense, with the most accurate forecasts during the night, and the highest difference between simple and advanced methods during peak hours. Furthermore, the length of the forecasting window influenced forecasts, with higher forecast errors at larger forecasting windows. Using more historical data generally increased forecast accuracies, but recent observations were found to have a considerably higher influence than distant ones. External variables such as weather and special events were not considered.
+
+Although the conclusions of @froehlich2009 seem obvious now, they formed an important basis for further research, with more advanced forecasting methods. @kaltenbrunner2010 fitted Auto Regressive Integrated Moving Average (ARIMA) models to the historical bike availability data of each docking station in Barcelona's *Bicing* system, incorporated information from neighbouring stations into these models, and forecasted the amount of available bicycles up to one hour ahead. @won2012 used a similar approach, but included recurring seasonal patterns in the ARIMA models.  @borgnat2011, instead, split the forecasting task in two: linear regression, with weather, usage intensity and specific conditions like holidays as explanatory variables, was used to forecast a non-stationary amplitude for a given day, while an autoregressive (AR) model forecasted the hourly fluctuations in the data. 
+
+@rixley2013 created linear regression models to forecast the number of monthly rentals per docking station. Explanatory variables such as demographic and built environment factors were extracted from a circular buffer with a radius of 400 meters around each station. @singhvi2015 did a comparable study, but on a macroscopic level, arguing that aggregating
+stations in neighborhoods can substantially improve predictions.
+
+In 2014, Kaggle, a well-known online community for data scientists, hosted a machine learning competition, in which participants were asked to combine historical usage patterns with weather data, and forecast bike demand in the station-based PBSS of Washington D.C. [@kaggle]. The competition increased the academic interest in bike availability forecasting with machine learning methods, and new publications on this topic followed rapidly. @giot2014 compared Ridge Regression, Adaboost Regression, Random Forest Regression, Gradient Tree Boosting Regression and Support Vector Regression by predicting Washington's city-wide bike sharing usage up to one day ahead, inputting both recent observations, time features (e.g. season, day of the week, hour of the day) and weather features (e.g. temperature, wind speed). Ridge Regression and Adaboost Regression turned out to be the best performing methods. @li2015 used Gradient Tree Boosting Regression with time and weather features. However, they first grouped the docking stations into distinct, spatially contiguous clusters, and forecasted the bike usage per cluster. @dias2015 attempted to simplify the task, by using a Random Forest Regressor to forecast only if a docking station will be either completely full, completely empty, or anything in between. 
+
+Later, spatial relations between individual docking stations were incorporated into the machine learning approaches, which resulted in more sophisticated forecasting methods. @yang2016 proposed a probabilistic spatio-temporal mobility model that considered previous check-out records at other stations and expected trip durations to estimate the future check-ins at each station. Subsequently, check-outs at each station were estimated with a Random Forest Regressor, that also took weather forecasts into account. @lin2018 modelled station-based PBSS as a graph, with each station being a node. Then, they applied a Convolutional Neural Network in a form generalized for graph-structured data, to forecast hourly bike demand. @lozano2018 created an automated multi-agent bike demand forecasting system for the Salamanca's *SalenBici* system, with digital 'agents' that collect different types of data, such as calendar events, weather forecasts and historical usage. These data are then combined, and used to forecast check-ins and check-outs separately for each station, with a Random Forest Regressor. @wang2018 compared the Random Forest approach to two of the latest machine learning innovations, Long Short Term Memory Neural Networks and Gated Recurrent Units, but found no substantial improvements in the results.
+
+All discussed academic publications related to bike availability forecasting in station-based PBSS are listed in Table 1.1, in chronological order. It can be seen that machine learning methods have received a lot of attention in recent years, compared to traditional statistical forecasting methods such as ARIMA. The two serve the same goal, but have a different philosophy and model development process. Traditional statistical methods assume a functional form in advance, concern inference and estimation, and aim at providing models that offer insights on the data. Machine learning methods approximate the functional form via learning inside a 'black box', do not require specifications of the model and the error distribution, and aim solely at providing an efficient forecast [@ermagun2018]. 
+
+Studies in the field of bike availability forecasting that make valuable comparisons between traditional time series forecasting and machine learning methods, are scarce. @li2015 and @yang2016 included ARIMA in their baseline methods, but only in a form that does not take any seasonal component into account, while @dias2015 compared a seasonal ARIMA model with their proposed Random Forest Regressor, but without using the same amount of data for both methods. In spatio-temporal transportation forecasting in general, there is no clear consensus on which method is 'better'. Despite the strong increase in publications that use machine learning, @ermagun2018 state that "there is not a certain superiority when machine learning methods are compared with advanced statistical
+methods such as autoregressive integrated moving average."
+
+```{r stationforecasts}
+library(kableExtra)
+
+literature = data.frame(
+  Authors = c(
+    'Froehlich, Neumann, and Oliver',
+    'Kaltenbrunner et al.',
+    'Borgnat et al.',
+    'Won Yoon, Pinelli, and Calabrese',
+    'Rixey',
+    'Giot and Cherrier',
+    'D. Singhvi et al.',
+    'Y. Li et al.',
+    'Dias, Bellalta, and Oechsner',
+    'Z. Yang et al.',
+    'Lin, He, and Peeta',
+    'Lozano et al.',
+    'B. Wang and Kim'
+    
+  ),
+  Year = c(
+    '2009',
+    '2010',
+    '2011',
+    '2012',
+    '2013',
+    '2014',
+    '2015',
+    '2015',
+    '2015',
+    '2016',
+    '2018',
+    '2018',
+    '2018'
+  ),
+  MainForecastingMethod = c(
+    'Bayesian Network',
+    'Spatial ARIMA',
+    'Linear regression and AR',
+    'Spatial, seasonal ARIMA',
+    'Linear regression',
+    'Ridge regression, Adaboost regression, Random Forest regression, Gradient Tree Boosting regression and Support Vector regression',
+    'Linear regression',
+    'Gradient Tree Boosting regression',
+    'Random Forest regression',
+    'Probabilisitc mobility model and Random Forest regression',
+    'Graph Convolutional Neural Network',
+    'Random Forest regression',
+    ' Long Short Term Memory Neural Networks and Gated Recurrent Units'
+    
+  ),
+  SpatialUnitOfAnalysis = c(
+    'Docking station',
+    'Docking station',
+    'Docking station',
+    'Docking station',
+    'Docking station',
+    'City',
+    'Neighbourhood',
+    'Cluster',
+    'Docking station',
+    'Docking station',
+    'Docking station',
+    'Docking station',
+    'Docking station'
+  ),
+  CaseStudy = c(
+    'Barcelona',
+    'Barcelona',
+    'Lyon',
+    'Dublin',
+    'Washington DC, Minneapolis and Denver',
+    'Washington DC',
+    'New York',
+    'Washington DC',
+    'Barcelona',
+    'Hangzhou',
+    'New York',
+    'Salamanca',
+    'Suzhou'
+  )
+)
+
+colnames(literature) = c(
+  'Authors',
+  'Year',
+  'Main forecasting method',
+  'Spatial unit of analysis',
+  'Case study'
+)
+
+knitr::kable(
+  literature,
+  booktabs = TRUE,
+  caption = 'Publications regarding forecasts in station-based bike sharing systems, known to the author'
+) %>%
+kable_styling(
+  latex_options = c('hold_position', 'striped')
+) %>%
+column_spec(
+  1,
+  width = '3cm'
+) %>%
+column_spec(
+  2,
+  width = '1cm'
+) %>%
+column_spec(
+  3,
+  width = '4cm'
+) %>%
+column_spec(
+  4,
+  width = '3cm'
+) %>%
+column_spec(
+  5,
+  width = '3cm'
+)
+```
+
+## 1.3.2 Forecasting in dockless systems
+Publications regarding bike availability forecasting in dockless PBSS can be counted on the fingers of one hand. In addition to them, a small number of similar studies have been done in the field of dockless car sharing, which is based on the same principles as dockless bike sharing. 
+
+Those few attempts can be divided in two groups of approaches, which are labeled here as the *grid based approach* ad the *distance based approach*. In the grid based approach, the system's operational area, i.e. the 'system area', is divided into distinct grid cells, which may be regularly shaped, but do not have to be. For example, the cell boundaries may also correspond with administrative boundaries. Subsequently, each cell is treated as being a docking station. That is, from the historical data on locations of available vehicles, the number of vehicles in each cell is counted at several timestamps in the past, creating a time series of counts. Hence, for a given geographical point, the forecasted value will be the expected number of vehicles inside the cell that contains the point.
+
+The distance based approach uses the historical data to calculate the distance from a given geographical location to the nearest available vehicle, for several timestamps in the past, creating a time series of real-valued distances. Hence, the forecasted value will be the expected distance from the given point to the nearest available vehicle, at a given timestamp in the future.
+
+The grid based approach was taken by @caggiani2017, who were among of the first to forecast bike availability in dockless PBSS. They did not use a regular grid, but defined the outline of the cells with a spatio-temporal clustering procedure, that worked as follows. Historical time series containing daily counts of available bikes were obtained for each zone, and clustered based on temporal patterns. Geographically connected zones that belonged to the same temporal cluster, were aggregated. The resulting clusters formed the spatial units of analysis, and for each of them, the number of available bikes was forecasted one day ahead with a Nonlinear Autoregressive Neural Network. However, at that time, they lacked data to test their methodology on. Instead, they used data from the station-based PBSS in London, pretending each docking station to be a cluster centroid.
+
+@yi2018 did have access to a dataset of a dockless PBDSS, in the Chinese city of Chengu, and laid a regular grid with square cells over its systems area. Besides historical count data of available bikes in each grid cell, they included a categorical variable representing the time of day in their system. Forecasting was done with a recent machine learning method, named Convolutional Long Short Term Memory Network. @muller2015, in contradiction, used traditional statistical methods, and focused on forecasting the number of car bookings in a dockless car sharing system, for each ZIP-code area in Berlin. They compared a seasonal ARIMA model with a Holt Winters exponential smoothing model, and found acceptable and similar forecasting errors for both of them.
+
+The only example of the application of the distance based approach, known to the author, is the work of @formentin2015. Their methodology, focused on dockless car sharing systems, can be summarized as follows. For a set of given locations, evenly distributed over the city, historical location data is pre-processed into a time series of historical distance data. A strictly linear trend is subtracted from these time series, and if present, the seasonal component as well, using the classical time series decomposition method. AR models are fitted to the data that are left. Then, a model structure that is acceptable for all time series, is identified, and serves as the general forecasting model for the complete city. That is, for individual forecast requests, this general model structure will be used, no matter what the location of the request is. Only when a forecast request is located inside the city center, the corresponding historical distance data will be decomposed before forecasting, assuming a daily seasonal pattern. In that case, the seasonal component will afterwards be added to the forecast produced by the general model. The general model is updated every month.
+
+```{r docklessforecasts}
+
+literature = data.frame(
+  Authors = c(
+    'Formentin, Bianchessi, and Savares',
+    'Müller and Bogenberger',
+    'Caggiani et al.',
+    'Yi et al.'
+    
+  ),
+  Year = c(
+    '2015',
+    '2015',
+    '2017',
+    '2018'
+  ),
+  MainForecastingMethod = c(
+    'AR',
+    'ARIMA and Holt Winters ETS',
+    'Nonlinear Autoregressive Neural Network',
+    'Convolutional Long Short Term Memory Network'
+    
+  ),
+  Approach = c(
+    'Distance based',
+    'Grid based',
+    'Grid based',
+    'Grid based'
+  ),
+  CaseStudy = c(
+    'Milan',
+    'Berlin',
+    'London',
+    'Chengu'
+  ),
+  Type = c(
+    'Car',
+    'Car',
+    'Bike',
+    'Bike'
+  )
+)
+
+colnames(literature) = c(
+  'Authors',
+  'Year',
+  'Main forecasting method',
+  'Approach',
+  'Case study',
+  'Type'
+)
+
+knitr::kable(
+  literature,
+  booktabs = TRUE,
+  caption = 'Publications regarding forecasts in dockless vehicle sharing systems, known to the author'
+) %>%
+kable_styling(
+  latex_options = c('hold_position', 'striped')
+) %>%
+column_spec(
+  1,
+  width = '3cm'
+) %>%
+column_spec(
+  2,
+  width = '1cm'
+) %>%
+column_spec(
+  3,
+  width = '4cm'
+) %>%
+column_spec(
+  4,
+  width = '3cm'
+) %>%
+column_spec(
+  5,
+  width = '2cm'
+) %>%
+column_spec(
+  6,
+  width = '1cm'
+)
+```
+
+<!-- ## 1.3.3 Exploratory studies in dockless systems -->
+<!-- Since the rapid expansion of dockless bike sharing systems, the academic interest in understanding the underlying spatio-temporal dynamics of them has grown. Most of those studies are still exploratory in nature, mainly aim to provide guidance to policy makers, and focus specifically on a single system. Broader researches, that base their findings on a comparative analysis of several dockless PBSS, have, to the knowledge of the author, not been done yet.  -->
+
+<!-- @mckenzie2018 examined the differences in activity patterns between station-based and dockless PBSS in Washington DC. The station-based system showed regular patterns, with clear peaks in morning and afternoon peak hours, implying relatively high usage by commuters. The dockless system, however, reflected a relatively high usage for leisure or non-commute related activities. @chen2018 performed a similar study in Hangzhou, and also drew similar conclusions. Although the dockless system there showed a higher usage activity for all purposes, including commuting, the relative share of commuting trips compared to other purposes was smaller than for the station-based system. -->
 
 # 1.4 Approach
-The few attempts made to design forecasting systems for dockless vehicle sharing, either with bikes, scooters or cars, can be divided into two groups of approaches, which are labeled here as the *grid based approach* ad the *distance based approach*. The grid based approach [@yi2018; @caggiani2017] starts with laying a spatial grid over the system area, and treating each grid cell as being a docking station. That is, from the historical data on locations of available vehicles, the number of vehicles in each grid cell is counted at several timestamps in the past, creating a time series of counts. Hence, for a given geographical point, the forecasted value will be the expected number of vehicles inside the grid cell that contains the point.
-
-The distance based approach [@formentin2015] uses the historical data to calculate the distance from a given geographical location to the nearest available vehicle for several timestamps in the past, creating a time series of real-valued distances. Hence, the forecasted value will be the expected distance from the given point to the nearest available vehicle, at a given timestamp in the future.
-
-The bike availability forecasting system as proposed in this thesis uses the distance based approach, because it has the following advantages over the grid based approach.
+The bike availability forecasting system as proposed in this thesis extends the methodology proposed by @formentin2015, and uses the distance based approach. That is, the distance to the nearest available bike will be the variable of interest. The distance based approached is chosen, because it has the following advantages over the grid based approach.
 
 * Forecasts will not be dependent on the chosen spatial resolution of the grid.
 * Forecasts will not be made with count data, which would have limited the choice of suitable forecasting models.
