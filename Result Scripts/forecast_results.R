@@ -2,7 +2,7 @@ require(dockless)
 
 # Load data
 forecasts_dbafs = readRDS('RDS Files/forecasts_dbafs.rds')
-forecasts_naive = readRDS('RDS Files/forecasts_naive.rds')
+forecasts_nfs = readRDS('RDS Files/forecasts_nfs.rds')
 testpoints = readRDS('RDS Files/testpoints.rds')
 
 ## ----------------------- POINT FORECAST ERRORS --------------------
@@ -28,15 +28,15 @@ mae_dbafs = dockless::evaluate(
 )
 
 # RMSE for Naïve
-rmse_naive = dockless::evaluate(
-  x = forecasts_naive,
+rmse_nfs = dockless::evaluate(
+  x = forecasts_nfs,
   clusters = testpoints$cluster,
   type = 'RMSE'
 )
 
 # MAE for Naïve
-mae_naive = dockless::evaluate(
-  x = forecasts_naive,
+mae_nfs = dockless::evaluate(
+  x = forecasts_nfs,
   clusters = testpoints$cluster,
   type = 'MAE'
 )
@@ -44,7 +44,7 @@ mae_naive = dockless::evaluate(
 # Combine
 results = do.call(
   'cbind', 
-  list(n_testpoints, rmse_dbafs, mae_dbafs, rmse_naive, mae_naive)
+  list(n_testpoints, rmse_dbafs, mae_dbafs, rmse_nfs, mae_nfs)
 )
 rownames(results) = c(
   'Total', 

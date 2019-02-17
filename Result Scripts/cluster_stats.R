@@ -2,7 +2,7 @@ require(tsfeatures)
 require(dplyr)
 
 # Load data
-distancedata_clusters = readRDS('RDS Files/distancedata_clusters.rds')
+distancedata_clusters = readRDS('RDS Files/distancedata_centroids_train.rds')
 gridcentroids = readRDS('RDS Files/gridcentroids.rds')
 
 ## -------------------------- LENGTH --------------------------------
