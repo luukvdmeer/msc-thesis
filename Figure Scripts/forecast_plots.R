@@ -8,8 +8,8 @@ require(tibble)
 
 # Load data
 testpoints = readRDS('RDS Files/testpoints.rds')
-forecasts_dbafs = readRDS('RDS Files/forecasts_user_dbafs.rds')
-forecasts_nfs = readRDS('RDS Files/forecasts_user_nfs.rds')
+forecasts_dbafs = readRDS('RDS Files/forecasts_dbafs.rds')
+forecasts_nfs = readRDS('RDS Files/forecasts_nfs.rds')
 
 ## ------------------- TESTPOINTS TIMESTAMPS ------------------------
 # Round timestamps to the nearest hour
@@ -233,30 +233,43 @@ rm(rmse_dbafs, rmse_nfs, rmse_hourofday, rmse_lag, hourofday, lag, g,
 
 ## ------------------ INDIVIDUAL FORECASTS --------------------------
 
-forecasts_dbafs = readRDS('RDS Files/forecasts_modelpoints_dbafs.rds')
-forecasts_nfs   = readRDS('RDS Files/forecasts_modelpoints_nfs.rds')
+# Load distance data for the modelpoints during the test period
+distancedata_modelpoints_test = readRDS('RDS Files/distancedata_modelpoints_test.rds')
+models = readRDS('RDS Files/models.rds')
+modelpoints = readRDS('RDS Files/modelpoints.rds')
 
-# Add cluster information to each data frame of the forecasts
+# Forecast the whole week
+forecasts_modelpoints_week = dockless::forecast_multiple(
+  data = distancedata_modelpoints_test,
+  method = 'DBAFS',
+  perspective = 'operator',
+  points = modelpoints,
+  models = models
+)
+
+# Add cluster information
 f = function(x, y) {
   x$cluster = y
   return(x)
 }
 
 cluster_vector = as.factor(c(1,2,3,4))
-dbafs_data = mapply(f, forecasts_dbafs, cluster_vector, SIMPLIFY = FALSE)
-nfs_data   = mapply(f, forecasts_nfs, cluster_vector, SIMPLIFY = FALSE)
+data = mapply(
+  f, 
+  forecasts_modelpoints_week, 
+  cluster_vector, 
+  SIMPLIFY = FALSE
+)
 
 # Bind all data frames together
-dbafs_newdata = do.call(rbind, dbafs_data)
-nfs_newdata   = do.call(rbind, nfs_data)
+newdata = do.call(rbind, data)
 
 # Data frame for observations
-obs_newdata   = dbafs_newdata
+obs_newdata   = newdata
 
 # Add color columns
-dbafs_newdata$color = '#fc8c01'
-nfs_newdata$color   = 'tan'
-obs_newdata$color   = 'darkgrey'
+newdata$color = '#fc8c01'
+obs_newdata$color = 'darkgrey'
 
 # Plot
 forecastplot = ggplot() +
@@ -265,7 +278,7 @@ forecastplot = ggplot() +
     mapping = aes(x = time, y = observation, col = color)
   ) +
   geom_line(
-    data = dbafs_newdata,
+    data = newdata,
     mapping = aes(x = time, y = forecast, col = color),
     size = 1
   ) +
@@ -322,5 +335,6 @@ ggsave(
 
 rm(cluster_vector, forecastplot, forecastgrid, i,
    j, k, stripr, colors, forecasts_dbafs, forecasts_nfs,
-   dbafs_data, nfs_data, dbafs_newdata, nfs_newdata, obs_newdata)
+   distancedata_modelpoints_week, forecasts_modelpoints_week, data, 
+   newdata, obs_newdata)
 

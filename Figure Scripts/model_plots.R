@@ -6,7 +6,7 @@ require(sf)
 require(dockless)
 
 # Load data
-modeldata = readRDS('RDS Files/distancedata_modelpoints.rds')
+modeldata = readRDS('RDS Files/distancedata_modelpoints_train.rds')
 models = readRDS('RDS Files/models.rds')
 
 ## ------------------------ TIME PLOTS ------------------------------
@@ -50,7 +50,7 @@ weekend = function(x) {
 # Plot
 timeplot = ggplot() +
   geom_rect(
-    data = weekend(newdata),
+    data = weekend(newdata[newdata$model == 1, ]),
     mapping = aes(
       xmin = time, 
       xmax = time1, 
@@ -58,7 +58,7 @@ timeplot = ggplot() +
       ymax = Inf
     ),
     fill = 'darkgrey',
-    alpha = 0.1
+    alpha = 0.3
   ) +
   geom_line(
     data = newdata,
@@ -366,6 +366,42 @@ stlplot_3 = ggplot() +
 ggsave(
   'Document/Figures/stlplot_model3.png',
   plot = stlplot_3,
+  scale = 1.5,
+  dpi = 600
+)
+
+## MODEL 4
+stl = models[[4]]$stl %>%
+  as_tibble() %>%
+  gather() %>%
+  mutate(key = factor(.$key, levels = c('Data', 'Trend', 'Seasonal672', 'Remainder'))) %>%
+  mutate(time = rep(modeldata[[3]]$time, length(unique(.$key))))
+
+stlplot_4 = ggplot() +
+  geom_line(
+    data = stl,
+    mapping = aes(x = time, y = value)
+  ) +
+  labs(
+    x = 'Time',
+    y = 'Log transformed distance to the nearest bike'
+  ) +
+  scale_x_datetime(
+    date_breaks = '1 weeks',
+    date_labels = c('Oct 15', 'Sep 17', 'Sep 24', 'Oct 1', 'Oct 8')
+  ) +
+  theme(
+    text = element_text(family = 'sans'),
+    strip.background = element_rect(fill = dockless_colors(categorical = TRUE)[4])
+  ) +
+  facet_grid(
+    key ~ .,
+    scale = 'free_y'
+  )
+
+ggsave(
+  'Document/Figures/stlplot_model4.png',
+  plot = stlplot_4,
   scale = 1.5,
   dpi = 600
 )
