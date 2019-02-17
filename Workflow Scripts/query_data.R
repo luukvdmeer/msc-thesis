@@ -27,7 +27,7 @@ distancedata_centroids_train = dockless::query_distances(
 distancedata_centroids_test = dockless::query_distances(
   gridcentroids,
   from = as.POSIXct(
-    "2018-10-01 00:00:00",
+    "2018-10-14 23:45:00",
     format = "%Y-%m-%d %H:%M:%S", 
     tz = "America/Los_Angeles"
   ),
@@ -44,7 +44,7 @@ distancedata_centroids_test = dockless::query_distances(
 distancedata_modelpoints_train = dockless::query_distances(
   modelpoints,
   from = as.POSIXct(
-    "2018-09-17 00:00:00",
+    "2018-09-16 23:45:00",
     format = "%Y-%m-%d %H:%M:%S", 
     tz = "America/Los_Angeles"
   ),
@@ -57,16 +57,16 @@ distancedata_modelpoints_train = dockless::query_distances(
   database_password = database_password
 )
 
-# Distance data for the grid cell centroids, during the test period
+# Distance data for the model points, during the test period
 distancedata_modelpoints_test = dockless::query_distances(
   modelpoints,
   from = as.POSIXct(
-    "2018-10-01 00:00:00",
+    "2018-10-14 23:45:00",
     format = "%Y-%m-%d %H:%M:%S", 
     tz = "America/Los_Angeles"
   ),
   to = as.POSIXct(
-    "2018-11-05 00:00:00",
+    "2018-11-06 00:00:00",
     format = "%Y-%m-%d %H:%M:%S", 
     tz = "America/Los_Angeles"
   ),
@@ -78,7 +78,7 @@ distancedata_modelpoints_test = dockless::query_distances(
 distancedata_testpoints = dockless::query_distances(
   testpoints,
   from = as.POSIXct(
-    "2018-10-01 00:00:00",
+    "2018-10-14 23:45:00",
     format = "%Y-%m-%d %H:%M:%S", 
     tz = "America/Los_Angeles"
   ),
