@@ -2,12 +2,12 @@ require(tsfeatures)
 require(dplyr)
 
 # Load data
-distancedata_clusters = readRDS('RDS Files/distancedata_centroids_train.rds')
+distancedata_centroids = readRDS('RDS Files/distancedata_centroids.rds')
 gridcentroids = readRDS('RDS Files/gridcentroids.rds')
 
 ## -------------------------- LENGTH --------------------------------
 # Calculate length of each time series
-length_total = length(distancedata_clusters)
+length_total = length(distancedata_centroids)
 
 # Add cluster information
 mean_df = data.frame(
@@ -27,7 +27,7 @@ length_results = c(length_total, length_cluster)
 ## -------------------------- MEAN ----------------------------------
 # Calculate mean of each time series
 mean_vec = sapply(
-  distancedata_clusters,
+  distancedata_centroids,
   function(x) mean(x$distance, na.rm = TRUE)
 )
 
@@ -52,7 +52,7 @@ mean_results = c(mean_avg_total, mean_avg_cluster)
 ## -------------------------- RANGE ----------------------------------
 # Calculate range of each time series
 range_vec = sapply(
-  distancedata_clusters,
+  distancedata_centroids,
   function(x) max(x$distance, na.rm = TRUE) - min(x$distance, na.rm = TRUE)
 )
 
@@ -77,7 +77,7 @@ range_results = c(range_avg_total, range_avg_cluster)
 ## -------------------- STANDARD DEVIATION --------------------------
 # Calculate sd of each time series
 sd_vec = sapply(
-  distancedata_clusters,
+  distancedata_centroids,
   function(x) sd(x$distance, na.rm = TRUE)
 )
 
@@ -102,7 +102,7 @@ sd_results = c(sd_avg_total, sd_avg_cluster)
 ## ----------------- FIRST ORDER AUTOCORRELATION --------------------
 # Calculate first-order autocorrelation of each time series
 acf_vec = sapply(
-  distancedata_clusters,
+  distancedata_centroids,
   function(x) tsfeatures::acf_features(x$distance)[[1]]
 )
 
@@ -127,7 +127,7 @@ acf_results = c(acf_avg_total, acf_avg_cluster)
 ## ------------------------ SPECTRAL ENTROPY ------------------------
 # Calculate entropy of each time series
 entropy_vec = sapply(
-  distancedata_clusters,
+  distancedata_centroids,
   function(x) tsfeatures::entropy(x$distance)
 )
 

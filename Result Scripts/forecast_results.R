@@ -1,4 +1,5 @@
 require(dockless)
+require(dplyr)
 
 # Load data
 forecasts_dbafs = readRDS('RDS Files/forecasts_dbafs.rds')
@@ -20,12 +21,12 @@ rmse_dbafs = dockless::evaluate(
   type = 'RMSE'
 )
 
-# MAE for DBAFS
-mae_dbafs = dockless::evaluate(
-  x = forecasts_dbafs,
-  clusters = testpoints$cluster,
-  type = 'MAE'
-)
+# # MAE for DBAFS
+# mae_dbafs = dockless::evaluate(
+#   x = forecasts_dbafs,
+#   clusters = testpoints$cluster,
+#   type = 'MAE'
+# )
 
 # RMSE for Naïve
 rmse_nfs = dockless::evaluate(
@@ -34,17 +35,17 @@ rmse_nfs = dockless::evaluate(
   type = 'RMSE'
 )
 
-# MAE for Naïve
-mae_nfs = dockless::evaluate(
-  x = forecasts_nfs,
-  clusters = testpoints$cluster,
-  type = 'MAE'
-)
+# # MAE for Naïve
+# mae_nfs = dockless::evaluate(
+#   x = forecasts_nfs,
+#   clusters = testpoints$cluster,
+#   type = 'MAE'
+# )
 
 # Combine
 results = do.call(
   'cbind', 
-  list(n_testpoints, rmse_dbafs, mae_dbafs, rmse_nfs, mae_nfs)
+  list(n_testpoints, rmse_dbafs, rmse_nfs)
 )
 rownames(results) = c(
   'Total', 
@@ -55,7 +56,7 @@ rownames(results) = c(
 )
 colnames(results) = c(
   'n',
-  rep(c('mean', 'min', 'max'), 4)
+  rep(c('mean', 'min', 'max'), 2)
 )
 
 # Save as data.frame
