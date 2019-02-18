@@ -16,19 +16,15 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = "\\textwidth")
 ```
 
-This chapter describes the case study that was done to test the performance of DBAFS. It is structured as follows. First, the characteristics of the bike sharing system that served as a data source for the experiments, are presented. Data pre-processing operations that were done before sending the data to DBAFS, are explained in section two. Finally, the third section shows the methodology of the experiments itself.
+This chapter describes the case study that was done to test the performance of DBAFS. It is structured as follows. First, the characteristics of the bike sharing system that served as a data source for the experiment, are presented. The data retrieval process is described in section two. Finally, the third section explains the methodology of the experiment itself.
 
 # 4.1 Data source
 `*NOTE: Describe JUMP Bikes, show system area in San Francisco, mention that it are electric bikes, and give main characteristics of the system (how much is it used, by who, for what purposes, etc)*`
 
 `*NOTE: Also discuss the following plot, adapted from the San Francisco Municipal Transportation Agency, which shows the usage of the dockless JUMP system in San Francisco compared to that of the station-based GoBike system. It can be seen that the pattern of JUMP is less consistent, which can have a large influence on the forecasts`*
 
-```{r jumpgo, fig.align = 'center'}
-knitr::include_graphics('Figures/jumpgo.png')
-```
-
-# 4.2 Data pre-processing
-JUMP Bikes provided access to their historical database containing the geographical locations of their available bikes in San Francisco. The database fulfilled all DBAFS requirements described in section 3.4. Data collection started at September 9th, 2018, 15:41:08 PDT, and continued until December 16th, 2018, 23:59:59 PST. The data had a temporal resolution of one minute, meaning that every minute, the location of each available bike in the system was recorded. Timestamps were stored with six-digit precision. Because of that, the time of recording was not exactly the same for each available bike, but could vary up to a few seconds. Therefore, as a first pre-processing step, all timestamps were truncated to minute precision.
+# 4.2 Data retrieval
+JUMP Bikes provided access to their historical database containing the geographical locations of their available bikes in San Francisco. The database fulfilled all DBAFS requirements described in section 3.4. Data collection started at September 9th, 2018, 15:41:08, Pacific Daylight Saving Time (PDT). The data had a temporal resolution of one minute, meaning that every minute, the location of each available bike in the system was recorded. Timestamps were stored with six-digit precision. Because of that, the time of recording was not exactly the same for each available bike, but could vary up to a few seconds. Therefore, before using the data in DBAFS, all timestamps were truncated to minute precision.
 
 When calculating distances, only the historical data at every quarter of an hour were used in the experiment. Hence, $i_{s}$ was set equal to fifteen minutes. There were several reasons for this choice. Firstly, it is not expected that the data change drastically from minute to minute. That is, using data with a temporal resolution of one minute will probably not contain a lot more information than using data with a temporal resolution of fifteen minutes. Consequently, if a forecast for a specific timestamp is in practice a forecast for a few minutes earlier, this will not be problematic. On the other hand, using only data every fifteen minutes will decrease the size of the data with a factor fifteen, and speed up computations considerably. Furthermore, a lower order ARIMA($p$, $d$, $q$) model can be used to capture the same patterns in the data. This is important, since lower order models will result in lower errors arising from parameter estimation [@brockwell2002].
 
