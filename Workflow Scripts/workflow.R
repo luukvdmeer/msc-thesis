@@ -40,7 +40,7 @@ gridcells$intensity = dockless::usage_intensity(
 gridcentroids$intensity = gridcells$intensity
 
 # Load distance data for grid cell centroids during training period
-distancedata_centroids_train = readRDS('RDS Files/distancedata_centroids_train.rds')
+distancedata_centroids = readRDS('RDS Files/distancedata_centroids.rds')
 
 # Cluster
 clusters = dockless::spatial_cluster(
@@ -63,11 +63,11 @@ modelpoints = dockless::create_modelpoints(
 ## ------------------------ MODEL LOOP ---------------------------
 
 # Load distance data for the modelpoints
-distancedata_modelpoints_train = readRDS('RDS Files/distancedata_modelpoints_train.rds')
+distancedata_modelpoints = readRDS('RDS Files/distancedata_modelpoints.rds')
 
 # Build models
 models = dockless::build_models(
-  data = distancedata_modelpoints_train,
+  data = distancedata_modelpoints,
   auto_seasonality = TRUE,
   seasons = list(NULL, 96, 672, c(96, 672))
 )
@@ -93,15 +93,4 @@ forecasts_nfs = dockless::forecast_multiple(
   data = distancedata_testpoints,
   method = 'NFS',
   points = testpoints
-)
-
-# Load distance data for the modelpoints during the test period
-distancedata_modelpoints_test = readRDS('RDS Files/distancedata_modelpoints_test.rds')
-
-# Forecast model points with DBAFS
-forecasts_mpf = dockless::forecast_multiple(
-  data = distancedata_modelpoints_test,
-  method = 'DBAFS',
-  points = testpoints,
-  models = models
 )
