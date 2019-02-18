@@ -1,6 +1,7 @@
 require(rosm)
 require(ggspatial)
 require(ggplot2)
+require(ggsci)
 require(sf)
 require(dockless)
 
@@ -89,9 +90,9 @@ pickups_map = ggplot() +
     lwd = NA,
     alpha = 0.7
   ) +
-  scale_fill_gradientn(
+  scale_fill_material(
     name = 'pick-ups',
-    colours = dockless_colors(20)
+    palette = 'orange'
   ) +
   theme(
     text = element_text(family = 'sans'),
@@ -132,7 +133,7 @@ clusters_map = ggplot() +
   theme(
     text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5),
-    legend.position = c(0.1, 0.15),
+    legend.position = c(0.1, 0.2),
     legend.background = element_blank()
   )
 
@@ -175,7 +176,7 @@ modelpoints_map = ggplot() +
   theme(
     text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5),
-    legend.position = c(0.1, 0.15),
+    legend.position = c(0.1, 0.2),
     legend.background = element_blank()
   ) +
   guides(
