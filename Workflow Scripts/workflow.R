@@ -44,10 +44,10 @@ distancedata_centroids = readRDS('RDS Files/distancedata_centroids.rds')
 
 # Cluster
 clusters = dockless::spatial_cluster(
-  data = distancedata_centroids_train,
+  data = distancedata_centroids,
   grid = gridcells,
   area = systemarea,
-  K = 4,
+  K = c(3:10),
   omega = seq(0, 1, 0.1)
 )
 
