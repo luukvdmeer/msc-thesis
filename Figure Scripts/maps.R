@@ -6,10 +6,18 @@ require(sf)
 require(dockless)
 
 ## ------------------------ SYSTEM AREA -----------------------------
+point1 = st_point(c(-122.601025, 37.752269))
+point2 = st_point(c(-122.291959, 37.752269))
+points = st_sf(st_sfc(point1, point2, crs = 4326))
+
 systemarea_map = ggplot() +
   ggspatial::annotation_map_tile(
     type = 'cartolight',
     zoom = 13
+  ) +
+  ggspatial::layer_spatial(
+    data = points,
+    alpha = 0
   ) +
   ggspatial::layer_spatial(
     data = readRDS('RDS Files/systemarea.rds'),
@@ -25,7 +33,7 @@ systemarea_map = ggplot() +
 ggsave(
   'Document/Figures/systemarea.png',
   plot = systemarea_map,
-  width = 5,
+  width = 10,
   height = 5,
   units = 'in',
   dpi = 600
@@ -193,3 +201,36 @@ ggsave(
 )
 
 rm(modelpoints_map)
+
+## ------------------------ TEST POINTS -----------------------------
+testpoints_locations = ggplot() +
+  ggspatial::annotation_map_tile(
+    type = 'cartolight',
+    zoom = 13
+  ) +
+  ggspatial::layer_spatial(
+    data = (readRDS('RDS Files/clusters.rds'))$outlines,
+    col = 'grey',
+    lwd = 1,
+    alpha = 0.4
+  ) +
+  ggspatial::layer_spatial(
+    data = readRDS('RDS Files/testpoints.rds'),
+    col = '#fc8c01',
+    alpha = 0.7
+  ) +
+  theme(
+    text = element_text(family = 'serif'),
+    plot.title = element_text(hjust = 0.5)
+  )
+
+ggsave(
+  'Document/Figures/testpoints_locations.png',
+  plot = testpoints_locations,
+  width = 5,
+  height = 5,
+  units = 'in',
+  dpi = 600
+)
+
+rm(testpoints_locations)
