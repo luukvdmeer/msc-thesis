@@ -232,6 +232,7 @@ knitr::include_graphics('Figures/hourlag.png', auto_pdf = TRUE)
 
 # 5.4 Limitations & Recommendations
 `*NOTE: write about limitation of DBAFS, and give recommendation how things could be improved. Cover at least the following points:`
+`- analysis of detailed forecasts: at which points does DBAFS perform good, and at which points not?`
 `- the low forecastability of dockless bike sharing data in general, compared to station based bike sharing systems`
 `- methods that can include exogeneous variables. For example, the new forecast packages in R, that are still in development, like FASSTER, and a Dynamic Harmonic Regression with seasonality in Fourier terms and an ARIMA model for the errors`
 `- talk about possible exogeneous variables, based on the literature. Weather, special events like football matches, holidays, etcetera`

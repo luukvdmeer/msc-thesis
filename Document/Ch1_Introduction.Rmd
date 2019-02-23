@@ -297,12 +297,14 @@ column_spec(
 <!-- @mckenzie2018 examined the differences in activity patterns between station-based and dockless PBSS in Washington DC. The station-based system showed regular patterns, with clear peaks in morning and afternoon peak hours, implying relatively high usage by commuters. The dockless system, however, reflected a relatively high usage for leisure or non-commute related activities. @chen2018 performed a similar study in Hangzhou, and also drew similar conclusions. Although the dockless system there showed a higher usage activity for all purposes, including commuting, the relative share of commuting trips compared to other purposes was smaller than for the station-based system. -->
 
 # 1.4 Approach
-The bike availability forecasting system as proposed in this thesis extends the methodology proposed by @formentin2015, and uses the distance based approach. That is, the distance to the nearest available bike will be the variable of interest. The distance based approached is chosen, because it has the following advantages over the grid based approach.
+The bike availability forecasting system as proposed in this thesis extends the methodology proposed by @formentin2015, and uses the distance based approach, since it has the following advantages over the grid based approach.
 
 * Forecasts will not be dependent on the chosen spatial resolution of the grid.
 * Forecasts will not be made with count data, which would have limited the choice of suitable forecasting models.
 * Forecasts can be interpreted in the same way at every location in space. This in contradiction to the grid based approach, where for a location at the edge of a grid cell, there might as well be closer bikes within the neighboring cell.
 * Forecasts give more freedom to the user, who can decide for himself if he considers the forecasted distance acceptable or not. In the grid based approach, the cell size is fixed, and does not take into account that some people are willing to walk further than others.
+
+By choosing the distance based approach, the proposed forecasting system will involve the analysis, modelling and forecasting of time series that each contain the distances from specific geographical locations to the nearest available bike, at several timetamps in the past. Hence, the data of interest are *spatio-temporal* in nature, and require a methodology that adequately deals with both their spatial and temporal dimension. 
 
 Throughout the thesis, the proposed forecasting system will be referred to as the **D**ockless **B**ike **A**vailability **F**orecasting **S**ystem (DBAFS). The focus will lay on the design of a general methodology for it, rather than on the creation of a fully configured, practical application. A forecast can be requested for any location within the system area of a dockless bike sharing system, and, theoretically, any timestamp in the future. However, short-term forecasts, up to one day ahead, form the target, and longer forecasting horizons will not be handled.
 
