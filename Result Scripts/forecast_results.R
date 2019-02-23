@@ -103,7 +103,7 @@ colnames(prediction_interval_check) =
   c('Total', 'Bayview', 'Downtown', 'Residential', 'Presidio')
 
 # Save as data.frame
-saveRDS(as.data.frame(prediction_interval_check), 'Document/Results/prediction_interval_check.rds')
+saveRDS(as.data.frame(t(prediction_interval_check)), 'Document/Results/prediction_interval_check.rds')
 
 
 
