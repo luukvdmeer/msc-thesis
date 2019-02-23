@@ -1,0 +1,289 @@
+# Results and discussion
+
+This chapter presents and discusses the results of the experiment described in Chapter 4. It is structured as follows. The first section shows the clusters that resulted from the cluster loop, along with their main characteristics, and the chosen locations of the model points. Section two presents the structure of the models that were build in the model loop, and the residual diagnostics for each them. Then, the third section focuses on the accuracies of the forecasts, and their patterns in both space and time. Finally, in the fourth section, the limitations of DBAFS are discussed, and recommendations for possible improvements are given.
+
+## Clustering
+Figure 5.1a shows the grid overlaying the JUMP Bikes system area in San Francisco, including the centroid of each grid cell. In total, the grid contains 249 cells, each 500 meter high and 500 meter wide. 
+
+Figure 5.1b shows the calculated number of pick-ups per grid cell, during the training period. On average, there were 218 pick-ups per grid cell, wich corresponds to approximately eight pick-ups per day. The maximum number of pick-ups in a grid cell was 1985 (i.e. 71 per day on average), while in 25 of the 249 grid cells, there were no pick-ups at all. It can be seen that high counts of pick-ups occured in the grid cells along the diagonal axis from south-west to north-east. Mainly in the south-eastern corner of the system area, the usage intensity was very low.
+
+Figure 5.2 shows the temporal patterns of the usage data, with the pick-ups per day of the week, and per hour of the day. Friday was the day with on average the most pick-ups, while Saturday and Sunday had the least. The busiest hours of the day, where 8:00 and 9:00, during morning rush hours, and 16:00 and 17:00, during afternoon rush hours. The lowest numbers of hourly pick-ups, as expected, occured during the night.
+
+```{r mapandgrid, out.width = '50%', fig.show = 'hold', fig.cap = 'a) grid overlaying the system area; b) number of pick-ups per grid cell', fig.pos = 'H'}
+knitr::include_graphics(c('Figures/grid.png', 'Figures/pickups.png'), auto_pdf = TRUE)
+```
+```{r usageplots, out.width = '50%', fig.show = 'hold', fig.cap = 'a) pick-ups per day of the week; b) pick-ups per hour of the day', fig.pos = 'H'}
+knitr::include_graphics(c('Figures/usageday.png', 'Figures/usagehour.png'), auto_pdf = TRUE)
+```
+
+Recall that for each grid cell centroid, a time series of historical distance data was queried, and that the normalized, average weekly patterns in these data were clustered using spatially constrained hierarchical clustering. The automatic procedure of defining the number of clusters $k$ and the mixing parameter $\alpha$, lead to a definition of $k = 4$ and $\alpha = 0.6$. This resulted in a partition containing four fully spatial contiguous clusters. The geographical outlines of these clusters are shown in Figure 5.2a. The centroid of each cluster, weighted by the number of pick-ups in the corresponding grid cells, are shown in Figure 5.2b. These weighted centroids serve as the model points in DBAFS.
+
+```{r clusters, out.width = '50%', fig.show = 'hold', fig.cap = 'a) cluster outlines; b) model point locations', fig.pos = 'H'}
+knitr::include_graphics(c('Figures/clusters.png', 'Figures/modelpoints.png'), auto_pdf = TRUE)
+```
+
+Roughly speaking, and based on a large study of neighbourhood indicators in San Francisco [@sfindicator], the four clusters can be characterized as follows. The orange cluster covers the Bayview/Hunters Point neighbourhood, which is a rather isolated area, with a high percentage of low-income households and relatively high crime rates. The blue cluster forms the city center of San Francisco, containing the neighbourhoods with the highest population densities, but also with a relatively high job density compared to the residential density, and large areas zoned for commercial usage. The purple cluster mainly contains neighbourhoods where the residential density is high compared to the job density, and the area zoned for commercial usage is relatively small. Finally, the green cluster covers the Presidio Park, a recreational area with few inhabitants, and a relatively high number of bike lanes. For the sake of clarity, the orange, blue, purple and green clusters are from now on referred to as the *Bayview*, *Downtown*, *Residential* and *Presidio* clusters, respectively. Consistently, the four corresponding model points will be called the *Bayview*, *Downtown*, *Residential* and *Presidio* model points, respectively.
+
+Table 1 presents some descriptive statistics of the time series, averaged per cluster, and averaged over the whole system area. From the 249 grid cells, more than a hundred are located within the Residential cluster, while the Presidio cluster is by far the smallest of the four. During the training period, the nearest available bike was on average located 619 meters from the grid cell centroids. In the Bayview cluster, however, this was more than one kilometer, a difference of almost a factor two compared to the Downtown cluster, and even more compared to the Residential and Presidio clusters. The Bayview cluster also showed the largest variation in the data, with a high average standard deviation compared to the other clusters, and an average range that spanned more than four kilometers. This can possibly be explained by the low usage intensity of the bike sharing system in this part of the system area. When the number of bikes in an area is low, the nearest available bike and the second nearest available bike are more likely to be far away from each other. In that case, when the closest of them gets picked-up, the distance to the nearest available bike will suddenly increase substantially. The other way around, when all available bikes are far away, and one bike gets dropped-off inside the area, the distance to the nearest available bike will suddenly decrease substantially. 
+
+Although not as extreme as the Bayview cluster, also the other clusters had on average high ranges when compared to the mean and standard deviation. However, the standard deviation itself turned out to be rather small relative to the mean. This implies either the presence of outliers, or population distributions with thin, but wide tails.
+
+The first order autocorrelation measures the average dependency between data values at time $t$ and corresponding data values at time $t-1$. In the whole system area, this dependency was strong, especially in the Bayview and Presidio clusters. These high autocorrelation values are important, since they imply that it is reasonable to use past observations when forecasting future ones. However, the calculated spectral entropy values show that in general, the data are also very complex, and the forecastability is low. This mainly concerns the Downtown and Residential clusters, which contain, as could be seen in Figure 5.1b, the areas where the pick-up density is high. In such areas, the data are more dynamic, since bikes get picked-up and dropped off constantly, and the location of the nearest available bike will change often. In most cases, the more dynamic the data, the harder to forecast.
+
+```{r clusterstats}
+library(kableExtra)
+
+cluster_stats = readRDS('Results/cluster_stats.rds')
+colnames(cluster_stats) = c(
+  "$N$",
+  "$\\mu$",
+  "$range$",
+  "$\\sigma$",
+  "$\\rho(1)$",
+  "$H$"
+)
+
+knitr::kable(
+  cluster_stats,
+  align = 'l',
+  booktabs = TRUE,
+  digits = c(0, 0, 0, 0, 2, 2),
+  escape = FALSE,
+  caption = 'Descriptive statistics of the grid cell centroids distance data'
+) %>%
+kable_styling(
+  latex_options = c('striped', 'HOLD_position')
+) %>%
+column_spec(
+  1,
+  bold = TRUE,
+  width = '4cm'
+) %>%
+  column_spec(
+  2:7,
+  width = '1.5cm'
+) %>%
+footnote(
+  number_title = '\\\\scriptsize{Except $N$, all metrics are calculated for each time series seperately, and averaged afterwards.}',
+  number = c(
+    "\\\\scriptsize{$N$ is the total number of grid cell centroids}",
+    "\\\\scriptsize{$\\\\mu$ is the mean of the data, in meters}",
+    "\\\\scriptsize{$range$ is the difference between the maximum and minimum data value, in meters}",
+    "\\\\scriptsize{$\\\\sigma$ is the standard deviation of the data, in meters}",
+    "\\\\scriptsize{$\\\\rho(1)$ is the first order autocorrelation, see section 2.2.1}",
+    "\\\\scriptsize{$H$ is the normalized spectral entropy, see section 2.2.3}"
+  ),
+  escape = FALSE
+)
+```
+
+Figure 5.3 shows the normalized, average weekly patterns of the time series, averaged once again per cluster. The patterns can be explained intuitively. The Bayview cluster has a low usage intensity, and although there are peaks in the data every day, a clear and consistent pattern is absent. The Downtown cluster has a high density of jobs and commercial activities. During working hours, the demand for bikes is low, which leads to a high number of available bikes, and consequently, short distances to the nearest available bike. In the afternoon, just after working hours, the demand starts increasing, and it gets harder to find an available bike nearby. This peak in the data continues during the evening, when the activity in the commericial zones is high. Later in the evening, the demand decreases again. However, the data lacks a clear peak during morning peak hours, as well as a clear difference between weekdays and weekends, indicating that there is a substantial share of non-commute related usage.
+
+The Residential cluster shows the exact opposite pattern. In the morning rush hours, commuters use the bike to get to work, and not many available bikes are left in the residential areas. Hence, in those areas, the distance to the nearest available bike is higher during working hours. In the afternoon, commuters come back from work, and leave the bikes in the residential areas, causing a decrease in distance to the nearest available bike. Hence, the distance data peaks during working hours. In the weekends, the peaks seem to be slightly lower, but this difference is not as large as might have been expected. They do happen later on the day, corresponding to the same periods as the Downtown cluster.
+
+Finally, the Presidio cluster is mainly a recreational area. There are a lot of bikes, but during weekdays, they are used less, leading to small and relatively constant distances to the nearest available bike. In weekends, and mainly on Sunday afternoon, the usage intensity is high, and it takes longer to find an available bike.
+
+```{r patterns, fig.cap='Patterns of the distance data for the grid centroids, per cluster', fig.pos='H'}
+knitr::include_graphics('Figures/clusterplots.png', auto_pdf = TRUE)
+```
+
+## Model building
+Figure 5.4 shows the time plots of the distance data that were queried for each of the model points in Figure 5.2b, with the dark grey shaded areas representing weekends. The plots endorse the findings in the previous sections. The data corresponding to the Bayview model point show large variation, interspersed with flat sections, and lack a clear repeating pattern. The data corresponding to the Downtown and Residential model points are most dynamic. A daily pattern shows for both of them. However, in both datasets, this pattern is far from smooth, and the daily peaks vary considerably in height from day to day. This underlines the high spectral entropies that were found for these clusters. A clear difference between weekdays and weekends, can not be seen. The Presidio model point shows the most constant data, with a low mean and long flat sections. Sunday afternoons stand out clearly in most of the weeks, but not in all of them. The last sunday, for example, shows only a minor peak in the data. In less extent, this also applies to the other clusters, with lower peaks than normal, in the last weekend. Finally, none of the datasets contain missing values, and clear evidence for non-constant variances is not present.
+
+```{r timeplots, fig.cap='Time plots of the distance data for the model points', fig.pos='H'}
+knitr::include_graphics('Figures/timeplots.png', auto_pdf = TRUE)
+```
+
+The structures of the fitted models are shown in Table 5.2. The automatic seasonality detection resulted in a daily seasonal pattern for both the Downtown and the Residential model point. As expected, a weekly seasonal pattern was found for the Presidio model point, an no seasonality for the Bayview model point. The ARIMA($p$, $d$, $q$) models for the Bayview and Downtown model points, have a relatively high number of autoregressive terms, while for the Presidio model point, the number of moving average terms is high. For the Residential model point, the best fit was obtained by only including one autoregressive and one moving average term. All datasets passed the KPSS test for stationarity after one differencing operation. The full details of the components and fitted models, including parameter estimates and decomposition plots, can be found in Appendix B.
+
+```{r modelstructure}
+library(kableExtra)
+
+model_structure = data.frame(
+  seasonality = c('none', 'daily', 'daily', 'weekly'),
+  p = c(3, 3, 1, 1),
+  d = c(1, 1, 1, 1),
+  q = c(1, 2, 1, 4)
+)
+rownames(model_structure) = c(
+  'Bayview', 
+  'Downtown', 
+  'Residential', 
+  'Presidio'
+)
+colnames(model_structure) = c(
+  "seasonality",
+  "$p$",
+  "$d$",
+  "$q$"
+)
+
+knitr::kable(
+  model_structure,
+  align = c('c', 'c', 'c', 'c'),
+  booktabs = TRUE,
+  escape = FALSE,
+  caption = 'Model structures'
+) %>%
+kable_styling(
+  latex_options = c('striped', 'HOLD_position')
+) %>%
+# add_header_above(
+#   c(" " = 1, "STL" = 1, "ARIMA" = 3)
+# ) %>%
+column_spec(
+  1,
+  bold = TRUE,
+  width = '4cm'
+) %>%
+column_spec(
+  2,
+  width = '3cm'
+) %>%
+column_spec(
+  3:5,
+  width = '1.5cm'
+)
+```
+
+Figure 5.5 shows the residuals of each model, plotted over time. All models have residuals with an approximately zero mean, and the variances look approximately constant. Comparing Figure 5.5 with Figure 5.4, it can be seen that for the less dynamic data in Bayview and Presidio, the models struggle to find a good fit for the peaks and valleys in the data, while the flat sections are explained accurately.
+
+```{r residualtimeplots, fig.cap='Time plots of the model residuals', fig.pos='H'}
+knitr::include_graphics('Figures/residual_timeplots.png', auto_pdf = TRUE)
+```
+
+The autocorrelations at several time lags in the residuals are shown in Figure 5.6. Since the data have a temporal resolution of 15 minutes, 96 time lags correspond to one day, and 672 time lags, the total span of the x-axis in the figure, to one week. The dotted orange lines form the lower and upper 95% confidence bounds, assuming a normal distribution. This means that the residuals are considered to be a realization of a white noise process when at least 95% of the autocorrelation values fall within these bounds. It is important to note here that when working with real-world data, finding perfectly random model residuals is an exception, especially when the data have a high entropy. Taking that into account, the autocorrelation plot of the Bayview, Downtown and Residential models look good, and their residuals seem to approximate white noise. 
+
+However, for the Presidio cluster, the residual autocorrelation has a strong peak at lag 672, corresponding to one week. Recall that the data of the Presidio model point was relatively flat during the weekdays, and spiky in the weekends. These spikes, however, varied considerably in amplitude from week to week. The weekly seasonal component that was substracted from the data, accounts for the recurring patterns, but can not completely capture the differences from week to week. Therefore, errors during the 'spiky' weekends, will still be higher than during the 'flat' weekdays, causing autocorrelation in the residuals. With just a stochastic time series model, it is hard to solve this. Including external variables that explain the variation, could be an option, and will be discussed in section 5.4.2.
+
+```{r residualacf, fig.cap='ACF plot of the model residuals', fig.pos='H'}
+knitr::include_graphics('Figures/residual_acfplots.png', auto_pdf = TRUE)
+```
+
+Finally, Figure 5.7 shows the histograms of the model residual distributions. As expected, for the Bayview and Presidio models, most values are clustered closely around the zero mean, with the tails being extremely thin and long, especially for the Bayview model. The residuals of the Downtown and Residential models follow a distribution that comes closer to a normal one, but also here, the tails are wide. 
+
+```{r residualhist, fig.cap='Histograms of the model residuals', fig.pos='H'}
+knitr::include_graphics('Figures/residual_histograms.png', auto_pdf = TRUE)
+```
+
+## Forecasting
+Figure 5.8a shows the spatial distribution of the 500 test points. As planned, areas with high usage intensity have more test points, with 94% located in the Downtown and Residential clusters,and only the minimum of ten test points in the Bayview cluster. Figure 5.8b shows the temporal distribution test points. All days in the test week are well covered, with less test points during working times and in the night, and more during the morning rush hours and in the evening. On weekend days, there is only one strong peak, around noon. Furthermore, it can be seen that the morning peak on November 1st is somewhat lower compared to the other weekdays. This may be, because it is the morning of All Saint's Day, following the Halloween night. For the full information on the test points, with all unique location-time combinations, see Appendix A. 
+
+```{r testpoints, fig.cap = 'a) test points locations; b) test point timestamps, counted per hour', fig.pos = 'H'}
+knitr::include_graphics('Figures/testpoints.png', auto_pdf = TRUE)
+```
+
+The first row of Table 5.3 lists the RMSE's, averaged over the whole system area, of the forecasts produced by DBAFS, and of the forecasts produced by the baseline system, NFS. DBAFS clearly outperforms NFS, by producing forecasts with errors that are on average 31% lower. Furthermore, the range of error values is much lower for DBAFS, than for NFS. The minima are comparable, but NFS produces forecasts with error values up to 1644 meters, while DBAFS never exceeds 1004 meters.
+
+```{r forecastresults}
+library(kableExtra)
+
+forecast_results = readRDS('Results/forecast_results.rds')
+
+knitr::kable(
+  forecast_results,
+  digits = 0,
+  booktabs = TRUE,
+  caption = "Forecast RMSE's, in meters"
+) %>%
+kable_styling(
+  latex_options = c('striped', 'HOLD_position')
+) %>%
+add_header_above(
+  c(" " = 2, "DBAFS" = 3, "NFS" = 3)
+) %>%
+column_spec(
+  1,
+  bold = TRUE,
+  width = '2cm'
+) %>%
+  column_spec(
+  2:7,
+  width = '1.5cm'
+)
+```
+
+Regarding the spatial patterns of the forecast errors, the remaining rows of Table 5.3 show the RMSE's averaged per spatial cluster. With NFS, the lowest errors are obtained in the Bayview and Presidio clusters, where the data are less dynamic. In the Bayview cluster, NFS gives the same results as DBAFS, and in the Presidio cluster, DBAFS performs only slightly better than NFS. For DBAFS, however, the lowest errors are not found in those clusters, but in the highly dynamic Downtown cluster. Here, DBAFS gives errors that are 40% lower than those of NFS. In the Residential cluster, there are larger errors than in the Downtown cluster, but also here, DBAFS outperforms NFS with errors that are 23% lower. It shows the strength of DBAFS in forecasting dynamic data, when compared to NFS.
+
+Regarding the temporal patterns of the forecast errors, Figure 5.10 shows the RMSE's averaged per hour of the day, and per forecast lag. The lowest forecast errors occur during the night, when the usage intensity of the system is low. During the day, higher errors occur, with peaks at the morning peak hour, around noon (i.e. the peak hour in the weekend) and after working hours. This patterns are similar for NFS, but with higher RMSE's at each hour. The forecast errors of both methods rise steeply directly after the first forecast lag, but for NFS, this increase is much larger than for DBAFS. 
+
+What strikes, is that the RMSE does not increase constantly when the forecast horizon gets larger. From the forecasting lag of 12 hours, the errors for both DBAFS and NFS decrease again. Moreover, at a forecasting lag of approximately 18 hours, the RMSE of the DBAFS forecasts is, on average, back at almost the same level as the one at a forecasting lag of just 15 minutes. This conspicuousness can be explained as follows. Most of the simulated forecast requests are made at times with a high usage intensity, that are hard to forecast. The first forecast lags, will still correspond to high usage times, but after a while, forecasts will be made during night time. As could be seen in Figure 5.10a, these night time forecasts have much lower errors. Therefore, it can happen that, despite the length of the forecasting window, 'far-ahead' forecasts have lower errors than 'close-by' forecasts.
+
+```{r timeandlag, fig.show = 'hold', fig.cap = 'a) RMSE averaged per hour of the day; b) RMSE averaged per forecast lag', fig.pos = 'h'}
+knitr::include_graphics('Figures/hourlag.png', auto_pdf = TRUE)
+```
+
+## Limitations and recommendations
+<!-- `*NOTE: write about limitation of DBAFS, and give recommendation how things could be improved. Cover at least the following points:` -->
+<!-- `- analysis of detailed forecasts: at which points does DBAFS perform good, and at which points not?` -->
+<!-- `- the low forecastability of dockless bike sharing data in general, compared to station based bike sharing systems` -->
+<!-- `- methods that can include exogeneous variables. For example, the new forecast packages in R, that are still in development, like FASSTER, and a Dynamic Harmonic Regression with seasonality in Fourier terms and an ARIMA model for the errors` -->
+<!-- `- talk about possible exogeneous variables, based on the literature. Weather, special events like football matches, holidays, etcetera` -->
+<!-- `- machine learning possibilities` -->
+<!-- `- higher density of model points` -->
+<!-- `- clustering based on ARIMA parameters instead of on raw data*` -->
+
+### Limits of forecastability
+Although DBAFS outperforms the baseline, the average forecast RMSE of almost 300 meters can be considered high when looking at it from an absolute perspective. To get a more detailed understanding of the performance of DBAFS, it may be benefitial to look at some individual forecast results, rather than at general, averaged metrics. Therefore, Figure 5.11 shows the forecasts at the four model point locations, for the whole test period. Each day is forecasted seperately, with two weeks of historical data. 
+
+As already pointed out earlier in this chapter, the forecasts in the Bayview cluster act in a similar way as naïve forecasts, with straight lines every day. Peaks in the true data occur randomly, and can not be captured well by the fitted model. In the Downtown and Residential clusters, the ones of primary interest, DBAFS performs very well in forecasting when peaks are going to occur, but fails to accurately capture the variation in the height of these peaks from day to day. Equivalently, in the Presidio cluster, the varying amplitude of the Sunday afternoon peak, is problematic for the forecasts. When this peak has been relatively low in the two weeks before, DBAFS will expect it to stay low, and never forecast the reoccurence of a higer peak.
+
+```{r forecastplot, fig.show = 'hold', fig.cap = 'Detailed forecasts for the model point locations', fig.pos = 'H'}
+knitr::include_graphics('Figures/forecastplot.png', auto_pdf = TRUE)
+```
+
+The irregularity of the patterns in the data, and consequently, their high entropy, can be linked to the flexible and dynamic nature of dockless PBSS. Users can pick up bikes spontaneously, whenever they see one around. This in contradiction to station-based PBSS, which have a more organized structure, where trips are usually planned in advance, at regular moments in time. Some studies in the United States already explored these differences between dockless and station-based systems. A report of the National Association of City Transportation Officials showed that the usage in station-based systems follows typical commuting patterns, while in dockless systems, it is more dispersed [@nacto2018]. This is in line with the conclusions drawn from Figure 5.4, earlier in this chapter. Moreover, @mckenzie2018 found similar results in Washington DC. 
+
+In San Francisco, the differences between station-based and dockless systems may even be stronger, for the following reason. For single-trips, JUMP Bikes is cheaper than the station-based Ford GoBike system. However, in contradiction to GoBike, JUMP Bikes has no subscription pricing. That is, for irregular usage, JUMP Bikes is the better option, but when using a JUMP Bike every working day for two trips of half an hour (\$2 each), this will cost around \$1040 per year, compared to only \$149 for a yearly subscription on GoBike [@harris2018].
+
+To strenghten the findings discussed above, Figure 5.12 is adapted from the mid-point evaluation of JUMP Bikes in San Francisco, performed by SFMTA, and shows the number of trips per bike per day, for both JUMP Bikes and GoBike, during five months in 2018 [@sfmta2018three]. It clearly confirms the expected differences between the two. The course of the GoBike line is very regular, with peaks during weekdays, and valleys during weekends. JUMP Bikes, in contradiction, follows a highly irregular pattern. Such irregularity, obviously, sets limits on the ability of models to forecast the data accurately.
+
+### Exogeneous variables
+That the forecastability of dockless bike sharing data is limited, does not mean that the forecasts produced by DBAFS can not be improved in any way. There may be exogeneous variables that can explain at least a part of the variation in peak height from day to day. The most relevant of those, probably relate to weather conditions. Several studies addressed the relationship between cycling activity in PBSS and weather conditions already [@corcoran2014; @faghih2014; @campbell2016; @shen2018]. Most notably, heavy rain or snowfall, high humidity, strong winds, extremely low temperatures, and extremely high temperatures, all have a negative impact on PBSS usage, both for recreational and commuting trips. It must be noted, that DBAFS already deals with long-term weather variations, since models are updated regularly, and moreover, STL allows the seasonal pattern to change slightly over time. The short-term weather variation, however, may be an important factor influencing the variability in the data, which DBAFS is not able to account for. Therefore, including weather condition variables in the forecasting system, can possibly decrease the forecast errors substantially.
+
+```{r jumpgo, fig.show = 'hold', fig.cap = 'Dockless versus station-based, adapted from SFMTA', fig.pos = 'H'}
+knitr::include_graphics('Figures/jumpgo.png', auto_pdf = TRUE)
+```
+
+Above average peaks in the data may occur when special events, such as sport matches, concerts or conferences, take place. Furthermore, public holidays may cause abnormal data patterns [@corcoran2014]. These are also factors that are not considered by DBAFS. Modelling their relationship with PBSS usage is complicated, especially for the events, since the influence will not be the same at all locations within each cluster. However, they will contain information that can explain a part of the variability in the data, as well.
+
+As explained in section 2.4.1, time series forecasting models relate future patterns to past patterns in the same data. That is, in essence, they do not allow for exogeneous variables. However, several methods have been developed to overcome this issue. For example, @hyndman2018fpp recommend dynamic regression models, in which the exogeneous variables are included in a linear regression, with an ARIMA($p$, $d$, $q$) model fitted to the autocorrelated errors. Optionially, seasonal patterns can be captured by including Fourier terms in the regression as well. Another option is the `fasster` package in R [@fasster], which is, at the time of writing, still under development. Fasster stands for 'Forecasting with Additive Switching of Seasonality, Trend and Exogenous Regressors', and is a model is designed to capture both the influence of exogeneous regressors as multiple seasonal patterns in a state space framework, by using state switching. Finally, machine learning regression methods are widely used in forecasting, and allow the use of exogeneous variables as well. It is recommended to test these approaches with the exogeneous variables described above, and examine the accuracy gain compared to the current approach of DBAFS.
+
+### Residual distributions and prediction intervals
+Another point of concern regards the non-normality of the models' residual distributions, which showed clearly in Figure 5.8. Both in the calculation of the AIC, for model selection, and in the estimation of the model parameters, Gaussian likelihood is used, assuming a normal distribution. In the literature, approaches have been developed to use different likelihood functions, such as the Laplace Likelihood and Student's t likelihood, that may be more appropriate to use for models with widely tailed residual distributions such as those identified in Figure 5.8 [@li1988; @lehr1998; @huang2000]. However, such approaches will increase the complexity of the system. Moreover, the accuracy gain will probably be of minor extent, since, as discussed in section 2.4.2.4, using Gaussian likelihood is sensible even for models with non-normally distributed residuals, especially when sample sizes are large. It should also be noted that in the `forecast` package, Gaussian likelihood is the only available option.
+
+The non-normality of the residuals does have an important effect on the validity of the prediction intervals, however. When 95% prediction intervals are calculated, assuming normality of the forecast distribution, they can not be interpreted as such. To emphasize this, Table 5.4 shows the percentage of true observations that fall within the calculated 95% prediction interval of the forecasts. As can be seen, for all clusters, and especially those where seasonality was detected, this percentage is extremely low. That is, the calculated prediction intervals are far to narrow, making them not useful in any sense.
+
+```{r intervalcheck}
+prediction_interval_check = readRDS('Results/prediction_interval_check.rds')
+
+knitr::kable(
+  prediction_interval_check,
+  booktabs = TRUE,
+  digits = 1,
+  caption = 'Interpretation of the calculated prediction intervals'
+) %>%
+kable_styling(
+  latex_options = c('striped', 'HOLD_position')
+) %>%
+column_spec(
+  1,
+  width = '4cm',
+  bold = TRUE
+)
+```
+
+As proposed by @hyndman2018fpp, in the case of non-normally distrubuted model residuals, a technique called bootstrapping is a useful alternative for calculating prediction intervals. It does not make assumptions about the distribution of the residuals, and only requires them to be uncorrelated. Many possible futures for each forecasted time lag are obtained by repeatingly sampling from the model residuals, and replacing the error terms of the forecasts (see Equation 2.x) by these sampled values. Then, the 95% prediction interval for each forecast is equal to the interval that contains 95% of the calculated 'possible futures'. A detailed description of this technique is given in @mccullough1994.
+
+Another important reason for the extremely narrow prediction intervals, is that not all sources of uncertainty are included in its calculation. In DBAFS, there are at least six different sources of uncertainty.
+
+* The random error component of the ARIMA($p$, $d$, $q$) model.
+* The parameter estimates of the ARIMA($p$, $d$, $q$) model.
+* The choice of the model.
+* The continuation of the data generating process into the future.
+* The continuation of the seasonal patterns into future.
+* The use of a model fitted on the model point's data, for other locations within the same cluster.
+
+In the `forecast` package, only the first of these sources is taken into account when calculating prediction intervals [@hyndman2018fpp]. In most cases, this leads to acceptable estimates. Even when an ARIMA forecast is combined with a seasonal naïve forecast, this is often true, since seasonal patterns are expected to be constant. However, as already noticed earlier in this chapter, in dockless bike sharing data, there may be a large variation from season to season, and simply ignoring the seasonal uncertainty, is not valid anymore. Bootstrapping can help to partly overcome this issue as well. However, that is a time consuming process, and therefore not suitable to perform at every individual forecast.  That is, it still does not account for the last source of uncertainty, which influence is expected to be large. Hence, to provide sensible prediction intervals, an adequate methodology that captures all sources of uncertainty to an acceptable extent, should be developed.
+
+### GPS accuracy

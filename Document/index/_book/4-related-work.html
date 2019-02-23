@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 1.3 Related work | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</title>
+  <meta name="description" content="Chapter 4 1.3 Related work | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 1.3 Related work | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 1.3 Related work | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  
+  
+  
+
+<meta name="author" content="Lucas van der Meer">
+
+
+<meta name="date" content="2019-02-25">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="3-objective.html">
+<link rel="next" href="5-approach.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction-1.html"><a href="1-introduction-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-context.html"><a href="2-context.html"><i class="fa fa-check"></i><b>2</b> 1.1 Context</a></li>
+<li class="chapter" data-level="3" data-path="3-objective.html"><a href="3-objective.html"><i class="fa fa-check"></i><b>3</b> 1.2 Objective</a></li>
+<li class="chapter" data-level="4" data-path="4-related-work.html"><a href="4-related-work.html"><i class="fa fa-check"></i><b>4</b> 1.3 Related work</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-station-based-systems"><i class="fa fa-check"></i><b>4.1</b> 1.3.1 Forecasting in station-based systems</a></li>
+<li class="chapter" data-level="4.2" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-dockless-systems"><i class="fa fa-check"></i><b>4.2</b> 1.3.2 Forecasting in dockless systems</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-approach.html"><a href="5-approach.html"><i class="fa fa-check"></i><b>5</b> 1.4 Approach</a></li>
+<li class="chapter" data-level="6" data-path="6-outline.html"><a href="6-outline.html"><i class="fa fa-check"></i><b>6</b> 1.5 Outline</a></li>
+<li class="chapter" data-level="7" data-path="7-references.html"><a href="7-references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="8" data-path="8-theoretical-background.html"><a href="8-theoretical-background.html"><i class="fa fa-check"></i><b>8</b> Theoretical background</a></li>
+<li class="chapter" data-level="9" data-path="9-time-series-definition.html"><a href="9-time-series-definition.html"><i class="fa fa-check"></i><b>9</b> 2.1 Time series definition</a></li>
+<li class="chapter" data-level="10" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html"><i class="fa fa-check"></i><b>10</b> 2.2 Time series characteristics</a><ul>
+<li class="chapter" data-level="10.1" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#autocorrelation"><i class="fa fa-check"></i><b>10.1</b> 2.2.1 Autocorrelation</a></li>
+<li class="chapter" data-level="10.2" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#stationarity"><i class="fa fa-check"></i><b>10.2</b> 2.2.2 Stationarity</a></li>
+<li class="chapter" data-level="10.3" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#spectral-entropy"><i class="fa fa-check"></i><b>10.3</b> 2.2.3 Spectral entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-time-series-components.html"><a href="11-time-series-components.html"><i class="fa fa-check"></i><b>11</b> 2.3 Time series components</a><ul>
+<li class="chapter" data-level="11.1" data-path="11-time-series-components.html"><a href="11-time-series-components.html#definitions"><i class="fa fa-check"></i><b>11.1</b> 2.3.1 Definitions</a></li>
+<li class="chapter" data-level="11.2" data-path="11-time-series-components.html"><a href="11-time-series-components.html#classical-decomposition"><i class="fa fa-check"></i><b>11.2</b> 2.3.2 Classical decomposition</a></li>
+<li class="chapter" data-level="11.3" data-path="11-time-series-components.html"><a href="11-time-series-components.html#stl-decomposition"><i class="fa fa-check"></i><b>11.3</b> 2.3.3 STL decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html"><i class="fa fa-check"></i><b>12</b> 2.4 Time series forecasting</a><ul>
+<li class="chapter" data-level="12.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting-models"><i class="fa fa-check"></i><b>12.1</b> 2.4.1 Forecasting models</a></li>
+<li class="chapter" data-level="12.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#arima"><i class="fa fa-check"></i><b>12.2</b> 2.4.2 ARIMA</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#structure"><i class="fa fa-check"></i><b>12.2.1</b> 2.4.2.1 Structure</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-selection"><i class="fa fa-check"></i><b>12.2.2</b> 2.4.2.2 Model selection</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#parameter-estimation"><i class="fa fa-check"></i><b>12.2.3</b> 2.4.2.3 Parameter estimation</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-checking"><i class="fa fa-check"></i><b>12.2.4</b> 2.4.2.4 Model checking</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting"><i class="fa fa-check"></i><b>12.2.5</b> 2.4.2.5 Forecasting</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#accuracy-evaluation"><i class="fa fa-check"></i><b>12.2.6</b> 2.4.2.6 Accuracy evaluation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#transformations"><i class="fa fa-check"></i><b>12.2.7</b> 2.4.2.7 Transformations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#naive-forecasts"><i class="fa fa-check"></i><b>12.3</b> 2.4.3 Naïve forecasts</a></li>
+<li class="chapter" data-level="12.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#seasonal-forecasts"><i class="fa fa-check"></i><b>12.4</b> 2.4.4 Seasonal forecasts</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html"><i class="fa fa-check"></i><b>13</b> 2.5 Time series clustering</a><ul>
+<li class="chapter" data-level="13.1" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#dissimilarity-measures"><i class="fa fa-check"></i><b>13.1</b> 2.5.1 Dissimilarity measures</a></li>
+<li class="chapter" data-level="13.2" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.2</b> 2.5.2 Hierarchical clustering</a></li>
+<li class="chapter" data-level="13.3" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#spatial-time-series-clustering"><i class="fa fa-check"></i><b>13.3</b> 2.5.3 Spatial time series clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="14-references-1.html"><a href="14-references-1.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="15" data-path="15-system-architecture.html"><a href="15-system-architecture.html"><i class="fa fa-check"></i><b>15</b> System architecture</a></li>
+<li class="chapter" data-level="16" data-path="16-overall-design.html"><a href="16-overall-design.html"><i class="fa fa-check"></i><b>16</b> 3.1 Overall design</a></li>
+<li class="chapter" data-level="17" data-path="17-software.html"><a href="17-software.html"><i class="fa fa-check"></i><b>17</b> 3.2 Software</a></li>
+<li class="chapter" data-level="18" data-path="18-system-area.html"><a href="18-system-area.html"><i class="fa fa-check"></i><b>18</b> 3.3 System area</a></li>
+<li class="chapter" data-level="19" data-path="19-database.html"><a href="19-database.html"><i class="fa fa-check"></i><b>19</b> 3.4 Database</a><ul>
+<li class="chapter" data-level="19.1" data-path="19-database.html"><a href="19-database.html#distance-data"><i class="fa fa-check"></i><b>19.1</b> 3.4.1 Distance data</a></li>
+<li class="chapter" data-level="19.2" data-path="19-database.html"><a href="19-database.html#usage-data"><i class="fa fa-check"></i><b>19.2</b> 3.4.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="20-forecast-request.html"><a href="20-forecast-request.html"><i class="fa fa-check"></i><b>20</b> 3.5 Forecast request</a></li>
+<li class="chapter" data-level="21" data-path="21-cluster-loop.html"><a href="21-cluster-loop.html"><i class="fa fa-check"></i><b>21</b> 3.6 Cluster loop</a></li>
+<li class="chapter" data-level="22" data-path="22-model-loop.html"><a href="22-model-loop.html"><i class="fa fa-check"></i><b>22</b> 3.7 Model loop</a></li>
+<li class="chapter" data-level="23" data-path="23-forecast-loop.html"><a href="23-forecast-loop.html"><i class="fa fa-check"></i><b>23</b> 3.8 Forecast loop</a></li>
+<li class="chapter" data-level="24" data-path="24-references-2.html"><a href="24-references-2.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
+<li class="chapter" data-level="25" data-path="25-data-and-experimental-design.html"><a href="25-data-and-experimental-design.html"><i class="fa fa-check"></i><b>25</b> Data and experimental design</a></li>
+<li class="chapter" data-level="26" data-path="26-data-source.html"><a href="26-data-source.html"><i class="fa fa-check"></i><b>26</b> 4.1 Data source</a></li>
+<li class="chapter" data-level="27" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html"><i class="fa fa-check"></i><b>27</b> 4.2 Data retrieval</a><ul>
+<li class="chapter" data-level="27.1" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#distance-data-1"><i class="fa fa-check"></i><b>27.1</b> 4.2.1 Distance data</a></li>
+<li class="chapter" data-level="27.2" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#usage-data-1"><i class="fa fa-check"></i><b>27.2</b> 4.2.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="28-experimental-design.html"><a href="28-experimental-design.html"><i class="fa fa-check"></i><b>28</b> 4.3 Experimental design</a><ul>
+<li class="chapter" data-level="28.1" data-path="28-experimental-design.html"><a href="28-experimental-design.html#training-and-test-periods"><i class="fa fa-check"></i><b>28.1</b> 4.3.1 Training and test periods</a></li>
+<li class="chapter" data-level="28.2" data-path="28-experimental-design.html"><a href="28-experimental-design.html#additional-software"><i class="fa fa-check"></i><b>28.2</b> 4.3.3 Additional software</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="29-references-3.html"><a href="29-references-3.html"><i class="fa fa-check"></i><b>29</b> References</a></li>
+<li class="chapter" data-level="30" data-path="30-results-and-discussion.html"><a href="30-results-and-discussion.html"><i class="fa fa-check"></i><b>30</b> Results and discussion</a></li>
+<li class="chapter" data-level="31" data-path="31-clustering.html"><a href="31-clustering.html"><i class="fa fa-check"></i><b>31</b> 5.1 Clustering</a></li>
+<li class="chapter" data-level="32" data-path="32-model-building.html"><a href="32-model-building.html"><i class="fa fa-check"></i><b>32</b> 5.2 Model building</a></li>
+<li class="chapter" data-level="33" data-path="33-forecasting-1.html"><a href="33-forecasting-1.html"><i class="fa fa-check"></i><b>33</b> 5.3 Forecasting</a></li>
+<li class="chapter" data-level="34" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html"><i class="fa fa-check"></i><b>34</b> 5.4 Limitations &amp; Recommendations</a><ul>
+<li class="chapter" data-level="34.1" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#limits-of-forecastability"><i class="fa fa-check"></i><b>34.1</b> 5.4.1 Limits of forecastability</a></li>
+<li class="chapter" data-level="34.2" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#exogeneous-variables"><i class="fa fa-check"></i><b>34.2</b> 5.4.2 Exogeneous variables</a></li>
+<li class="chapter" data-level="34.3" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#non-normal-distributions"><i class="fa fa-check"></i><b>34.3</b> 5.4.3 Non-normal distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="35-references-4.html"><a href="35-references-4.html"><i class="fa fa-check"></i><b>35</b> References</a></li>
+<li class="chapter" data-level="36" data-path="36-conclusion.html"><a href="36-conclusion.html"><i class="fa fa-check"></i><b>36</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="related-work" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> 1.3 Related work</h1>
+<p><span class="citation">Pal, Zhang, &amp; Kwon (2018)</span> define two main categories in which publications related to PBSS can be classified. The first category involves the studies whose primary objective is to forecast the system’s future bike availability, bike demand, or similar. The second category involves the studies whose primary objective is to understand and describe the system, so that either its service level can be improved or the system can be expanded. Since this thesis aims to forecast bike availability, publications of the first category are the ones of interest. In essence, they all deal with time series analysis, and a wide range of forecasting methods has already been applied, primarily focused on station-based PBSS. These are covered in section 1.3.1, while the first attempts targeting dockless PBSS are reviewed in section 1.3.2.</p>
+<div id="forecasting-in-station-based-systems" class="section level2">
+<h2><span class="header-section-number">4.1</span> 1.3.1 Forecasting in station-based systems</h2>
+<p>One of the first works on bike availability forecasting was published ten years ago, by <span class="citation">Froehlich, Neumann, &amp; Oliver (2009)</span>. The study had an exploratory approach, focused on gaining a better understanding of the spatio-temporal patterns in station-based bike sharing systems and the factors that influence forecasts of those patterns. Some forecasting models were selected, ranging from very simple (e.g. a Last Value Predictor) to slightly more complex (e.g. a Bayesian Network). The most accurate forecasts were made at stations with a low usage, where the variability in the data was small. The Bayesian Network started outperforming the simpler methods at stations with a higher usage, and a corresponding large variability in the data. Usage intensity did not only vary over space, but also over time. The same conclusions were drawn in this sense, with the most accurate forecasts during the night, and the highest difference between simple and advanced methods during peak hours. Furthermore, the length of the forecasting window influenced forecasts, with higher forecast errors at larger forecasting windows. Using more historical data generally increased forecast accuracies, but recent observations were found to have a considerably higher influence than distant ones. External variables such as weather and special events were not considered.</p>
+<p>Although the conclusions of <span class="citation">Froehlich et al. (2009)</span> seem obvious now, they formed an important basis for further research, with more advanced forecasting methods. <span class="citation">Kaltenbrunner, Meza, Grivolla, Codina, &amp; Banchs (2010)</span> fitted Auto Regressive Integrated Moving Average (ARIMA) models to the historical bike availability data of each docking station in Barcelona’s <em>Bicing</em> system, incorporated information from neighbouring stations into these models, and forecasted the amount of available bicycles up to one hour ahead. <span class="citation">Won Yoon, Pinelli, &amp; Calabrese (2012)</span> used a similar approach, but included recurring seasonal patterns in the ARIMA models. <span class="citation">Borgnat et al. (2011)</span>, instead, split the forecasting task in two: linear regression, with weather, usage intensity and specific conditions like holidays as explanatory variables, was used to forecast a non-stationary amplitude for a given day, while an autoregressive (AR) model forecasted the hourly fluctuations in the data.</p>
+<p><span class="citation">Rixey (2013)</span> created linear regression models to forecast the number of monthly rentals per docking station. Explanatory variables such as demographic and built environment factors were extracted from a circular buffer with a radius of 400 meters around each station. <span class="citation">D. Singhvi et al. (2015)</span> did a comparable study, but on a macroscopic level, arguing that aggregating stations in neighborhoods can substantially improve predictions.</p>
+<p>In 2014, Kaggle, a well-known online community for data scientists, hosted a machine learning competition, in which participants were asked to combine historical usage patterns with weather data, and forecast bike demand in the station-based PBSS of Washington D.C. <span class="citation">(Kaggle, 2014)</span>. The competition increased the academic interest in bike availability forecasting with machine learning methods, and new publications on this topic followed rapidly. <span class="citation">Giot &amp; Cherrier (2014)</span> compared Ridge Regression, Adaboost Regression, Random Forest Regression, Gradient Tree Boosting Regression and Support Vector Regression by predicting Washington’s city-wide bike sharing usage up to one day ahead, inputting both recent observations, time features (e.g. season, day of the week, hour of the day) and weather features (e.g. temperature, wind speed). Ridge Regression and Adaboost Regression turned out to be the best performing methods. <span class="citation">Y. Li, Zheng, Zhang, &amp; Chen (2015)</span> used Gradient Tree Boosting Regression with time and weather features. However, they first grouped the docking stations into distinct, spatially contiguous clusters, and forecasted the bike usage per cluster. <span class="citation">Dias, Bellalta, &amp; Oechsner (2015)</span> attempted to simplify the task, by using a Random Forest Regressor to forecast only if a docking station will be either completely full, completely empty, or anything in between.</p>
+<p>Later, spatial relations between individual docking stations were incorporated into the machine learning approaches, which resulted in more sophisticated forecasting methods. <span class="citation">Z. Yang et al. (2016)</span> proposed a probabilistic spatio-temporal mobility model that considered previous check-out records at other stations and expected trip durations to estimate the future check-ins at each station. Subsequently, check-outs at each station were estimated with a Random Forest Regressor, that also took weather forecasts into account. <span class="citation">L. Lin, He, &amp; Peeta (2018)</span> modelled station-based PBSS as a graph, with each station being a node. Then, they applied a Convolutional Neural Network in a form generalized for graph-structured data, to forecast hourly bike demand. <span class="citation">Lozano, Paz, Villarrubia, De La Iglesia, &amp; Bajo (2018)</span> created an automated multi-agent bike demand forecasting system for the Salamanca’s <em>SalenBici</em> system, with digital ‘agents’ that collect different types of data, such as calendar events, weather forecasts and historical usage. These data are then combined, and used to forecast check-ins and check-outs separately for each station, with a Random Forest Regressor.</p>
+<p>The Random Forest and Convolutional Neural Network approaches were compared by <span class="citation">Ruffieux, Spycher, Mugellini, &amp; Khaled (2017)</span>. Furthermore, they differentiated themselves by forecasting bike availability in six different cities, instead of only one. The outcomes showed that the Random Forest Regressor works better for short-term forecasts, while Convolutional Neural Networks are more suitable for long-term forecasts. <span class="citation">B. Wang &amp; Kim (2018)</span> compared the Random Forest approach to two of the latest machine learning innovations, Long Short Term Memory Neural Networks and Gated Recurrent Units, but found no substantial improvements in the results.</p>
+<p>All discussed academic publications related to bike availability forecasting in station-based PBSS are listed in Table 1.1, in chronological order. It can be seen that machine learning methods have received a lot of attention in recent years, compared to traditional statistical forecasting methods such as ARIMA. The two serve the same goal, but have a different philosophy and model development process. Traditional statistical methods assume a functional form in advance, concern inference and estimation, and aim at providing models that offer insights on the data. Machine learning methods approximate the functional form via learning inside a ‘black box’, do not require specifications of the model and the error distribution, and aim solely at providing an efficient forecast <span class="citation">(Ermagun &amp; Levinson, 2018)</span>.</p>
+<p>Studies in the field of bike availability forecasting that make valuable comparisons between traditional time series forecasting and machine learning methods, are scarce. <span class="citation">Y. Li et al. (2015)</span> and <span class="citation">Z. Yang et al. (2016)</span> included ARIMA in their baseline methods, but only in a form that does not take any seasonal component into account, while <span class="citation">Dias et al. (2015)</span> compared a seasonal ARIMA model with their proposed Random Forest Regressor, but without using the same amount of data for both methods. In spatio-temporal transportation forecasting in general, there is no clear consensus on which method is ‘better’. Despite the strong increase in publications that use machine learning, <span class="citation">Ermagun &amp; Levinson (2018)</span> state that “there is not a certain superiority when machine learning methods are compared with advanced statistical methods such as autoregressive integrated moving average.”</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:stationforecasts">Table 4.1: </span>Publications regarding forecasts in station-based bike sharing systems, known to the author
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Authors
+</th>
+<th style="text-align:left;">
+Year
+</th>
+<th style="text-align:left;">
+Main forecasting method
+</th>
+<th style="text-align:left;">
+Spatial unit of analysis
+</th>
+<th style="text-align:left;">
+Case study
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Froehlich, Neumann, and Oliver
+</td>
+<td style="text-align:left;width: 1cm; ">
+2009
+</td>
+<td style="text-align:left;width: 4cm; ">
+Bayesian Network
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Barcelona
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Kaltenbrunner et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2010
+</td>
+<td style="text-align:left;width: 4cm; ">
+Spatial ARIMA
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Barcelona
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Borgnat et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2011
+</td>
+<td style="text-align:left;width: 4cm; ">
+Linear regression and AR
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Lyon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Won Yoon, Pinelli, and Calabrese
+</td>
+<td style="text-align:left;width: 1cm; ">
+2012
+</td>
+<td style="text-align:left;width: 4cm; ">
+Spatial, seasonal ARIMA
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Dublin
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Rixey
+</td>
+<td style="text-align:left;width: 1cm; ">
+2013
+</td>
+<td style="text-align:left;width: 4cm; ">
+Linear regression
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Washington DC, Minneapolis and Denver
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Giot and Cherrier
+</td>
+<td style="text-align:left;width: 1cm; ">
+2014
+</td>
+<td style="text-align:left;width: 4cm; ">
+Ridge regression, Adaboost regression, Random Forest regression, Gradient Tree Boosting regression and Support Vector regression
+</td>
+<td style="text-align:left;width: 3cm; ">
+City
+</td>
+<td style="text-align:left;width: 3cm; ">
+Washington DC
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+D. Singhvi et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2015
+</td>
+<td style="text-align:left;width: 4cm; ">
+Linear regression
+</td>
+<td style="text-align:left;width: 3cm; ">
+Neighbourhood
+</td>
+<td style="text-align:left;width: 3cm; ">
+New York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Y. Li et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2015
+</td>
+<td style="text-align:left;width: 4cm; ">
+Gradient Tree Boosting regression
+</td>
+<td style="text-align:left;width: 3cm; ">
+Cluster
+</td>
+<td style="text-align:left;width: 3cm; ">
+Washington DC
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Dias, Bellalta, and Oechsner
+</td>
+<td style="text-align:left;width: 1cm; ">
+2015
+</td>
+<td style="text-align:left;width: 4cm; ">
+Random Forest regression
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Barcelona
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Z. Yang et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2016
+</td>
+<td style="text-align:left;width: 4cm; ">
+Probabilisitc mobility model and Random Forest regression
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Hangzhou
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Ruffieux et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2017
+</td>
+<td style="text-align:left;width: 4cm; ">
+Random Forest regression and Convolutional Neural Network
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Namur, Essen, Glasgow, Budapest, Vienna and Nice
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Lin, He, and Peeta
+</td>
+<td style="text-align:left;width: 1cm; ">
+2018
+</td>
+<td style="text-align:left;width: 4cm; ">
+Graph Convolutional Neural Network
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+New York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Lozano et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2018
+</td>
+<td style="text-align:left;width: 4cm; ">
+Random Forest regression
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Salamanca
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+B. Wang and Kim
+</td>
+<td style="text-align:left;width: 1cm; ">
+2018
+</td>
+<td style="text-align:left;width: 4cm; ">
+Long Short Term Memory Neural Networks and Gated Recurrent Units
+</td>
+<td style="text-align:left;width: 3cm; ">
+Docking station
+</td>
+<td style="text-align:left;width: 3cm; ">
+Suzhou
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="forecasting-in-dockless-systems" class="section level2">
+<h2><span class="header-section-number">4.2</span> 1.3.2 Forecasting in dockless systems</h2>
+<p>Publications regarding bike availability forecasting in dockless PBSS can be counted on the fingers of one hand. In addition to them, a small number of similar studies have been done in the field of dockless car sharing, which is based on the same principles as dockless bike sharing.</p>
+<p>Those few attempts can be divided in two groups of approaches, which are labeled here as the <em>grid based approach</em> ad the <em>distance based approach</em>. In the grid based approach, the system’s operational area, i.e. the ‘system area’, is divided into distinct grid cells, which may be regularly shaped, but do not have to be. For example, the cell boundaries may also correspond with administrative boundaries. Subsequently, each cell is treated as being a docking station. That is, from the historical data on locations of available vehicles, the number of vehicles in each cell is counted at several timestamps in the past, creating a time series of counts. Hence, for a given geographical point, the forecasted value will be the expected number of vehicles inside the cell that contains the point.</p>
+<p>The distance based approach uses the historical data to calculate the distance from a given geographical location to the nearest available vehicle, for several timestamps in the past, creating a time series of real-valued distances. Hence, the forecasted value will be the expected distance from the given point to the nearest available vehicle, at a given timestamp in the future.</p>
+<p>The grid based approach was taken by <span class="citation">Caggiani, Ottomanelli, Camporeale, &amp; Binetti (2017)</span>, who were among of the first to forecast bike availability in dockless PBSS. They did not use a regular grid, but defined the outline of the cells with a spatio-temporal clustering procedure, that worked as follows. Historical time series containing daily counts of available bikes were obtained for each zone, and clustered based on temporal patterns. Geographically connected zones that belonged to the same temporal cluster, were aggregated. The resulting clusters formed the spatial units of analysis, and for each of them, the number of available bikes was forecasted one day ahead with a Nonlinear Autoregressive Neural Network. However, at that time, they lacked data to test their methodology on. Instead, they used data from the station-based PBSS in London, pretending each docking station to be a cluster centroid.</p>
+<p><span class="citation">Yi et al. (2018)</span> did have access to a dataset of a dockless PBDSS, in the Chinese city of Chengu, and laid a regular grid with square cells over its systems area. Besides historical count data of available bikes in each grid cell, they included a categorical variable representing the time of day in their system. Forecasting was done with a recent machine learning method, named Convolutional Long Short Term Memory Network. <span class="citation">J. Müller &amp; Bogenberger (2015)</span>, in contradiction, used traditional statistical methods, and focused on forecasting the number of car bookings in a dockless car sharing system, for each ZIP-code area in Berlin. They compared a seasonal ARIMA model with a Holt Winters exponential smoothing model, and found acceptable and similar forecasting errors for both of them.</p>
+<p>The only example of the application of the distance based approach, known to the author, is the work of <span class="citation">Formentin, Bianchessi, &amp; Savaresi (2015)</span>. Their methodology, focused on dockless car sharing systems, can be summarized as follows. For a set of given locations, evenly distributed over the city, historical location data is pre-processed into a time series of historical distance data. A strictly linear trend is subtracted from these time series, and if present, the seasonal component as well, using the classical time series decomposition method. AR models are fitted to the data that are left. Then, a model structure that is acceptable for all time series, is identified, and serves as the general forecasting model for the complete city. That is, for individual forecast requests, this general model structure will be used, no matter what the location of the request is. Only when a forecast request is located inside the city center, the corresponding historical distance data will be decomposed before forecasting, assuming a daily seasonal pattern. In that case, the seasonal component will afterwards be added to the forecast produced by the general model. The general model is updated every month.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:docklessforecasts">Table 4.2: </span>Publications regarding forecasts in dockless vehicle sharing systems, known to the author
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Authors
+</th>
+<th style="text-align:left;">
+Year
+</th>
+<th style="text-align:left;">
+Main forecasting method
+</th>
+<th style="text-align:left;">
+Approach
+</th>
+<th style="text-align:left;">
+Case study
+</th>
+<th style="text-align:left;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Formentin, Bianchessi, and Savares
+</td>
+<td style="text-align:left;width: 1cm; ">
+2015
+</td>
+<td style="text-align:left;width: 4cm; ">
+AR
+</td>
+<td style="text-align:left;width: 3cm; ">
+Distance based
+</td>
+<td style="text-align:left;width: 2cm; ">
+Milan
+</td>
+<td style="text-align:left;width: 1cm; ">
+Car
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Müller and Bogenberger
+</td>
+<td style="text-align:left;width: 1cm; ">
+2015
+</td>
+<td style="text-align:left;width: 4cm; ">
+ARIMA and Holt Winters ETS
+</td>
+<td style="text-align:left;width: 3cm; ">
+Grid based
+</td>
+<td style="text-align:left;width: 2cm; ">
+Berlin
+</td>
+<td style="text-align:left;width: 1cm; ">
+Car
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Caggiani et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2017
+</td>
+<td style="text-align:left;width: 4cm; ">
+Nonlinear Autoregressive Neural Network
+</td>
+<td style="text-align:left;width: 3cm; ">
+Grid based
+</td>
+<td style="text-align:left;width: 2cm; ">
+London
+</td>
+<td style="text-align:left;width: 1cm; ">
+Bike
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Yi et al.
+</td>
+<td style="text-align:left;width: 1cm; ">
+2018
+</td>
+<td style="text-align:left;width: 4cm; ">
+Convolutional Long Short Term Memory Network
+</td>
+<td style="text-align:left;width: 3cm; ">
+Grid based
+</td>
+<td style="text-align:left;width: 2cm; ">
+Chengu
+</td>
+<td style="text-align:left;width: 1cm; ">
+Bike
+</td>
+</tr>
+</tbody>
+</table>
+<!-- ## 1.3.3 Exploratory studies in dockless systems -->
+<!-- Since the rapid expansion of dockless bike sharing systems, the academic interest in understanding the underlying spatio-temporal dynamics of them has grown. Most of those studies are still exploratory in nature, mainly aim to provide guidance to policy makers, and focus specifically on a single system. Broader researches, that base their findings on a comparative analysis of several dockless PBSS, have, to the knowledge of the author, not been done yet.  -->
+<!-- @mckenzie2018 examined the differences in activity patterns between station-based and dockless PBSS in Washington DC. The station-based system showed regular patterns, with clear peaks in morning and afternoon peak hours, implying relatively high usage by commuters. The dockless system, however, reflected a relatively high usage for leisure or non-commute related activities. @chen2018 performed a similar study in Hangzhou, and also drew similar conclusions. Although the dockless system there showed a higher usage activity for all purposes, including commuting, the relative share of commuting trips compared to other purposes was smaller than for the station-based system. -->
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="3-objective.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

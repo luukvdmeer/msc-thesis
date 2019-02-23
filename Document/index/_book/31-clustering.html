@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 31 5.1 Clustering | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</title>
+  <meta name="description" content="Chapter 31 5.1 Clustering | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 31 5.1 Clustering | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 31 5.1 Clustering | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  
+  
+  
+
+<meta name="author" content="Lucas van der Meer">
+
+
+<meta name="date" content="2019-02-25">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="30-results-and-discussion.html">
+<link rel="next" href="32-model-building.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction-1.html"><a href="1-introduction-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-context.html"><a href="2-context.html"><i class="fa fa-check"></i><b>2</b> 1.1 Context</a></li>
+<li class="chapter" data-level="3" data-path="3-objective.html"><a href="3-objective.html"><i class="fa fa-check"></i><b>3</b> 1.2 Objective</a></li>
+<li class="chapter" data-level="4" data-path="4-related-work.html"><a href="4-related-work.html"><i class="fa fa-check"></i><b>4</b> 1.3 Related work</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-station-based-systems"><i class="fa fa-check"></i><b>4.1</b> 1.3.1 Forecasting in station-based systems</a></li>
+<li class="chapter" data-level="4.2" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-dockless-systems"><i class="fa fa-check"></i><b>4.2</b> 1.3.2 Forecasting in dockless systems</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-approach.html"><a href="5-approach.html"><i class="fa fa-check"></i><b>5</b> 1.4 Approach</a></li>
+<li class="chapter" data-level="6" data-path="6-outline.html"><a href="6-outline.html"><i class="fa fa-check"></i><b>6</b> 1.5 Outline</a></li>
+<li class="chapter" data-level="7" data-path="7-references.html"><a href="7-references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="8" data-path="8-theoretical-background.html"><a href="8-theoretical-background.html"><i class="fa fa-check"></i><b>8</b> Theoretical background</a></li>
+<li class="chapter" data-level="9" data-path="9-time-series-definition.html"><a href="9-time-series-definition.html"><i class="fa fa-check"></i><b>9</b> 2.1 Time series definition</a></li>
+<li class="chapter" data-level="10" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html"><i class="fa fa-check"></i><b>10</b> 2.2 Time series characteristics</a><ul>
+<li class="chapter" data-level="10.1" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#autocorrelation"><i class="fa fa-check"></i><b>10.1</b> 2.2.1 Autocorrelation</a></li>
+<li class="chapter" data-level="10.2" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#stationarity"><i class="fa fa-check"></i><b>10.2</b> 2.2.2 Stationarity</a></li>
+<li class="chapter" data-level="10.3" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#spectral-entropy"><i class="fa fa-check"></i><b>10.3</b> 2.2.3 Spectral entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-time-series-components.html"><a href="11-time-series-components.html"><i class="fa fa-check"></i><b>11</b> 2.3 Time series components</a><ul>
+<li class="chapter" data-level="11.1" data-path="11-time-series-components.html"><a href="11-time-series-components.html#definitions"><i class="fa fa-check"></i><b>11.1</b> 2.3.1 Definitions</a></li>
+<li class="chapter" data-level="11.2" data-path="11-time-series-components.html"><a href="11-time-series-components.html#classical-decomposition"><i class="fa fa-check"></i><b>11.2</b> 2.3.2 Classical decomposition</a></li>
+<li class="chapter" data-level="11.3" data-path="11-time-series-components.html"><a href="11-time-series-components.html#stl-decomposition"><i class="fa fa-check"></i><b>11.3</b> 2.3.3 STL decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html"><i class="fa fa-check"></i><b>12</b> 2.4 Time series forecasting</a><ul>
+<li class="chapter" data-level="12.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting-models"><i class="fa fa-check"></i><b>12.1</b> 2.4.1 Forecasting models</a></li>
+<li class="chapter" data-level="12.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#arima"><i class="fa fa-check"></i><b>12.2</b> 2.4.2 ARIMA</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#structure"><i class="fa fa-check"></i><b>12.2.1</b> 2.4.2.1 Structure</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-selection"><i class="fa fa-check"></i><b>12.2.2</b> 2.4.2.2 Model selection</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#parameter-estimation"><i class="fa fa-check"></i><b>12.2.3</b> 2.4.2.3 Parameter estimation</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-checking"><i class="fa fa-check"></i><b>12.2.4</b> 2.4.2.4 Model checking</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting"><i class="fa fa-check"></i><b>12.2.5</b> 2.4.2.5 Forecasting</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#accuracy-evaluation"><i class="fa fa-check"></i><b>12.2.6</b> 2.4.2.6 Accuracy evaluation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#transformations"><i class="fa fa-check"></i><b>12.2.7</b> 2.4.2.7 Transformations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#naive-forecasts"><i class="fa fa-check"></i><b>12.3</b> 2.4.3 Naïve forecasts</a></li>
+<li class="chapter" data-level="12.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#seasonal-forecasts"><i class="fa fa-check"></i><b>12.4</b> 2.4.4 Seasonal forecasts</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html"><i class="fa fa-check"></i><b>13</b> 2.5 Time series clustering</a><ul>
+<li class="chapter" data-level="13.1" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#dissimilarity-measures"><i class="fa fa-check"></i><b>13.1</b> 2.5.1 Dissimilarity measures</a></li>
+<li class="chapter" data-level="13.2" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.2</b> 2.5.2 Hierarchical clustering</a></li>
+<li class="chapter" data-level="13.3" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#spatial-time-series-clustering"><i class="fa fa-check"></i><b>13.3</b> 2.5.3 Spatial time series clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="14-references-1.html"><a href="14-references-1.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="15" data-path="15-system-architecture.html"><a href="15-system-architecture.html"><i class="fa fa-check"></i><b>15</b> System architecture</a></li>
+<li class="chapter" data-level="16" data-path="16-overall-design.html"><a href="16-overall-design.html"><i class="fa fa-check"></i><b>16</b> 3.1 Overall design</a></li>
+<li class="chapter" data-level="17" data-path="17-software.html"><a href="17-software.html"><i class="fa fa-check"></i><b>17</b> 3.2 Software</a></li>
+<li class="chapter" data-level="18" data-path="18-system-area.html"><a href="18-system-area.html"><i class="fa fa-check"></i><b>18</b> 3.3 System area</a></li>
+<li class="chapter" data-level="19" data-path="19-database.html"><a href="19-database.html"><i class="fa fa-check"></i><b>19</b> 3.4 Database</a><ul>
+<li class="chapter" data-level="19.1" data-path="19-database.html"><a href="19-database.html#distance-data"><i class="fa fa-check"></i><b>19.1</b> 3.4.1 Distance data</a></li>
+<li class="chapter" data-level="19.2" data-path="19-database.html"><a href="19-database.html#usage-data"><i class="fa fa-check"></i><b>19.2</b> 3.4.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="20-forecast-request.html"><a href="20-forecast-request.html"><i class="fa fa-check"></i><b>20</b> 3.5 Forecast request</a></li>
+<li class="chapter" data-level="21" data-path="21-cluster-loop.html"><a href="21-cluster-loop.html"><i class="fa fa-check"></i><b>21</b> 3.6 Cluster loop</a></li>
+<li class="chapter" data-level="22" data-path="22-model-loop.html"><a href="22-model-loop.html"><i class="fa fa-check"></i><b>22</b> 3.7 Model loop</a></li>
+<li class="chapter" data-level="23" data-path="23-forecast-loop.html"><a href="23-forecast-loop.html"><i class="fa fa-check"></i><b>23</b> 3.8 Forecast loop</a></li>
+<li class="chapter" data-level="24" data-path="24-references-2.html"><a href="24-references-2.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
+<li class="chapter" data-level="25" data-path="25-data-and-experimental-design.html"><a href="25-data-and-experimental-design.html"><i class="fa fa-check"></i><b>25</b> Data and experimental design</a></li>
+<li class="chapter" data-level="26" data-path="26-data-source.html"><a href="26-data-source.html"><i class="fa fa-check"></i><b>26</b> 4.1 Data source</a></li>
+<li class="chapter" data-level="27" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html"><i class="fa fa-check"></i><b>27</b> 4.2 Data retrieval</a><ul>
+<li class="chapter" data-level="27.1" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#distance-data-1"><i class="fa fa-check"></i><b>27.1</b> 4.2.1 Distance data</a></li>
+<li class="chapter" data-level="27.2" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#usage-data-1"><i class="fa fa-check"></i><b>27.2</b> 4.2.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="28-experimental-design.html"><a href="28-experimental-design.html"><i class="fa fa-check"></i><b>28</b> 4.3 Experimental design</a><ul>
+<li class="chapter" data-level="28.1" data-path="28-experimental-design.html"><a href="28-experimental-design.html#training-and-test-periods"><i class="fa fa-check"></i><b>28.1</b> 4.3.1 Training and test periods</a></li>
+<li class="chapter" data-level="28.2" data-path="28-experimental-design.html"><a href="28-experimental-design.html#additional-software"><i class="fa fa-check"></i><b>28.2</b> 4.3.3 Additional software</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="29-references-3.html"><a href="29-references-3.html"><i class="fa fa-check"></i><b>29</b> References</a></li>
+<li class="chapter" data-level="30" data-path="30-results-and-discussion.html"><a href="30-results-and-discussion.html"><i class="fa fa-check"></i><b>30</b> Results and discussion</a></li>
+<li class="chapter" data-level="31" data-path="31-clustering.html"><a href="31-clustering.html"><i class="fa fa-check"></i><b>31</b> 5.1 Clustering</a></li>
+<li class="chapter" data-level="32" data-path="32-model-building.html"><a href="32-model-building.html"><i class="fa fa-check"></i><b>32</b> 5.2 Model building</a></li>
+<li class="chapter" data-level="33" data-path="33-forecasting-1.html"><a href="33-forecasting-1.html"><i class="fa fa-check"></i><b>33</b> 5.3 Forecasting</a></li>
+<li class="chapter" data-level="34" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html"><i class="fa fa-check"></i><b>34</b> 5.4 Limitations &amp; Recommendations</a><ul>
+<li class="chapter" data-level="34.1" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#limits-of-forecastability"><i class="fa fa-check"></i><b>34.1</b> 5.4.1 Limits of forecastability</a></li>
+<li class="chapter" data-level="34.2" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#exogeneous-variables"><i class="fa fa-check"></i><b>34.2</b> 5.4.2 Exogeneous variables</a></li>
+<li class="chapter" data-level="34.3" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#non-normal-distributions"><i class="fa fa-check"></i><b>34.3</b> 5.4.3 Non-normal distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="35-references-4.html"><a href="35-references-4.html"><i class="fa fa-check"></i><b>35</b> References</a></li>
+<li class="chapter" data-level="36" data-path="36-conclusion.html"><a href="36-conclusion.html"><i class="fa fa-check"></i><b>36</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="clustering" class="section level1">
+<h1><span class="header-section-number">Chapter 31</span> 5.1 Clustering</h1>
+<p>Figure 5.1a shows the grid overlaying the JUMP Bikes system area in San Francisco, including the centroid of each grid cell. In total, the grid contains 249 cells, each 500 meter high and 500 meter wide. Figure 5.1b shows the calculated number of pick-ups per grid cell, during the training period. On average, there were 218 pick-ups per grid cell, wich corresponds to approximately eight pick-ups per day. The maximum number of pick-ups in a grid cell was 1985 (i.e. 71 per day on average), while in 25 of the 249 grid cells, there were no pick-ups at all. It can be seen that high counts of pick-ups occured in the grid cells along the diagonal axis from south-west to north-east. Mainly in the south-eastern corner of the system area, the usage intensity was very low.</p>
+<div class="figure" style="text-align: center"><span id="fig:mapandgrid"></span>
+<img src="Figures/grid.png" alt="a) grid overlaying the system area; b) number of pick-ups per grid cell" width="50%" /><img src="Figures/pickups.png" alt="a) grid overlaying the system area; b) number of pick-ups per grid cell" width="50%" />
+<p class="caption">
+Figure 31.1: a) grid overlaying the system area; b) number of pick-ups per grid cell
+</p>
+</div>
+<p>Figure 5.2 shows the temporal patterns of the usage data, with the pick-ups per day of the week, and per hour of the day. Friday was the day with on average the most pick-ups, while Saturday and Sunday had the least. The busiest hours of the day, where 8:00 and 9:00, during morning rush hours, and 16:00 and 17:00, during afternoon rush hours. The lowest numbers of hourly pick-ups, as expected, occured during the night.</p>
+<div class="figure" style="text-align: center"><span id="fig:usageplots"></span>
+<img src="Figures/usageday.png" alt="a) pick-ups per day of the week; b) pick-ups per hour of the day" width="50%" /><img src="Figures/usagehour.png" alt="a) pick-ups per day of the week; b) pick-ups per hour of the day" width="50%" />
+<p class="caption">
+Figure 31.2: a) pick-ups per day of the week; b) pick-ups per hour of the day
+</p>
+</div>
+<p>Recall that for each grid cell centroid, a time series of historical distance data was queried, and that the normalized, average weekly patterns in these data were clustered using spatially constrained hierarchical clustering. The automatic procedure of defining the number of clusters <span class="math inline">\(k\)</span> and the mixing parameter <span class="math inline">\(\alpha\)</span>, lead to a definition of <span class="math inline">\(k = 4\)</span> and <span class="math inline">\(\alpha = 0.6\)</span>. This resulted in a partition containing four fully spatial contiguous clusters. The geographical outlines of these clusters are shown in Figure 5.2a. The centroid of each cluster, weighted by the number of pick-ups in the corresponding grid cells, are shown in Figure 5.2b. These weighted centroids serve as the model points in DBAFS.</p>
+<div class="figure" style="text-align: center"><span id="fig:clusters"></span>
+<img src="Figures/clusters.png" alt="a) geographical outline of the clusters; b) geographical locations of the model points" width="50%" /><img src="Figures/modelpoints.png" alt="a) geographical outline of the clusters; b) geographical locations of the model points" width="50%" />
+<p class="caption">
+Figure 31.3: a) geographical outline of the clusters; b) geographical locations of the model points
+</p>
+</div>
+<p>Roughly speaking, and based on a large study of neighbourhood indicators in San Francisco <span class="citation">(San Francisco Department of Public Health, 2014)</span>, the four clusters can be characterized as follows. The orange cluster covers the Bayview/Hunters Point neighbourhood, which is a rather isolated area, with a high percentage of low-income households and relatively high crime rates. The blue cluster forms the city center of San Francisco, containing the neighbourhoods with the highest population densities, but also with a relatively high job density compared to the residential density, and large areas zoned for commercial usage. The purple cluster mainly contains neighbourhoods where the residential density is high compared to the job density, and the area zoned for commercial usage is relatively small. Finally, the green cluster covers the Presidio Park, a recreational area with few inhabitants, and a relatively high number of bike lanes. For the sake of clarity, the orange, blue, purple and green clusters are from now on referred to as the <em>Bayview</em>, <em>Downtown</em>, <em>Residential</em> and <em>Presidio</em> clusters, respectively. Consistently, the four corresponding model points will be called the <em>Bayview</em>, <em>Downtown</em>, <em>Residential</em> and <em>Presidio</em> model points, respectively.</p>
+<p>Table 1 presents some descriptive statistics of the time series, averaged per cluster, and averaged over the whole system area. From the 249 grid cells, more than a hundred are located within the Residential cluster, while the Presidio cluster is by far the smallest of the four. During the training period, the nearest available bike was on average located 619 meters from the grid cell centroids. In the Bayview cluster, however, this was more than one kilometer, a difference of almost a factor two compared to the Downtown cluster, and even more compared to the Residential and Presidio clusters. The Bayview cluster also showed the largest variation in the data, with a high average standard deviation compared to the other clusters, and an average range that spanned more than four kilometers. This can possibly be explained by the low usage intensity of the bike sharing system in this part of the system area. When the number of bikes in an area is low, the nearest available bike and the second nearest available bike are more likely to be far away from each other. In that case, when the closest of them gets picked-up, the distance to the nearest available bike will suddenly increase substantially. The other way around, when all available bikes are far away, and one bike gets dropped-off inside the area, the distance to the nearest available bike will suddenly decrease substantially.</p>
+<p>Although not as extreme as the Bayview cluster, also the other clusters had on average high ranges when compared to the mean and standard deviation. However, the standard deviation itself turned out to be rather small relative to the mean. This implies either the presence of outliers, or population distributions with thin, but wide tails.</p>
+<p>The first order autocorrelation measures the average dependency between data values at time <span class="math inline">\(t\)</span> and corresponding data values at time <span class="math inline">\(t-1\)</span>. In the whole system area, this dependency was strong, especially in the Bayview and Presidio clusters. These high autocorrelation values are important, since they imply that it is reasonable to use past observations when forecasting future ones. However, the calculated spectral entropy values show that in general, the data are also very complex, and the forecastability is low. This mainly concerns the Downtown and Residential clusters, which contain, as could be seen in Figure 5.1b, the areas where the pick-up density is high. In such areas, the data are more dynamic, since bikes get picked-up and dropped off constantly, and the location of the nearest available bike will change often. In most cases, the more dynamic the data, the harder to forecast.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:clusterstats">Table 31.1: </span>Descriptive statistics of the grid cell centroids distance data
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(N\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\mu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(range\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\sigma\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\rho(1)\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(H\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Total
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+249
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+619
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2726
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+155
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.82
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Bayview
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+46
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+1080
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+4021
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+155
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.95
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Downtown
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+81
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+557
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2551
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+77
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.77
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Residential
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+103
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+490
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2410
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+112
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.79
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Presido
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+19
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+462
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2057
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+137
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.92
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.68
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">Note: </span>
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup></sup> Except <span class="math inline">\(N\)</span>, all metrics are calculated for each time series seperately, and averaged afterwards.
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> <span class="math inline">\(N\)</span> is the total number of grid cell centroids
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> <span class="math inline">\(\\mu\)</span> is the mean of the data, in meters
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>3</sup> <span class="math inline">\(range\)</span> is the difference between the maximum and minimum data value, in meters
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>4</sup> <span class="math inline">\(\\sigma\)</span> is the standard deviation of the data, in meters
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>5</sup> <span class="math inline">\(\\rho(1)\)</span> is the first order autocorrelation, see section 2.2.1
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>6</sup> <span class="math inline">\(H\)</span> is the normalized spectral entropy, see section 2.2.3
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Figure 5.3 shows the normalized, average weekly patterns of the time series, averaged once again per cluster. The patterns can be explained intuitively. The Bayview cluster has a low usage intensity, and although there are peaks in the data every day, a clear and consistent pattern is absent.</p>
+<p>The Downtown cluster has a high density of jobs and commercial activities. During working hours, the demand for bikes is low, which leads to a high number of available bikes, and consequently, short distances to the nearest available bike. In the afternoon, just after working hours, the demand starts increasing, and it gets harder to find an available bike nearby. This peak in the data continues during the evening, when the activity in the commericial zones is high. Later in the evening, the demand decreases again. A clear difference between weekdays and weekends, can not be seen.</p>
+<p>The Residential cluster shows the exact opposite pattern. In the morning rush hours, commuters use the bike to get to work, and not many available bikes are left in the residential areas. Hence, in those areas, the distance to the nearest available bike is higher during working hours. In the afternoon, commuters come back from work, and leave the bikes in the residential areas, causing a decrease in distance to the nearest available bike. Hence, the distance data peaks during working hours. In the weekends, the peaks seem to be slightly lower, but this difference is not as large as might have been expected. They do happen later on the day, corresponding to the same periods as the Downtown cluster.</p>
+<p>Finally, the Presidio cluster is mainly a recreational area. There are a lot of bikes, but during weekdays, they are used less, leading to small and relatively constant distances to the nearest available bike. In weekends, and mainly on Sunday afternoon, the usage intensity is high, and it takes longer to find an available bike.</p>
+<div class="figure" style="text-align: center"><span id="fig:patterns"></span>
+<img src="Figures/clusterplots.png" alt="Normalized, average weekly patterns of the grid cell distance data, averaged per cluster" width="\textwidth" />
+<p class="caption">
+Figure 31.4: Normalized, average weekly patterns of the grid cell distance data, averaged per cluster
+</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="30-results-and-discussion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="32-model-building.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

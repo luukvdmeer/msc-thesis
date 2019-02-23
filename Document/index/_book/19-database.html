@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 19 3.4 Database | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</title>
+  <meta name="description" content="Chapter 19 3.4 Database | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 19 3.4 Database | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 19 3.4 Database | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  
+  
+  
+
+<meta name="author" content="Lucas van der Meer">
+
+
+<meta name="date" content="2019-02-25">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="18-system-area.html">
+<link rel="next" href="20-forecast-request.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction-1.html"><a href="1-introduction-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-context.html"><a href="2-context.html"><i class="fa fa-check"></i><b>2</b> 1.1 Context</a></li>
+<li class="chapter" data-level="3" data-path="3-objective.html"><a href="3-objective.html"><i class="fa fa-check"></i><b>3</b> 1.2 Objective</a></li>
+<li class="chapter" data-level="4" data-path="4-related-work.html"><a href="4-related-work.html"><i class="fa fa-check"></i><b>4</b> 1.3 Related work</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-station-based-systems"><i class="fa fa-check"></i><b>4.1</b> 1.3.1 Forecasting in station-based systems</a></li>
+<li class="chapter" data-level="4.2" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-dockless-systems"><i class="fa fa-check"></i><b>4.2</b> 1.3.2 Forecasting in dockless systems</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-approach.html"><a href="5-approach.html"><i class="fa fa-check"></i><b>5</b> 1.4 Approach</a></li>
+<li class="chapter" data-level="6" data-path="6-outline.html"><a href="6-outline.html"><i class="fa fa-check"></i><b>6</b> 1.5 Outline</a></li>
+<li class="chapter" data-level="7" data-path="7-references.html"><a href="7-references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="8" data-path="8-theoretical-background.html"><a href="8-theoretical-background.html"><i class="fa fa-check"></i><b>8</b> Theoretical background</a></li>
+<li class="chapter" data-level="9" data-path="9-time-series-definition.html"><a href="9-time-series-definition.html"><i class="fa fa-check"></i><b>9</b> 2.1 Time series definition</a></li>
+<li class="chapter" data-level="10" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html"><i class="fa fa-check"></i><b>10</b> 2.2 Time series characteristics</a><ul>
+<li class="chapter" data-level="10.1" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#autocorrelation"><i class="fa fa-check"></i><b>10.1</b> 2.2.1 Autocorrelation</a></li>
+<li class="chapter" data-level="10.2" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#stationarity"><i class="fa fa-check"></i><b>10.2</b> 2.2.2 Stationarity</a></li>
+<li class="chapter" data-level="10.3" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#spectral-entropy"><i class="fa fa-check"></i><b>10.3</b> 2.2.3 Spectral entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-time-series-components.html"><a href="11-time-series-components.html"><i class="fa fa-check"></i><b>11</b> 2.3 Time series components</a><ul>
+<li class="chapter" data-level="11.1" data-path="11-time-series-components.html"><a href="11-time-series-components.html#definitions"><i class="fa fa-check"></i><b>11.1</b> 2.3.1 Definitions</a></li>
+<li class="chapter" data-level="11.2" data-path="11-time-series-components.html"><a href="11-time-series-components.html#classical-decomposition"><i class="fa fa-check"></i><b>11.2</b> 2.3.2 Classical decomposition</a></li>
+<li class="chapter" data-level="11.3" data-path="11-time-series-components.html"><a href="11-time-series-components.html#stl-decomposition"><i class="fa fa-check"></i><b>11.3</b> 2.3.3 STL decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html"><i class="fa fa-check"></i><b>12</b> 2.4 Time series forecasting</a><ul>
+<li class="chapter" data-level="12.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting-models"><i class="fa fa-check"></i><b>12.1</b> 2.4.1 Forecasting models</a></li>
+<li class="chapter" data-level="12.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#arima"><i class="fa fa-check"></i><b>12.2</b> 2.4.2 ARIMA</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#structure"><i class="fa fa-check"></i><b>12.2.1</b> 2.4.2.1 Structure</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-selection"><i class="fa fa-check"></i><b>12.2.2</b> 2.4.2.2 Model selection</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#parameter-estimation"><i class="fa fa-check"></i><b>12.2.3</b> 2.4.2.3 Parameter estimation</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-checking"><i class="fa fa-check"></i><b>12.2.4</b> 2.4.2.4 Model checking</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting"><i class="fa fa-check"></i><b>12.2.5</b> 2.4.2.5 Forecasting</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#accuracy-evaluation"><i class="fa fa-check"></i><b>12.2.6</b> 2.4.2.6 Accuracy evaluation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#transformations"><i class="fa fa-check"></i><b>12.2.7</b> 2.4.2.7 Transformations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#naive-forecasts"><i class="fa fa-check"></i><b>12.3</b> 2.4.3 Naïve forecasts</a></li>
+<li class="chapter" data-level="12.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#seasonal-forecasts"><i class="fa fa-check"></i><b>12.4</b> 2.4.4 Seasonal forecasts</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html"><i class="fa fa-check"></i><b>13</b> 2.5 Time series clustering</a><ul>
+<li class="chapter" data-level="13.1" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#dissimilarity-measures"><i class="fa fa-check"></i><b>13.1</b> 2.5.1 Dissimilarity measures</a></li>
+<li class="chapter" data-level="13.2" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.2</b> 2.5.2 Hierarchical clustering</a></li>
+<li class="chapter" data-level="13.3" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#spatial-time-series-clustering"><i class="fa fa-check"></i><b>13.3</b> 2.5.3 Spatial time series clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="14-references-1.html"><a href="14-references-1.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="15" data-path="15-system-architecture.html"><a href="15-system-architecture.html"><i class="fa fa-check"></i><b>15</b> System architecture</a></li>
+<li class="chapter" data-level="16" data-path="16-overall-design.html"><a href="16-overall-design.html"><i class="fa fa-check"></i><b>16</b> 3.1 Overall design</a></li>
+<li class="chapter" data-level="17" data-path="17-software.html"><a href="17-software.html"><i class="fa fa-check"></i><b>17</b> 3.2 Software</a></li>
+<li class="chapter" data-level="18" data-path="18-system-area.html"><a href="18-system-area.html"><i class="fa fa-check"></i><b>18</b> 3.3 System area</a></li>
+<li class="chapter" data-level="19" data-path="19-database.html"><a href="19-database.html"><i class="fa fa-check"></i><b>19</b> 3.4 Database</a><ul>
+<li class="chapter" data-level="19.1" data-path="19-database.html"><a href="19-database.html#distance-data"><i class="fa fa-check"></i><b>19.1</b> 3.4.1 Distance data</a></li>
+<li class="chapter" data-level="19.2" data-path="19-database.html"><a href="19-database.html#usage-data"><i class="fa fa-check"></i><b>19.2</b> 3.4.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="20-forecast-request.html"><a href="20-forecast-request.html"><i class="fa fa-check"></i><b>20</b> 3.5 Forecast request</a></li>
+<li class="chapter" data-level="21" data-path="21-cluster-loop.html"><a href="21-cluster-loop.html"><i class="fa fa-check"></i><b>21</b> 3.6 Cluster loop</a></li>
+<li class="chapter" data-level="22" data-path="22-model-loop.html"><a href="22-model-loop.html"><i class="fa fa-check"></i><b>22</b> 3.7 Model loop</a></li>
+<li class="chapter" data-level="23" data-path="23-forecast-loop.html"><a href="23-forecast-loop.html"><i class="fa fa-check"></i><b>23</b> 3.8 Forecast loop</a></li>
+<li class="chapter" data-level="24" data-path="24-references-2.html"><a href="24-references-2.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
+<li class="chapter" data-level="25" data-path="25-data-and-experimental-design.html"><a href="25-data-and-experimental-design.html"><i class="fa fa-check"></i><b>25</b> Data and experimental design</a></li>
+<li class="chapter" data-level="26" data-path="26-data-source.html"><a href="26-data-source.html"><i class="fa fa-check"></i><b>26</b> 4.1 Data source</a></li>
+<li class="chapter" data-level="27" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html"><i class="fa fa-check"></i><b>27</b> 4.2 Data retrieval</a><ul>
+<li class="chapter" data-level="27.1" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#distance-data-1"><i class="fa fa-check"></i><b>27.1</b> 4.2.1 Distance data</a></li>
+<li class="chapter" data-level="27.2" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#usage-data-1"><i class="fa fa-check"></i><b>27.2</b> 4.2.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="28-experimental-design.html"><a href="28-experimental-design.html"><i class="fa fa-check"></i><b>28</b> 4.3 Experimental design</a><ul>
+<li class="chapter" data-level="28.1" data-path="28-experimental-design.html"><a href="28-experimental-design.html#training-and-test-periods"><i class="fa fa-check"></i><b>28.1</b> 4.3.1 Training and test periods</a></li>
+<li class="chapter" data-level="28.2" data-path="28-experimental-design.html"><a href="28-experimental-design.html#additional-software"><i class="fa fa-check"></i><b>28.2</b> 4.3.3 Additional software</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="29-references-3.html"><a href="29-references-3.html"><i class="fa fa-check"></i><b>29</b> References</a></li>
+<li class="chapter" data-level="30" data-path="30-results-and-discussion.html"><a href="30-results-and-discussion.html"><i class="fa fa-check"></i><b>30</b> Results and discussion</a></li>
+<li class="chapter" data-level="31" data-path="31-clustering.html"><a href="31-clustering.html"><i class="fa fa-check"></i><b>31</b> 5.1 Clustering</a></li>
+<li class="chapter" data-level="32" data-path="32-model-building.html"><a href="32-model-building.html"><i class="fa fa-check"></i><b>32</b> 5.2 Model building</a></li>
+<li class="chapter" data-level="33" data-path="33-forecasting-1.html"><a href="33-forecasting-1.html"><i class="fa fa-check"></i><b>33</b> 5.3 Forecasting</a></li>
+<li class="chapter" data-level="34" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html"><i class="fa fa-check"></i><b>34</b> 5.4 Limitations &amp; Recommendations</a><ul>
+<li class="chapter" data-level="34.1" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#limits-of-forecastability"><i class="fa fa-check"></i><b>34.1</b> 5.4.1 Limits of forecastability</a></li>
+<li class="chapter" data-level="34.2" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#exogeneous-variables"><i class="fa fa-check"></i><b>34.2</b> 5.4.2 Exogeneous variables</a></li>
+<li class="chapter" data-level="34.3" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#non-normal-distributions"><i class="fa fa-check"></i><b>34.3</b> 5.4.3 Non-normal distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="35-references-4.html"><a href="35-references-4.html"><i class="fa fa-check"></i><b>35</b> References</a></li>
+<li class="chapter" data-level="36" data-path="36-conclusion.html"><a href="36-conclusion.html"><i class="fa fa-check"></i><b>36</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="database" class="section level1">
+<h1><span class="header-section-number">Chapter 19</span> 3.4 Database</h1>
+<p>In a dockless bike sharing system, each bike is equipped with a Global Positioning System (GPS). Every <span class="math inline">\(i_{d}\)</span> minutes, the geographical locations of all bikes are saved into a database, together with the corresponding timestamp. The locations of the bikes that are not in use at the current time, and thus available, are usually visible to the users of the system in a mobile application, and stored separately from the data regarding bikes that are in use.</p>
+<p>The geographical location of a bike is spatial data, and should be stored as such. An advanced and open source database management system for spatial data is PostgreSQL in combination with the PostGIS extension. DBAFS requires the data to be stored in such a database, and to have a sub-daily temporal resolution. Each feature represents the location of an available bike at a certain timestamp and should at least have the following fields.</p>
+<ul>
+<li>A timestamp of data type <code>timestamp with time zone</code>.</li>
+<li>A geographical location of data type <code>geometry(Point)</code>.</li>
+<li>A unique ID of the bike to which the feature belongs.</li>
+</ul>
+<p>Data are pre-processed on the database server, and only the data that are needed, are loaded into memory. In DBAFS, this pre-processing step involves two different procedures. The first one leads to data that contain information about the distance to the nearest bike for several timestamps in the past, and is discussed in the next sub-section, while the latter produces a dataset with all the bicycle pick-ups in the database, and is discussed in section 3.3.2.</p>
+<div id="distance-data" class="section level2">
+<h2><span class="header-section-number">19.1</span> 3.4.1 Distance data</h2>
+<p>For a given location, the distance from that location to the nearest available bike is calculated for each timestamp <span class="math inline">\(t \in T\)</span>, where <span class="math inline">\(T\)</span> is a regularly spaced time interval containing timestamps within the timespan of the historical data. The temporal resolution of <span class="math inline">\(T\)</span> equals <span class="math inline">\(i_{s}\)</span> minutes, where <span class="math inline">\(i_{s} \geq i_{d}\)</span>. The nearest available bike is found by a nearest neighbour searching process that uses spatial indices on the geometries. In practice, this means that it is not needed to first compute the distances to all available bikes, which would slow down the process vastly. If no bike can be found, for example due to a server error at that timestamp, or the unlikely event that there are no bikes available anywhere in the system, the corresponding feature will be inserted in the data, with a non-available distance value, <span class="math inline">\(NA\)</span>. That is, after pre-processing, the resulting time series will always be regular, with all timestamps <span class="math inline">\(t \in T\)</span> present. This also means that when data are queried for several locations at the same times, the resulting time series will always have the same length.</p>
+<p>The calculated distances are great-circle distances assuming a spherical earth a radius equal to the mean radius of the WGS84 ellipsoid, as showed in Equation 3.1.</p>
+<p><span class="math display">\[
+L_{AB} = \frac{(2a+b)}{3} \times
+\frac{\pi}{180} \times
+arccos(sin\phi_{A}sin\phi_{B}+cos\phi_{A}cos\phi_{B}cos\Delta\lambda)
+\]</span></p>
+<p>Where <span class="math inline">\(L_{AB}\)</span> is the great-circle distance between point <span class="math inline">\(A\)</span> and point <span class="math inline">\(B\)</span> in meters, <span class="math inline">\(\phi_{A}\)</span> and <span class="math inline">\(\phi_{B}\)</span> are the latitudes of respectively point <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> in degrees on the WGS84 ellipsoid, and <span class="math inline">\(\Delta\lambda\)</span> is the difference in longitude between the two points, i.e. <span class="math inline">\(\lambda_{B}-\lambda_{A}\)</span>, in degrees on the WGS84 ellipsoid. Furthermore, <span class="math inline">\(a\)</span> is the equatorial radius of the WGS84 ellipsoid in meters, which is defined to be <span class="math inline">\(6378137\)</span>, and <span class="math inline">\(b\)</span> is the polar radius of the WGS84 ellipsoid in meters, which is defined to be <span class="math inline">\(6378137 \times (1 - 298.257 223 563^{-1}) = 6 356 752.3142\)</span> <span class="citation">(Iliffe &amp; Lott, 2008)</span>.</p>
+<p>The sphere is chosen since calculating distances on the ellipsoid itself slows down computations, and, on the geographical scale of a dockless bike sharing system, has an accuracy gain that can be neglected. Working with the shortest distance over the street network might in most cases be more appropriate, but at the same time involves much more complex computations, especially when either the given location or the locations of the bikes are not exactly on the network lines.</p>
+<p>The output of this pre-processing operation is a time series with <span class="math inline">\(T\)</span> features and a temporal resolution of <span class="math inline">\(i_{s}\)</span>, belonging to one single location in the system area of the dockless bike sharing system. Each feature contains a timestamp and the great-circle distance from the given location to the nearest available bike in meters. Such data are referred to in this thesis as <em>distance data</em>.</p>
+</div>
+<div id="usage-data" class="section level2">
+<h2><span class="header-section-number">19.2</span> 3.4.2 Usage data</h2>
+<p>A pick-up is the moment that a user of the dockless bike sharing system unlocks a bike to make a trip. For the historical database containing the locations of the available bikes, this means that the bike that is picked-up will be present in the data at the last timestamp before the pick-up, but missing at the first timestamp after the pick-up. In DBAFS, this is used to retrieve all the pick-ups from the database. Historical data with the highest possible temporal resolution, i.e. <span class="math inline">\(i_{d}\)</span> minutes, are queried for one single bike ID. Then, all timestamps that are missing, are added to the data, but without an available location. If feature <span class="math inline">\(j\)</span> has an available location, but feature <span class="math inline">\(j+1\)</span> has not, <span class="math inline">\(j\)</span> is considered a pick-up. This procedure is repeated for all individual bikes. If more than 20% of the features within the same minute are considered pick-ups, it is assumed that this was caused by a server error, and they are removed from the data.</p>
+<p>The output of this pre-processing operation is a data frame with all the features in the database that are considered pick-ups. Each feature has at least a timestamp, a geographical location and a bike ID. The number of pick-ups in an area represents the usage intensity of the bike sharing system. Such data are therefore referred to in this thesis as <em>usage data</em>.</p>
+<p>Obviously, the procedure described in this sub-section has some deficiencies. The removal of a bike by the system operator, for redistribution or maintenance purposes, is falsely considered to be a pick-up. Specific information about redistribution patterns can be added, but will in many cases be unavailable, and even if available, those patterns may be too irregular to implement adequately in the workflow. However, in DBAFS, the usage data are only used to define the location of the model point in a cluster, and not to analyze usage patterns into detail. Therefore, fully accurate data are not indispensable for this purpose, and the current procedure forms a sufficient basis.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="18-system-area.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="20-forecast-request.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

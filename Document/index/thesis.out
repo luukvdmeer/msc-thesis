@@ -1,0 +1,64 @@
+\BOOKMARK [0][-]{chapter.1}{Chapter 1: Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Context}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Objective}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Related work}{chapter.1}% 4
+\BOOKMARK [2][-]{subsection.1.3.1}{Forecasting in station-based systems}{section.1.3}% 5
+\BOOKMARK [2][-]{subsection.1.3.2}{Forecasting in dockless systems}{section.1.3}% 6
+\BOOKMARK [1][-]{section.1.4}{Approach}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.5}{Outline}{chapter.1}% 8
+\BOOKMARK [0][-]{chapter.2}{Chapter 2: Theoretical background}{}% 9
+\BOOKMARK [1][-]{section.2.1}{Time series definition}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.2}{Time series characteristics}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.1}{Autocorrelation}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.2}{Stationarity}{section.2.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.3}{Spectral entropy}{section.2.2}% 14
+\BOOKMARK [1][-]{section.2.3}{Time series components}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.3.1}{Definitions}{section.2.3}% 16
+\BOOKMARK [2][-]{subsection.2.3.2}{Classical decomposition}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.3}{STL decomposition}{section.2.3}% 18
+\BOOKMARK [1][-]{section.2.4}{Time series forecasting}{chapter.2}% 19
+\BOOKMARK [2][-]{subsection.2.4.1}{Forecasting models}{section.2.4}% 20
+\BOOKMARK [2][-]{subsection.2.4.2}{ARIMA}{section.2.4}% 21
+\BOOKMARK [3][-]{section*.8}{2.4.2.1 Structure}{subsection.2.4.2}% 22
+\BOOKMARK [3][-]{section*.9}{2.4.2.2 Model selection}{subsection.2.4.2}% 23
+\BOOKMARK [3][-]{section*.11}{2.4.2.3 Parameter estimation}{subsection.2.4.2}% 24
+\BOOKMARK [3][-]{section*.12}{2.4.2.4 Model checking}{subsection.2.4.2}% 25
+\BOOKMARK [3][-]{section*.13}{2.4.2.5 Forecasting}{subsection.2.4.2}% 26
+\BOOKMARK [3][-]{section*.14}{2.4.2.6 Accuracy evaluation}{subsection.2.4.2}% 27
+\BOOKMARK [3][-]{section*.15}{2.4.2.7 Transformations}{subsection.2.4.2}% 28
+\BOOKMARK [2][-]{subsection.2.4.3}{Na\357ve forecasts}{section.2.4}% 29
+\BOOKMARK [2][-]{subsection.2.4.4}{Seasonal forecasts}{section.2.4}% 30
+\BOOKMARK [1][-]{section.2.5}{Time series clustering}{chapter.2}% 31
+\BOOKMARK [2][-]{subsection.2.5.1}{Dissimilarity measures}{section.2.5}% 32
+\BOOKMARK [2][-]{subsection.2.5.2}{Hierarchical clustering}{section.2.5}% 33
+\BOOKMARK [2][-]{subsection.2.5.3}{Spatial time series clustering}{section.2.5}% 34
+\BOOKMARK [0][-]{chapter.3}{Chapter 3: System architecture}{}% 35
+\BOOKMARK [1][-]{section.3.1}{Overall design}{chapter.3}% 36
+\BOOKMARK [1][-]{section.3.2}{Software}{chapter.3}% 37
+\BOOKMARK [1][-]{section.3.3}{System area}{chapter.3}% 38
+\BOOKMARK [1][-]{section.3.4}{Database}{chapter.3}% 39
+\BOOKMARK [2][-]{subsection.3.4.1}{Distance data}{section.3.4}% 40
+\BOOKMARK [2][-]{subsection.3.4.2}{Usage data}{section.3.4}% 41
+\BOOKMARK [1][-]{section.3.5}{Forecast request}{chapter.3}% 42
+\BOOKMARK [1][-]{section.3.6}{Cluster loop}{chapter.3}% 43
+\BOOKMARK [1][-]{section.3.7}{Model loop}{chapter.3}% 44
+\BOOKMARK [1][-]{section.3.8}{Forecast loop}{chapter.3}% 45
+\BOOKMARK [0][-]{chapter.4}{Chapter 4: Data and experimental design}{}% 46
+\BOOKMARK [1][-]{section.4.1}{Data source}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.2}{Data retrieval}{chapter.4}% 48
+\BOOKMARK [2][-]{subsection.4.2.1}{Distance data}{section.4.2}% 49
+\BOOKMARK [2][-]{subsection.4.2.2}{Usage data}{section.4.2}% 50
+\BOOKMARK [1][-]{section.4.3}{Experimental design}{chapter.4}% 51
+\BOOKMARK [2][-]{subsection.4.3.1}{Training and test periods}{section.4.3}% 52
+\BOOKMARK [2][-]{subsection.4.3.2}{Additional software}{section.4.3}% 53
+\BOOKMARK [0][-]{chapter.5}{Chapter 5: Results and discussion}{}% 54
+\BOOKMARK [1][-]{section.5.1}{Clustering}{chapter.5}% 55
+\BOOKMARK [1][-]{section.5.2}{Model building}{chapter.5}% 56
+\BOOKMARK [1][-]{section.5.3}{Forecasting}{chapter.5}% 57
+\BOOKMARK [1][-]{section.5.4}{Limitations and recommendations}{chapter.5}% 58
+\BOOKMARK [2][-]{subsection.5.4.1}{Limits of forecastability}{section.5.4}% 59
+\BOOKMARK [2][-]{subsection.5.4.2}{Exogeneous variables}{section.5.4}% 60
+\BOOKMARK [2][-]{subsection.5.4.3}{Residual distributions and prediction intervals}{section.5.4}% 61
+\BOOKMARK [2][-]{subsection.5.4.4}{GPS accuracy}{section.5.4}% 62
+\BOOKMARK [0][-]{chapter.6}{Chapter 6: Conclusion}{}% 63
+\BOOKMARK [0][-]{chapter*.38}{References}{}% 64

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 10 2.2 Time series characteristics | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</title>
+  <meta name="description" content="Chapter 10 2.2 Time series characteristics | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 10 2.2 Time series characteristics | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 2.2 Time series characteristics | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  
+  
+  
+
+<meta name="author" content="Lucas van der Meer">
+
+
+<meta name="date" content="2019-02-25">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="9-time-series-definition.html">
+<link rel="next" href="11-time-series-components.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction-1.html"><a href="1-introduction-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-context.html"><a href="2-context.html"><i class="fa fa-check"></i><b>2</b> 1.1 Context</a></li>
+<li class="chapter" data-level="3" data-path="3-objective.html"><a href="3-objective.html"><i class="fa fa-check"></i><b>3</b> 1.2 Objective</a></li>
+<li class="chapter" data-level="4" data-path="4-related-work.html"><a href="4-related-work.html"><i class="fa fa-check"></i><b>4</b> 1.3 Related work</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-station-based-systems"><i class="fa fa-check"></i><b>4.1</b> 1.3.1 Forecasting in station-based systems</a></li>
+<li class="chapter" data-level="4.2" data-path="4-related-work.html"><a href="4-related-work.html#forecasting-in-dockless-systems"><i class="fa fa-check"></i><b>4.2</b> 1.3.2 Forecasting in dockless systems</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-approach.html"><a href="5-approach.html"><i class="fa fa-check"></i><b>5</b> 1.4 Approach</a></li>
+<li class="chapter" data-level="6" data-path="6-outline.html"><a href="6-outline.html"><i class="fa fa-check"></i><b>6</b> 1.5 Outline</a></li>
+<li class="chapter" data-level="7" data-path="7-references.html"><a href="7-references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="8" data-path="8-theoretical-background.html"><a href="8-theoretical-background.html"><i class="fa fa-check"></i><b>8</b> Theoretical background</a></li>
+<li class="chapter" data-level="9" data-path="9-time-series-definition.html"><a href="9-time-series-definition.html"><i class="fa fa-check"></i><b>9</b> 2.1 Time series definition</a></li>
+<li class="chapter" data-level="10" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html"><i class="fa fa-check"></i><b>10</b> 2.2 Time series characteristics</a><ul>
+<li class="chapter" data-level="10.1" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#autocorrelation"><i class="fa fa-check"></i><b>10.1</b> 2.2.1 Autocorrelation</a></li>
+<li class="chapter" data-level="10.2" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#stationarity"><i class="fa fa-check"></i><b>10.2</b> 2.2.2 Stationarity</a></li>
+<li class="chapter" data-level="10.3" data-path="10-time-series-characteristics.html"><a href="10-time-series-characteristics.html#spectral-entropy"><i class="fa fa-check"></i><b>10.3</b> 2.2.3 Spectral entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-time-series-components.html"><a href="11-time-series-components.html"><i class="fa fa-check"></i><b>11</b> 2.3 Time series components</a><ul>
+<li class="chapter" data-level="11.1" data-path="11-time-series-components.html"><a href="11-time-series-components.html#definitions"><i class="fa fa-check"></i><b>11.1</b> 2.3.1 Definitions</a></li>
+<li class="chapter" data-level="11.2" data-path="11-time-series-components.html"><a href="11-time-series-components.html#classical-decomposition"><i class="fa fa-check"></i><b>11.2</b> 2.3.2 Classical decomposition</a></li>
+<li class="chapter" data-level="11.3" data-path="11-time-series-components.html"><a href="11-time-series-components.html#stl-decomposition"><i class="fa fa-check"></i><b>11.3</b> 2.3.3 STL decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html"><i class="fa fa-check"></i><b>12</b> 2.4 Time series forecasting</a><ul>
+<li class="chapter" data-level="12.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting-models"><i class="fa fa-check"></i><b>12.1</b> 2.4.1 Forecasting models</a></li>
+<li class="chapter" data-level="12.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#arima"><i class="fa fa-check"></i><b>12.2</b> 2.4.2 ARIMA</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#structure"><i class="fa fa-check"></i><b>12.2.1</b> 2.4.2.1 Structure</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-selection"><i class="fa fa-check"></i><b>12.2.2</b> 2.4.2.2 Model selection</a></li>
+<li class="chapter" data-level="12.2.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#parameter-estimation"><i class="fa fa-check"></i><b>12.2.3</b> 2.4.2.3 Parameter estimation</a></li>
+<li class="chapter" data-level="12.2.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#model-checking"><i class="fa fa-check"></i><b>12.2.4</b> 2.4.2.4 Model checking</a></li>
+<li class="chapter" data-level="12.2.5" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#forecasting"><i class="fa fa-check"></i><b>12.2.5</b> 2.4.2.5 Forecasting</a></li>
+<li class="chapter" data-level="12.2.6" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#accuracy-evaluation"><i class="fa fa-check"></i><b>12.2.6</b> 2.4.2.6 Accuracy evaluation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#transformations"><i class="fa fa-check"></i><b>12.2.7</b> 2.4.2.7 Transformations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#naive-forecasts"><i class="fa fa-check"></i><b>12.3</b> 2.4.3 Naïve forecasts</a></li>
+<li class="chapter" data-level="12.4" data-path="12-time-series-forecasting.html"><a href="12-time-series-forecasting.html#seasonal-forecasts"><i class="fa fa-check"></i><b>12.4</b> 2.4.4 Seasonal forecasts</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html"><i class="fa fa-check"></i><b>13</b> 2.5 Time series clustering</a><ul>
+<li class="chapter" data-level="13.1" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#dissimilarity-measures"><i class="fa fa-check"></i><b>13.1</b> 2.5.1 Dissimilarity measures</a></li>
+<li class="chapter" data-level="13.2" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.2</b> 2.5.2 Hierarchical clustering</a></li>
+<li class="chapter" data-level="13.3" data-path="13-time-series-clustering.html"><a href="13-time-series-clustering.html#spatial-time-series-clustering"><i class="fa fa-check"></i><b>13.3</b> 2.5.3 Spatial time series clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="14-references-1.html"><a href="14-references-1.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
+<li class="chapter" data-level="15" data-path="15-system-architecture.html"><a href="15-system-architecture.html"><i class="fa fa-check"></i><b>15</b> System architecture</a></li>
+<li class="chapter" data-level="16" data-path="16-overall-design.html"><a href="16-overall-design.html"><i class="fa fa-check"></i><b>16</b> 3.1 Overall design</a></li>
+<li class="chapter" data-level="17" data-path="17-software.html"><a href="17-software.html"><i class="fa fa-check"></i><b>17</b> 3.2 Software</a></li>
+<li class="chapter" data-level="18" data-path="18-system-area.html"><a href="18-system-area.html"><i class="fa fa-check"></i><b>18</b> 3.3 System area</a></li>
+<li class="chapter" data-level="19" data-path="19-database.html"><a href="19-database.html"><i class="fa fa-check"></i><b>19</b> 3.4 Database</a><ul>
+<li class="chapter" data-level="19.1" data-path="19-database.html"><a href="19-database.html#distance-data"><i class="fa fa-check"></i><b>19.1</b> 3.4.1 Distance data</a></li>
+<li class="chapter" data-level="19.2" data-path="19-database.html"><a href="19-database.html#usage-data"><i class="fa fa-check"></i><b>19.2</b> 3.4.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="20-forecast-request.html"><a href="20-forecast-request.html"><i class="fa fa-check"></i><b>20</b> 3.5 Forecast request</a></li>
+<li class="chapter" data-level="21" data-path="21-cluster-loop.html"><a href="21-cluster-loop.html"><i class="fa fa-check"></i><b>21</b> 3.6 Cluster loop</a></li>
+<li class="chapter" data-level="22" data-path="22-model-loop.html"><a href="22-model-loop.html"><i class="fa fa-check"></i><b>22</b> 3.7 Model loop</a></li>
+<li class="chapter" data-level="23" data-path="23-forecast-loop.html"><a href="23-forecast-loop.html"><i class="fa fa-check"></i><b>23</b> 3.8 Forecast loop</a></li>
+<li class="chapter" data-level="24" data-path="24-references-2.html"><a href="24-references-2.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
+<li class="chapter" data-level="25" data-path="25-data-and-experimental-design.html"><a href="25-data-and-experimental-design.html"><i class="fa fa-check"></i><b>25</b> Data and experimental design</a></li>
+<li class="chapter" data-level="26" data-path="26-data-source.html"><a href="26-data-source.html"><i class="fa fa-check"></i><b>26</b> 4.1 Data source</a></li>
+<li class="chapter" data-level="27" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html"><i class="fa fa-check"></i><b>27</b> 4.2 Data retrieval</a><ul>
+<li class="chapter" data-level="27.1" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#distance-data-1"><i class="fa fa-check"></i><b>27.1</b> 4.2.1 Distance data</a></li>
+<li class="chapter" data-level="27.2" data-path="27-data-retrieval.html"><a href="27-data-retrieval.html#usage-data-1"><i class="fa fa-check"></i><b>27.2</b> 4.2.2 Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="28-experimental-design.html"><a href="28-experimental-design.html"><i class="fa fa-check"></i><b>28</b> 4.3 Experimental design</a><ul>
+<li class="chapter" data-level="28.1" data-path="28-experimental-design.html"><a href="28-experimental-design.html#training-and-test-periods"><i class="fa fa-check"></i><b>28.1</b> 4.3.1 Training and test periods</a></li>
+<li class="chapter" data-level="28.2" data-path="28-experimental-design.html"><a href="28-experimental-design.html#additional-software"><i class="fa fa-check"></i><b>28.2</b> 4.3.3 Additional software</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="29-references-3.html"><a href="29-references-3.html"><i class="fa fa-check"></i><b>29</b> References</a></li>
+<li class="chapter" data-level="30" data-path="30-results-and-discussion.html"><a href="30-results-and-discussion.html"><i class="fa fa-check"></i><b>30</b> Results and discussion</a></li>
+<li class="chapter" data-level="31" data-path="31-clustering.html"><a href="31-clustering.html"><i class="fa fa-check"></i><b>31</b> 5.1 Clustering</a></li>
+<li class="chapter" data-level="32" data-path="32-model-building.html"><a href="32-model-building.html"><i class="fa fa-check"></i><b>32</b> 5.2 Model building</a></li>
+<li class="chapter" data-level="33" data-path="33-forecasting-1.html"><a href="33-forecasting-1.html"><i class="fa fa-check"></i><b>33</b> 5.3 Forecasting</a></li>
+<li class="chapter" data-level="34" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html"><i class="fa fa-check"></i><b>34</b> 5.4 Limitations &amp; Recommendations</a><ul>
+<li class="chapter" data-level="34.1" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#limits-of-forecastability"><i class="fa fa-check"></i><b>34.1</b> 5.4.1 Limits of forecastability</a></li>
+<li class="chapter" data-level="34.2" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#exogeneous-variables"><i class="fa fa-check"></i><b>34.2</b> 5.4.2 Exogeneous variables</a></li>
+<li class="chapter" data-level="34.3" data-path="34-limitations-recommendations.html"><a href="34-limitations-recommendations.html#non-normal-distributions"><i class="fa fa-check"></i><b>34.3</b> 5.4.3 Non-normal distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="35-references-4.html"><a href="35-references-4.html"><i class="fa fa-check"></i><b>35</b> References</a></li>
+<li class="chapter" data-level="36" data-path="36-conclusion.html"><a href="36-conclusion.html"><i class="fa fa-check"></i><b>36</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="time-series-characteristics" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> 2.2 Time series characteristics</h1>
+<div id="autocorrelation" class="section level2">
+<h2><span class="header-section-number">10.1</span> 2.2.1 Autocorrelation</h2>
+<p>Analyzing time series raises unique problems in statistical modelling and inference. In conventional statistics, methods rely on the assumptions of independent and identically distributed random variables. However, in time series analysis, observations made at nearby moments in time are likely to be related. That is, it is likely that there exist internal relationships within a time series. If these relationships are linear, they are called autocorrelation, as defined in Definition 3 <span class="citation">(Shumway &amp; Stoffer, 2011)</span>.</p>
+<p><strong>Defintion 3</strong> <em>Autocorrelation</em> measures the linear correlation between two points on the same time series observed at different times. <span class="math inline">\(\blacksquare\)</span></p>
+<p>Given a sample {<span class="math inline">\(y_{1}, y_{2}, ... , y_{n}\)</span>} of a time series, the degree of dependence in the data can be assessed by computing the <em>autocorrelation function</em> (ACF), for each lag <span class="math inline">\(h\)</span>, as defined in Equation 1 <span class="citation">(Brockwell &amp; Davis, 2002)</span>.</p>
+<p><span class="math display">\[ \hat\rho(h) = \frac{\hat\gamma(h)}{\hat\gamma(0)}, \quad -n &lt; h &lt; n \]</span></p>
+<p>Where <span class="math inline">\(\hat\gamma(h)\)</span> is the autocovariance function of the sample at lag <span class="math inline">\(h\)</span>, as defined in Equation 2.</p>
+<p><span class="math display">\[ \hat\gamma(h) = n^{-1}\sum_{t=1}^{n-|h|}(y_{t+|h|} - \bar{y})(y_{t} - \bar{y}), \quad -n &lt; h &lt; n \]</span></p>
+<p>Where <span class="math inline">\(n\)</span> is the length of the sample, <span class="math inline">\(y_{t}\)</span> is the data value at time <span class="math inline">\(t\)</span>, <span class="math inline">\(y_{t-|h|}\)</span> is the data value at time <span class="math inline">\(t\)</span> minus <span class="math inline">\(|h|\)</span> time periods, and <span class="math inline">\(\bar{y}\)</span> is the mean of the sample. Whenever a time series {<span class="math inline">\(Y_{t}\)</span>} is stationary, a concept that is introduced in the next section, the ACF of the sample {<span class="math inline">\(y_{t}\)</span>} can be used as an estimate for the ACF of {<span class="math inline">\(Y_{t}\)</span>}. A time series without autocorrelation, with zero mean and finite variance, is called <em>white noise</em>.</p>
+<p>Conventional statistical methods can not be appropriately applied to data that exhibit autocorrelation, since the independency assumption is violated. The primary objective of time series analysis, therefore, is to develop mathematical models that are appropriate to use for data with a temporal autocorrelation structure <span class="citation">(Shumway &amp; Stoffer, 2011)</span>. Furthermore, autocorrelation is in some cases an advantage, since an internal dependence structure implies that past observations can be used adequately to forecast future values.</p>
+</div>
+<div id="stationarity" class="section level2">
+<h2><span class="header-section-number">10.2</span> 2.2.2 Stationarity</h2>
+<p>In time series analysis, a key role is played by time series whose statistical properties do not vary with time <span class="citation">(Brockwell &amp; Davis, 2002)</span>. Such time series are referred to as <em>stationary time series</em>. The most restrictive form of stationarity is defined in Definition 4 <span class="citation">(Woodward et al., 2017)</span>.</p>
+<p><strong>Definition 4</strong> A time series {<span class="math inline">\(Y(t); t \in T\)</span>} is <em>strictly stationary</em> if for any <span class="math inline">\(t_{1}, t_{2}, ..., t_{k} \in T\)</span> and any <span class="math inline">\(h \in T\)</span>, the joint distribution of {<span class="math inline">\(Y_{t_{1}}, Y_{t_{2}}, ..., Y_{t_{k}}\)</span>} is identical to that of {<span class="math inline">\(Y_{t_{1+h}}, Y_{t_{2+h}}, ..., Y_{t_{k+h}}\)</span>}. <span class="math inline">\(\blacksquare\)</span></p>
+<p>However, it is often too hard to mathematically establish the requirement of strict stationarity, since the involved distributions are not known. For most applications, a milder form of stationarity, which only imposes conditions on the first and second moment of a time series, is sufficient. This is officially known as <em>weak stationarity</em>, but, in time series analysis, usually just called <em>stationarity</em>. It is mathematically defined as in Definition 5 <span class="citation">(Woodward et al., 2017)</span>.</p>
+<p><strong>Definition 5</strong> A time series {<span class="math inline">\(Y(t); t \in T\)</span>} is <em>stationary</em> if</p>
+<p><span class="math inline">\(\quad \text{1) } E[Y_{t}] = \mu \quad (\text{constant for all }t)\)</span>.</p>
+<p><span class="math inline">\(\quad \text{2) } Var[Y_{t}] = \sigma^{2} \quad (\text{constant for all }t)\)</span>.</p>
+<p><span class="math inline">\(\quad \text{3) } \gamma(t_{1}, t_{2}) \text{ depends only on } t_{2} - t_{1}\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+<p>In words, this means that a time series is said to be stationary when the mean and variance are constant over time, and the autocovariance function only depends on the difference between two time points, and not on the time point itself. Note here that each time series that is strictly stationary (Definition 4), is, by definition, also stationary (Definition 5).</p>
+<p>Stationarity is important, since in real-world problems, it is common that only one realization of a time series is available. That means that each random variable in the time series is represented by a single value. This makes it impossible to get an understanding of the underlying probability distributions of those random variables, unless it is assumed that their statistical properties are the same (i.e. the time series is stationary). In that case, the statistical properties of the whole sample can be used to estimate the statistical properties of each individual probability distribution. An understanding of the underlying probability distributions, in turn, is especially important when the goal is to forecast how the time series will behave at future time points. When the statistical properties of the time series have been constant over time in the past, one can simply predict that they will remain constant in the future.</p>
+<p>In most practical applications, non-stationary time series are the rule rather than the exception. Luckily, by applying mathematical transformations, it often possible to render a non-stationary time series as, approximately, stationary. This process is referred to as <em>stationarizing</em> a time series <span class="citation">(Nau, 2018)</span>. Stationarizing is used a lot in statistical forecasting methods, which are discussed in section 2.4.</p>
+</div>
+<div id="spectral-entropy" class="section level2">
+<h2><span class="header-section-number">10.3</span> 2.2.3 Spectral entropy</h2>
+<p>Often, two separate approaches to time series analysis are defined. The first, referred to as the <em>time domain</em>, deals primarily with the internal dependence structure in time series data, where current values can be explained in terms of a dependence on past values, as discussed in section 2.2.1. The second, referred to as the <em>frequency domain</em>, works with a spectral representation of the time series, in which the original data is expressed as a weighted sum of sine and cosine waveforms, each with their own frequency. Named after the French mathematician Jean-Baptiste Joseph Fourier, such a representation is commonly known as a <em>Fourier representation</em> or <em>Fourier series</em>, and its corresponding sine and cosine terms as <em>Fourier terms</em>. Forecasting is inherently tied to the time domain of time series analysis, which will therefore be the focus of this thesis. However, there is no schism dividing the two approaches. That is, some frequency domain techniques can be useful even in the time domain, and vice versa <span class="citation">(Shumway &amp; Stoffer, 2011)</span>.</p>
+<p>One of such techniques is the calculation of the spectral entropy of a time series, which describes the order and regularity of a time series, based on its Fourier representation. The spectral entropy of a time series can be calculated with Equation 2.x.</p>
+<p><span class="math display">\[ H = \int_{-\pi}^{\pi} \hat{f}(\lambda)\log \hat{f}(\lambda)d\lambda\]</span></p>
+<p>Where <span class="math inline">\(\hat{f}_{y}(\lambda)\)</span> is the estimated spectral density function, which describes the importance of the different frequencies in the Fourier representation of the time series. Usually, <span class="math inline">\(H\)</span> is normalized to the range of values between 0 and 1. For a detailed description of the calculations, see <span class="citation">Goerg (2013)</span>. Spectral entropy is useful in forecasting, since it can serve as a quantative measure of the forecastability of a time series. Data that are easy to forecast, will have a small value of <span class="math inline">\(H\)</span>, while very noisy data will have a large value of <span class="math inline">\(H\)</span> <span class="citation">(T. S. Talagala, Hyndman, &amp; Athanasopoulos, 2018)</span>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="9-time-series-definition.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11-time-series-components.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
