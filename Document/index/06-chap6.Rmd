@@ -1,3 +1,10 @@
 # Conclusion
 
-`*NOTE: To be written at the end*`
+This thesis presented a fully automated forecasting system for bike availability in dockless bike sharing systems. To balance speed and accuracy, the system took advantage of the spatio-temporal nature of the data, and used an approach in which the structures of forecasting models build at specific locations and specific timestamps, were inherited by forecast requests for nearby locations, and future timestamps.
+
+The proposed system was tested through a case study in San Francisco, California. The results showed that time series forecasting models, nested inside the proposed structure of model inheritance, can produce forecasts that outperform simple baseline methods. However, they also highlighted the limited forecastability of dockless bike sharing data, especially when compared to conventional station-based systems. 
+
+In future studies that adress the same problem, the forecast accuracy may be improved by incuding exogeneous variables, related to weather conditions and special events, which can explain some of the uncaptured variation. Furthermore, methodolgies to provide sensible prediction intervals, need to be developed.
+
+Results are believed to be of direct, practical interest for operators of dockless bike sharing systems. In the broader picture, the most important contribution of this thesis is that it is one of the first works that aimed to get a deeper, scientific understanding of the spatio-temporal dynamics of dockless bike sharing systems, and the forecastability of their data. As such, it took a new step on the way to reliable, convenient bike sharing systems, that can provide a serious alternative to motorized transport, and increase the liveability in urban environments.
+

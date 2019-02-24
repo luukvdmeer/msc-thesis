@@ -64,6 +64,8 @@ On top of those mentioned in section 3.2, some additional R packages were used f
 
 * The `tsibblestats` package [@tsibblestats] was used to estimate the ACF (see section 2.2.1) of time series.
 * The `tsfeatures` package [@tsfeatures] was used to calculate the spectral entropy (see section 2.2.3) of time series. 
-* Data and results were visualized graphically with the `ggplot2` package [@ggplot]. Additionally, the packages `tidyr` [@tidyr] and `tibble` [@tibble] were used to transform some data into formats that are compatible with `ggplot2`.
+* Data and results were visualized graphically with the `ggplot2` package [@ggplot]. Additionally, the packages `tidyr` [@tidyr], `dplyr` [@dplyr] and `tibble` [@tibble] were used to transform some data into formats that are compatible with `ggplot2`.
 * Maps were created with the `ggspatial` package [@ggspatial]. Besides, with the `rosm` package [@rosm], all basemap tiles were retrieved from CARTO [@carto].
 * For maps with a continuous color scheme, the `orange_material` color scheme from the `ggsci` package [@ggsci] was used.
+
+For the R code used in the experiment, see Appendix A.

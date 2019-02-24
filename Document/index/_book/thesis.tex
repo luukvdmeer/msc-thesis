@@ -69,6 +69,46 @@
 % \usepackage{times} % other fonts are available like times, bookman, charter, palatino
 
 % Syntax highlighting #22
+  \usepackage{color}
+  \usepackage{fancyvrb}
+  \newcommand{\VerbBar}{|}
+  \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+  % Add ',fontsize=\small' for more characters per line
+  \usepackage{framed}
+  \definecolor{shadecolor}{RGB}{248,248,248}
+  \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+  \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+  \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+  \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+  \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+  \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+  \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+  \newcommand{\ImportTok}[1]{#1}
+  \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+  \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+  \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+  \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+  \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+  \newcommand{\BuiltInTok}[1]{#1}
+  \newcommand{\ExtensionTok}[1]{#1}
+  \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+  \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+  \newcommand{\RegionMarkerTok}[1]{#1}
+  \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+  \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+  \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+  \newcommand{\NormalTok}[1]{#1}
 
 % To pass between YAML and LaTeX the dollar signs are added by CII
 \title{Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing
@@ -122,7 +162,25 @@ Systems}
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \Acknowledgements{
-I want to thank a few people.
+This thesis, and in the broader sense, my whole period as a student,
+would not have been possible without the help and support of others. It
+still feels somewhat strange, that by writing these words, a seven-year
+journey comes to an end. I want to thank my family, and in particular my
+parents, for their unconditional support, also in times when I made
+wrong decisions. Lorena, thank you for cheering me up whenever I needed
+it, and my friends and classmates, thank you for being like a family!\\
+I want to thank all my teachers for sharing their knowledge, despite
+making me suffer with homework and assignments! In particular, I want to
+thank my supervisor, Edzer Pebesma, for providing guidance whenever
+necessary, but also constantly encouracing an independent way of working
+and thinking, in which own thoughts and ideas are important.
+Additionally, I want to thank my co-supervisors, Jorge Mateu and Joel
+Silva, for their valuable feedback. Thanks also to the whole r-spatial
+community, for providing open source tools, and encouraging involvement
+and contributions, within an environment that makes everyone feel
+equally valued.\\
+Finally, I owe gratitude to JUMP Bikes, and Alexander Tedeschi in
+particular, for providing me with very useful data.
 }
 
 \Dedication{
@@ -173,7 +231,25 @@ Second paragraph of abstract starts here.
 \frontmatter % this stuff will be roman-numbered
 \pagestyle{empty} % this removes page numbers from the frontmatter
   \begin{acknowledgements}
-    I want to thank a few people.
+    This thesis, and in the broader sense, my whole period as a student,
+    would not have been possible without the help and support of others. It
+    still feels somewhat strange, that by writing these words, a seven-year
+    journey comes to an end. I want to thank my family, and in particular my
+    parents, for their unconditional support, also in times when I made
+    wrong decisions. Lorena, thank you for cheering me up whenever I needed
+    it, and my friends and classmates, thank you for being like a family!\\
+    I want to thank all my teachers for sharing their knowledge, despite
+    making me suffer with homework and assignments! In particular, I want to
+    thank my supervisor, Edzer Pebesma, for providing guidance whenever
+    necessary, but also constantly encouracing an independent way of working
+    and thinking, in which own thoughts and ideas are important.
+    Additionally, I want to thank my co-supervisors, Jorge Mateu and Joel
+    Silva, for their valuable feedback. Thanks also to the whole r-spatial
+    community, for providing open source tools, and encouraging involvement
+    and contributions, within an environment that makes everyone feel
+    equally valued.\\
+    Finally, I owe gratitude to JUMP Bikes, and Alexander Tedeschi in
+    particular, for providing me with very useful data.
   \end{acknowledgements}
 
   \hypersetup{linkcolor=black}
@@ -683,7 +759,12 @@ each contain the distances from specific geographical locations to the
 nearest available bike, at several timetamps in the past. Hence, the
 data of interest are \emph{spatio-temporal} in nature, and require a
 methodology that adequately deals with both their spatial and temporal
-dimension.
+dimension. In the proposed system, the spatio-temporal nature of the
+data is used as an advantage, and an approach is developed in which the
+structures of time series forecasting models build at specific locations
+and specific timestamps, are inherited by forecast requests for nearby
+locations, and future timestamps. In that way, the need for individual
+models for each forecast request, is taken out.
 
 Throughout the thesis, the proposed forecasting system will be referred
 to as the \textbf{D}ockless \textbf{B}ike \textbf{A}vailability
@@ -2853,9 +2934,11 @@ were used for reporting the results of the experiment, as listed below.
   Data and results were visualized graphically with the \texttt{ggplot2}
   package (Wickham, \protect\hyperlink{ref-ggplot}{2016}). Additionally,
   the packages \texttt{tidyr} (Wickham \& Henry,
-  \protect\hyperlink{ref-tidyr}{2018}) and \texttt{tibble} (K. Müller \&
-  Wickham, \protect\hyperlink{ref-tibble}{2019}) were used to transform
-  some data into formats that are compatible with \texttt{ggplot2}.
+  \protect\hyperlink{ref-tidyr}{2018}), \texttt{dplyr} (Wickham,
+  François, Henry, \& Müller, \protect\hyperlink{ref-dplyr}{2019}) and
+  \texttt{tibble} (Müller \& Wickham,
+  \protect\hyperlink{ref-tibble}{2019}) were used to transform some data
+  into formats that are compatible with \texttt{ggplot2}.
 \item
   Maps were created with the \texttt{ggspatial} package (Dunnington,
   \protect\hyperlink{ref-ggspatial}{2018}). Besides, with the
@@ -2867,6 +2950,8 @@ were used for reporting the results of the experiment, as listed below.
   color scheme from the \texttt{ggsci} package (Xiao,
   \protect\hyperlink{ref-ggsci}{2018}) was used.
 \end{itemize}
+For the R code used in the experiment, see Appendix A.
+
 \chapter{Results and discussion}\label{results-and-discussion}
 
 This chapter presents and discusses the results of the experiment
@@ -2967,7 +3052,7 @@ substantially.
 Although not as extreme as the Bayview cluster, also the other clusters
 had on average high ranges when compared to the mean and standard
 deviation. However, the standard deviation itself turned out to be
-rather small relative to the mean. This implies either the presence of
+rather small relative to the range. This implies either the presence of
 outliers, or population distributions with thin, but wide tails.
 
 The first order autocorrelation measures the average dependency between
@@ -2991,11 +3076,11 @@ often. In most cases, the more dynamic the data, the harder to forecast.
 \toprule
   & $N$ & $\mu$ & $range$ & $\sigma$ & $\rho(1)$ & $H$\\
 \midrule
-\rowcolor{gray!6}  Total & 249 & 619 & 2726 & 155 & 0.82 & 0.77\\
-Bayview & 46 & 1080 & 4021 & 155 & 0.95 & 0.67\\
-\rowcolor{gray!6}  Downtown & 81 & 557 & 2551 & 77 & 0.77 & 0.81\\
-Residential & 103 & 490 & 2410 & 112 & 0.79 & 0.81\\
-\rowcolor{gray!6}  Presido & 19 & 462 & 2057 & 137 & 0.92 & 0.68\\
+\rowcolor{gray!6}  Total & 249 & 619 & 2726 & 422 & 0.82 & 0.77\\
+Bayview & 46 & 1080 & 4021 & 631 & 0.95 & 0.67\\
+\rowcolor{gray!6}  Downtown & 81 & 557 & 2551 & 352 & 0.77 & 0.81\\
+Residential & 103 & 490 & 2410 & 371 & 0.79 & 0.81\\
+\rowcolor{gray!6}  Presido & 19 & 462 & 2057 & 310 & 0.92 & 0.68\\
 \bottomrule
 \multicolumn{7}{l}{\textit{\scriptsize{Except $N$, all metrics are calculated for each time series seperately, and averaged afterwards.}}}\\
 \multicolumn{7}{l}{\textsuperscript{1} \scriptsize{$N$ is the total number of grid cell centroids}}\\
@@ -3443,8 +3528,270 @@ sources of uncertainty to an acceptable extent, should be developed.
 
 \chapter{Conclusion}\label{conclusion}
 
-\texttt{*NOTE:\ To\ be\ written\ at\ the\ end*}
+This thesis presented a fully automated forecasting system for bike
+availability in dockless bike sharing systems. To balance speed and
+accuracy, the system took advantage of the spatio-temporal nature of the
+data, and used an approach in which the structures of forecasting models
+build at specific locations and specific timestamps, were inherited by
+forecast requests for nearby locations, and future timestamps.
 
+The proposed system was tested through a case study in San Francisco,
+California. The results showed that time series forecasting models,
+nested inside the proposed structure of model inheritance, can produce
+forecasts that outperform simple baseline methods. However, they also
+highlighted the limited forecastability of dockless bike sharing data,
+especially when compared to conventional station-based systems.
+
+In future studies that adress the same problem, the forecast accuracy
+may be improved by incuding exogeneous variables, related to weather
+conditions and special events, which can explain some of the uncaptured
+variation. Furthermore, methodolgies to provide sensible prediction
+intervals, need to be developed.
+
+Results are believed to be of direct, practical interest for operators
+of dockless bike sharing systems. In the broader picture, the most
+important contribution of this thesis is that it is one of the first
+works that aimed to get a deeper, scientific understanding of the
+spatio-temporal dynamics of dockless bike sharing systems, and the
+forecastability of their data. As such, it took a new step on the way to
+reliable, convenient bike sharing systems, that can provide a serious
+alternative to motorized transport, and increase the liveability in
+urban environments.
+
+\appendix
+
+\chapter{Code}\label{code}
+\begin{wrapfigure}{R}{.35\textwidth}  
+ \begin{center}
+    \includegraphics[width=.3\textwidth]{Figures/hexagon.png}  
+\end{center}
+\end{wrapfigure}
+All the R code used in this thesis, as well as the nested SQL code, is
+bundled in the \texttt{dockless} package (Van der Meer,
+\protect\hyperlink{ref-dockless}{2019}). Its source code, including
+documentation for each function, can be found on GitHub, through the
+following link: \url{https://github.com/luukvdmeer/dockless}. An R
+version of at least 2.10 is required. The package is optimized for the
+case study in San Francisco, but can easily be adapted to other systems.
+
+The JUMP Bikes database is not openly accessible. Therefore, to query
+the data, and pre-process them on the database server, database
+credentials are needed. Please contact the author for more information.
+However, to enable reproducibility, all necessary pre-processed datasets
+have been included in the package. These are the following:
+\begin{itemize}
+\tightlist
+\item
+  \texttt{distancedata\_centroids}: an object of class
+  \texttt{dockless\_dfc} containing the distance data for all 249 grid
+  cell centroids, during the training period.
+\item
+  \texttt{distancedata\_modelpoints}: an object of class
+  \texttt{dockless\_dfc} containing the distance data for all 4 model
+  points, during the training period.
+\item
+  \texttt{distancedata\_testpoints}: an object of class
+  \texttt{dockless\_dfc} containing the distance data for all 500 test
+  points, during the test period, and the two weeks before.
+\item
+  \texttt{usagedata\_train}: an object of class \texttt{sf} with POINT
+  geometry, containing all calculated pick-ups during the training
+  period.
+\item
+  \texttt{usagedata\_test}: an object of class \texttt{sf} with POINT
+  geometry, containing all calculated pick-ups during the test period.
+\item
+  \texttt{testpoints}: an object of class \texttt{sf} with POINT
+  geometry, containing all location-timestamp combinations of the 500
+  test points.
+\item
+  \texttt{systemarea}: an object of class \texttt{sf} with POLYGON
+  geometry, containing the geographical outline of the JUMP Bikes system
+  area in San Francisco.
+\end{itemize}
+The \texttt{dockless} package can be downloaded from github with the
+following code. Please make sure that the \texttt{devtools} package is
+installed in advance.\\
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{'luukvdmeer/dockless'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+Then, the complete analysis can be reproduced as follows. Furthermore,
+reproducible scripts for all tables and figures in chapter 5 can be
+found through the following link:
+\url{https://github.com/luukvdmeer/dockless/tree/master/scripts}\\
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(dockless)}
+\KeywordTok{require}\NormalTok{(sf)}
+
+\NormalTok{## ----------------------- CLUSTER LOOP --------------------------}
+\CommentTok{# Create grid}
+\NormalTok{gridcells =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{create_grid}\NormalTok{(}
+  \DataTypeTok{area =}\NormalTok{ systemarea,}
+  \DataTypeTok{cellsize =} \KeywordTok{c}\NormalTok{(}\DecValTok{500}\NormalTok{, }\DecValTok{500}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{# Calculate grid cell centroids}
+\NormalTok{gridcentroids =}\StringTok{ }\NormalTok{gridcells }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{project_sf}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{sf}\OperatorTok{::}\KeywordTok{st_centroid}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{sf}\OperatorTok{::}\KeywordTok{st_transform}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
+
+\CommentTok{# Usage intensity per grid cell}
+\NormalTok{gridcells}\OperatorTok{$}\NormalTok{intensity =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{usage_intensity}\NormalTok{(}
+  \DataTypeTok{usage =}\NormalTok{ usagedata_train,}
+  \DataTypeTok{grid =}\NormalTok{ gridcells}
+\NormalTok{)}
+
+\CommentTok{# Add intensity information to grid cell centroids}
+\NormalTok{gridcentroids}\OperatorTok{$}\NormalTok{intensity =}\StringTok{ }\NormalTok{gridcells}\OperatorTok{$}\NormalTok{intensity}
+
+\CommentTok{# Cluster}
+\NormalTok{clusters =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{spatial_cluster}\NormalTok{(}
+  \DataTypeTok{data =}\NormalTok{ distancedata_centroids,}
+  \DataTypeTok{grid =}\NormalTok{ gridcells,}
+  \DataTypeTok{area =}\NormalTok{ systemarea,}
+  \DataTypeTok{K =} \KeywordTok{c}\NormalTok{(}\DecValTok{3}\OperatorTok{:}\DecValTok{10}\NormalTok{),}
+  \DataTypeTok{omega =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{)}
+
+
+\CommentTok{# Add cluster information to grid cells and grid cell centroids}
+\NormalTok{gridcells}\OperatorTok{$}\NormalTok{cluster     =}\StringTok{ }\NormalTok{clusters}\OperatorTok{$}\NormalTok{indices}
+\NormalTok{gridcentroids}\OperatorTok{$}\NormalTok{cluster =}\StringTok{ }\NormalTok{clusters}\OperatorTok{$}\NormalTok{indices}
+
+\CommentTok{# Create model points}
+\NormalTok{modelpoints =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{create_modelpoints}\NormalTok{(}
+  \DataTypeTok{centroids =}\NormalTok{ gridcentroids}
+\NormalTok{)}
+
+\NormalTok{## ------------------------ MODEL LOOP ---------------------------}
+\CommentTok{# Build models}
+\NormalTok{models =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{build_models}\NormalTok{(}
+  \DataTypeTok{data =}\NormalTok{ distancedata_modelpoints,}
+  \DataTypeTok{auto_seasonality =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{seasons =} \KeywordTok{list}\NormalTok{(}\OtherTok{NULL}\NormalTok{, }\DecValTok{96}\NormalTok{, }\DecValTok{672}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{96}\NormalTok{, }\DecValTok{672}\NormalTok{))}
+\NormalTok{)}
+
+\NormalTok{## ---------------------- FORECAST LOOP --------------------------}
+\CommentTok{# Forecast test points with DBAFS and NFS}
+\NormalTok{forecasts_dbafs =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{forecast_multiple}\NormalTok{(}
+  \DataTypeTok{data =}\NormalTok{ distancedata_testpoints,}
+  \DataTypeTok{method =} \StringTok{'DBAFS'}\NormalTok{,}
+  \DataTypeTok{points =}\NormalTok{ testpoints,}
+  \DataTypeTok{models =}\NormalTok{ models}
+\NormalTok{)}
+
+\NormalTok{forecasts_nfs =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{forecast_multiple}\NormalTok{(}
+  \DataTypeTok{data =}\NormalTok{ distancedata_testpoints,}
+  \DataTypeTok{method =} \StringTok{'NFS'}\NormalTok{,}
+  \DataTypeTok{points =}\NormalTok{ testpoints}
+\NormalTok{)}
+
+\CommentTok{# Calculate RMSE's}
+\NormalTok{errors_dbafs =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{evaluate}\NormalTok{(}
+\NormalTok{  forecasts_dbafs,}
+  \DataTypeTok{type =} \StringTok{'RMSE'}\NormalTok{,}
+  \DataTypeTok{clusters =}\NormalTok{ testpoints}\OperatorTok{$}\NormalTok{cluster}
+\NormalTok{)}
+
+\NormalTok{errors_nfs   =}\StringTok{ }\NormalTok{dockless}\OperatorTok{::}\KeywordTok{evaluate}\NormalTok{(}
+\NormalTok{  forecasts_nfs,}
+  \DataTypeTok{type =} \StringTok{'RMSE'}\NormalTok{,}
+  \DataTypeTok{clusters =}\NormalTok{ testpoints}\OperatorTok{$}\NormalTok{cluster}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\chapter{Models}\label{models}
+
+This appendix provides more detailed information about the models that
+were fitted to the non-seasonal historical data of each model point.
+This information includes parameter estimates, error variance, Gaussian
+log-likelihood, and information criteria such as AIC. For those model
+points where seasonality was detected, the decomposition plots are
+provided as well.
+
+\section{Bayview model point}\label{bayview-model-point}
+
+\textbf{Model}
+\begin{verbatim}
+Series: x 
+ARIMA(3,1,1) 
+Box Cox transformation: lambda= 0 
+
+Coefficients:
+          ar1      ar2      ar3     ma1
+      -0.7636  -0.1269  -0.0724  0.6610
+s.e.   0.2148   0.0320   0.0195  0.2148
+
+sigma^2 estimated as 0.03032:  log likelihood=886.22
+AIC=-1762.45   AICc=-1762.42   BIC=-1732.96
+\end{verbatim}
+\newpage
+
+\section{Downtown model point}\label{downtown-model-point}
+
+\textbf{Decomposition plot}
+
+\includegraphics[width=\textwidth]{Figures/stlplot_model2}
+
+\textbf{Model}
+\begin{verbatim}
+Series: x 
+ARIMA(3,1,2) 
+
+Coefficients:
+          ar1     ar2     ar3      ma1     ma2
+      -0.1423  0.5707  0.1873  -0.2605  -0.719
+s.e.   0.3526  0.2258  0.0351   0.3600   0.352
+
+sigma^2 estimated as 0.2219:  log likelihood=-1788.92
+AIC=3589.84   AICc=3589.87   BIC=3625.22
+\end{verbatim}
+\newpage
+
+\section{Residential model point}\label{residential-model-point}
+
+\textbf{Decomposition plot}
+
+\includegraphics[width=\textwidth]{Figures/stlplot_model3}
+
+\textbf{Model}
+\begin{verbatim}
+Series: x 
+ARIMA(1,1,1) 
+
+Coefficients:
+         ar1      ma1
+      0.6263  -0.9128
+s.e.  0.0394   0.0257
+
+sigma^2 estimated as 0.1714:  log likelihood=-1442.62
+AIC=2891.25   AICc=2891.26   BIC=2908.94
+\end{verbatim}
+\newpage
+
+\section{Presidio model point}\label{presidio-model-point}
+
+\textbf{Decomposition plot}
+
+\includegraphics[width=\textwidth]{Figures/stlplot_model4}
+
+\textbf{Model}
+\begin{verbatim}
+Series: x 
+ARIMA(1,1,4) 
+
+Coefficients:
+          ar1     ma1      ma2      ma3      ma4
+      -0.6904  0.4389  -0.2201  -0.1439  -0.1430
+s.e.   0.0781  0.0790   0.0275   0.0232   0.0192
+
+sigma^2 estimated as 0.02021:  log likelihood=1431.7
+AIC=-2851.41   AICc=-2851.37   BIC=-2816.03
+\end{verbatim}
 \backmatter
 
 \chapter*{References}\label{references}
@@ -3922,6 +4269,11 @@ Department of Econometrics; Business Statistics. Retrieved from
 United Nations. (2018). World Urbanization Prospects 2018. Retrieved
 from \url{https://population.un.org/wup/}
 
+\hypertarget{ref-dockless}{}
+Van der Meer, L. (2019). \emph{dockless: Spatio-Temporal Forecasts for
+Bike Availability in Dockless Bike Sharing Systems}. Retrieved from
+\url{https://github.com/luukvdmeer/dockless}
+
 \hypertarget{ref-guardian1}{}
 Van Mead, N. (2017, March). Uber for bikes: how 'dockless' cycles
 flooded China -- and are heading overseas. Retrieved from
@@ -3958,6 +4310,11 @@ Springer-Verlag New York. Retrieved from \url{http://ggplot2.org}
 Wickham, H., \& Henry, L. (2018). \emph{tidyr: Easily Tidy Data with
 'spread()' and 'gather()' Functions}. Retrieved from
 \url{https://cran.r-project.org/package=tidyr}
+
+\hypertarget{ref-dplyr}{}
+Wickham, H., François, R., Henry, L., \& Müller, K. (2019). \emph{dplyr:
+A Grammar of Data Manipulation}. Retrieved from
+\url{https://cran.r-project.org/package=dplyr}
 
 \hypertarget{ref-won2012}{}
 Won Yoon, J., Pinelli, F., \& Calabrese, F. (2012). Cityride: A

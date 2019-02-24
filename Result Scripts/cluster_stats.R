@@ -9,12 +9,6 @@ gridcentroids = readRDS('RDS Files/gridcentroids.rds')
 # Calculate length of each time series
 length_total = length(distancedata_centroids)
 
-# Add cluster information
-mean_df = data.frame(
-  mean = mean_vec,
-  cluster = gridcentroids$cluster
-)
-
 # Calculate average mean per cluster
 length_cluster = gridcentroids %>%
   group_by(cluster) %>%
@@ -76,24 +70,24 @@ range_results = c(range_avg_total, range_avg_cluster)
 
 ## -------------------- STANDARD DEVIATION --------------------------
 # Calculate sd of each time series
-sd_vec = sapply(
+var_vec = sapply(
   distancedata_centroids,
-  function(x) sd(x$distance, na.rm = TRUE)
+  function(x) var(x$distance, na.rm = TRUE)
 )
 
 # Calculate average sd of all time series
-sd_avg_total = sd(sd_vec, na.rm = TRUE)
+sd_avg_total = sqrt(mean(var_vec, na.rm = TRUE))
 
 # Add cluster information
-sd_df = data.frame(
-  sd = sd_vec,
+var_df = data.frame(
+  var = var_vec,
   cluster = gridcentroids$cluster
 )
 
 # Calculate average sd per cluster
-sd_avg_cluster = sd_df %>%
+sd_avg_cluster = var_df %>%
   group_by(cluster) %>%
-  summarise(sd = sd(sd, na.rm = TRUE)) %>%
+  summarise(sd = sqrt(mean(var, na.rm = TRUE))) %>%
   pull(sd)
 
 # Store all results
