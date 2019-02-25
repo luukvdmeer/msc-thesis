@@ -167,24 +167,50 @@ would not have been possible without the help and support of others. It
 still feels somewhat strange, that by writing these words, a seven-year
 journey comes to an end. I want to thank my family, and in particular my
 parents, for their unconditional support, also in times when I made
-wrong decisions. Lorena, thank you for cheering me up whenever I needed
-it, and my friends and classmates, thank you for being like a family!\\
+wrong decisions. Lore, thank you for cheering me up whenever I needed
+it, and my friends and classmates, thank you for being like a family!
+\par
+
 I want to thank all my teachers for sharing their knowledge, despite
 making me suffer with homework and assignments! In particular, I want to
 thank my supervisor, Edzer Pebesma, for providing guidance whenever
-necessary, but also constantly encouracing an independent way of working
+necessary, but also constantly encouraging an independent way of working
 and thinking, in which own thoughts and ideas are important.
 Additionally, I want to thank my co-supervisors, Jorge Mateu and Joel
 Silva, for their valuable feedback. Thanks also to the whole r-spatial
 community, for providing open source tools, and encouraging involvement
 and contributions, within an environment that makes everyone feel
-equally valued.\\
+equally valued. \par
 Finally, I owe gratitude to JUMP Bikes, and Alexander Tedeschi in
 particular, for providing me with very useful data.
 }
 
 \Dedication{
-
+\begin{tabbing}
+ACF \hspace{3em} \=  Autocorrelation Function \\
+AIC \>  Aikake’s Information Criterion \\
+AR \> Autoregressive \\
+ARIMA \> Autoregressive Integrated Moving Average \\
+ARMA \> Autoregressive Moving Average \\
+DBAFS \> Dockless Bike Availability Forecasting System \\
+GPS \>  Global Positioning System \\
+ID \> Identification \\
+KPSS \>  Kwiatkowski-Phillips-Schmidt-Shin \\
+MA \> Moving Average \\
+MAE \> Mean Absolute Error \\
+MLE \> Maximum Likelihood Estimation \\
+NFS \> Naïve Forecasting System \\
+PACF \> Partial Autocorrelation Function \\
+PDT \>  Pacific Daylight Saving Time \\
+PST \> Pacific Standard Time \\
+PBSS \> Public Bike Sharing Systems \\
+RMSE \> Root Mean Squared Error \\
+RMSLE \> Root Mean Squared Logarithmic Error \\
+SFMTA \>  San Francisco Municipal Transportation Agency \\
+SQL \>  Structured Query Language \\
+STL \>  Seasonal Trend decomposition procedure based on Loess \\
+WGS84 \> World Geodetic System 1984
+\end{tabbing}
 }
 
 \Preface{
@@ -192,9 +218,32 @@ particular, for providing me with very useful data.
 }
 
 \Abstract{
-The preface pretty much says it all. \par
+Forecasting bike availability is of great importance when turning the
+shared bike into a reliable, pleasant and uncomplicated mode of
+transport. Several approaches have been developed to forecast bike
+availability in station-based bike sharing systems. However, dockless
+bike sharing systems remain fairly unexplored in that sense, despite
+their rapid expansion over the world in recent years. To fill this gap,
+this thesis aims to develop a generally applicable methodology for bike
+availability forecasting in dockless bike sharing systems, that produces
+automated, fast and accurate forecasts. \par
 
-Second paragraph of abstract starts here.
+To balance speed and accuracy, an approach is taken in which the system
+area of a dockless bike sharing system is divided into spatially
+contiguous clusters that represent locations with the same temporal
+patterns in the historical data. Each cluster gets assigned a model
+point, for which an ARIMA(\(p\),\(d\),\(q\)) forecasting model is fitted
+to the deseasonalized data. Each individual forecast will inherit the
+structure and parameters of one of those pre-build models, rather than
+building a new model on its own. \par
+
+The proposed system was tested through a case study in San Francisco,
+California. The results showed that the proposed system outperforms
+simple baseline methods. However, they also highlighted the limited
+forecastability of dockless bike sharing data. \par
+
+\textbf{Keywords:} dockless bike sharing systems, bike availability,
+forecasting, time series analysis, sustainable transport
 }
 
 	\usepackage{caption}
@@ -236,18 +285,20 @@ Second paragraph of abstract starts here.
     still feels somewhat strange, that by writing these words, a seven-year
     journey comes to an end. I want to thank my family, and in particular my
     parents, for their unconditional support, also in times when I made
-    wrong decisions. Lorena, thank you for cheering me up whenever I needed
-    it, and my friends and classmates, thank you for being like a family!\\
+    wrong decisions. Lore, thank you for cheering me up whenever I needed
+    it, and my friends and classmates, thank you for being like a family!
+    \par
+    
     I want to thank all my teachers for sharing their knowledge, despite
     making me suffer with homework and assignments! In particular, I want to
     thank my supervisor, Edzer Pebesma, for providing guidance whenever
-    necessary, but also constantly encouracing an independent way of working
+    necessary, but also constantly encouraging an independent way of working
     and thinking, in which own thoughts and ideas are important.
     Additionally, I want to thank my co-supervisors, Jorge Mateu and Joel
     Silva, for their valuable feedback. Thanks also to the whole r-spatial
     community, for providing open source tools, and encouraging involvement
     and contributions, within an environment that makes everyone feel
-    equally valued.\\
+    equally valued. \par
     Finally, I owe gratitude to JUMP Bikes, and Alexander Tedeschi in
     particular, for providing me with very useful data.
   \end{acknowledgements}
@@ -259,12 +310,61 @@ Second paragraph of abstract starts here.
   \listoftables
 
   \listoffigures
+  \begin{dedication}
+    \begin{tabbing}
+    ACF \hspace{3em} \=  Autocorrelation Function \\
+    AIC \>  Aikake’s Information Criterion \\
+    AR \> Autoregressive \\
+    ARIMA \> Autoregressive Integrated Moving Average \\
+    ARMA \> Autoregressive Moving Average \\
+    DBAFS \> Dockless Bike Availability Forecasting System \\
+    GPS \>  Global Positioning System \\
+    ID \> Identification \\
+    KPSS \>  Kwiatkowski-Phillips-Schmidt-Shin \\
+    MA \> Moving Average \\
+    MAE \> Mean Absolute Error \\
+    MLE \> Maximum Likelihood Estimation \\
+    NFS \> Naïve Forecasting System \\
+    PACF \> Partial Autocorrelation Function \\
+    PDT \>  Pacific Daylight Saving Time \\
+    PST \> Pacific Standard Time \\
+    PBSS \> Public Bike Sharing Systems \\
+    RMSE \> Root Mean Squared Error \\
+    RMSLE \> Root Mean Squared Logarithmic Error \\
+    SFMTA \>  San Francisco Municipal Transportation Agency \\
+    SQL \>  Structured Query Language \\
+    STL \>  Seasonal Trend decomposition procedure based on Loess \\
+    WGS84 \> World Geodetic System 1984
+    \end{tabbing}
+  \end{dedication}
   \begin{abstract}
-    The preface pretty much says it all. \par
+    Forecasting bike availability is of great importance when turning the
+    shared bike into a reliable, pleasant and uncomplicated mode of
+    transport. Several approaches have been developed to forecast bike
+    availability in station-based bike sharing systems. However, dockless
+    bike sharing systems remain fairly unexplored in that sense, despite
+    their rapid expansion over the world in recent years. To fill this gap,
+    this thesis aims to develop a generally applicable methodology for bike
+    availability forecasting in dockless bike sharing systems, that produces
+    automated, fast and accurate forecasts. \par
     
-    Second paragraph of abstract starts here.
+    To balance speed and accuracy, an approach is taken in which the system
+    area of a dockless bike sharing system is divided into spatially
+    contiguous clusters that represent locations with the same temporal
+    patterns in the historical data. Each cluster gets assigned a model
+    point, for which an ARIMA(\(p\),\(d\),\(q\)) forecasting model is fitted
+    to the deseasonalized data. Each individual forecast will inherit the
+    structure and parameters of one of those pre-build models, rather than
+    building a new model on its own. \par
+    
+    The proposed system was tested through a case study in San Francisco,
+    California. The results showed that the proposed system outperforms
+    simple baseline methods. However, they also highlighted the limited
+    forecastability of dockless bike sharing data. \par
+    
+    \textbf{Keywords:} dockless bike sharing systems, bike availability,
+    forecasting, time series analysis, sustainable transport
   \end{abstract}
-
 \mainmatter % here the regular arabic numbering starts
 \pagestyle{fancyplain} % turns page numbering back on
 
@@ -299,7 +399,7 @@ functional mode of transport in urban areas, is probably the bicycle. It
 can be used for short and medium distance trips, that form a large part
 of everyday city travel. Since it causes no air pollution, is healthy,
 has low usage and infrastructure costs, and requires little space,
-cycling is sustainable in both the economical, social and environmental
+cycling is sustainable in the economical, social and environmental
 sense. Not for nothing, it receives increasing attention in cities all
 over the world. The share of trips done by bicycle, has risen sharply in
 recent years, also in cities without a cycling tradition, and
@@ -351,7 +451,7 @@ desired trip origin, either there are no docking stations close enough
 to the desired trip destination (Fishman, Washington, Haworth, \&
 Mazzei, \protect\hyperlink{ref-fishman2014}{2014}). The possibilities of
 increasing the number of docking stations are generally limited, due to
-high costs and space requirements. As an answer to this inconveniences,
+high costs and space requirements. As an answer to these inconveniences,
 so-called \emph{dockless bike sharing systems}, in some literature also
 referred to as \emph{free floating bike sharing sytems} or
 \emph{flexible bike sharing systems}, have rapidly gained popularity in
@@ -448,7 +548,7 @@ The objective of this thesis is to deal with those challenges, and
 develop a generally applicable methodology for bike availability
 forecasting in dockless bike sharing systems.
 
-\section{Related work}\label{related-work}
+\section{Related work}\label{onethree}
 
 Pal, Zhang, \& Kwon (\protect\hyperlink{ref-pal2018}{2018}) define two
 main categories in which publications related to PBSS can be classified.
@@ -460,12 +560,11 @@ be improved or the system can be expanded. Since this thesis aims to
 forecast bike availability, publications of the first category are the
 ones of interest. In essence, they all deal with time series analysis,
 and a wide range of forecasting methods has already been applied,
-primarily focused on station-based PBSS. These are covered in section
-1.3.1, while the first attempts targeting dockless PBSS are reviewed in
-section 1.3.2.
+primarily focused on station-based PBSS. These are covered in Section
+\ref{onethreeone}, while the first attempts targeting dockless PBSS are
+reviewed in Section \ref{onethreetwo}.
 
-\subsection{Forecasting in station-based
-systems}\label{forecasting-in-station-based-systems}
+\subsection{Forecasting in station-based systems}\label{onethreeone}
 
 One of the first works on bike availability forecasting was published
 ten years ago, by Froehlich, Neumann, \& Oliver
@@ -515,7 +614,7 @@ factors were extracted from a circular buffer with a radius of 400
 meters around each station. D. Singhvi et al.
 (\protect\hyperlink{ref-singhvi2015}{2015}) did a comparable study, but
 on a macroscopic level, arguing that aggregating stations in
-neighborhoods can substantially improve predictions.
+neighbourhoods can substantially improve predictions.
 
 In 2014, Kaggle, a well-known online community for data scientists,
 hosted a machine learning competition, in which participants were asked
@@ -528,10 +627,10 @@ Cherrier (\protect\hyperlink{ref-giot2014}{2014}) compared Ridge
 Regression, Adaboost Regression, Random Forest Regression, Gradient Tree
 Boosting Regression and Support Vector Regression by predicting
 Washington's city-wide bike sharing usage up to one day ahead, inputting
-both recent observations, time features (e.g.~season, day of the week,
-hour of the day) and weather features (e.g.~temperature, wind speed).
-Ridge Regression and Adaboost Regression turned out to be the best
-performing methods. Y. Li, Zheng, Zhang, \& Chen
+recent observations, time features (e.g.~season, day of the week, hour
+of the day) and weather features (e.g.~temperature, wind speed). Ridge
+Regression and Adaboost Regression turned out to be the best performing
+methods. Y. Li, Zheng, Zhang, \& Chen
 (\protect\hyperlink{ref-li2015}{2015}) used Gradient Tree Boosting
 Regression with time and weather features. However, they first grouped
 the docking stations into distinct, spatially contiguous clusters, and
@@ -558,7 +657,7 @@ Iglesia, \& Bajo (\protect\hyperlink{ref-lozano2018}{2018}) created an
 automated multi-agent bike demand forecasting system for the Salamanca's
 \emph{SalenBici} system, with digital `agents' that collect different
 types of data, such as calendar events, weather forecasts and historical
-usage. These data are then combined, and used to forecast check-ins and
+usage. These data were combined, and used to forecast check-ins and
 check-outs separately for each station, with a Random Forest Regressor.
 
 The Random Forest and Convolutional Neural Network approaches were
@@ -574,7 +673,7 @@ innovations, Long Short Term Memory Neural Networks and Gated Recurrent
 Units, but found no substantial improvements in the results.
 
 All discussed academic publications related to bike availability
-forecasting in station-based PBSS are listed in Table 1.1, in
+forecasting in station-based PBSS are listed in Table \ref{tab:tab1}, in
 chronological order. It can be seen that machine learning methods have
 received a lot of attention in recent years, compared to traditional
 statistical forecasting methods such as ARIMA. The two serve the same
@@ -605,12 +704,12 @@ certain superiority when machine learning methods are compared with
 advanced statistical methods such as autoregressive integrated moving
 average.''
 \begin{longtable}{>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{1cm}>{\raggedright\arraybackslash}p{4cm}>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
-\caption{\label{tab:stationforecasts}Publications regarding forecasts in station-based bike sharing systems, known to the author}\\
+\caption{\label{tab:tab1}Publications regarding forecasts in station-based bike sharing systems, known to the author}\\
 \toprule
 Authors & Year & Main forecasting method & Spatial unit of analysis & Case study\\
 \midrule
 \endfirsthead
-\caption[]{\label{tab:stationforecasts}Publications regarding forecasts in station-based bike sharing systems, known to the author \textit{(continued)}}\\
+\caption[]{\label{tab:tab1}Publications regarding forecasts in station-based bike sharing systems, known to the author \textit{(continued)}}\\
 \toprule
 Authors & Year & Main forecasting method & Spatial unit of analysis & Case study\\
 \midrule
@@ -636,8 +735,7 @@ Lin, He, and Peeta & 2018 & Graph Convolutional Neural Network & Docking station
 \rowcolor{gray!6}  Lozano et al. & 2018 & Random Forest regression & Docking station & Salamanca\\
 B. Wang and Kim & 2018 & Long Short Term Memory Neural Networks and Gated Recurrent Units & Docking station & Suzhou\\*
 \end{longtable}
-\subsection{Forecasting in dockless
-systems}\label{forecasting-in-dockless-systems}
+\subsection{Forecasting in dockless systems}\label{onethreetwo}
 
 Publications regarding bike availability forecasting in dockless PBSS
 can be counted on the fingers of one hand. In addition to them, a small
@@ -712,9 +810,12 @@ decomposed before forecasting, assuming a daily seasonal pattern. In
 that case, the seasonal component will afterwards be added to the
 forecast produced by the general model. The general model is updated
 every month.
+
+All discussed academic publications related to bike availability
+forecasting in dockless PBSS are listed in Table \ref{tab:tab2}.
 \begin{table}[H]
 
-\caption{\label{tab:docklessforecasts}Publications regarding forecasts in dockless vehicle sharing systems, known to the author}
+\caption{\label{tab:tab2}Publications regarding forecasts in dockless vehicle sharing systems, known to the author}
 \centering
 \begin{tabular}{>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{1cm}>{\raggedright\arraybackslash}p{4cm}>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{2cm}>{\raggedright\arraybackslash}p{1cm}}
 \toprule
@@ -746,12 +847,12 @@ based approach.
   Forecasts can be interpreted in the same way at every location in
   space. This in contradiction to the grid based approach, where for a
   location at the edge of a grid cell, there might as well be closer
-  bikes within the neighboring cell.
+  bikes within the neighbouring cell.
 \item
-  Forecasts give more freedom to the user, who can decide for himself if
-  he considers the forecasted distance acceptable or not. In the grid
-  based approach, the cell size is fixed, and does not take into account
-  that some people are willing to walk further than others.
+  Forecasts give more freedom to the user, who can decide for themselves
+  if they consider the forecasted distance acceptable or not. In the
+  grid based approach, the cell size is fixed, and does not take into
+  account that some people are willing to walk further than others.
 \end{itemize}
 By choosing the distance based approach, the proposed forecasting system
 will involve the analysis, modelling and forecasting of time series that
@@ -763,8 +864,8 @@ dimension. In the proposed system, the spatio-temporal nature of the
 data is used as an advantage, and an approach is developed in which the
 structures of time series forecasting models build at specific locations
 and specific timestamps, are inherited by forecast requests for nearby
-locations, and future timestamps. In that way, the need for individual
-models for each forecast request, is taken out.
+locations, and future timestamps. In that way, the need for separate
+models for each individual forecast, is taken out.
 
 Throughout the thesis, the proposed forecasting system will be referred
 to as the \textbf{D}ockless \textbf{B}ike \textbf{A}vailability
@@ -778,16 +879,17 @@ horizons will not be handled.
 
 \section{Outline}\label{outline}
 
-The rest of the document is structured as follows. Chapter 2 provides a
-theoretical background of the concepts used in this thesis, which are
-all linked to the field of time series analysis. In Chapter 3, the
-methodology of the proposed forecasting system is described into detail.
-Chapter 4 presents the data on which the system is tested, and describes
-the experimental setup. In Chapter 5, the results of the experiments are
-shown, interpreted, and discussed. Finally, Chapter 6 lists the
-conclusions of this thesis.
+The rest of the document is structured as follows. Chapter \ref{two}
+provides a theoretical background of the concepts used in this thesis,
+which are all linked to the field of time series analysis. In Chapter
+\ref{three}, the methodology of the proposed forecasting system is
+described into detail. Chapter \ref{four} presents the data on which the
+system is tested, and describes the experimental setup. In Chapter
+\ref{five}, the results of the experiments are shown, interpreted, and
+discussed. Finally, Chapter \ref{six} lists the conclusions of this
+thesis.
 
-\chapter{Theoretical background}\label{theoretical-background}
+\chapter{Theoretical background}\label{two}
 
 This chapter presents a brief introduction to the theory of time series
 analysis. It is meant to serve as a theoretical foundation of the
@@ -821,7 +923,7 @@ series. \(\blacksquare\)
 
 Typically, observations are made at equally spaced time intervals, such
 as every hour, every day or every year. In such cases, \(T\) takes on a
-discrete set of values, and we refer to them as \emph{discrete-time time
+discrete set of values, and are known as \emph{discrete-time time
 series}. On the other hand, \emph{continuous-time time series} arise
 when \(T\) takes on a continuous range of values (Brockwell \& Davis,
 \protect\hyperlink{ref-brockwell2002}{2002}). In this thesis, only
@@ -848,7 +950,7 @@ clarification is needed, it is given locally.
 
 \section{Time series characteristics}\label{time-series-characteristics}
 
-\subsection{Autocorrelation}\label{autocorrelation}
+\subsection{Autocorrelation}\label{twotwoone}
 
 Analyzing time series raises unique problems in statistical modelling
 and inference. In conventional statistics, methods rely on the
@@ -866,16 +968,18 @@ different times. \(\blacksquare\)
 Given a sample \{\(y_{1}, y_{2}, ... , y_{n}\)\} of a time series, the
 degree of dependence in the data can be assessed by computing the
 \emph{autocorrelation function} (ACF), for each lag \(h\), as defined in
-Equation 1 (Brockwell \& Davis,
+Equation \eqref{eq:eq1} (Brockwell \& Davis,
 \protect\hyperlink{ref-brockwell2002}{2002}).
-
-\[ \hat\rho(h) = \frac{\hat\gamma(h)}{\hat\gamma(0)}, \quad -n < h < n \]
-
+\begin{equation}
+\hat\rho(h) = \frac{\hat\gamma(h)}{\hat\gamma(0)}, \quad -n < h < n
+\label{eq:eq1}
+\end{equation}
 Where \(\hat\gamma(h)\) is the autocovariance function of the sample at
-lag \(h\), as defined in Equation 2.
-
-\[ \hat\gamma(h) = n^{-1}\sum_{t=1}^{n-|h|}(y_{t+|h|} - \bar{y})(y_{t} - \bar{y}), \quad -n < h < n \]
-
+lag \(h\), defined in Equation \eqref{eq:eq2}.
+\begin{equation}
+\hat\gamma(h) = n^{-1}\sum_{t=1}^{n-|h|}(y_{t+|h|} - \bar{y})(y_{t} - \bar{y}), \quad -n < h < n
+\label{eq:eq2}
+\end{equation}
 Where \(n\) is the length of the sample, \(y_{t}\) is the data value at
 time \(t\), \(y_{t-|h|}\) is the data value at time \(t\) minus \(|h|\)
 time periods, and \(\bar{y}\) is the mean of the sample. Whenever a time
@@ -900,8 +1004,8 @@ values.
 In time series analysis, a key role is played by time series whose
 statistical properties do not vary with time (Brockwell \& Davis,
 \protect\hyperlink{ref-brockwell2002}{2002}). Such time series are
-referred to as \emph{stationary time series}. The most restrictive form
-of stationarity is defined in Definition 4 (Woodward et al.,
+called \emph{stationary time series}. The most restrictive form of
+stationarity is defined in Definition 4 (Woodward et al.,
 \protect\hyperlink{ref-woodward2017}{2017}).
 
 \textbf{Definition 4} A time series \{\(Y(t); t \in T\)\} is
@@ -915,8 +1019,9 @@ requirement of strict stationarity, since the involved distributions are
 not known. For most applications, a milder form of stationarity, which
 only imposes conditions on the first and second moment of a time series,
 is sufficient. This is officially known as \emph{weak stationarity},
-but, in time series analysis, usually just called \emph{stationarity}.
-It is mathematically defined as in Definition 5 (Woodward et al.,
+but, in time series analysis, usually just called \emph{stationarity},
+for the sake of simplicity. It is mathematically defined as in
+Definition 5 (Woodward et al.,
 \protect\hyperlink{ref-woodward2017}{2017}).
 
 \textbf{Definition 5} A time series \{\(Y(t); t \in T\)\} is
@@ -956,45 +1061,50 @@ rather than the exception. Luckily, by applying mathematical
 transformations, it often possible to render a non-stationary time
 series as, approximately, stationary. This process is referred to as
 \emph{stationarizing} a time series (Nau,
-\protect\hyperlink{ref-nau2018}{2018}). Stationarizing is used a lot in
-statistical forecasting methods, which are discussed in section 2.4.
+\protect\hyperlink{ref-nau2018}{2018}). Stationarizing is used often in
+statistical forecasting methods, which are discussed in Section
+\ref{twofour}.
 
-\subsection{Spectral entropy}\label{spectral-entropy}
+\subsection{Spectral entropy}\label{twotwothree}
 
 Often, two separate approaches to time series analysis are defined. The
 first, referred to as the \emph{time domain}, deals primarily with the
 internal dependence structure in time series data, where current values
 can be explained in terms of a dependence on past values, as discussed
-in section 2.2.1. The second, referred to as the \emph{frequency
-domain}, works with a spectral representation of the time series, in
-which the original data is expressed as a weighted sum of sine and
-cosine waveforms, each with their own frequency. Named after the French
-mathematician Jean-Baptiste Joseph Fourier, such a representation is
-commonly known as a \emph{Fourier representation} or \emph{Fourier
-series}, and its corresponding sine and cosine terms as \emph{Fourier
-terms}. Forecasting is inherently tied to the time domain of time series
-analysis, which will therefore be the focus of this thesis. However,
-there is no schism dividing the two approaches. That is, some frequency
-domain techniques can be useful even in the time domain, and vice versa
-(Shumway \& Stoffer, \protect\hyperlink{ref-shumway2011}{2011}).
+in Section \ref{twotwoone}. The second, referred to as the
+\emph{frequency domain}, works with a spectral representation of the
+time series, in which the original data is expressed as a weighted sum
+of sine and cosine waveforms, each with their own frequency. Named after
+the French mathematician Jean-Baptiste Joseph Fourier, such a
+representation is commonly known as a \emph{Fourier representation} or
+\emph{Fourier series}, and its corresponding sine and cosine terms as
+\emph{Fourier terms}. Forecasting is inherently tied to the time domain
+of time series analysis, which will therefore be the focus of this
+thesis. However, there is no schism dividing the two approaches. That
+is, some frequency domain techniques can be useful even in the time
+domain, and vice versa (Shumway \& Stoffer,
+\protect\hyperlink{ref-shumway2011}{2011}).
 
 One of such techniques is the calculation of the spectral entropy of a
 time series, which describes the order and regularity of a time series,
 based on its Fourier representation. The spectral entropy of a time
-series can be calculated with Equation 2.x.
-
-\[ H = \int_{-\pi}^{\pi} \hat{f}(\lambda)\log \hat{f}(\lambda)d\lambda\]
-
+series can be calculated with Equation \eqref{eq:eq3}.
+\begin{equation}
+H = \int_{-\pi}^{\pi} \hat{f}(\lambda)\log \hat{f}(\lambda)d\lambda
+\label{eq:eq3}
+\end{equation}
 Where \(\hat{f}_{y}(\lambda)\) is the estimated spectral density
 function, which describes the importance of the different frequencies in
 the Fourier representation of the time series. Usually, \(H\) is
 normalized to the range of values between 0 and 1. For a detailed
 description of the calculations, see Goerg
-(\protect\hyperlink{ref-goerg2013}{2013}). Spectral entropy is useful in
-forecasting, since it can serve as a quantative measure of the
-forecastability of a time series. Data that are easy to forecast, will
-have a small value of \(H\), while very noisy data will have a large
-value of \(H\) (T. S. Talagala, Hyndman, \& Athanasopoulos,
+(\protect\hyperlink{ref-goerg2013}{2013}).
+
+Spectral entropy is useful in forecasting, since it can serve as a
+quantitative measure of the forecastability of a time series. Very
+smooth data, that are easy to forecast, will have a small value of
+\(H\), while very noisy data, that are hard to forecast, will have a
+large value of \(H\) (T. S. Talagala, Hyndman, \& Athanasopoulos,
 \protect\hyperlink{ref-talagala2018}{2018}).
 
 \section{Time series components}\label{time-series-components}
@@ -1004,14 +1114,14 @@ value of \(H\) (T. S. Talagala, Hyndman, \& Athanasopoulos,
 A time series can consist of various underlying patterns. Each of those
 patterns is considered a distinct component of the time series, with its
 own properties and behaviour. Splitting a time series into its
-components is known as \emph{time series decomposition}. It enables a
+components, is known as \emph{time series decomposition}. It enables a
 separate analysis of all the components, which helps to better
 understand the dynamics of a time series, but can also be useful in
-forecasting, as is showed later in this chapter.
+forecasting, as will be discussed later in this chapter.
 
 Hyndman \& Athanasopoulos (\protect\hyperlink{ref-hyndman2018fpp}{2018})
 define three main components of a time series: a trend-cycle component,
-a seasonal component and a remainder component. For simplicity, the
+a seasonal component, and a remainder component. For simplicity, the
 trend-cycle component is usually called just the trend component, which
 is done in this thesis as well.
 
@@ -1023,18 +1133,18 @@ falls that are not of a fixed frequency. \(\blacksquare\)
 
 \textbf{Definition 5} The \emph{seasonal component} contains the
 seasonal pattern of a time series. A seasonal pattern occurs when a time
-series is affected by factors such as the time of the year or the day of
-the week. Seasonality is always of a fixed and known frequency.
+series is affected by seasonal factors such as the time of the year or
+the the day of the week, and is always of a fixed and known frequency.
 \(\blacksquare\)
 
 \textbf{Definition 6} The \emph{remainder component} is the remaining
 variation in a time series after the trend and seasonal components are
 removed. \(\blacksquare\)
 
-There exist several different methods for the decomposition of a time
-series. Most of them are based on the classical decomposition method,
-which is discussed in the next section. A more sophisticated approach is
-known as STL, and is covered in section 2.2.2.3.
+There exist several methods for the decomposition of a time series. Most
+of them are based on the classical decomposition method, which is
+discussed in the next section. A more sophisticated approach is known as
+STL, and is covered in Section \ref{twothreethree}.
 
 \subsection{Classical decomposition}\label{classical-decomposition}
 
@@ -1044,20 +1154,22 @@ referred to as classical decomposition by Hyndman \& Athanasopoulos
 approach for the use of the method, which is summarized in this section.
 Classical decomposition can be applied in two different forms. In the
 additive form, a time series is assumed to be the sum of its components,
-as shown in Equation 2.
-
-\[ y_{t} = T_{t} + S_{t} + R_{t} \]
-
+as shown in Equation \eqref{eq:eq4}.
+\begin{equation}
+y_{t} = T_{t} + S_{t} + R_{t}
+\label{eq:eq4}
+\end{equation}
 In the multiplicative form, a time series is assumed to be the product
-of its components, as shown in Equation 3.
+of its components, as shown in Equation \eqref{eq:eq5}.
+\begin{equation}
+y_{t} = T_{t} \times S_{t} \times R_{t}
+\label{eq:eq5}
+\end{equation}
+Where, for both Equation \eqref{eq:eq4} and Equation \eqref{eq:eq5},
+\(y_{t}\) is the data, \(T_{t}\) is the trend component, \(S_{t}\) is
+the seasonal component and \(R_{t}\) is the remainder component.
 
-\[ y_{t} = T_{t} \times S_{t} \times R_{t} \]
-
-Where, for both Equation 2 and Equation 3, \(y_{t}\) is the data,
-\(T_{t}\) is the trend component, \(S_{t}\) is the seasonal component
-and \(R_{t}\) is the remainder component.
-
-Additive decomposition is the appropriate form when the amplitude of the
+Additive decomposition is used in cases when the amplitude of the
 variation around the trend is relatively constant. On the other hand,
 when the amplitude of the variation around the trend changes with the
 level of the trend, multiplicative decomposition should be used.
@@ -1068,29 +1180,33 @@ smoothing the data with a symmetric moving average filter of order
 \(m\), where \(m\) is a non-negative integer. That is, the estimate of
 the trend component at time \(t\) is the average of all the data values
 within a window of \(m\) time periods centered at \(t\), as shown in
-Equation 4. Usually, \(m\) is set to be equal to the seasonal period of
-the time series, which, in turn, is the number of observations per
-seasonal cycle. For example, when working with daily data that show a
-weekly seasonal pattern, the seasonal period is 7.
+Equation \eqref{eq:eq6}. Usually, \(m\) is set to be equal to the seasonal
+period of the time series, which, in turn, is the number of observations
+per seasonal cycle. For example, when working with daily data that show
+a weekly seasonal pattern, the seasonal period is 7.
+\begin{equation}
+\hat{T}_{t} = \frac{1}{m}\sum_{j=-k}^{k}y_{t+j}
+\label{eq:eq6}
+\end{equation}
+Where \(k = (m-1)/2\).
 
-\[ \hat{T}_{t} = \frac{1}{m}\sum_{j=-k}^{k}y_{t+j} \]
-
-Where \(k = (m-1)/2\). The detrended time series data are then
-calculated by removing the estimated trend component from the original
-data. In the case of additive decomposition by subtraction,
-\(y_{t} - \hat{T}_{t}\), and in the case of multiplicative decomposition
-by division, \(y_{t}/\hat{T}_{t}\).
+The detrended time series data are then calculated by removing the
+estimated trend component from the original data. In the case of
+additive decomposition by subtraction, \(y_{t} - \hat{T}_{t}\), and in
+the case of multiplicative decomposition by division,
+\(y_{t}/\hat{T}_{t}\).
 
 The seasonal component is estimated by averaging the detrended data
-values per season, as shown in Equation 5. Using again the example of
-daily data with a weekly seasonal pattern, that would mean that the
-estimated seasonal component for a specific Monday is the average value
-of all Monday observations in the data set, the estimated seasonal
-component for a specific Tuesday is the average value of all Tuesday
-observations in the data set, and so on.
-
-\[ \hat{S}_{t} = \frac{1}{n_{t}}\sum_{i=1}^{n_{t}}(\omega_{t})_{i} \]
-
+values per season, as shown in Equation \eqref{eq:eq7}. Using again the
+example of daily data with a weekly seasonal pattern, that would mean
+that the estimated seasonal component for a specific Monday is the
+average value of all Monday observations in the data set, the estimated
+seasonal component for a specific Tuesday is the average value of all
+Tuesday observations in the data set, and so on.
+\begin{equation}
+\hat{S}_{t} = \frac{1}{n_{t}}\sum_{i=1}^{n_{t}}(\omega_{t})_{i}
+\label{eq:eq7}
+\end{equation}
 Where \(\omega_{t}\) is a vector containing all the detrended values
 belonging to the same season as \(y_{t}\), and \(n_{t}\) is the length
 of \(\omega_{t}\). Usually, the estimated seasonal component values for
@@ -1101,14 +1217,16 @@ decomposition.
 Finally, the remainder component is estimated by removing both the
 estimated trend component and the estimated seasonal component from the
 original time series. For additive decomposition, this is done by
-applying Equation 6.
-
-\[ \hat{R}_{t} = y_{t} - \hat{T}_{t} - \hat{S}_{t} \]
-
-For multiplicative decomposition, Equation 7 is used.
-
-\[ \hat{R}_{t} = \frac{y_{t}}{\hat{T}_{t}\hat{S}_{t}} \]
-
+applying Equation \eqref{eq:eq8}.
+\begin{equation}
+\hat{R}_{t} = y_{t} - \hat{T}_{t} - \hat{S}_{t}
+\label{eq:eq8}
+\end{equation}
+For multiplicative decomposition, Equation \eqref{eq:eq9} is used.
+\begin{equation}
+\hat{R}_{t} = \frac{y_{t}}{\hat{T}_{t}\hat{S}_{t}}
+\label{eq:eq9}
+\end{equation}
 Classical decomposition is generally praised for its simplicity, but has
 several disadvantages compared to some of the more modern decomposition
 methods (Hyndman \& Athanasopoulos,
@@ -1116,14 +1234,15 @@ methods (Hyndman \& Athanasopoulos,
 use of a symmetric moving average filter, there are no trend component
 estimates available for the first few and last few observations of the
 time series. Therefore, also the remainder component estimate lacks
-these values. This is mainly problematic when forecasting, as is showed
-later in this chapter. Furthermore, the seasonal component stays
-constant over all the seasonal cycles, and cannot capture slight changes
-over time. Especially when working with longer time series, this may be
-an inappropriate representation of the truth. Finally, classical
-decomposition is not robust to extreme values in the data.
+these values. An unknown current value of a time series, is mainly
+problematic when forecasting, as is shown in Section \ref{twofour}.
+Furthermore, the seasonal component stays constant over all the seasonal
+cycles, and cannot capture slight changes over time. Especially when
+working with longer time series, this may be an inappropriate
+representation of the truth. Finally, classical decomposition is not
+robust to extreme values in the data.
 
-\subsection{STL decomposition}\label{stl-decomposition}
+\subsection{STL decomposition}\label{twothreethree}
 
 A widely used method that is based on classical decomposition, but deals
 with many of the limitations mentioned above, is known as STL. It stands
@@ -1148,21 +1267,21 @@ the neighbourhood width. That is, the \(q\) observations that are
 closest to \(x\) are selected as neighbours of \(x\). Each of these
 observations is given a weight based on its distance to x, in a way that
 the closest observations get the highest weight. Let \(W\) be the
-tricube weight function as defined in Equation 8.
-
-\[
+tricube weight function as defined in Equation \eqref{eq:eq10}.
+\begin{equation}
 W(u) = 
     \begin{cases}
       (1 - u^{3})^{3} &\quad 0 \leq u < 1\\
       0 &\quad u \geq 1\\
     \end{cases}
-\]
-
-Then, the neighbourhood weight for each observation \(x_{i}\) is
-calculated with Equation 9.
-
-\[ \upsilon_{i} = W\Bigg(\frac{|x_{i} - x|}{\lambda_{q}(x)}\Bigg) \]
-
+\label{eq:eq10}
+\end{equation}
+Subsequently, the neighbourhood weight for each observation \(x_{i}\) is
+calculated with Equation \eqref{eq:eq11}.
+\begin{equation}
+\upsilon_{i} = W\Bigg(\frac{|x_{i} - x|}{\lambda_{q}(x)}\Bigg)
+\label{eq:eq11}
+\end{equation}
 Where \(\lambda_{q}(x)\) is the distance of the \(q\)th farthest
 observation from \(x\). Then, \(\hat{g}(x)\) is calculated by fitting a
 polynomial regression of degree \(d\) to x, using weighted least squares
@@ -1236,32 +1355,33 @@ the analyst.
 The outer loop of STL starts with \(n_{i}\) iterations of the inner
 loop. The estimations of the trend and seasonal components that follow
 from the passes through the inner loop, are used to estimate the
-remainder component with Equation 10.
-
-\[ \hat{R}_{t} = y_{t} - \hat{T}_{t} - \hat{S}_{t} \]
-
+remainder component with Equation \eqref{eq:eq12}.
+\begin{equation}
+\hat{R}_{t} = y_{t} - \hat{T}_{t} - \hat{S}_{t}
+\label{eq:eq12}
+\end{equation}
 For each observation in the time series, a robustness weight is
 calculated. This weight reflects how extreme the value of the remainder
-component of that observation is, in a way that a very extreme value is
+component of that observation is, in a way that an extreme value is
 given a very low, or even zero, weight. Let \(B\) be the bisquare weight
-function as defined in Equation 11.
-
-\[
+function as defined in Equation \eqref{eq:eq13}.
+\begin{equation}
 B(u) = 
     \begin{cases}
       (1 - u^{2})^{2} &\quad 0 \leq u < 1\\
       0 &\quad u \geq 1\\
     \end{cases}
-\]
-
+\label{eq:eq13}
+\end{equation}
 Then, the robustness weight at time point \(t\) is calculated with
-Equation 12.
-
-\[ \rho_{t} = B\Bigg(\frac{|R_{t}|}{6median(|R_{t}|)}\Bigg) \]
-
-After the first pass of the outer loop, the next iteration starts again
-with \(n_{i}\) passes through the inner loop. However, in the loess
-smoothing in step 2 and step 6, each neighbourhood weight
+Equation \eqref{eq:eq14}.
+\begin{equation}
+\rho_{t} = B\Bigg(\frac{|R_{t}|}{6median(|R_{t}|)}\Bigg)
+\label{eq:eq14}
+\end{equation}
+After the first pass through the outer loop, the next iteration starts
+again with \(n_{i}\) passes through the inner loop. However, in the
+loess smoothing in step 2 and step 6, each neighbourhood weight
 \(\upsilon_{t}\) is now multiplied by its corresponding robustness
 weight \(\rho_{t}\), such that extreme values have less influence on the
 estimates of the trend and seasonal components. Also, the estimated
@@ -1277,13 +1397,13 @@ rule, which states that \(log(a) + log(b)\) is equivalent to
 \protect\hyperlink{ref-hyndman2018fpp}{2018}).
 
 The complete methodology of STL as described above is summarized in
-Figure 1.
+Figure \ref{fig:stl}.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Figures/STL} \caption{Summary of the STL methodology}\label{fig:stl}
 \end{figure}
-\section{Time series forecasting}\label{time-series-forecasting}
+\section{Time series forecasting}\label{twofour}
 
-\subsection{Forecasting models}\label{forecasting-models}
+\subsection{Forecasting models}\label{twofourone}
 
 Often, the main aim of time series analysis is to forecast future values
 of a time series. In some cases, this can be done by using external
@@ -1343,21 +1463,23 @@ An ARIMA model is a combination of an \emph{autoregressive} (AR) and
 on the original data. An autoregressive model of order \(p\), commonly
 referred to as an AR(\(p\)) model, is based on the assumption that the
 current value of a time series is a linear combination of \(p\) previous
-values, as showed in Equation 13.
-
-\[ y_{t} = \phi_{1}y_{t-1} + \phi_{2}y_{t-2} + ... + \phi_{p}y_{t-p} + \epsilon_{t} \]
-
+values, as showed in Equation \eqref{eq:eq15}.
+\begin{equation}
+y_{t} = \phi_{1}y_{t-1} + \phi_{2}y_{t-2} + ... + \phi_{p}y_{t-p} + \epsilon_{t}
+\label{eq:eq15}
+\end{equation}
 Where \(y_{t}\) is the current value of the time series at time period
 \(t\), \(\epsilon_{t}\) is the random error (i.e.~white noise) at time
-\(t\), \(\phi_{1},...,\phi_{p}\) are model parameters.
+\(t\), and \(\phi_{1},...,\phi_{p}\) are model parameters.
 
 A moving average model of order \(q\), commonly referred to as an
 MA(\(q\)) model, is based on the assumption that the current value of a
 time series is a linear combination of \(q\) previous errors, as showed
-in Equation 14.
-
-\[ y_{t} = \epsilon_{t} + \theta_{1}\epsilon_{t-1} + \theta_{2}\epsilon_{t-2} + ... + \theta_{q}\epsilon_{t-q} \]
-
+in Equation \eqref{eq:eq16}.
+\begin{equation}
+y_{t} = \epsilon_{t} + \theta_{1}\epsilon_{t-1} + \theta_{2}\epsilon_{t-2} + ... + \theta_{q}\epsilon_{t-q}
+\label{eq:eq16}
+\end{equation}
 Where \(y_{t}\) is the current value of the time series at time period
 \(t\), \(\epsilon_{t}\) is the error at time period \(t\), which is
 assumed to be white noise, and \(\theta_{1},...,\theta_{q}\) are model
@@ -1367,39 +1489,40 @@ AR(\(p\)) and MA(\(q\)) models can be combined into an autoregressive
 moving average model of order (\(p\), \(q\)), commonly referred to as
 ARMA(\(p\), \(q\)). That is, in such a model, the current value of a
 time series is a linear combination of both \(p\) previous values and
-\(q\) previous errors, as showed in Equation 15.
-
-\[ 
+\(q\) previous errors, as showed in Equation \eqref{eq:eq17}.
+\begin{equation}
 y_{t} = \phi_{1}y_{t-1} + ... + \phi_{p}y_{t-p} + \theta_{1}\epsilon_{t-1} + ... + \theta_{q}\epsilon_{t-q} + \epsilon_{t} 
-\]
-
+\label{eq:eq17}
+\end{equation}
 ARMA(\(p\), \(q\)) models require the forecasted time series to be
 stationary. When working with non-stationary time series, it is often
 possible to stationarize the series by differencing it one or more
 times. The first order difference of a time series is the series of
-changes from one time period to the next, as shown in Equation 16.
-
-\[ \nabla y_{t} = y_{t} - y_{t-1} \]
-
+changes from one time period to the next, as shown in Equation
+\eqref{eq:eq18}.
+\begin{equation}
+\nabla y_{t} = y_{t} - y_{t-1}
+\label{eq:eq18}
+\end{equation}
 Where \(\nabla y_{t}\) is the first order difference of \(y_{t}\). When
 the first order difference is still non-stationary, the second order
 difference \(\nabla^{2}y_{t}\) can be computed by taking again the first
-order difference of \(\nabla y_{t}\), and so on. The original
-non-stationary time series that needed to be differenced in order to get
-stationary, is called an \emph{integrated} version of the stationary
-series. That is why a model that first stationarizes the data by
-applying a \(d\)-th order difference, before fitting an ARMA(\(p\),
+order difference of \(\nabla y_{t}\), and so on.
+
+The original non-stationary time series that needed to be differenced in
+order to get stationary, is called an \emph{integrated} version of the
+stationary series. That is why a model that first stationarizes the data
+by applying a \(d\)-th order difference, before fitting an ARMA(\(p\),
 \(q\)) model, is called an autoregressive integrated moving average
 model of order (\(p\), \(d\), \(q\)), commonly referred to as
 ARIMA(\(p\), \(d\), \(q\)). That is, in such a model, the current value
 of the \(d-\)th order difference of a time series is a linear
 combination of both \(p\) previous values and \(q\) previous errors, as
-showed in Equation 17.
-
-\[ 
+showed in Equation \eqref{eq:eq19}.
+\begin{equation} 
 \nabla^{d}y_{t} = \phi_{1}\nabla^{d}y_{t-1} + ... + \phi_{p}\nabla^{d}y_{t-p} + \theta_{1}\epsilon_{t-1} + ... + \theta_{q}\epsilon_{t-q} + \epsilon_{t} 
-\]
-
+\label{eq:eq19}
+\end{equation}
 Where \(\nabla^{d}y_{t}\) is the \(d\)-th order difference of \(y_{t}\).
 Note here that ARIMA(\(p\), \(d\), \(q\)) is a general form of all the
 other models discussed earlier in this section. For example, an AR(1)
@@ -1412,7 +1535,7 @@ procedure and consists of three stages, named model selection, parameter
 estimation and model checking. All these stages are described separately
 in the next three subsections.
 
-\subsubsection{2.4.2.2 Model selection}\label{model-selection}
+\subsubsection{2.4.2.2 Model selection}\label{twofourtwotwo}
 
 In the model selection stage, \(p\), \(d\) and \(q\) are chosen. In this
 process, \(d\) is selected first, such that the choice of \(p\) and
@@ -1423,18 +1546,20 @@ not, then difference the data once, and inspect the plot of
 \(\nabla y_{t}\). If \(\nabla y_{t}\) does not seem stationary either,
 take the second-order difference \(\nabla^{2} y_{t}\), and so on. In
 general, however, it is not recommended to difference more than two
-times. As an addition to the time plots, plotting the sample
-autocorrelation function of the data can help to identify stationarity.
-Non-stationary data show a slow decay in autocorrelation as the time lag
-increases, while for stationary data, the autocorrelation will drop to
-zero relatively fast.
+times.
+
+As an addition to the time plots, plotting the sample autocorrelation
+function of the data can help to identify stationarity. Non-stationary
+data show a slow decay in autocorrelation as the time lag increases,
+while for stationary data, the autocorrelation will drop to zero
+relatively fast.
 
 Once \(d\) has been set, either \(p\) or \(q\) can be selected by
 inspecting the autocorrelation function plot and the partial
 autocorrelation function plot of the differenced data, which
 respectively plot the sample autocorrelation function (ACF), defined in
-Equation 2.x, and the sample partial autocorrelation function (PACF),
-for several lags \(h\). The PACF is the relationship between an
+Equation \eqref{eq:eq1}, and the sample partial autocorrelation function
+(PACF), for several lags \(h\). The PACF is the relationship between an
 observation at time \(t\) and and observation at time \(t-k\), removing
 the effects of all time lags in between, i.e. \(1, 2, ..., k-1\). Then,
 appropriate values for either \(p\) or \(q\) are found with the
@@ -1443,10 +1568,10 @@ following rules of thumb:
 \tightlist
 \item
   The PACF plot of an ARIMA(\(p\),\(d\),\(0\)) process cuts of after lag
-  \(p\), and the ACF plot tails off.
+  \(p\); the ACF plot tails off.
 \item
   The ACF plot of an ARIMA(\(0\),\(d\),\(q\)) process cuts of after lag
-  \(q\), and the PACF plot tails off.
+  \(q\); the PACF plot tails off.
 \end{itemize}
 When dealing with ARIMA(\(p\), \(d\), \(q\)) processes where both
 \(p > 0\) and \(q > 0\), the ACF plot and PACF plot will both tail off,
@@ -1482,8 +1607,8 @@ considered non-stationary, the second-order differenced data
 \(\nabla^{2} y_{t}\) are tested for stationarity. This process is
 repeated until a stationary series is obtained.
 
-\textbf{Step 2.} In the second step, four different models are fitted to
-the \(d\)-times differenced data.
+\textbf{Step 2.} In the second step, four models are fitted to the
+\(d\)-times differenced data.
 \begin{itemize}
 \tightlist
 \item
@@ -1495,12 +1620,13 @@ the \(d\)-times differenced data.
 \item
   An ARIMA(\(2\), \(d\), \(2\)) model.
 \end{itemize}
-Then, the model with the lowest AIC is selected. AIC, which stands for
+The model with the lowest AIC is selected. AIC, which stands for
 Aikake's Information Criterion, is a measure for the goodness-of-fit of
-a model, and can be calculated with Equation 2.x.
-
-\[ AIC = -2 \log(L) + 2k\]
-
+a model, and can be calculated with Equation \eqref{eq:eq20}.
+\begin{equation}
+AIC = -2 \log(L) + 2k
+\label{eq:eq20}
+\end{equation}
 Where \(L\) is the Gaussian likelihood of the data, and \(k\) is the
 number of free parameters in the model. In this case,
 \(k = p + q + l + 1\), where \(l = 1\) when a non-zero constant is
@@ -1531,7 +1657,7 @@ repeated. The algorithm stops when there are no variations of the
 selected model that have a lower AIC. In that case, the selected model
 is the optimal model, and forms the output of the Hyndman-Khandakar
 algorithm. The complete methodology of the algorithm as described above
-is summarized in Figure 2.x.
+is summarized in Figure \ref{fig:hyndman}.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Figures/hyndman} \caption{Summary of the Hyndman-Khandakar algorithm}\label{fig:hyndman}
 \end{figure}
@@ -1555,15 +1681,16 @@ model as output, and the parameter estimation as described in this
 section is done inside the algorithm, each time a model is fitted to the
 \(d\)-times differenced data.
 
-\subsubsection{2.4.2.4 Model checking}\label{model-checking}
+\subsubsection{2.4.2.4 Model checking}\label{twofourtwofour}
 
 Model checking involves identifying if the fitted model is adequate.
 This is done by inspecting its residuals, which are defined as the
 difference between the actual observations and the corresponding fitted
-values, as shown in Equation 2.x.
-
-\[ \epsilon_{t} = y_{t} - \hat{y}_{t} \]
-
+values, as shown in Equation \eqref{eq:eq21}.
+\begin{equation}
+\epsilon_{t} = y_{t} - \hat{y}_{t}
+\label{eq:eq21}
+\end{equation}
 If the maximum likelihood ARIMA(\(p\), \(d\), \(q\)) model is the true
 process that generated the data, the residuals should be completely
 white noise. Recall, however, that the model is an estimation of the
@@ -1586,7 +1713,7 @@ Usually, several computations within the model fitting and forecasting
 process build on the assumption that the data come from a normally
 distributed population. For example, in MLE and the calculation of AIC,
 Gaussian likelihood is commonly used. Furthermore, prediction intervals
-of forecasts are in general derived from the normal distribution.
+of forecasts are in general derived by assuming a normal distribution.
 Normally distributed residuals indicate that these assumptions were
 valid, and are therefore a valuable property of a model. However, as
 stated by Brockwell \& Davis
@@ -1596,15 +1723,14 @@ is sensible even when the data are not normally distributed.
 \subsubsection{2.4.2.5 Forecasting}\label{forecasting}
 
 A fitted ARIMA(\(p\), \(d\), \(q\)) model can then be used to forecast
-the future values of a time series. To do so, Equation 2.x is rewritten,
-such that the current value of the time series, \(y_{t}\), is replaced
-by a future value of the time series, \(y_{t+h}\), as showed in Equation
-2.x.
-
-\[ 
-\nabla^{d}y_{t+h} = \hat\phi_{1}\nabla^{d}y_{t+h-1} + ... + \hat\phi_{p}\nabla^{d}y_{t+h-p} +\hat\theta_{1}\epsilon_{t+h-1} + ... + \hat\theta_{q}\epsilon_{t+h-q} + \epsilon_{t+1} 
-\]
-
+the future values of a time series. To do so, Equation \eqref{eq:eq19} is
+rewritten, such that the current value of the time series, \(y_{t}\), is
+replaced by a future value of the time series, \(y_{t+h}\), as showed in
+Equation \eqref{eq:eq22}.
+\begin{equation}
+\nabla^{d}y_{t+h} = \hat\phi_{1}\nabla^{d}y_{t+h-1} + ... + \hat\phi_{p}\nabla^{d}y_{t+h-p} +\hat\theta_{1}\epsilon_{t+h-1} + ... + \hat\theta_{q}\epsilon_{t+h-q} + \epsilon_{t+1}
+\label{eq:eq22}
+\end{equation}
 Where \(h\) is the forecast horizon, i.e.~the number of time lags ahead
 at which the forecast is made, \(p\), \(d\) and \(q\) are known and
 constant, and \(\hat\phi_{1},...,\hat\phi_{p}\) and
@@ -1621,14 +1747,17 @@ general, this means that the uncertainty of the forecasts increases as
 interval. Most often, the 95\% prediction interval is used. Assuming
 normally distributed residuals, the lower and upper bound of the 95\%
 prediction interval for the \(h\)-step forecast can be calculated with
-Equation 2.x and 2.x, respectively.
-
-\[ \ell = \hat{y}_{t+h} - 1.96\hat\sigma_{h}\]
-\[ \upsilon = \hat{y}_{t+h} + 1.96\hat\sigma_{h}\]
-
+Equation \eqref{eq:eq23} and Equation \eqref{eq:eq24}, respectively.
+\begin{equation}
+\ell = \hat{y}_{t+h} - 1.96\hat\sigma_{h}
+\label{eq:eq23}
+\end{equation}\begin{equation}
+\upsilon = \hat{y}_{t+h} + 1.96\hat\sigma_{h}
+\label{eq:eq24}
+\end{equation}
 Where \(\ell\) is the lower bound of the 95\% prediction interval,
 \(\upsilon\) is the upper bound of the 95\% prediction interval,
-\(\hat{y}_{t+h}\) is the forecasted value \(h\) time lags ahead.
+\(\hat{y}_{t+h}\) is the forecasted value \(h\) time lags ahead. and
 \(\hat\sigma_{h}\) is the estimated standard deviation of the forecast
 distribution \(h\) time lags ahead, which is explained below. The 95\%
 prediction interval can be interpreted as follows: there is a 95\%
@@ -1640,25 +1769,26 @@ the distribution of the random variable \(h\) time lags ahead that is
 forecasted, rather than an individual value. This distribution is
 referred to as the forecast distribution, and the single forecasted
 value, also known as the \emph{point forecast}, is then taken to be the
-mean of the forecast distribution. In Equation 2.x and 2.x,
-\(\hat\sigma_{h}\) is the estimated standard deviation of the forecasted
-distribution, assuming it is a normal distribution with mean
-\({y}_{t+h}\) and variance \(\sigma_{h}^{2}\). When \(h = 1\), the
-residual standard deviation \(\sigma_{\epsilon}\) is a good estimate for
-\(\sigma_{h}\). However, for \(h > 1\), computations get more complex.
-For a detailed description, see Shumway \& Stoffer
-(\protect\hyperlink{ref-shumway2011}{2011}), section 3.5.
+mean of the forecast distribution. In Equation \eqref{eq:eq23} and
+Equation \eqref{eq:eq24}, \(\hat\sigma_{h}\) is the estimated standard
+deviation of the forecasted distribution, assuming it is a normal
+distribution with mean \({y}_{t+h}\) and variance \(\sigma_{h}^{2}\).
+When \(h = 1\), the residual standard deviation \(\sigma_{\epsilon}\) is
+a good estimate for \(\sigma_{h}\). However, for \(h > 1\), computations
+get more complex. For a detailed description, see Shumway \& Stoffer
+(\protect\hyperlink{ref-shumway2011}{2011}), Section 3.5.
 
-\subsubsection{2.4.2.6 Accuracy evaluation}\label{accuracy-evaluation}
+\subsubsection{2.4.2.6 Accuracy evaluation}\label{twofourtwosix}
 
 A good model fit, does not necessarily lead to accurate forecasts.
 Therefore, when evaluating its performance, the forecasting model should
 be used to forecast multiple values of new data that were not included
 in the model building process. The error of each individual forecast can
-be calculated with Equation 2.x.
-
-\[ e_{t+h} = y_{t+h} - \hat{y}_{t+h} \]
-
+be calculated with Equation \eqref{eq:eq25}.
+\begin{equation}
+e_{t+h} = y_{t+h} - \hat{y}_{t+h}
+\label{eq:eq25}
+\end{equation}
 Where \(y_{t+h}\) is the observed data value \(h\) time lags into the
 future, and \(\hat{y}_{t+h}\) is the forecasted data value \(h\) time
 lags into the future. Obviously, future in this sense is relative to the
@@ -1671,32 +1801,36 @@ errors that all have the same units, while others may also be used when
 errors with different units are compared. Since all forecasts in this
 thesis are distances, the unit-dependent errors are adequate. Most
 commonly used are the Mean Absolute Error (MAE), which can be calculated
-with Equation 2.x, and the Root Mean Squared Error (RMSE), which can be
-calculated with Equation 2.x.
-
-\[ MAE = \frac{\sum_{i = 1}^k |e_{i}|}{k} \]
-\[ RMSE = \sqrt{\frac{\sum_{i = 1}^k e_{i}^{2}}{k}} \] Both the MAE and
-RMSE return values that are in the same scale as the original data. The
-MAE gives the same weight to all errors. The RMSE, however, gives large
-errors more weight than small errors, and therefore penalizes a large
-error variance. According to Chai \& Draxler
+with Equation \eqref{eq:eq26}, and the Root Mean Squared Error (RMSE),
+which can be calculated with Equation \eqref{eq:eq27}.
+\begin{equation}
+MAE = \frac{\sum_{i = 1}^k |e_{i}|}{k}
+\label{eq:eq26}
+\end{equation}\begin{equation}
+RMSE = \sqrt{\frac{\sum_{i = 1}^k e_{i}^{2}}{k}}
+\label{eq:eq27}
+\end{equation}
+Both the MAE and RMSE return values that are in the same scale as the
+original data. The MAE gives the same weight to all errors. The RMSE,
+however, gives large errors more weight than small errors, and therefore
+penalizes a large error variance. According to Chai \& Draxler
 (\protect\hyperlink{ref-chai2014}{2014}), the RMSE usually is better at
 revealing differences in model performance.
 
-In some of the works discussed in section 1.3, such as Y. Li et al.
-(\protect\hyperlink{ref-li2015}{2015}), Z. Yang et al.
+In some of the works discussed in Section \ref{onethree}, such as Y. Li
+et al. (\protect\hyperlink{ref-li2015}{2015}), Z. Yang et al.
 (\protect\hyperlink{ref-yang2016}{2016}) and Lozano et al.
 (\protect\hyperlink{ref-lozano2018}{2018}), the Root Mean Squared
 Logarithmic Error (RMSLE) is reported instead of the RMSE. Here, the
 natural logarithms of the observed and forecasted data values are used
 in the forecast error computation. The main reason for doing so, is that
-larger errors, usually occuring during peak hours or in areas/stations
+larger errors, usually occurring during peak hours or in areas/stations
 with a high usage intensity, do not dominate smaller errors.
 
-\subsubsection{2.4.2.7 Transformations}\label{transformations}
+\subsubsection{2.4.2.7 Transformations}\label{twofourtwoseven}
 
 Often, forecasts can be improved by using mathematical transformations,
-such that the original data is adjusted for some known patterns causing
+such that the original data are adjusted for some known patterns causing
 non-stationary and/or non-linear behaviour. That is, the data are
 transformed in advance, and the modelling and forecasting procedures are
 applied to the transformed data. After forecasting the transformed data,
@@ -1707,10 +1841,11 @@ transformation}, which suppresses larger fluctuations that occur when
 the level of the time series increases. Furthermore, they guarantee
 strictly positive forecasted values. The log transformed data
 \(\omega_{t}\), is derived by taking the natural logarithm of the
-original data \(y_{t}\), as showed in Equation 2.x.
-
-\[ \omega_{t} = \log y_{t} \]
-
+original data \(y_{t}\), as showed in Equation \eqref{eq:eq28}.
+\begin{equation}
+\omega_{t} = \log y_{t}
+\label{eq:eq28}
+\end{equation}
 However, care has to be taken when back transforming a log transformed
 forecast to the original scale. Intuitively, one would obtain the back
 transformed forecast \(\hat{y}_{t+h}\) by setting it equal to
@@ -1719,36 +1854,39 @@ assuming that the forecast distribution of \(\omega_{t+h}\),
 \(\Omega_{t+h}\), is normal, with mean \(\mu_{\Omega_{t+h}}\) and
 variance \(\sigma_{\Omega_{t+h}}^{2}\), then the forecast distribution
 of \(y_{t+h}\), \(Y_{t+h}\), follows a log-normal distribution, with
-mean \(\mu_{Y_{t+h}}\) as defined in Equation 2.x.
-
-\[ \mu_{Y_{t+h}} = e^{(\mu_{\Omega_{t+h}} + 0.5 \sigma_{\Omega_{t+h}}^{2})} \]
-
+mean \(\mu_{Y_{t+h}}\) as defined in Equation \eqref{eq:eq29}.
+\begin{equation}
+\mu_{Y_{t+h}} = e^{(\mu_{\Omega_{t+h}} + 0.5 \sigma_{\Omega_{t+h}}^{2})}
+\label{eq:eq29}
+\end{equation}
 For the proof of this theorem, see Dambolena, Eriksen, \& Kopcso
 (\protect\hyperlink{ref-dambolena2009}{2009}). Hyndman \& Athanasopoulos
 (\protect\hyperlink{ref-hyndman2018fpp}{2018}) refer to
 \(\mu_{Y_{t+h}}\) as the \emph{bias-adjusted point forecast}.
 
-\subsection{Naïve forecasts}\label{naive-forecasts}
+\subsection{Naïve forecasts}\label{twofourthree}
 
 It is common practice to compare the errors of forecasts obtained with a
-fitted model to those of forecasts obtained with a very simple
-forecasting method. Such a simple method, is in that case refered to as
-a \emph{baseline method}. If the more sophisticated model does not lead
-to considerably better forecast accuracies than the baseline, it can be
-dismissed (Hyndman \& Athanasopoulos,
+fitted time series model to those of forecasts obtained with a very
+simple forecasting method. Such a simple method, is in that case
+referred to as a \emph{baseline method}. If the more sophisticated model
+does not lead to considerably better forecast accuracies than the
+baseline, it can be dismissed (Hyndman \& Athanasopoulos,
 \protect\hyperlink{ref-hyndman2018fpp}{2018}).
 
 One of the simplest forecast methods around, often used as a baseline,
-is known as the naïve method. When forecasting with the naïve method,
-all forecasted values will be equal to the last observation, no matter
-how far the forecasting window \(h\) reaches, as shown in Equation 2.x.
-
-\[ \hat{y}_{t+h} = y_{t} \]
-
+is known as the \emph{naïve method}. When forecasting with the naïve
+method, all forecasted values will be equal to the last observation, no
+matter how far the forecasting window \(h\) reaches, as shown in
+Equation \eqref{eq:eq30}.
+\begin{equation}
+\hat{y}_{t+h} = y_{t}
+\label{eq:eq30}
+\end{equation}
 Where \(\hat{y}_{t+h}\) is the forecasted data value \(h\) time lags
 into the future, and \(y_{t}\) is the last observed data value.
 
-\subsection{Seasonal forecasts}\label{seasonal-forecasts}
+\subsection{Seasonal forecasts}\label{twofourfour}
 
 ARIMA models as described in section 2.4.2 are designed for data without
 a seasonal component. With some modifications, they can be applied to
@@ -1810,20 +1948,20 @@ to group similar time series into the same cluster (Keogh \& Lin,
 \protect\hyperlink{ref-keogh2005}{2005}). Logically, this involves the
 calculation of a measure that represents the similarity, or
 dissimilarity, between two time series. A wide range of such measures
-exist, some of them based directly on the observations in the time
-series, others on specific features of the time series, and others on
-parameters or residual characteristics of models fitted to the time
-series.
+exist, some of them based directly on the observations, others on
+specific features of the time series, and others on parameters or
+residual characteristics of models fitted to the time series.
 
 Whenever the time series are of the same length, and observed at the
 same timestamps, a simple dissimilarity measure can be calculated by
-summing the ordered point-to-point distances between them. The most used
-distance function, in this sense, is the Euclidean distance, as defined
-in Equation 2.x (Cassisi, Montalto, Aliotta, Cannata, \& Pulvirenti,
+summing the ordered point-to-point distances between them. A well-known
+distance function is the Euclidean distance, as defined in Equation
+\eqref{eq:eq31} (Cassisi, Montalto, Aliotta, Cannata, \& Pulvirenti,
 \protect\hyperlink{ref-cassisi2012}{2012}).
-
-\[ d(Y,X) = \sqrt{\sum_{t=1}^{n}(y_{t}-x_{t})^{2}} \]
-
+\begin{equation}
+d(Y,X) = \sqrt{\sum_{t=1}^{n}(y_{t}-x_{t})^{2}}
+\label{eq:eq31}
+\end{equation}
 Where \(d(X,Y)\) is the dissimilarity value between time series \(Y\)
 and \(X\), \(y_{t}\) and \(x_{t}\) are the observations in respectively
 \(Y\) and \(X\) at time \(t\), and \(n\) is the length of \(Y\) and
@@ -1849,14 +1987,14 @@ Once the dissimilarity values for all possible combinations between the
 analyzed time series are calculated, they are stored in an
 \(n \times n\) matrix, where \(n\) is the number of analyzed time
 series, and the diagonal entries equal zero. Such a matrix is commonly
-referred to as a dissimilarity matrix, and can be used to cluster the
-time series with conventional clustering algorithms. In time series
-analysis, k-means clustering and hierarchical clustering are the most
-popular options for this task (X. C. Wang, Smith, \& Hyndman,
+referred to as a dissimilarity matrix, and can be used inside
+conventional clustering algorithms. In time series analysis, k-means
+clustering and hierarchical clustering are the most popular options for
+this task (X. C. Wang, Smith, \& Hyndman,
 \protect\hyperlink{ref-wang2006}{2006}). The latter is used in this
-thesis, and its theory is summarized briefly in the next sub-section,
-based on G. Gan, Ma, \& Wu (\protect\hyperlink{ref-gan2007}{2007}),
-Chapter 7 and Chapter 17.
+thesis, and its theory is summarized briefly in the next section, based
+on G. Gan, Ma, \& Wu (\protect\hyperlink{ref-gan2007}{2007}), Chapter 7
+and Chapter 17.
 
 \subsection{Hierarchical clustering}\label{hierarchical-clustering}
 
@@ -1875,26 +2013,26 @@ clustering is the most popular of the two types, and forms the focus of
 this section.
 
 Again, defining a suitable dissimilarity measure is a core task in the
-process. The simplest way of doing so, is known as the \emph{single link
-method}, where the dissimilarity value between two clusters is defined
-as the shortest possible distance from a data point in the first
-cluster, to a data point in the second cluster. In contradiction, the
-\emph{complete link method} calculates the dissimilarity value as being
-the longest possible distance between them. Other methods include the
-\emph{group average method}, which calculates the average of the
-shortest distances between all possible pairs of data points, and the
-\emph{centroid method}, which calculates the shortest distance between
-the cluster centroids. In all cases, the Euclidean distance is commonly
-used as the distance function.
+process. A simple example is the \emph{single link method}, where the
+dissimilarity between two clusters is defined as the shortest distance
+between a data point in the first cluster and a data point in the second
+cluster. In contradiction, the \emph{complete link method} calculates
+the dissimilarity as being the longest possible distance between them.
+Other methods include the \emph{group average method}, which calculates
+the average of the shortest distances between all pairs of data points,
+and the \emph{centroid method}, which calculates the shortest distance
+between the cluster centroids. In all cases, the Euclidean distance is
+commonly used as the distance function.
 
 A more general approach is known as the \emph{Ward method}, developed by
 Ward Jr. (\protect\hyperlink{ref-ward1963}{1963}). In this method, the
 dissimilarity between two clusters is defined as the loss of information
 when the clusters are merged. The information loss of a merge between
-two clusters is quantified with Equation 2.x.
-
-\[ \Delta I = I(C_{m}) - I(C_{1}) - I(C_{2}) \]
-
+two clusters is quantified with Equation \eqref{eq:eq32}.
+\begin{equation}
+\Delta I = I(C_{m}) - I(C_{1}) - I(C_{2})
+\label{eq:eq32}
+\end{equation}
 Where \(\Delta I\) is the information loss, \(C_{m}\) is the merge
 between clusters \(C_{1}\) and \(C_{2}\), and \(I(C_{m})\), \(I(C_{1})\)
 and \(I(C_{2})\) are the information criteria of respectively \(C_{m}\),
@@ -1902,27 +2040,26 @@ and \(I(C_{2})\) are the information criteria of respectively \(C_{m}\),
 (\protect\hyperlink{ref-ward1963}{1963}) did not put a hard restriction
 on how such an information criterion should be quantified, but usually,
 it is set to be the \emph{error sum of squares}, calculated with
-Equation 2.x.
-
-\[ I(C) = \sum_{i = 1}^{n} (c_{i} - \mu(C))^{2} \]
-
+Equation \eqref{eq:eq33}.
+\begin{equation}
+I(C) = \sum_{i = 1}^{n} (c_{i} - \mu(C))^{2}
+\label{eq:eq33}
+\end{equation}
 Where \(c_{i}\) are the data points in \(C\), \(\mu(C)\) is the center
 of mass of \(C\), and \(n\) is the number of data points in \(C\). In
 other words, \(I(C)\) is the sum of the Euclidean distances from all
 data points in the cluster, to the center of mass of the cluster.
 
-Since a hierarchical clustering algorithm produces a sequence of
-partitions, it is not needed to define the desired number of clusters,
-\(k\), in advance. However, if one is interested in obtaining only one
-single partition, it is necessary to find a suitable value of \(k\). It
-is common practice to do so by visually interpreting the dendrogram of
-the hierarchical clustering, which is a diagram representing the output
-in a tree structure, but automated approaches have been developed as
-well. Most of them are based on the idea that in an ideal situation,
-clusters are compact and clearly separated from each other. However,
-minimizing the variance within the clusters will always favor the
-situation where each data point forms a cluster on its own, while
-maximizing the variance between the clusters will always favor the
+If one is interested in obtaining only one single partition, it is
+necessary to find a suitable value for the desired number of clusters
+\(k\). It is common practice to do so by visually interpreting the
+dendrogram of the hierarchical clustering, which is a diagram
+representing the output in a tree structure, but automated approaches
+have been developed as well. Most of them are based on the idea that in
+an ideal situation, clusters are compact and clearly separated from each
+other. However, minimizing the variance within the clusters will always
+favor the situation where each data point forms a cluster on its own,
+while maximizing the variance between the clusters will always favor the
 situation where all data points are together in one cluster. Therefore,
 most approaches combine those two operations, in order to find the best
 possible partition.
@@ -1932,10 +2069,11 @@ Dunn (\protect\hyperlink{ref-dunn1974}{1974}). For a specific partition
 into \(k\) clusters, it calculates the ratio of the smallest distance
 between two data points that are not in the same cluster to the largest
 distance between two data points that are in the same cluster. This is
-shown in Equation 2.x.
-
-\[ V(\Lambda_{k}) = \min \Bigg\{ \min \Bigg(\frac{D(C_{i}, C_{j})}{\max diam(C_{l})} \Bigg) \Bigg\} \]
-
+shown in Equation \eqref{eq:eq34}.
+\begin{equation}
+V(\Lambda_{k}) = \min \Bigg\{ \min \Bigg(\frac{D(C_{i}, C_{j})}{\max diam(C_{l})} \Bigg) \Bigg\}
+\label{eq:eq34}
+\end{equation}
 Where \(V(\Lambda_{k})\) is the Dunn Index of a partition
 \(\Lambda_{k}\) with \(k\) clusters, \(1 \leq i, j, l \leq k\),
 \(D(C_{i}, C_{j})\) is the Euclidean distance between a data point in
@@ -1945,8 +2083,7 @@ cluster \(C_{i} \in \Lambda_{k}\) and a data point in cluster
 points in cluster \(C_{l} \in \Lambda_{k}\). To find the optimal
 partition \(\Lambda_{k}^*\), the Dunn Index should be maximized.
 
-\subsection{Spatial time series
-clustering}\label{spatial-time-series-clustering}
+\subsection{Spatial time series clustering}\label{twofivethree}
 
 Spatial time series are time series with a spatial reference, i.e.~time
 series that are linked to geographical locations (Kamarianakis \&
@@ -1954,13 +2091,13 @@ Prastacos, \protect\hyperlink{ref-kamarianakis2005}{2005}). With such
 series, similarity can not only be expressed in terms of similar data
 values, but also in terms of spatial proximity. These two, however, are
 likely to be related, given the concept of spatial dependence, which is
-similar to the temporal autocorrelation described in section 2.2.1, in
-the sense that the structure of the correlation between random variables
-is derived from a specific ordering, determined by their relative
-position in geographic space (Anselin,
+similar to the temporal autocorrelation described in Section
+\ref{twotwoone}, in the sense that the structure of the correlation
+between random variables is derived from a specific ordering, determined
+by their relative position in geographic space (Anselin,
 \protect\hyperlink{ref-anselin2010}{2010}). Hence, time series linked to
 geographical locations that are close to each other, are likely to show
-similar patterns.
+similar temporal patterns.
 
 When clustering a set of spatial time series, it may be desired that the
 clusters are not only similar in data values, but also form spatially
@@ -1978,7 +2115,7 @@ forcing a strong spatial dependence on the time series.
 For this, Chavent, Kuentz-Simonet, Labenne, \& Saracco
 (\protect\hyperlink{ref-clustgeo}{2018}) developed a variation on the
 hierarchical clustering algorithm, called \emph{spatially constrained
-hierarchical clustering}, which is summarized in this sub-section. The
+hierarchical clustering}, which is summarized in this section. The
 algorithm takes two dissimilarity matrices as input. The first one gives
 the dissimilarity values in the \emph{feature space}, i.e.~the
 dissimilarities of the data values of the observations, while the latter
@@ -1988,14 +2125,13 @@ dissimilarities of the geographical locations of the observations.
 Spatially constrained hierarchical clustering uses a Ward-like method to
 define which clusters will be merged at each step, but with a different
 definition of the information criterion of a cluster, as shown in
-Equation 2.x.
-
-\[ 
+Equation \eqref{eq:eq35}.
+\begin{equation} 
 I(C) = 
 (1-\alpha)\sum_{i=1}^{n}(c_{i} - \mu(C))^{2} +
 \alpha\sum_{i=1}^{n}(c_{i}^{*} - \mu^{*}(C))^{2}
-\]
-
+\label{eq:eq35}
+\end{equation}
 Where \(c_{i}\) are the data points in \(C\), with normalized values
 taken from the feature space dissimilarity matrix, and \(\mu(C)\) is the
 center of mass of \(C\), computed with those values. \(c_{i}^{*}\) are
@@ -2005,15 +2141,15 @@ of mass of \(C\), computed with those values. Furthermore, \(n\) is the
 number of data points in \(C\) and \(\alpha\) is the mixing parameter,
 where \(0 \leq \alpha \leq 1\). Chavent et al.
 (\protect\hyperlink{ref-clustgeo}{2018}) also present more general
-approaches, in which the calculated distances in Equation 2.x are not
-necessarily Euclidean, and where observations can be weighted, but these
-are not covered in this thesis.
+approaches, in which the calculated distances in Equation \eqref{eq:eq35}
+are not necessarily Euclidean, and where observations can be weighted,
+but these are not covered in this thesis.
 
 With the information criterion of a single cluster calculated as in
-Equation 2.x, the information loss of a merge between two clusters is
-calculated in the same way as in regular Ward hierarchical clustering
-(Equation 2.x). Then, at each merging step, two clusters are merged such
-that the loss of information is minimized.
+Equation \eqref{eq:eq35}, the information loss of a merge between two
+clusters is calculated in the same way as in regular Ward hierarchical
+clustering (Equation \eqref{eq:eq33}). Then, at each merging step, two
+clusters are merged such that the loss of information is minimized.
 
 The mixing parameter \(\alpha\) plays a key role in spatially
 constrained hierarchical clustering. It sets the importance that is
@@ -2024,7 +2160,7 @@ clustered without any spatial constraint, while \(\alpha = 1\) leads to
 a clustering only based on the spatial location of the data points.
 Therefore, it is important to determine a suitable value for \(\alpha\).
 Chavent et al. (\protect\hyperlink{ref-clustgeo}{2018}) propose the
-following approach. First, \(alpha\) is set to zero, and a hierarchical
+following approach. First, \(\alpha\) is set to zero, and a hierarchical
 clustering without spatial constraint is performed. The resulting
 sequence of partitions is rendered as a dendrogram, and the optimal
 number of clusters \(k^{*}\) is defined visually. Then, several
@@ -2032,28 +2168,28 @@ spatially constrained hierarchical clustering procedures are performed,
 each with a different value of \(\alpha\), and \(k = k^{*}\). Since
 \(k\) is fixed, the outputs are always single partitions. For each
 cluster in such a partition the information criterion regarding the
-feature data (i.e.~the first part of Equation 2.x) and the information
-criterion regarding the constraint data (i.e.~the second part of
-Equation 2.x), are calculated separately, and also summed separately
-over all clusters in the partition. These two summed values are then
-plotted, with \(\alpha\) on the x-axis. In the end, this lead to a plot
-that shows the loss of information in the feature space and the gain of
-information in the constraint space, as \(\alpha\) gets larger. With
-such a plot, \(\alpha\) can be chosen such that the trade-off between
-the loss and gain of information in the two spaces is considered
-acceptable.
+feature data (i.e.~the first part of Equation \eqref{eq:eq35}) and the
+information criterion regarding the constraint data (i.e.~the second
+part of Equation \eqref{eq:eq35}), are calculated separately, and also
+summed separately over all clusters in the partition. These two summed
+values are then plotted, with \(\alpha\) on the x-axis. In the end, this
+lead to a plot that shows the loss of information in the feature space
+and the gain of information in the constraint space, as \(\alpha\) gets
+larger. With such a plot, \(\alpha\) can be chosen such that the
+trade-off between the loss and gain of information in the two spaces is
+considered acceptable.
 
-\chapter{System architecture}\label{system-architecture}
+\chapter{System architecture}\label{three}
 
 This chapter describes the methodology of DBAFS. It builds on the theory
-discussed in Chapter 2, and is structured as follows. In the first
-section, a general overview of the complete forecasting system is given.
-Section two presents the software that underlies DBAFS. The third,
-fourth and fifth section discusses the inputs to the system, including
-the computation that are done on the database server of the dockless
-bike sharing system. Subsequently, section six, seven and eight cover
-the detailed methodologies of all the distinct components of the system
-architecture separately.
+discussed in Chapter \ref{two}, and is structured as follows. In the
+first section, a general overview of the complete forecasting system is
+given. Section two presents the software that underlies DBAFS. The
+third, fourth and fifth section discusses the inputs to the system,
+including the computations that are done on the database server of the
+dockless bike sharing system. Subsequently, section six, seven and eight
+cover the detailed methodologies of all the distinct components of the
+system architecture separately.
 
 \section{Overall design}\label{overall-design}
 
@@ -2072,7 +2208,7 @@ challenges, DBAFS should be a \emph{fast} and \emph{automated} process
 that still produces as \emph{accurate} forecasts as possible. Optimizing
 all of them, is a utopia. Faster forecasts, will probably have a
 negative affect on the accuracy, and aiming for an automated procedure,
-means that models can not be manually updated and finetuned. The goal,
+means that models can not be manually updated and fine-tuned. The goal,
 therefore, is to find an acceptable compromise between the three
 requirements.
 
@@ -2095,12 +2231,14 @@ takes the model structure and parameters of the model point that is in
 the same cluster as the location of the forecast.
 
 The architecture of DBAFS builds on two main assumptions, one regarding
-the spatial dependence of the data, and the other regarding the temporal
+the spatial dependence in the data, and the other regarding the temporal
 dependence in the data. Firstly, it is assumed that the processes
-generating the historical data are spatially dependent, and moreover,
-similar enough at each location in a cluster to be described by the same
-model. Secondly, it is assumed that these processes do not change
-radically over a short time period, such that a model fitted to a set of
+generating the historical data are spatially dependent, such that
+spatially contiguous clusters containing areas with similar temporal
+patterns can be constructed, and moreover, that they are similar enough
+at each location in a cluster to be described by the same model.
+Secondly, it is assumed that these processes do not change radically
+over a short time period, such that a model fitted to a set of
 historical data, can still adequately describe new data coming from a
 location in the same cluster. Of course, these assumptions will not
 always be completely valid, but are made to obtain a reasonable
@@ -2118,26 +2256,27 @@ historical data has changed considerably, and will, in most cases, be
 much larger than \(n_{m}\). The cluster, model and forecast loops are
 all completely automated and do not require any manual interventions.
 The overall design of DBAFS as described above is summarized in Figure
-3.1. The inputs of the system, i.e.~the system area, database and
-forecast request, are covered in section 3.3, 3.4 and 3.5, respectively,
-while section 3.6, 3.7 and 3.8 describe the detailed designs of the
-three processing loops.
+\ref{fig:overalldesign}. The inputs of the system, i.e.~the system area,
+database and forecast request, are covered in Section \ref{threethree},
+\ref{threefour} and \ref{threefive}, respectively, while Section
+\ref{threesix}, \ref{threeseven} and \ref{threeeight} describe the
+detailed designs of the three processing loops.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Figures/Workflow} \caption{Overall design of DBAFS}\label{fig:overalldesign}
 \end{figure}
-\section{Software}\label{software}
+\section{Software}\label{threetwo}
 
-The underlying code of DBAFS (see Appendix A) is written in the R
+The underlying code of DBAFS (see Appendix \ref{aa}) is written in the R
 programming language (R Core Team,
 \protect\hyperlink{ref-rlanguage}{2013}). However, Structured Query
 Language (SQL) statements are nested within the R code to retrieve data
 from a PostgreSQL database (PostgreSQL,
 \protect\hyperlink{ref-postgres}{2014}), and to run some of the heavier
 data pre-processing computations on the database server. These
-computations are discussed in section 3.4.
+computations are discussed in Section \ref{threefour}.
 
-On top of functions that are included in R by default, DBAFS uses of
-several extensions, listed below.
+On top of functions that are included in R by default, DBAFS makes use
+of several extensions, listed below.
 \begin{itemize}
 \tightlist
 \item
@@ -2165,7 +2304,7 @@ several extensions, listed below.
   The \texttt{tsibble} package, for pre-processing time series datasets
   (E. Wang, Cook, \& Hyndman, \protect\hyperlink{ref-tsibble}{2018}).
 \end{itemize}
-\section{System area}\label{system-area}
+\section{System area}\label{threethree}
 
 Each dockless bike sharing system has a system area, in which the bikes
 can be used. Usually, leaving a bike outside of the system area, will
@@ -2178,15 +2317,15 @@ accepted filetypes include, among others, ESRI shapefiles, GeoPackage
 files and GeoJSON files. It is also possible to retrieve the feature
 from a PostgreSQL database.
 
-\section{Database}\label{database}
+\section{Database}\label{threefour}
 
 In a dockless bike sharing system, each bike is equipped with a Global
 Positioning System (GPS). Every \(i_{d}\) minutes, the geographical
 locations of all bikes are saved into a database, together with the
 corresponding timestamp. The locations of the bikes that are not in use
-at the current time, and thus available, are usually visible to the
-users of the system in a mobile application, and stored separately from
-the data regarding bikes that are in use.
+at the current time, and thus available, are visible to the users of the
+system in a mobile application, and stored separately from the data
+regarding bikes that are in use.
 
 The geographical location of a bike is spatial data, and should be
 stored as such. An advanced and open source database management system
@@ -2208,11 +2347,11 @@ Data are pre-processed on the database server, and only the data that
 are needed, are loaded into memory. In DBAFS, this pre-processing step
 involves two different procedures. The first one leads to data that
 contain information about the distance to the nearest bike for several
-timestamps in the past, and is discussed in the next sub-section, while
-the latter produces a dataset with all the bicycle pick-ups in the
-database, and is discussed in section 3.3.2.
+timestamps in the past, and is discussed in the next section, while the
+latter produces a dataset with all the bicycle pick-ups in the database,
+and is discussed in Section \ref{threefourtwo}.
 
-\subsection{Distance data}\label{distance-data}
+\subsection{Distance data}\label{threefourone}
 
 For a given location, the distance from that location to the nearest
 available bike is calculated for each timestamp \(t \in T\), where \(T\)
@@ -2232,15 +2371,14 @@ when data are queried for several locations at the same times, the
 resulting time series will always have the same length.
 
 The calculated distances are great-circle distances assuming a spherical
-earth a radius equal to the mean radius of the WGS84 ellipsoid, as
-showed in Equation 3.1.
-
-\[
+earth with a radius equal to the mean radius of the WGS84 ellipsoid, as
+showed in Equation \eqref{eq:eq36}.
+\begin{equation}
 L_{AB} = \frac{(2a+b)}{3} \times
 \frac{\pi}{180} \times
 arccos(sin\phi_{A}sin\phi_{B}+cos\phi_{A}cos\phi_{B}cos\Delta\lambda)
-\]
-
+\label{eq:eq36}
+\end{equation}
 Where \(L_{AB}\) is the great-circle distance between point \(A\) and
 point \(B\) in meters, \(\phi_{A}\) and \(\phi_{B}\) are the latitudes
 of respectively point \(A\) and \(B\) in degrees on the WGS84 ellipsoid,
@@ -2267,7 +2405,7 @@ feature contains a timestamp and the great-circle distance from the
 given location to the nearest available bike in meters. Such data are
 referred to in this thesis as \emph{distance data}.
 
-\subsection{Usage data}\label{usage-data}
+\subsection{Usage data}\label{threefourtwo}
 
 A pick-up is the moment that a user of the dockless bike sharing system
 unlocks a bike to make a trip. For the historical database containing
@@ -2291,7 +2429,7 @@ of pick-ups in an area represents the usage intensity of the bike
 sharing system. Such data are therefore referred to in this thesis as
 \emph{usage data}.
 
-Obviously, the procedure described in this sub-section has some
+Obviously, the procedure described in this section has some
 deficiencies. The removal of a bike by the system operator, for
 redistribution or maintenance purposes, is falsely considered to be a
 pick-up. Specific information about redistribution patterns can be
@@ -2303,7 +2441,7 @@ patterns into detail. Therefore, fully accurate data are not
 indispensable for this purpose, and the current procedure forms a
 sufficient basis.
 
-\section{Forecast request}\label{forecast-request}
+\section{Forecast request}\label{threefive}
 
 A forecast request is made by a user. DBAFS assumes such a request to be
 composed of the geographical coordinates of the location at which the
@@ -2313,7 +2451,7 @@ coordinate reference system that is included in the PROJ library
 can be expressed in any time zone that is included in the Time Zone
 database (Eggert \& Olson, \protect\hyperlink{ref-tz}{2018}).
 
-\section{Cluster loop}\label{cluster-loop}
+\section{Cluster loop}\label{threesix}
 
 The main purpose of the cluster loop is to find suitable locations for
 the model points. The loop starts by laying a grid with square cells of
@@ -2329,18 +2467,20 @@ dimensionality of the clustering task, each of those time series is
 simplified by averaging its values per hour of the week. This is
 followed by a min-max normalization, such that time series that show the
 same patterns over time, but with different means, will be considered
-similar. The normalized values are calculated with Equation 3.2.
-
-\[ \hat{y_{t}} = \frac{y_{t} - y_{min}}{y_{max} - y_{min}} \]
-
+similar. The normalized values are calculated with Equation
+\eqref{eq:eq37}.
+\begin{equation}
+\hat{y_{t}} = \frac{y_{t} - y_{min}}{y_{max} - y_{min}}
+\label{eq:eq37}
+\end{equation}
 Where \(\hat{y_{t}}\) is the normalized value of \(y_{t}\), \(y_{min}\)
 is the minimum value in the time series, and \(y_{max}\) is the maximum
 value in the time series. By definition, \(0 \leq \hat{y_{t}} \leq 1\).
 
 For all possible combinations of the \(n\) averaged, normalized time
 series, a dissimilarity value is calculated based on the Euclidean
-distance between the two series, as defined in Equation 2.x. Since all
-time series have the same length, and observations at the same
+distance between the two series, as defined in Equation \eqref{eq:eq31}.
+Since all time series have the same length, and observations at the same
 timestamps, the Euclidean approach is appropriate, and for the sake of
 simplicity, chosen over dynamic time warping. Furthermore, since
 out-of-phase similarities are ignored, areas where similar peaks and
@@ -2358,22 +2498,24 @@ neighbours, and \(b_{i,j} = 1\) otherwise.
 
 \(A\) and \(B\) are used as the dissimilarity matrices of respectively
 the feature space and the constraint space in a spatially constrained
-hierarchical clustering procedure, which was introduced in section
-2.5.3. Before the final clustering procedure can start, the number of
-clusters \(k\) and the value of the mixing parameter \(\alpha\) need to
-be set. DBAFS does this based on the approach proposed by Chavent et al.
-(\protect\hyperlink{ref-clustgeo}{2018}), which was discussed in section
-2.5.3, but replaces the manual interpretation of plots by a fully
-automated method, as described below.
+hierarchical clustering procedure, which was introduced in Section
+\ref{twofivethree}. Before the final clustering procedure can start, the
+number of clusters \(k\) and the value of the mixing parameter
+\(\alpha\) need to be set. DBAFS does this based on the approach
+proposed by Chavent et al. (\protect\hyperlink{ref-clustgeo}{2018}),
+which was discussed in Section \ref{twofivethree}, but replaces the
+manual interpretation of plots by a fully automated method, as described
+below.
 
 At first, only the dissimilarity values in the feature space are
 clustered, i.e.~a spatially constrained hierarchical clustering with
 \(\alpha = 0\) is performed, which results in a sequence of partitions
 \{\(\Lambda_{k}\)\}. For each \(k \in K\), where \(K\) is a finite set
 of strictly positive integers, the Dunn Index \(V(\Lambda_{k})\) of a
-specific partition \(\Lambda_{k}\) is calculated with Equation 2.x.
-Then, the value of \(k\) that maximizes \(V(\Lambda_{k})\) is chosen as
-the optimal value of \(k\), and is referred to as \(k^{*}\).
+specific partition \(\Lambda_{k}\) is calculated with Equation
+\eqref{eq:eq34}. Then, the value of \(k\) that maximizes
+\(V(\Lambda_{k})\) is chosen as optimal value of \(k\), and referred to
+as \(k^{*}\).
 
 Secondly, for each \(\omega \in \Omega\), where \(\Omega =\)
 \{\(0, 0.1, 0.2, ..., 1\)\}, a spatially constrained hierarchical
@@ -2384,9 +2526,10 @@ sum \(\sum I_{f}(C_{i}^{\omega})\) and the sum
 \(\sum I_{c}(C_{i}^{\omega})\) are calculated, where \(C_{i}^{\omega}\)
 are the clusters in \(\Lambda_{\omega}\), \(I_{f}\) is the information
 criterion regarding the feature data (i.e.~the first part of Equation
-2.x) and \(I_{c}\) is the information criterion regarding the constraint
-data (i.e.~the second part of Equation 2.x). Then, the value of
-\(\omega\) that maximizes \(\sum I_{c}(C_{i}^{\omega})\), given that
+\eqref{eq:eq35}) and \(I_{c}\) is the information criterion regarding the
+constraint data (i.e.~the second part of Equation \eqref{eq:eq35}). Then,
+the value of \(\omega\) that maximizes \(\sum I_{c}(C_{i}^{\omega})\),
+given that
 \(\big((\sum I_{f}(C_{i}^{\omega}) / \sum I_{f}(C_{i}^{0})\big) \geq 0.9\),
 is chosen as the optimal value of \(\alpha\), and referred to as
 \(\alpha^{*}\). That is, clusters are made as spatially contiguous as
@@ -2403,16 +2546,16 @@ consisting of more than one set of spatially connected grid cells, can
 occur in situations where striving for full spatial contiguity would
 lead to a too large information loss in the feature space, and thus,
 clusters that would not truly represent areas with similar patterns in
-the distance data. In such cases, all spatially contiguous areas in
-these clusters, will be treated as seperate clusters, with their own
-model point. However, this may lead to a high number of model points
-that each represent a very small area. When this area has a high usage
-intensity, the described situation is acceptable. When this area has a
-very low usage intensity, on the other hand, it is unwanted to have a
-seperate model point representing it. Therefore, whenever a cluster has
-a usage intensity of less than two bicycle pick-ups per day, it will be
-merged with the closest neighbouring cluster. which is found by
-minimizing the inter-centroid distance.
+the distance data. In such cases, all distinct spatially contiguous
+areas in these clusters, will be treated as separate clusters, with
+their own model point. However, this may lead to a high number of model
+points that each represent a very small area. When this area has a high
+usage intensity, the described situation is acceptable. When this area
+has a very low usage intensity, on the other hand, it is unwanted to
+have a separate model point representing it. Therefore, whenever a
+cluster has a usage intensity of less than two bicycle pick-ups per day,
+it will be merged with the closest neighbouring cluster. which is found
+by minimizing the inter-centroid distance.
 
 Now, each cluster is guaranteed to be spatially contiguous, and gets
 assigned one model point. Before the locations for the model points are
@@ -2421,13 +2564,16 @@ pick-ups is calculated for each grid cell. This number is assigned as a
 variable to the corresponding grid cell centroids. Then, for each
 cluster, the arithmetic means of the coordinates of all grid cell
 centroids in that cluster, are calculated, weighted by the number of
-pick-ups. Equation 3.3 shows the calculation of the weighted average
-latitude of a cluster, while Equation 3.4 shows the calculation of the
-weighted average longitude of a cluster.
-
-\[ \phi^{*} = \frac{\sum_{i=1}^{m} \phi_{i} \times p_{i}}{\sum_{i=1}^{m} p_{i}} \]
-\[ \lambda^{*} = \frac{\sum_{i=1}^{m} \lambda_{i} \times p_{i}}{\sum_{i=1}^{m} p_{i}} \]
-
+pick-ups. Equation \eqref{eq:eq38} shows the calculation of the weighted
+average latitude of a cluster, while Equation \eqref{eq:eq39} shows the
+calculation of the weighted average longitude of a cluster.
+\begin{equation}
+\phi^{*} = \frac{\sum_{i=1}^{m} \phi_{i} \times p_{i}}{\sum_{i=1}^{m} p_{i}}
+\label{eq:eq38}
+\end{equation}\begin{equation}
+\lambda^{*} = \frac{\sum_{i=1}^{m} \lambda_{i} \times p_{i}}{\sum_{i=1}^{m} p_{i}}
+\label{eq:eq39}
+\end{equation}
 Where \(\phi^{*}\) and \(\lambda^{*}\) are respectively the weighted
 average latitude and the weighted average longitude of the cluster,
 \(\phi_i\) and \(\lambda_{i}\) are respectively the latitude and
@@ -2445,11 +2591,12 @@ send to the model loop. Finally, for each cluster, grid cells are first
 dissolved, and then clipped by the system area, to form one geographic
 outline of that cluster. The geographic outlines of all clusters, stored
 as polygons, are send to the forecast loop. The complete methodology of
-the cluster loop as described above is summarized in Figure 3.2.
+the cluster loop as described above is summarized in Figure
+\ref{fig:clusterloop}.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Figures/Clusterloop} \caption{Methodology of the cluster loop}\label{fig:clusterloop}
 \end{figure}
-\section{Model loop}\label{model-loop}
+\section{Model loop}\label{threeseven}
 
 The main purpose of the model loop is to fit time series models to the
 historical data of a limited set of geographical locations. These
@@ -2461,17 +2608,17 @@ forecasting, the forecasted distances will always be larger than zero.
 
 If the data are seasonal, they will pass through the decomposition
 process sequence. There, they will be decomposed into a trend, seasonal
-and remainder component with STL, as introduced in section 2.3.3. Single
-seasonal data, with either a daily or a weekly seasonal pattern, will be
-decomposed once. Multiple seasonal data, that show both a daily and a
-weekly seasonal pattern, will first be decomposed assuming that only
-daily seasonality is present, after which the trend and remainder
-component are added together, and decomposed again, now assuming weekly
-seasonality. Hence, such data are eventually decomposed in a trend,
-remainder and two seasonal components. Since STL is performed on the log
-transformation of the original data, this indirectly implies that the
-original data are decomposed in a multiplicative way, as explained at
-the end of section 2.3.3.
+and remainder component with STL, as introduced in Section
+\ref{twothreethree}. Single seasonal data, with either a daily or a
+weekly seasonal pattern, will be decomposed once. Multiple seasonal
+data, that show both a daily and a weekly seasonal pattern, will first
+be decomposed assuming that only daily seasonality is present, after
+which the trend and remainder component are added together, and
+decomposed again, now assuming weekly seasonality. Hence, such data are
+eventually decomposed in a trend, remainder and two seasonal components.
+Since STL is performed on the log transformation of the original data,
+this indirectly implies that the original data are decomposed in a
+multiplicative way.
 
 STL requires a set of parameters to be defined in advance. For most of
 them, there exist clear guidelines for the choice of their values,
@@ -2539,13 +2686,13 @@ the log transformation. Both types are from now on referred to as the
 
 In the ARIMA process sequence, an ARIMA(\(p\), \(d\), \(q\)) model is
 fitted to the non-seasonal data, by applying the Hyndman-Khandakar
-algorithm, as described in section 2.4.2.2. In R, the Hyndman-Khandakar
-algorithm is implemented in the \texttt{auto.arima} function from the
-\texttt{forecast} package, with the extra restriction that the order of
-differencing \(d\) is not allowed to be larger than two. It also allows
-missing values, by handling them exactly. This is an important
-characteristic, since it means that models will be fitted even if some
-observations are missing due to server errors.
+algorithm, as described in Section \ref{twofourtwotwo}.2. In R, the
+Hyndman-Khandakar algorithm is implemented in the \texttt{auto.arima}
+function from the \texttt{forecast} package, with the extra restriction
+that the order of differencing \(d\) is not allowed to be larger than
+two. It also allows missing values, by handling them exactly. This is an
+important characteristic, since it means that models will be fitted even
+if some observations are missing due to server errors.
 
 To determine if the data of a model point should pass through the
 decomposition process sequence, and if yes, how many seasonal components
@@ -2553,10 +2700,18 @@ should be subtracted, it is necessary to first identify the seasonal
 patterns in the data. This is done with a variation on what Hyndman \&
 Athanasopoulos (\protect\hyperlink{ref-hyndman2018fpp}{2018}) refer to
 as \emph{time series cross-validation}, and works as follows. Four
-different seasonality options are considered: no seasonality, only daily
-seasonality, only weekly seasonality, and both daily and weekly
-seasonality.
-
+different seasonality options are considered:
+\begin{itemize}
+\tightlist
+\item
+  no seasonality
+\item
+  only daily seasonality
+\item
+  only weekly seasonality
+\item
+  both daily and weekly seasonality.
+\end{itemize}
 Then, the first two of the \(n_{w}\) weeks of data are selected and
 log-transformed. Four different models are fitted to these data, each
 assuming a different seasonality option. That is, when the option of no
@@ -2597,13 +2752,13 @@ weekly seasonality, or zero, in the case of no seasonality. The chosen
 values \(p\), \(d\) and \(q\) of the ARIMA model, the estimated
 parameter values \(\hat\phi_{1},...,\hat\phi_{p}\) and
 \(\hat\theta_{1},...,\hat\theta_{q}\) of the ARIMA model, and the
-identified length of the seasonal period, \(L_{s}\), are all send to the
+identified length of the seasonal period, \(L_{s}\), are send to the
 forecast loop. The complete methodology of the model loop as described
-above is summarized in Figure 3.4.
+above is summarized in Figure \ref{fig:modelloop}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Figures/Modelloop} \caption{Methodology of the model loop}\label{fig:modelloop}
 \end{figure}
-\section{Forecast loop}\label{forecast-loop}
+\section{Forecast loop}\label{threeeight}
 
 The main purpose of the forecast loop is to produce a forecast whenever
 it is requested by a user. The forecasting task is split in two:
@@ -2614,17 +2769,18 @@ intersected with the clusters that resulted from a previous pass through
 the cluster loop. This process returns the cluster in which the
 requested forecast location lies. Subsequently, the model structure and
 parameters from the model that belongs to this specific cluster, are
-taken from a previous pass through the model loop. Since the clusters
-represent areas with similar patterns in the data, but not necessarily
-with similar means, the inherited model structure only provides the
-length of the seasonal patterns, and not the values corresponding to
-each season. Therefore, for the location of the forecast request,
-\(m_{f}\) weeks of distance data are queried, which will be used for
-seasonal decomposition, whenever the inherited model structure has an
-identified seasonality. The length of these data should be at least
-twice the length of the longest seasonal pattern, plus one observation.
-For example, when a weekly seasonality is present in hourly data, the
-data needed for forecasting should at least contain
+taken from a previous pass through the model loop.
+
+Since the clusters represent areas with similar patterns in the data,
+but not necessarily with similar means, the inherited model structure
+only provides the length of the seasonal patterns, and not the values
+corresponding to each season. Therefore, for the location of the
+forecast request, \(m_{f}\) weeks of distance data are queried, which
+will be used for seasonal decomposition, whenever the inherited model
+structure has an identified seasonality. The length of these data should
+be at least twice the length of the longest seasonal pattern, plus one
+observation. For example, when a weekly seasonality is present in hourly
+data, the data needed for forecasting should at least contain
 \(24 \times 7 \times 2 + 1 = 337\) observations.
 
 The queried distance data are log-transformed. Then, they are decomposed
@@ -2632,9 +2788,10 @@ by STL, using the identified seasonal period length(s) \(L_{s}\), which
 is stored in the provided model structure. When \(L_{s} = 0\), this
 decomposition step is skipped, and the data are treated in the same way
 as the combination of trend and remainder that outputs from STL. Both
-types are referred to as the \emph{non-seasonal data}. With the
-ARIMA(\(p\), \(d\), \(q\)) model that was taken from the model loop, the
-non-seasonal data are forecasted \(h\) time lags ahead.
+types are referred to as the \emph{non-seasonal data}.
+
+With the ARIMA(\(p\), \(d\), \(q\)) model that was taken from the model
+loop, the non-seasonal data are forecasted \(h\) time lags ahead.
 \(h = (T_{f} - T_{c}) / i_{s}\), where \(i_{s}\) is the temporal
 resolution of the pre-processed distance data, \(T_{c}\) is the
 timestamp in the distance data that is closest to the time at which the
@@ -2642,50 +2799,54 @@ forecast request was send and \(T_{f}\) is the last timestamp in the
 interval
 \{\(T_{c}, T_{c} + i_{s}, T_{c} + 2i_{s}, T_{c} + 3i_{s}, ..., T_{c} + ki_{s} | T_{c} + ki_{s} \leq T_{r}\)\},
 where \(T_{r}\), in turn, is the time for which the forecast is
-requested. For example, the distance data contains values for each
-quarter of an hour, the forecast request was send at 15:48, and the
-forecast is requested for 16:40. Then, \(T_{c}\) will be 15:45, the last
-timestamp in the queried distance data, and \(T_{f}\) will be 16:30, the
-last quarterly hour timestamp before the requested forecast time. Hence,
-\(h = 3\). That is, a forecast meant for 16:40, will in that case
-effectively be a forecast for 16:30. The values of \(p\), \(d\), and
-\(q\) in the ARIMA model are inherited from the model structure provided
-by the model loop, just as the estimated parameter values
-\(\hat\phi_{1},...,\hat\phi_{p}\) and
+requested. For example, imagine a situation in which the distance data
+contain values for each quarter of an hour, the forecast request was
+send at 15:48, and the forecast is requested for 16:40. Then, \(T_{c}\)
+will be 15:45, the last timestamp in the queried distance data, and
+\(T_{f}\) will be 16:30, the last quarterly hour timestamp before the
+requested forecast time. Hence, \(h = 3\). That is, a forecast meant for
+16:40, will in that case effectively be a forecast for 16:30. The values
+of \(p\), \(d\), and \(q\) in the ARIMA model are inherited from the
+model structure provided by the model loop, just as the estimated
+parameter values \(\hat\phi_{1},...,\hat\phi_{p}\) and
 \(\hat\theta_{1},...,\hat\theta_{q}\).
 
 For the data that were decomposed, the seasonal component is forecasted
 separately. This is done with a seasonal naïve forecasting method, as
-described in section 2.x. Then, the point forecast of the seasonal
-component is added to the point forecast of the non-seasonal data, to
-construct reseasonalized point forecast. The seasonal point forecast is
-also added to the upper and lower bounds of the prediction intervals, to
-construct reseasonalized prediction intervals. That is, the prediction
-intervals of the non-seasonal data are shifted in line with the point
-forecast, but do not get wider. Hence, the uncertainty of the seasonal
-forecasts is not included in the final prediction intervals. This keeps
-calculations simple, and is a reasonable approach, according to Hyndman
-\& Athanasopoulos (\protect\hyperlink{ref-hyndman2018fpp}{2018}).
+described in Section \ref{twofourfour}. Then, the point forecast of the
+seasonal component is added to the point forecast of the non-seasonal
+data, to construct a reseasonalized point forecast. This point forecast
+is backtransformed with bias-adjustment, to the original scale of the
+data, as explained in Section \ref{twofourtwoseven}.7. The seasonal
+point forecast is also added to the upper and lower bounds of the
+prediction intervals, to construct reseasonalized prediction intervals,
+which are backtransformed with bias-adjustment as well. That is, the
+prediction intervals of the non-seasonal data are shifted in line with
+the point forecast, but do not get wider. Hence, the uncertainty of the
+seasonal forecasts is not included in the final prediction intervals.
+This keeps calculations simple, and is a reasonable approach, according
+to Hyndman \& Athanasopoulos
+(\protect\hyperlink{ref-hyndman2018fpp}{2018}).
 
 The forecasted distance to the nearest available bike, for the requested
 time and location, together with the corresponding 95\% prediction
 interval, forms the output of DBAFS, and is send back to the user. The
 complete methodology of the forecast loop as described above is
-summarized in Figure 3.5.
+summarized in Figure \ref{fig:forecastloop}.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Figures/Forecastloop} \caption{Methodology of the forecast loop}\label{fig:forecastloop}
 \end{figure}
-\chapter{Data and experimental
-design}\label{data-and-experimental-design}
+\chapter{Data and experimental design}\label{four}
 
 This chapter describes the case study that was done to test the
 performance of DBAFS. It is structured as follows. First, the
 characteristics of the bike sharing system that served as a data source
 for the experiment, are presented. The data retrieval process is
-described in section two. Finally, the third section explains into
-detail the methodology of the experiment itself.
+described in section two. The third section explains into detail the
+methodology of the experiment itself. Finally, in the fourth section,
+the additional software packages used in the experiment are listed.
 
-\section{Data source}\label{data-source}
+\section{Data source}\label{fourone}
 
 DBAFS' forecasting power was evaluated with data from the dockless PBSS
 of San Francisco, California. The system there is exploited by JUMP
@@ -2698,15 +2859,15 @@ All provided bicycles have electric pedal assistance, up to a maximum
 speed of 32 km per hour.
 
 In January 2018, the San Francisco Municipal Transportation Agency
-(SFMTA) offered JUMP Bikes the city's first offical, exclusive permit to
-operate a dockless PBSS, for an 18 month trial period, in order to
+(SFMTA) offered JUMP Bikes the city's first official, exclusive permit
+to operate a dockless PBSS, for an 18 month trial period, in order to
 ``evaluate, collect data, and assess whether further increases would
 serve the public interest'' (Jose,
 \protect\hyperlink{ref-sfmta2018one}{2018}\protect\hyperlink{ref-sfmta2018one}{a}).
 SFMTA allowed up to 250 bikes in a system area of approximately 47
-km\(^2\), which is shown in Figure 4.1. After nine months, a mid-point
-evaluation lead to the allowance of expanding the fleet to 500 bikes
-(Jose,
+km\(^2\), which is shown in Figure \ref{fig:systemarea}. After nine
+months, a mid-point evaluation lead to the allowance of expanding the
+fleet to 500 bikes (Jose,
 \protect\hyperlink{ref-sfmta2018two}{2018}\protect\hyperlink{ref-sfmta2018two}{b}).
 
 The JUMP Bikes system in San Francisco, works as follows. A user needs
@@ -2723,7 +2884,7 @@ In that case, the bike will not be labeled as available anymore, and can
 not be taken by another user. However, the trip clock starts ticking
 from the moment of reservation. When a user wants to stop somewhere
 during a ride, the bike can be put `on-hold' for maximum an hour,
-meaning that the bike stays inavailable during the stop. Also in this
+meaning that the bike stays unavailable during the stop. Also in this
 case, the regular fee will be charged. When ending the ride, the bike
 needs to be locked legally to a fixed object. Not doing so, will result
 in a fee of \$25. Additionally, leaving the bike outside of the system
@@ -2732,9 +2893,9 @@ area, results in a \$25 fee as well (Harris,
 
 Since all JUMP bikes are electric, battery life forms an important
 issue. A fully charged bike can travel 48 to 64 kilometers with the
-pedal assist. Bikes with a batterly level of less than 25\% are
+pedal assist. Bikes with a battery level of less than 25\% are
 collected, and charged. Furthermore, other bikes are regularly charged
-during nightime. Charging takes in most cases about four to six hours,
+during nighttime. Charging takes in most cases about four to six hours,
 and is done in a JUMP Bikes depot. Some of the charged bikes are placed
 outside of the depot, where they can be picked up, while others are
 redistributed over the system area. In the near future, this process
@@ -2746,7 +2907,7 @@ depot (Foley, \protect\hyperlink{ref-foley2018}{2018}).
 In the first year of the trial period, 63000 users took over 625000
 trips. On average, trips were 4.2 kilometers long, while around 1\% of
 the trips, exceeded 24 kilometers. Each individual bike, was on average
-used seven times per day. In september 2018, this was over eight times
+used seven times per day. In September 2018, this was over eight times
 per day. Even when the size of the fleet doubled in October 2018, the
 utilization remained consistent until the first half of November, when
 it started to decrease slightly, due to cold weather (Rzepecki,
@@ -2760,56 +2921,56 @@ for efficient rebalancing, and accurate bike availability forecasts.
 
 JUMP Bikes provided access to a database containing the geographical
 locations of their available bikes in San Francisco. The database
-fulfilled all DBAFS requirements described in section 3.4. Data
-collection started at September 9th, 2018, 15:41:08, Pacific Daylight
-Saving Time (PDT). The data had a temporal resolution of one minute,
-meaning that every minute, the location of each available bike in the
-system was recorded. Timestamps were stored with six-digit precision.
-Because of that, the time of recording was not exactly the same for each
-available bike, but could vary up to a few seconds. Therefore, before
-using the data in DBAFS, all timestamps were truncated to minute
-precision.
+fulfilled all DBAFS requirements described in Section \ref{threefour}.
+Data collection started at September 9th, 2018, 15:41:08, Pacific
+Daylight Saving Time (PDT). The data had a temporal resolution of one
+minute, meaning that every minute, the location of each available bike
+in the system was recorded. Timestamps were stored with six-digit
+precision. Because of that, the time of recording was not exactly the
+same for each available bike, but could vary up to a few seconds.
+Therefore, before using the data in DBAFS, all timestamps were truncated
+to minute precision.
 
-\subsection{Distance data}\label{distance-data-1}
+\subsection{Distance data}\label{distance-data}
 
 When calculating distances, only the historical data at every quarter of
 an hour were used in the experiment. Hence, \(i_{s}\) was set equal to
-fifteen minutes. There were several reasons for this choice. Firstly, it
-is not expected that the data change drastically from minute to minute.
+15 minutes. There were several reasons for this choice. Firstly, it is
+not expected that the data change drastically from minute to minute.
 That is, using data with a temporal resolution of one minute will
 probably not contain a lot more information than using data with a
-temporal resolution of fifteen minutes. Consequently, if a forecast for
-a specific timestamp is in practice a forecast for a few minutes
-earlier, this will not be problematic. On the other hand, using only
-data every fifteen minutes will decrease the size of the data with a
-factor fifteen, and speed up computations considerably. Furthermore, a
-lower order ARIMA(\(p\), \(d\), \(q\)) model can be used to capture the
-same patterns in the data. This is important, since lower order models
-will result in lower errors arising from parameter estimation (Brockwell
-\& Davis, \protect\hyperlink{ref-brockwell2002}{2002}). After defining
+temporal resolution of 15 minutes. Consequently, if a forecast for a
+specific timestamp is in practice a forecast for a few minutes earlier,
+this will not be problematic. On the other hand, using only data every
+15 minutes will decrease the size of the data with a factor 15, and
+speed up computations considerably. Furthermore, a lower order
+ARIMA(\(p\), \(d\), \(q\)) model can be used to capture the same
+patterns in the data. This is important, since lower order models will
+result in lower errors arising from parameter estimation (Brockwell \&
+Davis, \protect\hyperlink{ref-brockwell2002}{2002}). After defining
 \(i_{s}\), distance data pre-processing steps on the JUMP Bikes database
-server were taken as described in section 3.4.1.
+server were taken as described in Section \ref{threefourone}.
 
-\subsection{Usage data}\label{usage-data-1}
+\subsection{Usage data}\label{usage-data}
 
 Based on the specific knowledge of the JUMP Bikes system presented in
-section 4.1, an extra restriction was added to the in section 3.4.2
-described process of retrieving pick-ups from the original data. If a
-feature that was initially considered to be a pick-up, was not followed
-by a drop-off within a two hour timeframe, the feature was removed from
-the usage data. Taking into account the average trip length of only 4.6
-kilometers, the fact that trips become more expensive after half an
-hour, the maximum allowed reservation time of 30 minutes, and the
-maximum allowed `on-hold'-time of one hour, the threshold of two hours
-was considered to be a safe border. In this way, pick-ups that occur
-because the system operator is collecting bikes to be charged
-(i.e.~pick-ups that do not reflect the usage intensity of the system),
-were taken out.
+Section \ref{fourone}, an extra restriction was added to the in Section
+\ref{threefourtwo} described process of retrieving pick-ups from the
+original data. If a feature that was initially considered to be a
+pick-up, was not followed by a drop-off within a two hour timeframe, the
+feature was removed from the usage data. Taking into account the average
+trip length of only 4.6 kilometers, the fact that trips become more
+expensive after half an hour, the maximum allowed reservation time of 30
+minutes, and the maximum allowed `on-hold'-time of one hour, the
+threshold of two hours was considered to be a safe border. In this way,
+pick-ups that occur because the system operator is collecting bikes to
+be charged (i.e.~pick-ups that do not reflect the usage intensity of the
+system), were taken out.
 
 Of course, there may have been some real trips that were longer than two
 hours. However, given that during the first year of the trial period
 only 1\% of the trips exceeded a distance of 24 kilometers, and the
-electric pedal assitance allows a speed of more than 30 kilometers per
+electric pedal assistance allows a speed of more than 30 kilometers per
 hours, this was assumed to be a negligible share of the total number of
 trips.
 
@@ -2817,30 +2978,32 @@ trips.
 
 \subsection{Training and test periods}\label{training-and-test-periods}
 
-As mentioned in section 4.1, usage of the JUMP Bikes system in San
-Francisco remained rather constant in September, October, and the start
-of November. An exploratory analysis on the distance data at several
-locations in the system area enabled to draw similar conclusions, with a
-sudden change in temporal patterns after mid-November. Recall that in
-DBAFS, parameter \(n_{w}\), the number of weeks between two passes
-through the model loop, should be chosen such that an `old' model is not
-used anymore when the patterns in the historical data have changed
-considerably. Therefore, to test the performance of DBAFS in an adequate
-way, both the period used for model building, called the \emph{training
-period}, and the period used for forecasting, called the \emph{test
-period}, should preferably fall within a timeframe where no large
-changes in the data patterns occur. However, they should not overlap
-each other either, since the forecasting performance of a model can only
-be truly evaluated when forecasts are made for data that the model has
-not seen yet.
+As mentioned in Section \ref{fourone}, usage of the JUMP Bikes system in
+San Francisco remained rather constant in September, October, and the
+start of November. An exploratory analysis on the distance data at
+several locations in the system area enabled to draw similar
+conclusions, with a sudden change in temporal patterns after
+mid-November. Recall that in DBAFS, parameter \(n_{w}\), the number of
+weeks between two passes through the model loop, should be chosen such
+that an `old' model is not used anymore when the patterns in the
+historical data have changed considerably. Therefore, to test the
+performance of DBAFS in an adequate way, both the period used for model
+building, called the \emph{training period}, and the period used for
+forecasting, called the \emph{test period}, should preferably fall
+within a timeframe where no large changes in the data patterns occur.
+However, they should not overlap each other either, since the
+forecasting performance of a model can only be truly evaluated when
+forecasts are made for data that the model has not seen yet.
 
 The training period, used to query data for both the cluster and model
-loop, spanned the first four full weeks (i.e.~2688 observations) in the
-data collection period, from Monday September 17th, 2018, 00:00:00 PDT,
-up to and including Sunday 13th, 2018, 23:45:00 PDT, as shown in Figure
-4.2. Hence, a situation was simulated in which the weeks of data used
-for clustering \(m_{c}\), and the weeks of data used for model building,
-\(m_{m}\) were both set to be four weeks. Taking into account the size
+loop, spanned the first four full weeks plus one observation (i.e.~2689
+observations) in the data collection period, from Sunday September 16th,
+2018, 23:45:00 PDT, up to and including Sunday October 13th, 2018,
+23:45:00 PDT, as shown in Figure \ref{fig:traintest}. Hence, a situation
+was simulated in which the weeks of data used for clustering, i.e.
+\(m_{c}\), and the weeks of data used for model building, i.e.
+\(m_{m}\), were both set to be four weeks. \(p\), the side length of the
+square grid cells, was set to 500 meters. Taking into account the size
 and shape of the system area, along with some exploratory research on
 the demographic characteristics of San Francisco, \(K\), the set of
 integers containing all values considered as the number of desired
@@ -2848,15 +3011,15 @@ clusters \(k\), was chosen to be \{\(3, 4, 5, ..., 10\)\}.
 
 The obtained model structures and parameters resulting from the model
 loop, were used to make several forecasts during a test period of one
-week. For each forecast, two weeks of distance data were retrieved from
-the database, such that in the case of a weekly seasonality, a
-sufficient amount of data would be present for decomposition. Hence,
-\(m_{f} = 2\). To make sure that in no case the data used for
-forecasting would overlap with the data used for model building, a two
-week period seperated the training and test period. That is, the test
-week ranged from Monday October 29th, 00:00:00 PDT, up to and including
-Sunday November 4th, 2018, 23:45:00 Pacific Standard Time (PST), as
-shown in Figure 4.2.
+week. For each forecast, two weeks of distance data, plus one
+observation, were retrieved from the database, such that in the case of
+a weekly seasonality, a sufficient amount of data would be present for
+decomposition. Hence, \(m_{f} = 2\). To make sure that in no case the
+data used for forecasting would overlap with the data used for model
+building, a two week period separated the training and test period. That
+is, the test week ranged from Monday October 29th, 00:00:00 PDT, up to
+and including Sunday November 4th, 2018, 23:45:00 PST, as shown in
+Figure \ref{fig:traintest}.
 
 Defining where and when to forecasts, was done by simulating real-world
 forecast requests, and sending them to the forecast loop. To do this in
@@ -2893,8 +3056,8 @@ Starting from the timestamp of the test point, all time lags up to one
 day ahead, i.e.~96 time lags in total, were forecasted. Having 500 test
 points, in total, 48000 forecasts were made. To evaluate their
 performance, historical distance data for all forecasted time lags were
-retrieved from the database, and the forecast RMSE (see section 2.4.2.6)
-was calculated for each test point seperately.
+retrieved from the database, and the forecast RMSE (see Section
+\ref{twofourtwosix}.6) was calculated for each test point separately.
 
 By using the approach described above, the reported overall forecast
 errors will be dominated by those made during peak hours, when obtaining
@@ -2908,28 +3071,29 @@ system.
 
 To examine the forecasting power of DBAFS in a relative manner, all test
 points were also forecasted 96 time lags ahead with a simple baseline
-method. The naïve method, as described in section 2.4.3, was chosen for
-this task. Therefore, the baseline forecasting system will from now on
-be referred to as the Naïve Forecasting System (NFS). For each test
-point, the RMSE's of the forecasts of NFS were calculated, and compared
-to those of DBAFS.
+method. The naïve method, as described in Section \ref{twofourthree},
+was chosen for this task. Therefore, the baseline forecasting system
+will from now on be referred to as the Naïve Forecasting System (NFS).
+For each test point, the RMSE's of the forecasts of NFS were calculated,
+and compared to those of DBAFS.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Figures/traintest} \caption{Training and test period}\label{fig:traintest}
 \end{figure}
 \subsection{Additional software}\label{additional-software}
 
-On top of those mentioned in section 3.2, some additional R packages
-were used for reporting the results of the experiment, as listed below.
+On top of those mentioned in Section \ref{threetwo}, some additional R
+packages were used for reporting the results of the experiment, as
+listed below.
 \begin{itemize}
 \tightlist
 \item
-  The \texttt{tsibblestats} package (Hyndman, O'Hara-Wild, \& Wang,
-  \protect\hyperlink{ref-tsibblestats}{2018}) was used to estimate the
-  ACF (see section 2.2.1) of time series.
+  The \texttt{feasts} package (Hyndman, O'Hara-Wild, \& Wang,
+  \protect\hyperlink{ref-feasts}{2019}) was used to estimate the ACF
+  (see Section \ref{twotwoone}) of time series.
 \item
   The \texttt{tsfeatures} package (Hyndman, Kang, Talagala, Wang, \&
   Yang, \protect\hyperlink{ref-tsfeatures}{2019}) was used to calculate
-  the spectral entropy (see section 2.2.3) of time series.
+  the spectral entropy (see Section \ref{twotwothree}) of time series.
 \item
   Data and results were visualized graphically with the \texttt{ggplot2}
   package (Wickham, \protect\hyperlink{ref-ggplot}{2016}). Additionally,
@@ -2950,43 +3114,46 @@ were used for reporting the results of the experiment, as listed below.
   color scheme from the \texttt{ggsci} package (Xiao,
   \protect\hyperlink{ref-ggsci}{2018}) was used.
 \end{itemize}
-For the R code used in the experiment, see Appendix A.
+For the R code used in the experiment, see Appendix \ref{aa}.
 
-\chapter{Results and discussion}\label{results-and-discussion}
+\chapter{Results and discussion}\label{five}
 
 This chapter presents and discusses the results of the experiment
-described in Chapter 4. It is structured as follows. The first section
-shows the clusters that resulted from the cluster loop, along with their
-main characteristics, and the chosen locations of the model points.
-Section two presents the structure of the models that were build in the
-model loop, and the residual diagnostics for each them. Then, the third
-section focuses on the accuracies of the forecasts, and their patterns
-in both space and time. Finally, in the fourth section, the limitations
-of DBAFS are discussed, and recommendations for possible improvements
-are given.
+described in Chapter \ref{four}. It is structured as follows. The first
+section shows the clusters that resulted from the cluster loop, along
+with their main characteristics, and the chosen locations of the model
+points. Section two presents the structures of the models that were
+build in the model loop, and the residual diagnostics for each them.
+Then, the third section focuses on the accuracies of the forecasts, and
+their patterns in both space and time. Finally, in the fourth section,
+the limitations of DBAFS are discussed, and recommendations for possible
+improvements are given.
 
 \section{Clustering}\label{clustering}
 
-Figure 5.1a shows the grid overlaying the JUMP Bikes system area in San
-Francisco, including the centroid of each grid cell. In total, the grid
-contains 249 cells, each 500 meter high and 500 meter wide.
+Figure \ref{fig:mapandgrid}a shows the grid overlaying the JUMP Bikes
+system area in San Francisco, including the centroid of each grid cell.
+In total, the grid contains 249 cells, each 500 meter high and 500 meter
+wide.
 
-Figure 5.1b shows the calculated number of pick-ups per grid cell,
-during the training period. On average, there were 218 pick-ups per grid
-cell, wich corresponds to approximately eight pick-ups per day. The
-maximum number of pick-ups in a grid cell was 1985 (i.e.~71 per day on
-average), while in 25 of the 249 grid cells, there were no pick-ups at
-all. It can be seen that high counts of pick-ups occured in the grid
-cells along the diagonal axis from south-west to north-east. Mainly in
-the south-eastern corner of the system area, the usage intensity was
-very low.
+Figure \ref{fig:mapandgrid}b shows the calculated number of pick-ups per
+grid cell, during the training period. In total, 54365 pick-ups were
+calculated within the extent of the grid. That is, on average, there
+were approximately 218 pick-ups per grid cell, which corresponds to
+approximately eight pick-ups per day. The maximum number of pick-ups in
+a grid cell was 1985 (i.e.~71 per day on average), while in 25 of the
+249 grid cells, there were no pick-ups at all. It can be seen that high
+counts of pick-ups occurred in the grid cells along the diagonal axis
+from south-west to north-east. Mainly in the south-eastern corner of the
+system area, the usage intensity was very low.
 
-Figure 5.2 shows the temporal patterns of the usage data, with the
-pick-ups per day of the week, and per hour of the day. Friday was the
-day with on average the most pick-ups, while Saturday and Sunday had the
-least. The busiest hours of the day, where 8:00 and 9:00, during morning
-rush hours, and 16:00 and 17:00, during afternoon rush hours. The lowest
-numbers of hourly pick-ups, as expected, occured during the night.
+Figure \ref{fig:usageplots} shows the temporal patterns of the usage
+data, with the pick-ups per day of the week, and per hour of the day.
+Friday was the day with on average the most pick-ups, while Saturday and
+Sunday had the least. The busiest hours of the day, where 8:00 and 9:00,
+during morning rush hours, and 16:00 and 17:00, during afternoon rush
+hours. The lowest numbers of hourly pick-ups, as expected, occurred
+during the night.
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{Figures/grid} \includegraphics[width=0.5\linewidth]{Figures/pickups} \caption{a) grid overlaying the system area; b) number of pick-ups per grid cell}\label{fig:mapandgrid}
 \end{figure}\begin{figure}[H]
@@ -2999,10 +3166,11 @@ hierarchical clustering. The automatic procedure of defining the number
 of clusters \(k\) and the mixing parameter \(\alpha\), lead to a
 definition of \(k = 4\) and \(\alpha = 0.6\). This resulted in a
 partition containing four fully spatial contiguous clusters. The
-geographical outlines of these clusters are shown in Figure 5.2a. The
-centroid of each cluster, weighted by the number of pick-ups in the
-corresponding grid cells, are shown in Figure 5.2b. These weighted
-centroids serve as the model points in DBAFS.
+geographical outlines of these clusters are shown in Figure
+\ref{fig:clusters}a. The centroid of each cluster, weighted by the
+number of pick-ups in the corresponding grid cells, are shown in Figure
+\ref{fig:clusters}b. These weighted centroids serve as the model points
+in DBAFS.
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{Figures/clusters} \includegraphics[width=0.5\linewidth]{Figures/modelpoints} \caption{a) cluster outlines; b) model point locations}\label{fig:clusters}
 \end{figure}
@@ -3027,32 +3195,32 @@ respectively. Consistently, the four corresponding model points will be
 called the \emph{Bayview}, \emph{Downtown}, \emph{Residential} and
 \emph{Presidio} model points, respectively.
 
-Table 1 presents some descriptive statistics of the time series,
-averaged per cluster, and averaged over the whole system area. From the
-249 grid cells, more than a hundred are located within the Residential
-cluster, while the Presidio cluster is by far the smallest of the four.
-During the training period, the nearest available bike was on average
-located 619 meters from the grid cell centroids. In the Bayview cluster,
-however, this was more than one kilometer, a difference of almost a
-factor two compared to the Downtown cluster, and even more compared to
-the Residential and Presidio clusters. The Bayview cluster also showed
-the largest variation in the data, with a high average standard
-deviation compared to the other clusters, and an average range that
-spanned more than four kilometers. This can possibly be explained by the
-low usage intensity of the bike sharing system in this part of the
-system area. When the number of bikes in an area is low, the nearest
-available bike and the second nearest available bike are more likely to
-be far away from each other. In that case, when the closest of them gets
-picked-up, the distance to the nearest available bike will suddenly
-increase substantially. The other way around, when all available bikes
-are far away, and one bike gets dropped-off inside the area, the
-distance to the nearest available bike will suddenly decrease
-substantially.
+Table \ref{tab:clusterstats} presents some descriptive statistics of the
+time series, averaged per cluster, and averaged over the whole system
+area. From the 249 grid cells, more than a hundred are located within
+the Residential cluster, while the Presidio cluster is by far the
+smallest of the four. During the training period, the nearest available
+bike was on average located 619 meters from the grid cell centroids. In
+the Bayview cluster, however, this was more than one kilometer, a
+difference of almost a factor two compared to the Downtown cluster, and
+even more compared to the Residential and Presidio clusters. The Bayview
+cluster also showed the largest variation in the data, with a high
+average standard deviation compared to the other clusters, and an
+average range that spanned more than four kilometers. This can possibly
+be explained by the low usage intensity of the bike sharing system in
+this part of the system area. When the number of bikes in an area is
+low, the nearest available bike and the second nearest available bike
+are more likely to be far away from each other. In that case, when the
+closest of them gets picked-up, the distance to the nearest available
+bike will suddenly increase substantially. The other way around, when
+all available bikes are far away, and one bike gets dropped-off inside
+the area, the distance to the nearest available bike will suddenly
+decrease substantially.
 
 Although not as extreme as the Bayview cluster, also the other clusters
 had on average high ranges when compared to the mean and standard
 deviation. However, the standard deviation itself turned out to be
-rather small relative to the range. This implies either the presence of
+rather small relative to the mean. This implies either the presence of
 outliers, or population distributions with thin, but wide tails.
 
 The first order autocorrelation measures the average dependency between
@@ -3091,21 +3259,21 @@ Residential & 103 & 490 & 2410 & 371 & 0.79 & 0.81\\
 \multicolumn{7}{l}{\textsuperscript{6} \scriptsize{$H$ is the normalized spectral entropy, see section 2.2.3}}\\
 \end{tabular}
 \end{table}
-Figure 5.3 shows the normalized, average weekly patterns of the time
-series, averaged once again per cluster. The patterns can be explained
-intuitively. The Bayview cluster has a low usage intensity, and although
-there are peaks in the data every day, a clear and consistent pattern is
-absent. The Downtown cluster has a high density of jobs and commercial
-activities. During working hours, the demand for bikes is low, which
-leads to a high number of available bikes, and consequently, short
-distances to the nearest available bike. In the afternoon, just after
-working hours, the demand starts increasing, and it gets harder to find
-an available bike nearby. This peak in the data continues during the
-evening, when the activity in the commericial zones is high. Later in
-the evening, the demand decreases again. However, the data lacks a clear
-peak during morning peak hours, as well as a clear difference between
-weekdays and weekends, indicating that there is a substantial share of
-non-commute related usage.
+Figure \ref{fig:patterns} shows the normalized, average weekly patterns
+of the time series, averaged once again per cluster. The patterns can be
+explained intuitively. The Bayview cluster has a low usage intensity,
+and although there are peaks in the data every day, a clear and
+consistent pattern is absent. The Downtown cluster has a high density of
+jobs and commercial activities. During working hours, the demand for
+bikes is low, which leads to a high number of available bikes, and
+consequently, short distances to the nearest available bike. In the
+afternoon, just after working hours, the demand starts increasing, and
+it gets harder to find an available bike nearby. This peak in the data
+continues during the evening, when the activity in the commercial zones
+is high. Later in the evening, the demand decreases again. However, the
+data lacks a clear peak during morning peak hours, as well as a clear
+difference between weekdays and weekends, indicating that there is a
+substantial share of non-commute related usage.
 
 The Residential cluster shows the exact opposite pattern. In the morning
 rush hours, commuters use the bike to get to work, and not many
@@ -3129,40 +3297,42 @@ and it takes longer to find an available bike.
 \end{figure}
 \section{Model building}\label{model-building}
 
-Figure 5.4 shows the time plots of the distance data that were queried
-for each of the model points in Figure 5.2b, with the dark grey shaded
-areas representing weekends. The plots endorse the findings in the
-previous sections. The data corresponding to the Bayview model point
-show large variation, interspersed with flat sections, and lack a clear
-repeating pattern. The data corresponding to the Downtown and
-Residential model points are most dynamic. A daily pattern shows for
-both of them. However, in both datasets, this pattern is far from
-smooth, and the daily peaks vary considerably in height from day to day.
-This underlines the high spectral entropies that were found for these
-clusters. A clear difference between weekdays and weekends, can not be
-seen. The Presidio model point shows the most constant data, with a low
-mean and long flat sections. Sunday afternoons stand out clearly in most
-of the weeks, but not in all of them. The last sunday, for example,
-shows only a minor peak in the data. In less extent, this also applies
-to the other clusters, with lower peaks than normal, in the last
-weekend. Finally, none of the datasets contain missing values, and clear
-evidence for non-constant variances is not present.
+Figure \ref{fig:timeplots} shows the time plots of the distance data
+that were queried for each of the model points in Figure
+\ref{fig:clusters}b, with the dark grey shaded areas representing
+weekends. The plots endorse the findings in the previous sections. The
+data corresponding to the Bayview model point show large variation,
+interspersed with flat sections, and lack a clear repeating pattern. The
+data corresponding to the Downtown and Residential model points are most
+dynamic. A daily pattern shows for both of them. However, in both
+datasets, this pattern is far from smooth, and the daily peaks vary
+considerably in height from day to day. This underlines the high
+spectral entropies that were found for these clusters. A clear
+difference between weekdays and weekends, can not be seen. The Presidio
+model point shows the most constant data, with a low mean and long flat
+sections. Sunday afternoons stand out clearly in most of the weeks, but
+not in all of them. The last Sunday, for example, shows only a minor
+peak in the data. In less extent, this also applies to the other
+clusters, with lower peaks than normal, in the last weekend. Finally,
+none of the datasets contain missing values, and clear evidence for
+non-constant variances is not present.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Figures/timeplots} \caption{Time plots of the distance data for the model points}\label{fig:timeplots}
 \end{figure}
-The structures of the fitted models are shown in Table 5.2. The
-automatic seasonality detection resulted in a daily seasonal pattern for
-both the Downtown and the Residential model point. As expected, a weekly
-seasonal pattern was found for the Presidio model point, an no
-seasonality for the Bayview model point. The ARIMA(\(p\), \(d\), \(q\))
-models for the Bayview and Downtown model points, have a relatively high
-number of autoregressive terms, while for the Presidio model point, the
-number of moving average terms is high. For the Residential model point,
-the best fit was obtained by only including one autoregressive and one
-moving average term. All datasets passed the KPSS test for stationarity
-after one differencing operation. The full details of the components and
-fitted models, including parameter estimates and decomposition plots,
-can be found in Appendix B.
+The structures of the fitted models are shown in Table
+\ref{tab:modelstructure}. The automatic seasonality detection resulted
+in a daily seasonal pattern for both the Downtown and the Residential
+model point. As expected, a weekly seasonal pattern was found for the
+Presidio model point, an no seasonality for the Bayview model point. The
+ARIMA(\(p\), \(d\), \(q\)) models for the Bayview and Downtown model
+points, have a relatively high number of autoregressive terms, while for
+the Presidio model point, the number of moving average terms is high.
+For the Residential model point, the best fit was obtained by only
+including one autoregressive and one moving average term. All datasets
+passed the KPSS test for stationarity after one differencing operation.
+The full details of the components and fitted models, including
+parameter estimates and decomposition plots, can be found in Appendix
+\ref{ab}.
 \begin{table}[H]
 
 \caption{\label{tab:modelstructure}Model structures}
@@ -3178,78 +3348,81 @@ Presidio & weekly & 1 & 1 & 4\\
 \bottomrule
 \end{tabular}
 \end{table}
-Figure 5.5 shows the residuals of each model, plotted over time. All
-models have residuals with an approximately zero mean, and the variances
-look approximately constant. Comparing Figure 5.5 with Figure 5.4, it
-can be seen that for the less dynamic data in Bayview and Presidio, the
-models struggle to find a good fit for the peaks and valleys in the
-data, while the flat sections are explained accurately.
+Figure \ref{fig:residualtimeplots} shows the residuals of each model,
+plotted over time. All models have residuals with an approximately zero
+mean, and the variances look approximately constant. Comparing Figure
+\ref{fig:residualtimeplots} with Figure \ref{fig:timeplots}, it can be
+seen that for the less dynamic data in Bayview and Presidio, the models
+struggle to find a good fit for the peaks and valleys in the data, while
+the flat sections are explained accurately.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Figures/residual_timeplots} \caption{Time plots of the model residuals}\label{fig:residualtimeplots}
 \end{figure}
 The autocorrelations at several time lags in the residuals are shown in
-Figure 5.6. Since the data have a temporal resolution of 15 minutes, 96
-time lags correspond to one day, and 672 time lags, the total span of
-the x-axis in the figure, to one week. The dotted orange lines form the
-lower and upper 95\% confidence bounds, assuming a normal distribution.
-This means that the residuals are considered to be a realization of a
-white noise process when at least 95\% of the autocorrelation values
-fall within these bounds. It is important to note here that when working
-with real-world data, finding perfectly random model residuals is an
-exception, especially when the data have a high entropy. Taking that
-into account, the autocorrelation plot of the Bayview, Downtown and
-Residential models look good, and their residuals seem to approximate
-white noise.
+Figure \ref{fig:residualacf}. Since the data have a temporal resolution
+of 15 minutes, 96 time lags correspond to one day, and 672 time lags,
+the total span of the x-axis in the figure, to one week. The dotted
+orange lines form the lower and upper 95\% confidence bounds, assuming a
+normal distribution. This means that the residuals are considered to be
+a realization of a white noise process when at least 95\% of the
+autocorrelation values fall within these bounds. It is important to note
+here that when working with real-world data, finding perfectly random
+model residuals is an exception, especially when the data have a high
+entropy. Taking that into account, the autocorrelation plot of the
+Bayview, Downtown and Residential models look good, and their residuals
+seem to approximate white noise.
 
 However, for the Presidio cluster, the residual autocorrelation has a
 strong peak at lag 672, corresponding to one week. Recall that the data
 of the Presidio model point was relatively flat during the weekdays, and
 spiky in the weekends. These spikes, however, varied considerably in
 amplitude from week to week. The weekly seasonal component that was
-substracted from the data, accounts for the recurring patterns, but can
+subtracted from the data, accounts for the recurring patterns, but can
 not completely capture the differences from week to week. Therefore,
 errors during the `spiky' weekends, will still be higher than during the
 `flat' weekdays, causing autocorrelation in the residuals. With just a
 stochastic time series model, it is hard to solve this. Including
-external variables that explain the variation, could be an option, and
+exogenous variables that explain the variation, could be an option, and
 will be discussed in section 5.4.2.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Figures/residual_acfplots} \caption{ACF plot of the model residuals}\label{fig:residualacf}
 \end{figure}
-Finally, Figure 5.7 shows the histograms of the model residual
-distributions. As expected, for the Bayview and Presidio models, most
-values are clustered closely around the zero mean, with the tails being
-extremely thin and long, especially for the Bayview model. The residuals
-of the Downtown and Residential models follow a distribution that comes
-closer to a normal one, but also here, the tails are wide.
+Finally, Figure \ref{fig:residualhist} shows the histograms of the model
+residual distributions. As expected, for the Bayview and Presidio
+models, most values are clustered closely around the zero mean, with the
+tails being extremely thin and long, especially for the Bayview model.
+The residuals of the Downtown and Residential models follow a
+distribution that comes closer to a normal one, but also here, the tails
+are wide.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Figures/residual_histograms} \caption{Histograms of the model residuals}\label{fig:residualhist}
 \end{figure}
 \section{Forecasting}\label{forecasting-1}
 
-Figure 5.8a shows the spatial distribution of the 500 test points. As
-planned, areas with high usage intensity have more test points, with
-94\% located in the Downtown and Residential clusters,and only the
-minimum of ten test points in the Bayview cluster. Figure 5.8b shows the
-temporal distribution test points. All days in the test week are well
-covered, with less test points during working times and in the night,
-and more during the morning rush hours and in the evening. On weekend
-days, there is only one strong peak, around noon. Furthermore, it can be
-seen that the morning peak on November 1st is somewhat lower compared to
-the other weekdays. This may be, because it is the morning of All
-Saint's Day, following the Halloween night. For the full information on
-the test points, with all unique location-time combinations, see
-Appendix A.
+Figure \ref{fig:testpoints}a shows the spatial distribution of the 500
+test points. As planned, areas with high usage intensity have more test
+points, with 94\% located in the Downtown and Residential clusters, and
+only the minimum of ten test points in the Bayview cluster. Figure
+\ref{fig:testpoints}b shows the temporal distribution test points. All
+days in the test week are well covered, with less test points during
+working times and in the night, and more during the morning rush hours
+and in the evening. On weekend days, there is only one strong peak,
+around noon. Furthermore, it can be seen that the morning peak on
+November 1st is somewhat lower compared to the other weekdays. This may
+be, because it is the morning of All Saint's Day, following the
+Halloween night. For the full information on the test points, with all
+unique location-time combinations, see Appendix \ref{aa}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Figures/testpoints} \caption{a) test points locations; b) test point timestamps, counted per hour}\label{fig:testpoints}
 \end{figure}
-The first row of Table 5.3 lists the RMSE's, averaged over the whole
-system area, of the forecasts produced by DBAFS, and of the forecasts
-produced by the baseline system, NFS. DBAFS clearly outperforms NFS, by
-producing forecasts with errors that are on average 31\% lower.
-Furthermore, the range of error values is much lower for DBAFS, than for
-NFS. The minima are comparable, but NFS produces forecasts with error
-values up to 1644 meters, while DBAFS never exceeds 1004 meters.
+The first row of Table \ref{tab:forecastresults} lists the RMSE's,
+averaged over the whole system area, of the forecasts produced by DBAFS,
+and of the forecasts produced by the baseline system, NFS. DBAFS clearly
+outperforms NFS, by producing forecasts with errors that are on average
+31\% lower. Furthermore, the range of error values is much lower for
+DBAFS, than for NFS. The minima are comparable, but NFS produces
+forecasts with error values up to 1644 meters, while DBAFS never exceeds
+1004 meters.
 \begin{table}[H]
 
 \caption{\label{tab:forecastresults}Forecast RMSE's, in meters}
@@ -3269,27 +3442,27 @@ Residential & 211 & 317 & 97 & 705 & 411 & 37 & 1644\\
 \end{tabular}
 \end{table}
 Regarding the spatial patterns of the forecast errors, the remaining
-rows of Table 5.3 show the RMSE's averaged per spatial cluster. With
-NFS, the lowest errors are obtained in the Bayview and Presidio
-clusters, where the data are less dynamic. In the Bayview cluster, NFS
-gives the same results as DBAFS, and in the Presidio cluster, DBAFS
-performs only slightly better than NFS. For DBAFS, however, the lowest
-errors are not found in those clusters, but in the highly dynamic
-Downtown cluster. Here, DBAFS gives errors that are 40\% lower than
-those of NFS. In the Residential cluster, there are larger errors than
-in the Downtown cluster, but also here, DBAFS outperforms NFS with
-errors that are 23\% lower. It shows the strength of DBAFS in
+rows of Table \ref{tab:forecastresults} show the RMSE's averaged per
+spatial cluster. With NFS, the lowest errors are obtained in the Bayview
+and Presidio clusters, where the data are less dynamic. In the Bayview
+cluster, NFS gives the same results as DBAFS, and in the Presidio
+cluster, DBAFS performs only slightly better than NFS. For DBAFS,
+however, the lowest errors are not found in those clusters, but in the
+highly dynamic Downtown cluster. Here, DBAFS gives errors that are 40\%
+lower than those of NFS. In the Residential cluster, there are larger
+errors than in the Downtown cluster, but also here, DBAFS outperforms
+NFS with errors that are 23\% lower. It shows the strength of DBAFS in
 forecasting dynamic data, when compared to NFS.
 
-Regarding the temporal patterns of the forecast errors, Figure 5.10
-shows the RMSE's averaged per hour of the day, and per forecast lag. The
-lowest forecast errors occur during the night, when the usage intensity
-of the system is low. During the day, higher errors occur, with peaks at
-the morning peak hour, around noon (i.e.~the peak hour in the weekend)
-and after working hours. This patterns are similar for NFS, but with
-higher RMSE's at each hour. The forecast errors of both methods rise
-steeply directly after the first forecast lag, but for NFS, this
-increase is much larger than for DBAFS.
+Regarding the temporal patterns of the forecast errors, Figure
+\ref{fig:timeandlag} shows the RMSE's averaged per hour of the day, and
+per forecast lag. The lowest forecast errors occur during the night,
+when the usage intensity of the system is low. During the day, higher
+errors occur, with peaks at the morning rush hour, around noon (i.e.~the
+peak hour in the weekend) and after working hours. This patterns are
+similar for NFS, but with higher RMSE's at each hour. The forecast
+errors of both methods rise steeply directly after the first forecast
+lag, but for NFS, this increase is much larger than for DBAFS.
 
 What strikes, is that the RMSE does not increase constantly when the
 forecast horizon gets larger. From the forecasting lag of 12 hours, the
@@ -3300,10 +3473,11 @@ of just 15 minutes. This conspicuousness can be explained as follows.
 Most of the simulated forecast requests are made at times with a high
 usage intensity, that are hard to forecast. The first forecast lags,
 will still correspond to high usage times, but after a while, forecasts
-will be made during night time. As could be seen in Figure 5.10a, these
-night time forecasts have much lower errors. Therefore, it can happen
-that, despite the length of the forecasting window, `far-ahead'
-forecasts have lower errors than `close-by' forecasts.
+will be made during night time. As could be seen in Figure
+\ref{fig:timeandlag}a, these night time forecasts have much lower
+errors. Therefore, it can happen that, despite the length of the
+forecasting window, `far-ahead' forecasts have lower errors than
+`close-by' forecasts.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Figures/hourlag} \caption{a) RMSE averaged per hour of the day; b) RMSE averaged per forecast lag}\label{fig:timeandlag}
 \end{figure}
@@ -3315,23 +3489,24 @@ recommendations}\label{limitations-and-recommendations}
 Although DBAFS outperforms the baseline, the average forecast RMSE of
 almost 300 meters can be considered high when looking at it from an
 absolute perspective. To get a more detailed understanding of the
-performance of DBAFS, it may be benefitial to look at some individual
+performance of DBAFS, it may be beneficial to look at some individual
 forecast results, rather than at general, averaged metrics. Therefore,
-Figure 5.11 shows the forecasts at the four model point locations, for
-the whole test period. Each day is forecasted seperately, with two weeks
-of historical data.
+Figure \ref{fig:forecastplot} shows the forecasts at the four model
+point locations, for the whole test period. Each day is forecasted
+separately, with two weeks of historical data.
 
 As already pointed out earlier in this chapter, the forecasts in the
-Bayview cluster act in a similar way as naïve forecasts, with straight
-lines every day. Peaks in the true data occur randomly, and can not be
-captured well by the fitted model. In the Downtown and Residential
-clusters, the ones of primary interest, DBAFS performs very well in
-forecasting when peaks are going to occur, but fails to accurately
-capture the variation in the height of these peaks from day to day.
-Equivalently, in the Presidio cluster, the varying amplitude of the
-Sunday afternoon peak, is problematic for the forecasts. When this peak
-has been relatively low in the two weeks before, DBAFS will expect it to
-stay low, and never forecast the reoccurence of a higer peak.
+Bayview cluster act in a similar way as naïve forecasts, with
+approximately straight lines every day. Peaks in the true data occur
+randomly, and can not be captured well by the fitted model. In the
+Downtown and Residential clusters, the ones of primary interest, DBAFS
+performs very well in forecasting when peaks are going to occur, but
+fails to accurately capture the variation in the height of those peaks
+from day to day. Equivalently, in the Presidio cluster, the varying
+amplitude of the Sunday afternoon peak, is problematic for the
+forecasts. When this peak has been relatively low in the two weeks
+before, DBAFS will expect it to stay low, and never forecast the
+reoccurrence of a higher peak.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Figures/forecastplot} \caption{Detailed forecasts for the model point locations}\label{fig:forecastplot}
 \end{figure}
@@ -3346,9 +3521,9 @@ report of the National Association of City Transportation Officials
 showed that the usage in station-based systems follows typical commuting
 patterns, while in dockless systems, it is more dispersed (NACTO,
 \protect\hyperlink{ref-nacto2018}{2018}). This is in line with the
-conclusions drawn from Figure 5.4, earlier in this chapter. Moreover,
-Mckenzie (\protect\hyperlink{ref-mckenzie2018}{2018}) found similar
-results in Washington DC.
+conclusions drawn from Figure \ref{fig:patterns}, earlier in this
+chapter. Moreover, Mckenzie (\protect\hyperlink{ref-mckenzie2018}{2018})
+found similar results in Washington D.C.
 
 In San Francisco, the differences between station-based and dockless
 systems may even be stronger, for the following reason. For
@@ -3360,22 +3535,22 @@ trips of half an hour (\$2 each), this will cost around \$1040 per year,
 compared to only \$149 for a yearly subscription on GoBike (Harris,
 \protect\hyperlink{ref-harris2018}{2018}).
 
-To strenghten the findings discussed above, Figure 5.12 is adapted from
-the mid-point evaluation of JUMP Bikes in San Francisco, performed by
-SFMTA, and shows the number of trips per bike per day, for both JUMP
-Bikes and GoBike, during five months in 2018 (SFMTA Board of Directors,
-\protect\hyperlink{ref-sfmta2018three}{2018}). It clearly confirms the
-expected differences between the two. The course of the GoBike line is
-very regular, with peaks during weekdays, and valleys during weekends.
-JUMP Bikes, in contradiction, follows a highly irregular pattern. Such
-irregularity, obviously, sets limits on the ability of models to
-forecast the data accurately.
+To strengthen the findings discussed above, Figure \ref{fig:jumpgo} is
+adapted from the mid-point evaluation of JUMP Bikes in San Francisco,
+performed by SFMTA, and shows the number of trips per bike per day, for
+both JUMP Bikes and GoBike, during five months in 2018 (SFMTA Board of
+Directors, \protect\hyperlink{ref-sfmta2018three}{2018}). It clearly
+confirms the expected differences between the two. The course of the
+GoBike line is very regular, with peaks during weekdays, and valleys
+during weekends. JUMP Bikes, in contradiction, follows a highly
+irregular pattern. Such irregularity, obviously, sets limits on the
+ability of models to forecast the data accurately.
 
-\subsection{Exogeneous variables}\label{exogeneous-variables}
+\subsection{Exogenous variables}\label{exogenous-variables}
 
 That the forecastability of dockless bike sharing data is limited, does
 not mean that the forecasts produced by DBAFS can not be improved in any
-way. There may be exogeneous variables that can explain at least a part
+way. There may be exogenous variables that can explain at least a part
 of the variation in peak height from day to day. The most relevant of
 those, probably relate to weather conditions. Several studies addressed
 the relationship between cycling activity in PBSS and weather conditions
@@ -3408,24 +3583,24 @@ will not be the same at all locations within each cluster. However, they
 will contain information that can explain a part of the variability in
 the data, as well.
 
-As explained in section 2.4.1, time series forecasting models relate
-future patterns to past patterns in the same data. That is, in essence,
-they do not allow for exogeneous variables. However, several methods
-have been developed to overcome this issue. For example, Hyndman \&
-Athanasopoulos (\protect\hyperlink{ref-hyndman2018fpp}{2018}) recommend
-dynamic regression models, in which the exogeneous variables are
-included in a linear regression, with an ARIMA(\(p\), \(d\), \(q\))
-model fitted to the autocorrelated errors. Optionially, seasonal
-patterns can be captured by including Fourier terms in the regression as
-well. Another option is the \texttt{fasster} package in R (O'Hara-Wild,
+As explained in Section \ref{twofourone}, time series forecasting models
+relate future patterns to past patterns in the same data. That is, in
+essence, they do not allow for exogenous variables. However, several
+methods have been developed to overcome this issue. For example, Hyndman
+\& Athanasopoulos (\protect\hyperlink{ref-hyndman2018fpp}{2018})
+recommend dynamic regression models, in which the exogenous variables
+are included in a linear regression, with an ARIMA(\(p\), \(d\), \(q\))
+model fitted to the autocorrelated errors. Optionally, seasonal patterns
+can be captured by including Fourier terms in the regression as well.
+Another option is the \texttt{fasster} package in R (O'Hara-Wild,
 \protect\hyperlink{ref-fasster}{2018}), which is, at the time of
 writing, still under development. Fasster stands for `Forecasting with
 Additive Switching of Seasonality, Trend and Exogenous Regressors', and
-is a model is designed to capture both the influence of exogeneous
+is a model designed to capture both the influence of exogenous
 regressors as multiple seasonal patterns in a state space framework, by
 using state switching. Finally, machine learning regression methods are
-widely used in forecasting, and allow the use of exogeneous variables as
-well. It is recommended to test these approaches with the exogeneous
+widely used in forecasting, and allow the use of exogenous variables as
+well. It is recommended to test these approaches with the exogenous
 variables described above, and examine the accuracy gain compared to the
 current approach of DBAFS.
 
@@ -3433,32 +3608,34 @@ current approach of DBAFS.
 intervals}\label{residual-distributions-and-prediction-intervals}
 
 Another point of concern regards the non-normality of the models'
-residual distributions, which showed clearly in Figure 5.8. Both in the
-calculation of the AIC, for model selection, and in the estimation of
-the model parameters, Gaussian likelihood is used, assuming a normal
-distribution. In the literature, approaches have been developed to use
-different likelihood functions, such as the Laplace Likelihood and
-Student's t likelihood, that may be more appropriate to use for models
-with widely tailed residual distributions such as those identified in
-Figure 5.8 (Huang \& Pawitan, \protect\hyperlink{ref-huang2000}{2000};
-Lehr \& Lii, \protect\hyperlink{ref-lehr1998}{1998}; W. K. Li \& McLeod,
+residual distributions, which showed clearly in Figure
+\ref{fig:residualhist}. Both in the calculation of the AIC, for model
+selection, and in the estimation of the model parameters, Gaussian
+likelihood is used, assuming a normal distribution. In the literature,
+approaches have been developed to use different likelihood functions,
+such as the Laplace Likelihood and Student's t likelihood, that may be
+more appropriate to use for models with widely tailed residual
+distributions such as those identified in Figure \ref{fig:residualhist}
+(Huang \& Pawitan, \protect\hyperlink{ref-huang2000}{2000}; Lehr \& Lii,
+\protect\hyperlink{ref-lehr1998}{1998}; W. K. Li \& McLeod,
 \protect\hyperlink{ref-li1988}{1988}). However, such approaches will
 increase the complexity of the system. Moreover, the accuracy gain will
-probably be of minor extent, since, as discussed in section 2.4.2.4,
-using Gaussian likelihood is sensible even for models with non-normally
-distributed residuals, especially when sample sizes are large. It should
-also be noted that in the \texttt{forecast} package, Gaussian likelihood
-is the only available option.
+probably be of minor extent, since, as discussed in section
+\ref{twofourtwofour}.4, using Gaussian likelihood is sensible even for
+models with non-normally distributed residuals, especially when sample
+sizes are large. It should also be noted that in the \texttt{forecast}
+package, Gaussian likelihood is the only available option.
 
 The non-normality of the residuals does have an important effect on the
 validity of the prediction intervals, however. When 95\% prediction
 intervals are calculated, assuming normality of the forecast
 distribution, they can not be interpreted as such. To emphasize this,
-Table 5.4 shows the percentage of true observations that fall within the
-calculated 95\% prediction interval of the forecasts. As can be seen,
-for all clusters, and especially those where seasonality was detected,
-this percentage is extremely low. That is, the calculated prediction
-intervals are far to narrow, making them not useful in any sense.
+Table \ref{tab:intervalcheck} shows the percentage of true observations
+that fall within the calculated 95\% prediction interval of the
+forecasts. As can be seen, for all clusters, and especially those where
+seasonality was detected, this percentage is extremely low. That is, the
+calculated prediction intervals are far to narrow, making them not
+useful in any sense.
 \begin{table}[H]
 
 \caption{\label{tab:intervalcheck}Interpretation of the calculated prediction intervals}
@@ -3477,17 +3654,16 @@ Residential & 0.6\\
 \end{table}
 As proposed by Hyndman \& Athanasopoulos
 (\protect\hyperlink{ref-hyndman2018fpp}{2018}), in the case of
-non-normally distrubuted model residuals, a technique called
+non-normally distributed model residuals, a technique called
 bootstrapping is a useful alternative for calculating prediction
 intervals. It does not make assumptions about the distribution of the
 residuals, and only requires them to be uncorrelated. Many possible
 futures for each forecasted time lag are obtained by repeatingly
 sampling from the model residuals, and replacing the error terms of the
-forecasts (see Equation 2.x) by these sampled values. Then, the 95\%
-prediction interval for each forecast is equal to the interval that
-contains 95\% of the calculated `possible futures'. A detailed
-description of this technique is given in McCullough
-(\protect\hyperlink{ref-mccullough1994}{1994}).
+forecasts by these sampled values. Then, the 95\% prediction interval
+for each forecast is equal to the interval that contains 95\% of the
+calculated `possible futures'. A detailed description of this technique
+is given by McCullough (\protect\hyperlink{ref-mccullough1994}{1994}).
 
 Another important reason for the extremely narrow prediction intervals,
 is that not all sources of uncertainty are included in its calculation.
@@ -3526,7 +3702,20 @@ sources of uncertainty to an acceptable extent, should be developed.
 
 \subsection{GPS accuracy}\label{gps-accuracy}
 
-\chapter{Conclusion}\label{conclusion}
+One special type of uncertainty does not relate directly to the
+forecasting process, but to the location provided by the bicycle's GPS
+instead. In highly built-up urban areas, this GPS location may differ
+considerably from the true location of the bicycle. According to Uber's
+research team, such an inaccuracy can have a margin of error of 50
+meters or more (Iland, Irish, Madhow, \& Sandler,
+\protect\hyperlink{ref-ubereng}{2018}). Since DBAFS essentially
+forecasts the GPS location, this has an influence on the reliability of
+the forecasts as well. Including these inaccuracies in the prediction
+interval, may be a complex challenge, but focused research could take a
+first step in quantifying the influence of GPS errors on the forecast
+uncertainty.
+
+\chapter{Conclusion}\label{six}
 
 This thesis presented a fully automated forecasting system for bike
 availability in dockless bike sharing systems. To balance speed and
@@ -3542,10 +3731,10 @@ forecasts that outperform simple baseline methods. However, they also
 highlighted the limited forecastability of dockless bike sharing data,
 especially when compared to conventional station-based systems.
 
-In future studies that adress the same problem, the forecast accuracy
-may be improved by incuding exogeneous variables, related to weather
+In future studies that address the same problem, the forecast accuracy
+may be improved by including exogenous variables, related to weather
 conditions and special events, which can explain some of the uncaptured
-variation. Furthermore, methodolgies to provide sensible prediction
+variation. Furthermore, methodologies to provide sensible prediction
 intervals, need to be developed.
 
 Results are believed to be of direct, practical interest for operators
@@ -3560,7 +3749,7 @@ urban environments.
 
 \appendix
 
-\chapter{Code}\label{code}
+\chapter{Code}\label{aa}
 \begin{wrapfigure}{R}{.35\textwidth}  
  \begin{center}
     \includegraphics[width=.3\textwidth]{Figures/hexagon.png}  
@@ -3704,7 +3893,7 @@ found through the following link:
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-\chapter{Models}\label{models}
+\chapter{Models}\label{ab}
 
 This appendix provides more detailed information about the models that
 were fitted to the non-seasonal historical data of each model point.
@@ -4043,10 +4232,15 @@ Hyndman, R. J., Kang, Y., Talagala, T., Wang, E., \& Yang, Y. (2019).
 \emph{tsfeatures: Time Series Feature Extraction}. Retrieved from
 \url{https://pkg.robjhyndman.com/tsfeatures/}
 
-\hypertarget{ref-tsibblestats}{}
-Hyndman, R. J., O'Hara-Wild, M., \& Wang, E. (2018). \emph{tsibblestats:
-Analysis of tidy time series}. Retrieved from
-\url{https://github.com/tidyverts/tsibblestats}
+\hypertarget{ref-feasts}{}
+Hyndman, R. J., O'Hara-Wild, M., \& Wang, E. (2019). \emph{feasts:
+Feature Extraction And Statistics for Time Series}. Retrieved from
+\url{https://github.com/tidyverts/feasts}
+
+\hypertarget{ref-ubereng}{}
+Iland, D., Irish, A., Madhow, U., \& Sandler, B. (2018, April).
+Rethinking GPS: Engineering Next-Gen Location at Uber. Retrieved from
+\url{https://eng.uber.com/rethinking-gps/}
 
 \hypertarget{ref-iliffe2008}{}
 Iliffe, J., \& Lott, R. (2008). \emph{Datums and Map Projections: For

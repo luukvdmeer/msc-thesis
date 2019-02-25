@@ -25,9 +25,42 @@ abstract: |
 # like below, use a command like that for the abstract above.  Note that a tab is 
 # needed on the line after the |.
 acknowledgements: |
-  This thesis, and in the broader sense, my whole period as a student, would not have been possible without the help and support of others. It still feels somewhat strange, that by writing these words, a seven-year journey comes to an end. I want to thank my family, and in particular my parents, for their unconditional support, also in times when I made wrong decisions. Lore, thank you for cheering me up whenever I needed it, and my friends and classmates, thank you for being like a family!\
-  I want to thank all my teachers for sharing their knowledge, despite making me suffer with homework and assignments! In particular, I want to thank my supervisor, Edzer Pebesma, for providing guidance whenever necessary, but also constantly encouraging an independent way of working and thinking, in which own thoughts and ideas are important. Additionally, I want to thank my co-supervisors, Jorge Mateu and Joel Silva, for their valuable feedback. Thanks also to the whole r-spatial community, for providing open source tools, and encouraging involvement and contributions, within an environment that makes everyone feel equally valued.\
+  This thesis, and in the broader sense, my whole period as a student, would not have been possible without the help and support of others. It still feels somewhat strange, that by writing these words, a seven-year journey comes to an end. I want to thank my family, and in particular my parents, for their unconditional support, also in times when I made wrong decisions. Lore, thank you for cheering me up whenever I needed it, and my friends and classmates, thank you for being like a family! \par
+  
+  I want to thank all my teachers for sharing their knowledge, despite making me suffer with homework and assignments! In particular, I want to thank my supervisor, Edzer Pebesma, for providing guidance whenever necessary, but also constantly encouraging an independent way of working and thinking, in which own thoughts and ideas are important. Additionally, I want to thank my co-supervisors, Jorge Mateu and Joel Silva, for their valuable feedback. Thanks also to the whole r-spatial community, for providing open source tools, and encouraging involvement and contributions, within an environment that makes everyone feel equally valued. \par
   Finally, I owe gratitude to JUMP Bikes, and Alexander Tedeschi in particular, for providing me with very useful data.
+  <!-- \clearpage -->
+  <!-- \shipout\null -->
+  <!-- \stepcounter{page} -->
+dedication: |
+  \begin{tabbing}
+  ACF \hspace{3em} \=  Autocorrelation Function \\
+  AIC \>  Aikake’s Information Criterion \\
+  AR \> Autoregressive \\
+  ARIMA \> Autoregressive Integrated Moving Average \\
+  ARMA \> Autoregressive Moving Average \\
+  DBAFS \> Dockless Bike Availability Forecasting System \\
+  GPS \>  Global Positioning System \\
+  ID \> Identification \\
+  KPSS \>  Kwiatkowski-Phillips-Schmidt-Shin \\
+  MA \> Moving Average \\
+  MAE \> Mean Absolute Error \\
+  MLE \> Maximum Likelihood Estimation \\
+  NFS \> Naïve Forecasting System \\
+  PACF \> Partial Autocorrelation Function \\
+  PDT \>  Pacific Daylight Saving Time \\
+  PST \> Pacific Standard Time \\
+  PBSS \> Public Bike Sharing Systems \\
+  RMSE \> Root Mean Squared Error \\
+  RMSLE \> Root Mean Squared Logarithmic Error \\
+  SFMTA \>  San Francisco Municipal Transportation Agency \\
+  SQL \>  Structured Query Language \\
+  STL \>  Seasonal Trend decomposition procedure based on Loess \\
+  WGS84 \> World Geodetic System 1984
+  \end{tabbing}
+  <!-- \clearpage -->
+  <!-- \shipout\null -->
+  <!-- \stepcounter{page} -->
 bibliography: bib/references.bib
 # Download your specific bibliography database file and refer to it in the line above.
 csl: csl/apa.csl

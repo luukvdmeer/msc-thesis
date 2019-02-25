@@ -7,7 +7,7 @@ If you feel it necessary to include an appendix, it goes here.
 -->
 
 
-# Code
+# Code {#aa}
 
 \begin{wrapfigure}{R}{.35\textwidth}  
  \begin{center}
@@ -117,7 +117,11 @@ errors_nfs   = dockless::evaluate(
 )
 ```
 
-# Models
+<!-- \clearpage -->
+<!-- \shipout\null -->
+<!-- \stepcounter{page} -->
+
+# Models {#ab}
 
 This appendix provides more detailed information about the models that were fitted to the non-seasonal historical data of each model point. This information includes parameter estimates, error variance, Gaussian log-likelihood, and information criteria such as AIC. For those model points where seasonality was detected, the decomposition plots are provided as well.
 

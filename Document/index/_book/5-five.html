@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 5 Results and discussion | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</title>
+  <meta name="description" content="Chapter 5 Results and discussion | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 5 Results and discussion | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Results and discussion | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  
+  
+  
+
+<meta name="author" content="Lucas van der Meer">
+
+
+<meta name="date" content="2019-02-25">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="4-four.html">
+<link rel="next" href="6-six.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+true
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="five" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Results and discussion</h1>
+<p>This chapter presents and discusses the results of the experiment described in Chapter <a href="4-four.html#four">4</a>. It is structured as follows. The first section shows the clusters that resulted from the cluster loop, along with their main characteristics, and the chosen locations of the model points. Section two presents the structures of the models that were build in the model loop, and the residual diagnostics for each them. Then, the third section focuses on the accuracies of the forecasts, and their patterns in both space and time. Finally, in the fourth section, the limitations of DBAFS are discussed, and recommendations for possible improvements are given.</p>
+<div id="clustering" class="section level2">
+<h2><span class="header-section-number">5.1</span> Clustering</h2>
+<p>Figure <a href="5-five.html#fig:mapandgrid">5.1</a>a shows the grid overlaying the JUMP Bikes system area in San Francisco, including the centroid of each grid cell. In total, the grid contains 249 cells, each 500 meter high and 500 meter wide.</p>
+<p>Figure <a href="5-five.html#fig:mapandgrid">5.1</a>b shows the calculated number of pick-ups per grid cell, during the training period. In total, 54365 pick-ups were calculated within the extent of the grid. That is, on average, there were approximately 218 pick-ups per grid cell, which corresponds to approximately eight pick-ups per day. The maximum number of pick-ups in a grid cell was 1985 (i.e. 71 per day on average), while in 25 of the 249 grid cells, there were no pick-ups at all. It can be seen that high counts of pick-ups occurred in the grid cells along the diagonal axis from south-west to north-east. Mainly in the south-eastern corner of the system area, the usage intensity was very low.</p>
+<p>Figure <a href="5-five.html#fig:usageplots">5.2</a> shows the temporal patterns of the usage data, with the pick-ups per day of the week, and per hour of the day. Friday was the day with on average the most pick-ups, while Saturday and Sunday had the least. The busiest hours of the day, where 8:00 and 9:00, during morning rush hours, and 16:00 and 17:00, during afternoon rush hours. The lowest numbers of hourly pick-ups, as expected, occurred during the night.</p>
+<div class="figure" style="text-align: center"><span id="fig:mapandgrid"></span>
+<img src="Figures/grid.png" alt="a) grid overlaying the system area; b) number of pick-ups per grid cell" width="50%" /><img src="Figures/pickups.png" alt="a) grid overlaying the system area; b) number of pick-ups per grid cell" width="50%" />
+<p class="caption">
+Figure 5.1: a) grid overlaying the system area; b) number of pick-ups per grid cell
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:usageplots"></span>
+<img src="Figures/usageday.png" alt="a) pick-ups per day of the week; b) pick-ups per hour of the day" width="50%" /><img src="Figures/usagehour.png" alt="a) pick-ups per day of the week; b) pick-ups per hour of the day" width="50%" />
+<p class="caption">
+Figure 5.2: a) pick-ups per day of the week; b) pick-ups per hour of the day
+</p>
+</div>
+<p>Recall that for each grid cell centroid, a time series of historical distance data was queried, and that the normalized, average weekly patterns in these data were clustered using spatially constrained hierarchical clustering. The automatic procedure of defining the number of clusters <span class="math inline">\(k\)</span> and the mixing parameter <span class="math inline">\(\alpha\)</span>, lead to a definition of <span class="math inline">\(k = 4\)</span> and <span class="math inline">\(\alpha = 0.6\)</span>. This resulted in a partition containing four fully spatial contiguous clusters. The geographical outlines of these clusters are shown in Figure <a href="5-five.html#fig:clusters">5.3</a>a. The centroid of each cluster, weighted by the number of pick-ups in the corresponding grid cells, are shown in Figure <a href="5-five.html#fig:clusters">5.3</a>b. These weighted centroids serve as the model points in DBAFS.</p>
+<div class="figure" style="text-align: center"><span id="fig:clusters"></span>
+<img src="Figures/clusters.png" alt="a) cluster outlines; b) model point locations" width="50%" /><img src="Figures/modelpoints.png" alt="a) cluster outlines; b) model point locations" width="50%" />
+<p class="caption">
+Figure 5.3: a) cluster outlines; b) model point locations
+</p>
+</div>
+<p>Roughly speaking, and based on a large study of neighbourhood indicators in San Francisco <span class="citation">(San Francisco Department of Public Health, <a href="#ref-sfindicator">2014</a>)</span>, the four clusters can be characterized as follows. The orange cluster covers the Bayview/Hunters Point neighbourhood, which is a rather isolated area, with a high percentage of low-income households and relatively high crime rates. The blue cluster forms the city center of San Francisco, containing the neighbourhoods with the highest population densities, but also with a relatively high job density compared to the residential density, and large areas zoned for commercial usage. The purple cluster mainly contains neighbourhoods where the residential density is high compared to the job density, and the area zoned for commercial usage is relatively small. Finally, the green cluster covers the Presidio Park, a recreational area with few inhabitants, and a relatively high number of bike lanes. For the sake of clarity, the orange, blue, purple and green clusters are from now on referred to as the <em>Bayview</em>, <em>Downtown</em>, <em>Residential</em> and <em>Presidio</em> clusters, respectively. Consistently, the four corresponding model points will be called the <em>Bayview</em>, <em>Downtown</em>, <em>Residential</em> and <em>Presidio</em> model points, respectively.</p>
+<p>Table <a href="5-five.html#tab:clusterstats">5.1</a> presents some descriptive statistics of the time series, averaged per cluster, and averaged over the whole system area. From the 249 grid cells, more than a hundred are located within the Residential cluster, while the Presidio cluster is by far the smallest of the four. During the training period, the nearest available bike was on average located 619 meters from the grid cell centroids. In the Bayview cluster, however, this was more than one kilometer, a difference of almost a factor two compared to the Downtown cluster, and even more compared to the Residential and Presidio clusters. The Bayview cluster also showed the largest variation in the data, with a high average standard deviation compared to the other clusters, and an average range that spanned more than four kilometers. This can possibly be explained by the low usage intensity of the bike sharing system in this part of the system area. When the number of bikes in an area is low, the nearest available bike and the second nearest available bike are more likely to be far away from each other. In that case, when the closest of them gets picked-up, the distance to the nearest available bike will suddenly increase substantially. The other way around, when all available bikes are far away, and one bike gets dropped-off inside the area, the distance to the nearest available bike will suddenly decrease substantially.</p>
+<p>Although not as extreme as the Bayview cluster, also the other clusters had on average high ranges when compared to the mean and standard deviation. However, the standard deviation itself turned out to be rather small relative to the mean. This implies either the presence of outliers, or population distributions with thin, but wide tails.</p>
+<p>The first order autocorrelation measures the average dependency between data values at time <span class="math inline">\(t\)</span> and corresponding data values at time <span class="math inline">\(t-1\)</span>. In the whole system area, this dependency was strong, especially in the Bayview and Presidio clusters. These high autocorrelation values are important, since they imply that it is reasonable to use past observations when forecasting future ones. However, the calculated spectral entropy values show that in general, the data are also very complex, and the forecastability is low. This mainly concerns the Downtown and Residential clusters, which contain, as could be seen in Figure 5.1b, the areas where the pick-up density is high. In such areas, the data are more dynamic, since bikes get picked-up and dropped off constantly, and the location of the nearest available bike will change often. In most cases, the more dynamic the data, the harder to forecast.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:clusterstats">Table 5.1: </span>Descriptive statistics of the grid cell centroids distance data
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(N\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\mu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(range\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\sigma\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\rho(1)\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(H\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Total
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+249
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+619
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2726
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+422
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.82
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Bayview
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+46
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+1080
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+4021
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+631
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.95
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Downtown
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+81
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+557
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2551
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+352
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.77
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Residential
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+103
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+490
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2410
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+371
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.79
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Presido
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+19
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+462
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+2057
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+310
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.92
+</td>
+<td style="text-align:left;width: 1.5cm; ">
+0.68
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">\scriptsize{Except <span class="math inline">\(N\)</span>, all metrics are calculated for each time series seperately, and averaged afterwards.}</span>
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> \scriptsize{<span class="math inline">\(N\)</span> is the total number of grid cell centroids}
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> \scriptsize{<span class="math inline">\(\\mu\)</span> is the mean of the data, in meters}
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>3</sup> \scriptsize{<span class="math inline">\(range\)</span> is the difference between the maximum and minimum data value, in meters}
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>4</sup> \scriptsize{<span class="math inline">\(\\sigma\)</span> is the standard deviation of the data, in meters}
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>5</sup> \scriptsize{<span class="math inline">\(\\rho(1)\)</span> is the first order autocorrelation, see section 2.2.1}
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>6</sup> \scriptsize{<span class="math inline">\(H\)</span> is the normalized spectral entropy, see section 2.2.3}
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Figure <a href="5-five.html#fig:patterns">5.4</a> shows the normalized, average weekly patterns of the time series, averaged once again per cluster. The patterns can be explained intuitively. The Bayview cluster has a low usage intensity, and although there are peaks in the data every day, a clear and consistent pattern is absent. The Downtown cluster has a high density of jobs and commercial activities. During working hours, the demand for bikes is low, which leads to a high number of available bikes, and consequently, short distances to the nearest available bike. In the afternoon, just after working hours, the demand starts increasing, and it gets harder to find an available bike nearby. This peak in the data continues during the evening, when the activity in the commercial zones is high. Later in the evening, the demand decreases again. However, the data lacks a clear peak during morning peak hours, as well as a clear difference between weekdays and weekends, indicating that there is a substantial share of non-commute related usage.</p>
+<p>The Residential cluster shows the exact opposite pattern. In the morning rush hours, commuters use the bike to get to work, and not many available bikes are left in the residential areas. Hence, in those areas, the distance to the nearest available bike is higher during working hours. In the afternoon, commuters come back from work, and leave the bikes in the residential areas, causing a decrease in distance to the nearest available bike. Hence, the distance data peaks during working hours. In the weekends, the peaks seem to be slightly lower, but this difference is not as large as might have been expected. They do happen later on the day, corresponding to the same periods as the Downtown cluster.</p>
+<p>Finally, the Presidio cluster is mainly a recreational area. There are a lot of bikes, but during weekdays, they are used less, leading to small and relatively constant distances to the nearest available bike. In weekends, and mainly on Sunday afternoon, the usage intensity is high, and it takes longer to find an available bike.</p>
+<div class="figure" style="text-align: center"><span id="fig:patterns"></span>
+<img src="Figures/clusterplots.png" alt="Patterns of the distance data for the grid centroids, per cluster" width="\textwidth" />
+<p class="caption">
+Figure 5.4: Patterns of the distance data for the grid centroids, per cluster
+</p>
+</div>
+</div>
+<div id="model-building" class="section level2">
+<h2><span class="header-section-number">5.2</span> Model building</h2>
+<p>Figure <a href="5-five.html#fig:timeplots">5.5</a> shows the time plots of the distance data that were queried for each of the model points in Figure <a href="5-five.html#fig:clusters">5.3</a>b, with the dark grey shaded areas representing weekends. The plots endorse the findings in the previous sections. The data corresponding to the Bayview model point show large variation, interspersed with flat sections, and lack a clear repeating pattern. The data corresponding to the Downtown and Residential model points are most dynamic. A daily pattern shows for both of them. However, in both datasets, this pattern is far from smooth, and the daily peaks vary considerably in height from day to day. This underlines the high spectral entropies that were found for these clusters. A clear difference between weekdays and weekends, can not be seen. The Presidio model point shows the most constant data, with a low mean and long flat sections. Sunday afternoons stand out clearly in most of the weeks, but not in all of them. The last Sunday, for example, shows only a minor peak in the data. In less extent, this also applies to the other clusters, with lower peaks than normal, in the last weekend. Finally, none of the datasets contain missing values, and clear evidence for non-constant variances is not present.</p>
+<div class="figure" style="text-align: center"><span id="fig:timeplots"></span>
+<img src="Figures/timeplots.png" alt="Time plots of the distance data for the model points" width="\textwidth" />
+<p class="caption">
+Figure 5.5: Time plots of the distance data for the model points
+</p>
+</div>
+<p>The structures of the fitted models are shown in Table <a href="5-five.html#tab:modelstructure">5.2</a>. The automatic seasonality detection resulted in a daily seasonal pattern for both the Downtown and the Residential model point. As expected, a weekly seasonal pattern was found for the Presidio model point, an no seasonality for the Bayview model point. The ARIMA(<span class="math inline">\(p\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(q\)</span>) models for the Bayview and Downtown model points, have a relatively high number of autoregressive terms, while for the Presidio model point, the number of moving average terms is high. For the Residential model point, the best fit was obtained by only including one autoregressive and one moving average term. All datasets passed the KPSS test for stationarity after one differencing operation. The full details of the components and fitted models, including parameter estimates and decomposition plots, can be found in Appendix <a href="B-ab.html#ab">B</a>.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:modelstructure">Table 5.2: </span>Model structures
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+seasonality
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(p\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(d\)</span>
+</th>
+<th style="text-align:center;">
+<span class="math inline">\(q\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Bayview
+</td>
+<td style="text-align:center;width: 3cm; ">
+none
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+3
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Downtown
+</td>
+<td style="text-align:center;width: 3cm; ">
+daily
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+3
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Residential
+</td>
+<td style="text-align:center;width: 3cm; ">
+daily
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Presidio
+</td>
+<td style="text-align:center;width: 3cm; ">
+weekly
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+1
+</td>
+<td style="text-align:center;width: 1.5cm; ">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p>Figure <a href="5-five.html#fig:residualtimeplots">5.6</a> shows the residuals of each model, plotted over time. All models have residuals with an approximately zero mean, and the variances look approximately constant. Comparing Figure <a href="5-five.html#fig:residualtimeplots">5.6</a> with Figure <a href="5-five.html#fig:timeplots">5.5</a>, it can be seen that for the less dynamic data in Bayview and Presidio, the models struggle to find a good fit for the peaks and valleys in the data, while the flat sections are explained accurately.</p>
+<div class="figure" style="text-align: center"><span id="fig:residualtimeplots"></span>
+<img src="Figures/residual_timeplots.png" alt="Time plots of the model residuals" width="\textwidth" />
+<p class="caption">
+Figure 5.6: Time plots of the model residuals
+</p>
+</div>
+<p>The autocorrelations at several time lags in the residuals are shown in Figure <a href="5-five.html#fig:residualacf">5.7</a>. Since the data have a temporal resolution of 15 minutes, 96 time lags correspond to one day, and 672 time lags, the total span of the x-axis in the figure, to one week. The dotted orange lines form the lower and upper 95% confidence bounds, assuming a normal distribution. This means that the residuals are considered to be a realization of a white noise process when at least 95% of the autocorrelation values fall within these bounds. It is important to note here that when working with real-world data, finding perfectly random model residuals is an exception, especially when the data have a high entropy. Taking that into account, the autocorrelation plot of the Bayview, Downtown and Residential models look good, and their residuals seem to approximate white noise.</p>
+<p>However, for the Presidio cluster, the residual autocorrelation has a strong peak at lag 672, corresponding to one week. Recall that the data of the Presidio model point was relatively flat during the weekdays, and spiky in the weekends. These spikes, however, varied considerably in amplitude from week to week. The weekly seasonal component that was subtracted from the data, accounts for the recurring patterns, but can not completely capture the differences from week to week. Therefore, errors during the ‘spiky’ weekends, will still be higher than during the ‘flat’ weekdays, causing autocorrelation in the residuals. With just a stochastic time series model, it is hard to solve this. Including exogenous variables that explain the variation, could be an option, and will be discussed in section 5.4.2.</p>
+<div class="figure" style="text-align: center"><span id="fig:residualacf"></span>
+<img src="Figures/residual_acfplots.png" alt="ACF plot of the model residuals" width="\textwidth" />
+<p class="caption">
+Figure 5.7: ACF plot of the model residuals
+</p>
+</div>
+<p>Finally, Figure <a href="5-five.html#fig:residualhist">5.8</a> shows the histograms of the model residual distributions. As expected, for the Bayview and Presidio models, most values are clustered closely around the zero mean, with the tails being extremely thin and long, especially for the Bayview model. The residuals of the Downtown and Residential models follow a distribution that comes closer to a normal one, but also here, the tails are wide.</p>
+<div class="figure" style="text-align: center"><span id="fig:residualhist"></span>
+<img src="Figures/residual_histograms.png" alt="Histograms of the model residuals" width="\textwidth" />
+<p class="caption">
+Figure 5.8: Histograms of the model residuals
+</p>
+</div>
+</div>
+<div id="forecasting-1" class="section level2">
+<h2><span class="header-section-number">5.3</span> Forecasting</h2>
+<p>Figure <a href="5-five.html#fig:testpoints">5.9</a>a shows the spatial distribution of the 500 test points. As planned, areas with high usage intensity have more test points, with 94% located in the Downtown and Residential clusters, and only the minimum of ten test points in the Bayview cluster. Figure <a href="5-five.html#fig:testpoints">5.9</a>b shows the temporal distribution test points. All days in the test week are well covered, with less test points during working times and in the night, and more during the morning rush hours and in the evening. On weekend days, there is only one strong peak, around noon. Furthermore, it can be seen that the morning peak on November 1st is somewhat lower compared to the other weekdays. This may be, because it is the morning of All Saint’s Day, following the Halloween night. For the full information on the test points, with all unique location-time combinations, see Appendix <a href="A-aa.html#aa">A</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:testpoints"></span>
+<img src="Figures/testpoints.png" alt="a) test points locations; b) test point timestamps, counted per hour" width="\textwidth" />
+<p class="caption">
+Figure 5.9: a) test points locations; b) test point timestamps, counted per hour
+</p>
+</div>
+<p>The first row of Table <a href="5-five.html#tab:forecastresults">5.3</a> lists the RMSE’s, averaged over the whole system area, of the forecasts produced by DBAFS, and of the forecasts produced by the baseline system, NFS. DBAFS clearly outperforms NFS, by producing forecasts with errors that are on average 31% lower. Furthermore, the range of error values is much lower for DBAFS, than for NFS. The minima are comparable, but NFS produces forecasts with error values up to 1644 meters, while DBAFS never exceeds 1004 meters.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:forecastresults">Table 5.3: </span>Forecast RMSE’s, in meters
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="2">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+DBAFS
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+NFS
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; font-weight: bold;">
+Total
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+500
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+282
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+38
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+1004
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+408
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+37
+</td>
+<td style="text-align:right;">
+1644
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; font-weight: bold;">
+Bayview
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+10
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+389
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+38
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+1004
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+389
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+38
+</td>
+<td style="text-align:right;">
+1004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; font-weight: bold;">
+Downtown
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+259
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+248
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+122
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+523
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+414
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+116
+</td>
+<td style="text-align:right;">
+927
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; font-weight: bold;">
+Residential
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+211
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+317
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+97
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+705
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+411
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+37
+</td>
+<td style="text-align:right;">
+1644
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; font-weight: bold;">
+Presidio
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+20
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+299
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+80
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+577
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+320
+</td>
+<td style="text-align:right;width: 1.5cm; ">
+175
+</td>
+<td style="text-align:right;">
+699
+</td>
+</tr>
+</tbody>
+</table>
+<p>Regarding the spatial patterns of the forecast errors, the remaining rows of Table <a href="5-five.html#tab:forecastresults">5.3</a> show the RMSE’s averaged per spatial cluster. With NFS, the lowest errors are obtained in the Bayview and Presidio clusters, where the data are less dynamic. In the Bayview cluster, NFS gives the same results as DBAFS, and in the Presidio cluster, DBAFS performs only slightly better than NFS. For DBAFS, however, the lowest errors are not found in those clusters, but in the highly dynamic Downtown cluster. Here, DBAFS gives errors that are 40% lower than those of NFS. In the Residential cluster, there are larger errors than in the Downtown cluster, but also here, DBAFS outperforms NFS with errors that are 23% lower. It shows the strength of DBAFS in forecasting dynamic data, when compared to NFS.</p>
+<p>Regarding the temporal patterns of the forecast errors, Figure <a href="5-five.html#fig:timeandlag">5.10</a> shows the RMSE’s averaged per hour of the day, and per forecast lag. The lowest forecast errors occur during the night, when the usage intensity of the system is low. During the day, higher errors occur, with peaks at the morning rush hour, around noon (i.e. the peak hour in the weekend) and after working hours. This patterns are similar for NFS, but with higher RMSE’s at each hour. The forecast errors of both methods rise steeply directly after the first forecast lag, but for NFS, this increase is much larger than for DBAFS.</p>
+<p>What strikes, is that the RMSE does not increase constantly when the forecast horizon gets larger. From the forecasting lag of 12 hours, the errors for both DBAFS and NFS decrease again. Moreover, at a forecasting lag of approximately 18 hours, the RMSE of the DBAFS forecasts is, on average, back at almost the same level as the one at a forecasting lag of just 15 minutes. This conspicuousness can be explained as follows. Most of the simulated forecast requests are made at times with a high usage intensity, that are hard to forecast. The first forecast lags, will still correspond to high usage times, but after a while, forecasts will be made during night time. As could be seen in Figure <a href="5-five.html#fig:timeandlag">5.10</a>a, these night time forecasts have much lower errors. Therefore, it can happen that, despite the length of the forecasting window, ‘far-ahead’ forecasts have lower errors than ‘close-by’ forecasts.</p>
+<div class="figure" style="text-align: center"><span id="fig:timeandlag"></span>
+<img src="Figures/hourlag.png" alt="a) RMSE averaged per hour of the day; b) RMSE averaged per forecast lag" width="\textwidth" />
+<p class="caption">
+Figure 5.10: a) RMSE averaged per hour of the day; b) RMSE averaged per forecast lag
+</p>
+</div>
+</div>
+<div id="limitations-and-recommendations" class="section level2">
+<h2><span class="header-section-number">5.4</span> Limitations and recommendations</h2>
+<!-- `*NOTE: write about limitation of DBAFS, and give recommendation how things could be improved. Cover at least the following points:` -->
+<!-- `- analysis of detailed forecasts: at which points does DBAFS perform good, and at which points not?` -->
+<!-- `- the low forecastability of dockless bike sharing data in general, compared to station based bike sharing systems` -->
+<!-- `- methods that can include exogeneous variables. For example, the new forecast packages in R, that are still in development, like FASSTER, and a Dynamic Harmonic Regression with seasonality in Fourier terms and an ARIMA model for the errors` -->
+<!-- `- talk about possible exogeneous variables, based on the literature. Weather, special events like football matches, holidays, etcetera` -->
+<!-- `- machine learning possibilities` -->
+<!-- `- higher density of model points` -->
+<!-- `- clustering based on ARIMA parameters instead of on raw data*` -->
+<div id="limits-of-forecastability" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Limits of forecastability</h3>
+<p>Although DBAFS outperforms the baseline, the average forecast RMSE of almost 300 meters can be considered high when looking at it from an absolute perspective. To get a more detailed understanding of the performance of DBAFS, it may be beneficial to look at some individual forecast results, rather than at general, averaged metrics. Therefore, Figure <a href="5-five.html#fig:forecastplot">5.11</a> shows the forecasts at the four model point locations, for the whole test period. Each day is forecasted separately, with two weeks of historical data.</p>
+<p>As already pointed out earlier in this chapter, the forecasts in the Bayview cluster act in a similar way as naïve forecasts, with approximately straight lines every day. Peaks in the true data occur randomly, and can not be captured well by the fitted model. In the Downtown and Residential clusters, the ones of primary interest, DBAFS performs very well in forecasting when peaks are going to occur, but fails to accurately capture the variation in the height of those peaks from day to day. Equivalently, in the Presidio cluster, the varying amplitude of the Sunday afternoon peak, is problematic for the forecasts. When this peak has been relatively low in the two weeks before, DBAFS will expect it to stay low, and never forecast the reoccurrence of a higher peak.</p>
+<div class="figure" style="text-align: center"><span id="fig:forecastplot"></span>
+<img src="Figures/forecastplot.png" alt="Detailed forecasts for the model point locations" width="\textwidth" />
+<p class="caption">
+Figure 5.11: Detailed forecasts for the model point locations
+</p>
+</div>
+<p>The irregularity of the patterns in the data, and consequently, their high entropy, can be linked to the flexible and dynamic nature of dockless PBSS. Users can pick up bikes spontaneously, whenever they see one around. This in contradiction to station-based PBSS, which have a more organized structure, where trips are usually planned in advance, at regular moments in time. Some studies in the United States already explored these differences between dockless and station-based systems. A report of the National Association of City Transportation Officials showed that the usage in station-based systems follows typical commuting patterns, while in dockless systems, it is more dispersed <span class="citation">(NACTO, <a href="#ref-nacto2018">2018</a>)</span>. This is in line with the conclusions drawn from Figure <a href="5-five.html#fig:patterns">5.4</a>, earlier in this chapter. Moreover, <span class="citation">Mckenzie (<a href="#ref-mckenzie2018">2018</a>)</span> found similar results in Washington D.C.</p>
+<p>In San Francisco, the differences between station-based and dockless systems may even be stronger, for the following reason. For single-trips, JUMP Bikes is cheaper than the station-based Ford GoBike system. However, in contradiction to GoBike, JUMP Bikes has no subscription pricing. That is, for irregular usage, JUMP Bikes is the better option, but when using a JUMP Bike every working day for two trips of half an hour ($2 each), this will cost around $1040 per year, compared to only $149 for a yearly subscription on GoBike <span class="citation">(Harris, <a href="#ref-harris2018">2018</a>)</span>.</p>
+<p>To strengthen the findings discussed above, Figure <a href="5-five.html#fig:jumpgo">5.12</a> is adapted from the mid-point evaluation of JUMP Bikes in San Francisco, performed by SFMTA, and shows the number of trips per bike per day, for both JUMP Bikes and GoBike, during five months in 2018 <span class="citation">(SFMTA Board of Directors, <a href="#ref-sfmta2018three">2018</a>)</span>. It clearly confirms the expected differences between the two. The course of the GoBike line is very regular, with peaks during weekdays, and valleys during weekends. JUMP Bikes, in contradiction, follows a highly irregular pattern. Such irregularity, obviously, sets limits on the ability of models to forecast the data accurately.</p>
+</div>
+<div id="exogenous-variables" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> Exogenous variables</h3>
+<p>That the forecastability of dockless bike sharing data is limited, does not mean that the forecasts produced by DBAFS can not be improved in any way. There may be exogenous variables that can explain at least a part of the variation in peak height from day to day. The most relevant of those, probably relate to weather conditions. Several studies addressed the relationship between cycling activity in PBSS and weather conditions already <span class="citation">(Campbell, Cherry, Ryerson, &amp; Yang, <a href="#ref-campbell2016">2016</a>; Corcoran, Li, Rohde, Charles-Edwards, &amp; Mateo-Babiano, <a href="#ref-corcoran2014">2014</a>; Faghih-Imani, Eluru, El-Geneidy, Rabbat, &amp; Haq, <a href="#ref-faghih2014">2014</a>; Shen et al., <a href="#ref-shen2018">2018</a>)</span>. Most notably, heavy rain or snowfall, high humidity, strong winds, extremely low temperatures, and extremely high temperatures, all have a negative impact on PBSS usage, both for recreational and commuting trips. It must be noted, that DBAFS already deals with long-term weather variations, since models are updated regularly, and moreover, STL allows the seasonal pattern to change slightly over time. The short-term weather variation, however, may be an important factor influencing the variability in the data, which DBAFS is not able to account for. Therefore, including weather condition variables in the forecasting system, can possibly decrease the forecast errors substantially.</p>
+<div class="figure" style="text-align: center"><span id="fig:jumpgo"></span>
+<img src="Figures/jumpgo.png" alt="Dockless versus station-based, adapted from SFMTA" width="\textwidth" />
+<p class="caption">
+Figure 5.12: Dockless versus station-based, adapted from SFMTA
+</p>
+</div>
+<p>Above average peaks in the data may occur when special events, such as sport matches, concerts or conferences, take place. Furthermore, public holidays may cause abnormal data patterns <span class="citation">(Corcoran et al., <a href="#ref-corcoran2014">2014</a>)</span>. These are also factors that are not considered by DBAFS. Modelling their relationship with PBSS usage is complicated, especially for the events, since the influence will not be the same at all locations within each cluster. However, they will contain information that can explain a part of the variability in the data, as well.</p>
+<p>As explained in Section <a href="2-two.html#twofourone">2.4.1</a>, time series forecasting models relate future patterns to past patterns in the same data. That is, in essence, they do not allow for exogenous variables. However, several methods have been developed to overcome this issue. For example, <span class="citation">Hyndman &amp; Athanasopoulos (<a href="#ref-hyndman2018fpp">2018</a>)</span> recommend dynamic regression models, in which the exogenous variables are included in a linear regression, with an ARIMA(<span class="math inline">\(p\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(q\)</span>) model fitted to the autocorrelated errors. Optionally, seasonal patterns can be captured by including Fourier terms in the regression as well. Another option is the <code>fasster</code> package in R <span class="citation">(O’Hara-Wild, <a href="#ref-fasster">2018</a>)</span>, which is, at the time of writing, still under development. Fasster stands for ‘Forecasting with Additive Switching of Seasonality, Trend and Exogenous Regressors’, and is a model designed to capture both the influence of exogenous regressors as multiple seasonal patterns in a state space framework, by using state switching. Finally, machine learning regression methods are widely used in forecasting, and allow the use of exogenous variables as well. It is recommended to test these approaches with the exogenous variables described above, and examine the accuracy gain compared to the current approach of DBAFS.</p>
+</div>
+<div id="residual-distributions-and-prediction-intervals" class="section level3">
+<h3><span class="header-section-number">5.4.3</span> Residual distributions and prediction intervals</h3>
+<p>Another point of concern regards the non-normality of the models’ residual distributions, which showed clearly in Figure <a href="5-five.html#fig:residualhist">5.8</a>. Both in the calculation of the AIC, for model selection, and in the estimation of the model parameters, Gaussian likelihood is used, assuming a normal distribution. In the literature, approaches have been developed to use different likelihood functions, such as the Laplace Likelihood and Student’s t likelihood, that may be more appropriate to use for models with widely tailed residual distributions such as those identified in Figure <a href="5-five.html#fig:residualhist">5.8</a> <span class="citation">(Huang &amp; Pawitan, <a href="#ref-huang2000">2000</a>; Lehr &amp; Lii, <a href="#ref-lehr1998">1998</a>; W. K. Li &amp; McLeod, <a href="#ref-li1988">1988</a>)</span>. However, such approaches will increase the complexity of the system. Moreover, the accuracy gain will probably be of minor extent, since, as discussed in section <a href="2-two.html#twofourtwofour">2.4.2.4</a>.4, using Gaussian likelihood is sensible even for models with non-normally distributed residuals, especially when sample sizes are large. It should also be noted that in the <code>forecast</code> package, Gaussian likelihood is the only available option.</p>
+<p>The non-normality of the residuals does have an important effect on the validity of the prediction intervals, however. When 95% prediction intervals are calculated, assuming normality of the forecast distribution, they can not be interpreted as such. To emphasize this, Table <a href="5-five.html#tab:intervalcheck">5.4</a> shows the percentage of true observations that fall within the calculated 95% prediction interval of the forecasts. As can be seen, for all clusters, and especially those where seasonality was detected, this percentage is extremely low. That is, the calculated prediction intervals are far to narrow, making them not useful in any sense.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:intervalcheck">Table 5.4: </span>Interpretation of the calculated prediction intervals
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Percentage of observations within 95% prediction interval
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Total
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Bayview
+</td>
+<td style="text-align:right;">
+17.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Downtown
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Residential
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4cm; font-weight: bold;">
+Presidio
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+</tbody>
+</table>
+<p>As proposed by <span class="citation">Hyndman &amp; Athanasopoulos (<a href="#ref-hyndman2018fpp">2018</a>)</span>, in the case of non-normally distributed model residuals, a technique called bootstrapping is a useful alternative for calculating prediction intervals. It does not make assumptions about the distribution of the residuals, and only requires them to be uncorrelated. Many possible futures for each forecasted time lag are obtained by repeatingly sampling from the model residuals, and replacing the error terms of the forecasts by these sampled values. Then, the 95% prediction interval for each forecast is equal to the interval that contains 95% of the calculated ‘possible futures’. A detailed description of this technique is given by <span class="citation">McCullough (<a href="#ref-mccullough1994">1994</a>)</span>.</p>
+<p>Another important reason for the extremely narrow prediction intervals, is that not all sources of uncertainty are included in its calculation. In DBAFS, there are at least six different sources of uncertainty.</p>
+<ul>
+<li>The random error component of the ARIMA(<span class="math inline">\(p\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(q\)</span>) model.</li>
+<li>The parameter estimates of the ARIMA(<span class="math inline">\(p\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(q\)</span>) model.</li>
+<li>The choice of the model.</li>
+<li>The continuation of the data generating process into the future.</li>
+<li>The continuation of the seasonal patterns into future.</li>
+<li>The use of a model fitted on the model point’s data, for other locations within the same cluster.</li>
+</ul>
+<p>In the <code>forecast</code> package, only the first of these sources is taken into account when calculating prediction intervals <span class="citation">(Hyndman &amp; Athanasopoulos, <a href="#ref-hyndman2018fpp">2018</a>)</span>. In most cases, this leads to acceptable estimates. Even when an ARIMA forecast is combined with a seasonal naïve forecast, this is often true, since seasonal patterns are expected to be constant. However, as already noticed earlier in this chapter, in dockless bike sharing data, there may be a large variation from season to season, and simply ignoring the seasonal uncertainty, is not valid anymore. Bootstrapping can help to partly overcome this issue as well. However, that is a time consuming process, and therefore not suitable to perform at every individual forecast. That is, it still does not account for the last source of uncertainty, which influence is expected to be large. Hence, to provide sensible prediction intervals, an adequate methodology that captures all sources of uncertainty to an acceptable extent, should be developed.</p>
+</div>
+<div id="gps-accuracy" class="section level3">
+<h3><span class="header-section-number">5.4.4</span> GPS accuracy</h3>
+<p>One special type of uncertainty does not relate directly to the forecasting process, but to the location provided by the bicycle’s GPS instead. In highly built-up urban areas, this GPS location may differ considerably from the true location of the bicycle. According to Uber’s research team, such an inaccuracy can have a margin of error of 50 meters or more <span class="citation">(Iland, Irish, Madhow, &amp; Sandler, <a href="#ref-ubereng">2018</a>)</span>. Since DBAFS essentially forecasts the GPS location, this has an influence on the reliability of the forecasts as well. Including these inaccuracies in the prediction interval, may be a complex challenge, but focused research could take a first step in quantifying the influence of GPS errors on the forecast uncertainty.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-campbell2016">
+<p>Campbell, A. A., Cherry, C. R., Ryerson, M. S., &amp; Yang, X. (2016). Factors influencing the choice of shared bicycles and shared electric bikes in Beijing. <em>Transportation Research Part C: Emerging Technologies</em>, <em>67</em>, 399–414. <a href="http://doi.org/https://doi.org/10.1016/j.trc.2016.03.004" class="uri">http://doi.org/https://doi.org/10.1016/j.trc.2016.03.004</a></p>
+</div>
+<div id="ref-corcoran2014">
+<p>Corcoran, J., Li, T., Rohde, D., Charles-Edwards, E., &amp; Mateo-Babiano, D. (2014). Spatio-temporal patterns of a Public Bicycle Sharing Program: the effect of weather and calendar events. <em>Journal of Transport Geography</em>, <em>41</em>, 292–305. <a href="http://doi.org/https://doi.org/10.1016/j.jtrangeo.2014.09.003" class="uri">http://doi.org/https://doi.org/10.1016/j.jtrangeo.2014.09.003</a></p>
+</div>
+<div id="ref-faghih2014">
+<p>Faghih-Imani, A., Eluru, N., El-Geneidy, A. M., Rabbat, M., &amp; Haq, U. (2014). How land-use and urban form impact bicycle flows: evidence from the bicycle-sharing system (BIXI) in Montreal. <em>Journal of Transport Geography</em>, <em>41</em>, 306–314. <a href="http://doi.org/https://doi.org/10.1016/j.jtrangeo.2014.01.013" class="uri">http://doi.org/https://doi.org/10.1016/j.jtrangeo.2014.01.013</a></p>
+</div>
+<div id="ref-harris2018">
+<p>Harris, D. (2018, June). The Complete San Francisco Bikeshare Review Guide. Retrieved from <a href="https://biketoeverything.com/2018/06/12/complete-san-francisco-bikeshare-review/" class="uri">https://biketoeverything.com/2018/06/12/complete-san-francisco-bikeshare-review/</a></p>
+</div>
+<div id="ref-huang2000">
+<p>Huang, J., &amp; Pawitan, Y. (2000). Quasi-Likelihood Estimation of Non-Invertible Moving Average Processes. <em>Scandinavian Journal of Statistics</em>, <em>27</em>(4), 689–702. Retrieved from <a href="http://www.jstor.org/stable/4616635" class="uri">http://www.jstor.org/stable/4616635</a></p>
+</div>
+<div id="ref-hyndman2018fpp">
+<p>Hyndman, R. J., &amp; Athanasopoulos, G. (2018). <em>Forecasting: principles and practice</em>. OTexts. Retrieved from <a href="https://otexts.org/fpp2/" class="uri">https://otexts.org/fpp2/</a></p>
+</div>
+<div id="ref-ubereng">
+<p>Iland, D., Irish, A., Madhow, U., &amp; Sandler, B. (2018, April). Rethinking GPS: Engineering Next-Gen Location at Uber. Retrieved from <a href="https://eng.uber.com/rethinking-gps/" class="uri">https://eng.uber.com/rethinking-gps/</a></p>
+</div>
+<div id="ref-lehr1998">
+<p>Lehr, M. E., &amp; Lii, K.-S. (1998). Maximum Likelihood Estimates of Non-Gaussian ARMA Models. <em>1998 Symposium on Nonlinear Time Series Models</em>. Retrieved from <a href="https://eml.berkeley.edu/symposia/nsf98/lii{\_}lehr.pdf" class="uri">https://eml.berkeley.edu/symposia/nsf98/lii{\_}lehr.pdf</a></p>
+</div>
+<div id="ref-li1988">
+<p>Li, W. K., &amp; McLeod, A. I. (1988). ARMA modelling with non-gaussian innovations. <em>Journal of Time Series Analysis</em>, <em>9</em>(2), 155–168. <a href="http://doi.org/10.1111/j.1467-9892.1988.tb00461.x" class="uri">http://doi.org/10.1111/j.1467-9892.1988.tb00461.x</a></p>
+</div>
+<div id="ref-mccullough1994">
+<p>McCullough, B. D. (1994). Bootstrapping forecast intervals: An application to AR(p) models. <em>Journal of Forecasting</em>, <em>13</em>(1), 51–66. <a href="http://doi.org/10.1002/for.3980130107" class="uri">http://doi.org/10.1002/for.3980130107</a></p>
+</div>
+<div id="ref-mckenzie2018">
+<p>Mckenzie, G. (2018). Docked vs. Dockless Bike-sharing : Contrasting Spatiotemporal Patterns. In <em>10th international conference on geographic information science (giscience 2018)</em> (pp. 46:1—–46:7). <a href="http://doi.org/10.4230/LIPIcs.GISCIENCE.2018.46" class="uri">http://doi.org/10.4230/LIPIcs.GISCIENCE.2018.46</a></p>
+</div>
+<div id="ref-nacto2018">
+<p>NACTO. (2018). <em>Bike Share in the U.S.: 2017</em>. National Association of City Transportation Officials. Retrieved from <a href="https://nacto.org/wp-content/uploads/2018/05/NACTO-Bike-Share-2017.pdf" class="uri">https://nacto.org/wp-content/uploads/2018/05/NACTO-Bike-Share-2017.pdf</a></p>
+</div>
+<div id="ref-fasster">
+<p>O’Hara-Wild, M. (2018). <em>fasster: Fast Additive Switching of Seasonality, Trend and Exogenous Regressors</em>. Retrieved from <a href="https://github.com/mitchelloharawild/fasster" class="uri">https://github.com/mitchelloharawild/fasster</a></p>
+</div>
+<div id="ref-sfindicator">
+<p>San Francisco Department of Public Health. (2014). The San Francisco Indicator Project. Retrieved from <a href="https://www.sfindicatorproject.org/" class="uri">https://www.sfindicatorproject.org/</a></p>
+</div>
+<div id="ref-sfmta2018three">
+<p>SFMTA Board of Directors. (2018). <em>Stationless Bikeshare Pilot Midpoint Evaluation</em>. San Francisco Municipal Transportation Agency. Retrieved from <a href="https://techcrunch.com/2018/10/01/ubers-jump-bike-fleet-may-soon-double-in-size-in-sf/" class="uri">https://techcrunch.com/2018/10/01/ubers-jump-bike-fleet-may-soon-double-in-size-in-sf/</a></p>
+</div>
+<div id="ref-shen2018">
+<p>Shen, Y., Zhang, X., &amp; Zhao, J. (2018). Understanding the usage of dockless bike sharing in Singapore. <em>International Journal of Sustainable Transportation</em>, <em>12</em>(9), 686–700. <a href="http://doi.org/10.1080/15568318.2018.1429696" class="uri">http://doi.org/10.1080/15568318.2018.1429696</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="4-four.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="6-six.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": [["VdMeerL-Thesis-DigitalVersion.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

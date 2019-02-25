@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 Data and experimental design | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</title>
+  <meta name="description" content="Chapter 4 Data and experimental design | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 Data and experimental design | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Data and experimental design | Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems" />
+  
+  
+  
+
+<meta name="author" content="Lucas van der Meer">
+
+
+<meta name="date" content="2019-02-25">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="3-three.html">
+<link rel="next" href="5-five.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+true
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="four" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Data and experimental design</h1>
+<p>This chapter describes the case study that was done to test the performance of DBAFS. It is structured as follows. First, the characteristics of the bike sharing system that served as a data source for the experiment, are presented. The data retrieval process is described in section two. The third section explains into detail the methodology of the experiment itself. Finally, in the fourth section, the additional software packages used in the experiment are listed.</p>
+<div id="fourone" class="section level2">
+<h2><span class="header-section-number">4.1</span> Data source</h2>
+<p>DBAFS’ forecasting power was evaluated with data from the dockless PBSS of San Francisco, California. The system there is exploited by JUMP Bikes (<a href="https://jump.com/" class="uri">https://jump.com/</a>), an American company founded in 2010, that went through a rapid development after being acquired by ride hailing giant Uber in April 2018 <span class="citation">(Khosrowshahi, <a href="#ref-uber2018">2018</a>)</span>. In February 2019, JUMP was active in 16 cities in the United States, as well as in Berlin, Germany. All provided bicycles have electric pedal assistance, up to a maximum speed of 32 km per hour.</p>
+<p>In January 2018, the San Francisco Municipal Transportation Agency (SFMTA) offered JUMP Bikes the city’s first official, exclusive permit to operate a dockless PBSS, for an 18 month trial period, in order to “evaluate, collect data, and assess whether further increases would serve the public interest” <span class="citation">(Jose, <a href="#ref-sfmta2018one">2018</a><a href="#ref-sfmta2018one">a</a>)</span>. SFMTA allowed up to 250 bikes in a system area of approximately 47 km<span class="math inline">\(^2\)</span>, which is shown in Figure <a href="4-four.html#fig:systemarea">4.1</a>. After nine months, a mid-point evaluation lead to the allowance of expanding the fleet to 500 bikes <span class="citation">(Jose, <a href="#ref-sfmta2018two">2018</a><a href="#ref-sfmta2018two">b</a>)</span>.</p>
+<p>The JUMP Bikes system in San Francisco, works as follows. A user needs to download the JUMP mobile application and create an account. The app shows the real-time locations of all available bikes. An available bike can be unlocked with a unique code that is send to the user account. A single trip costs $2 for a total time of 30 minutes. For every minute that exceeds the 30 minute timeframe, $0.07 will be charged. Options for subscription pricing, with a fixed amount per month or year, are not available.</p>
+<p>It is possible to reserve a bike up to 30 minutes before unlocking it. In that case, the bike will not be labeled as available anymore, and can not be taken by another user. However, the trip clock starts ticking from the moment of reservation. When a user wants to stop somewhere during a ride, the bike can be put ‘on-hold’ for maximum an hour, meaning that the bike stays unavailable during the stop. Also in this case, the regular fee will be charged. When ending the ride, the bike needs to be locked legally to a fixed object. Not doing so, will result in a fee of $25. Additionally, leaving the bike outside of the system area, results in a $25 fee as well <span class="citation">(Harris, <a href="#ref-harris2018">2018</a>)</span>.</p>
+<p>Since all JUMP bikes are electric, battery life forms an important issue. A fully charged bike can travel 48 to 64 kilometers with the pedal assist. Bikes with a battery level of less than 25% are collected, and charged. Furthermore, other bikes are regularly charged during nighttime. Charging takes in most cases about four to six hours, and is done in a JUMP Bikes depot. Some of the charged bikes are placed outside of the depot, where they can be picked up, while others are redistributed over the system area. In the near future, this process will change considerably, since the newly produced bikes, which will be introduced in the first months of this year, have swappable batteries, such that there is no need anymore to bring low-battery bikes to the depot <span class="citation">(Foley, <a href="#ref-foley2018">2018</a>)</span>.</p>
+<p>In the first year of the trial period, 63000 users took over 625000 trips. On average, trips were 4.2 kilometers long, while around 1% of the trips, exceeded 24 kilometers. Each individual bike, was on average used seven times per day. In September 2018, this was over eight times per day. Even when the size of the fleet doubled in October 2018, the utilization remained consistent until the first half of November, when it started to decrease slightly, due to cold weather <span class="citation">(Rzepecki, <a href="#ref-jump2019">2019</a>)</span>. While the demand is high, the supply is still restricted by SFTMA, putting extra emphasis on the need for efficient rebalancing, and accurate bike availability forecasts.</p>
+<div class="figure" style="text-align: center"><span id="fig:systemarea"></span>
+<img src="Figures/systemarea.png" alt="System area of JUMP Bikes in San Francisco" width="\textwidth" />
+<p class="caption">
+Figure 4.1: System area of JUMP Bikes in San Francisco
+</p>
+</div>
+</div>
+<div id="data-retrieval" class="section level2">
+<h2><span class="header-section-number">4.2</span> Data retrieval</h2>
+<p>JUMP Bikes provided access to a database containing the geographical locations of their available bikes in San Francisco. The database fulfilled all DBAFS requirements described in Section <a href="3-three.html#threefour">3.4</a>. Data collection started at September 9th, 2018, 15:41:08, Pacific Daylight Saving Time (PDT). The data had a temporal resolution of one minute, meaning that every minute, the location of each available bike in the system was recorded. Timestamps were stored with six-digit precision. Because of that, the time of recording was not exactly the same for each available bike, but could vary up to a few seconds. Therefore, before using the data in DBAFS, all timestamps were truncated to minute precision.</p>
+<div id="distance-data" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Distance data</h3>
+<p>When calculating distances, only the historical data at every quarter of an hour were used in the experiment. Hence, <span class="math inline">\(i_{s}\)</span> was set equal to 15 minutes. There were several reasons for this choice. Firstly, it is not expected that the data change drastically from minute to minute. That is, using data with a temporal resolution of one minute will probably not contain a lot more information than using data with a temporal resolution of 15 minutes. Consequently, if a forecast for a specific timestamp is in practice a forecast for a few minutes earlier, this will not be problematic. On the other hand, using only data every 15 minutes will decrease the size of the data with a factor 15, and speed up computations considerably. Furthermore, a lower order ARIMA(<span class="math inline">\(p\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(q\)</span>) model can be used to capture the same patterns in the data. This is important, since lower order models will result in lower errors arising from parameter estimation <span class="citation">(Brockwell &amp; Davis, <a href="#ref-brockwell2002">2002</a>)</span>. After defining <span class="math inline">\(i_{s}\)</span>, distance data pre-processing steps on the JUMP Bikes database server were taken as described in Section <a href="3-three.html#threefourone">3.4.1</a>.</p>
+</div>
+<div id="usage-data" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Usage data</h3>
+<p>Based on the specific knowledge of the JUMP Bikes system presented in Section <a href="4-four.html#fourone">4.1</a>, an extra restriction was added to the in Section <a href="3-three.html#threefourtwo">3.4.2</a> described process of retrieving pick-ups from the original data. If a feature that was initially considered to be a pick-up, was not followed by a drop-off within a two hour timeframe, the feature was removed from the usage data. Taking into account the average trip length of only 4.6 kilometers, the fact that trips become more expensive after half an hour, the maximum allowed reservation time of 30 minutes, and the maximum allowed ‘on-hold’-time of one hour, the threshold of two hours was considered to be a safe border. In this way, pick-ups that occur because the system operator is collecting bikes to be charged (i.e. pick-ups that do not reflect the usage intensity of the system), were taken out.</p>
+<p>Of course, there may have been some real trips that were longer than two hours. However, given that during the first year of the trial period only 1% of the trips exceeded a distance of 24 kilometers, and the electric pedal assistance allows a speed of more than 30 kilometers per hours, this was assumed to be a negligible share of the total number of trips.</p>
+</div>
+</div>
+<div id="experimental-design" class="section level2">
+<h2><span class="header-section-number">4.3</span> Experimental design</h2>
+<div id="training-and-test-periods" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Training and test periods</h3>
+<p>As mentioned in Section <a href="4-four.html#fourone">4.1</a>, usage of the JUMP Bikes system in San Francisco remained rather constant in September, October, and the start of November. An exploratory analysis on the distance data at several locations in the system area enabled to draw similar conclusions, with a sudden change in temporal patterns after mid-November. Recall that in DBAFS, parameter <span class="math inline">\(n_{w}\)</span>, the number of weeks between two passes through the model loop, should be chosen such that an ‘old’ model is not used anymore when the patterns in the historical data have changed considerably. Therefore, to test the performance of DBAFS in an adequate way, both the period used for model building, called the <em>training period</em>, and the period used for forecasting, called the <em>test period</em>, should preferably fall within a timeframe where no large changes in the data patterns occur. However, they should not overlap each other either, since the forecasting performance of a model can only be truly evaluated when forecasts are made for data that the model has not seen yet.</p>
+<p>The training period, used to query data for both the cluster and model loop, spanned the first four full weeks plus one observation (i.e. 2689 observations) in the data collection period, from Sunday September 16th, 2018, 23:45:00 PDT, up to and including Sunday October 13th, 2018, 23:45:00 PDT, as shown in Figure <a href="4-four.html#fig:traintest">4.2</a>. Hence, a situation was simulated in which the weeks of data used for clustering, i.e. <span class="math inline">\(m_{c}\)</span>, and the weeks of data used for model building, i.e. <span class="math inline">\(m_{m}\)</span>, were both set to be four weeks. <span class="math inline">\(p\)</span>, the side length of the square grid cells, was set to 500 meters. Taking into account the size and shape of the system area, along with some exploratory research on the demographic characteristics of San Francisco, <span class="math inline">\(K\)</span>, the set of integers containing all values considered as the number of desired clusters <span class="math inline">\(k\)</span>, was chosen to be {<span class="math inline">\(3, 4, 5, ..., 10\)</span>}.</p>
+<p>The obtained model structures and parameters resulting from the model loop, were used to make several forecasts during a test period of one week. For each forecast, two weeks of distance data, plus one observation, were retrieved from the database, such that in the case of a weekly seasonality, a sufficient amount of data would be present for decomposition. Hence, <span class="math inline">\(m_{f} = 2\)</span>. To make sure that in no case the data used for forecasting would overlap with the data used for model building, a two week period separated the training and test period. That is, the test week ranged from Monday October 29th, 00:00:00 PDT, up to and including Sunday November 4th, 2018, 23:45:00 PST, as shown in Figure <a href="4-four.html#fig:traintest">4.2</a>.</p>
+<p>Defining where and when to forecasts, was done by simulating real-world forecast requests, and sending them to the forecast loop. To do this in a realistic way, the following requirements had to be fulfilled.</p>
+<ul>
+<li>More forecast requests should occur at locations where the usage intensity of the system is higher.</li>
+<li>More forecast requests should occur at times when the usage intensity of the system is higher.</li>
+<li>It should be accounted for, that the times when the usage intensity is higher, can vary per location, and vice versa.</li>
+</ul>
+<p>Bearing these requirements in mind, the following approach was developed. All pick-ups during the test week were retrieved from the database. Ten pick-ups per cluster where randomly sampled, guaranteeing that each cluster was represented in the sample. Subsequently, <span class="math inline">\(500-10 \times k\)</span> pick-ups were randomly sampled from the remaining ones, regardless to which cluster they belonged. This lead to a dataset of 500 pick-ups in total, from which the location-timestamp combinations were retrieved. Pick-ups reflect the usage of the bike sharing system. That is, a random sample of them will contain more locations in areas where the usage intensity is high, and more timestamps at times when the usage intensity is high. Furthermore, the location and timestamp come as a combination, rather than as separate entities. In this way, the approach fulfills all three requirements mentioned above. The location-timestamp combinations in the sample will from now on be referred to as the <em>test points</em>.</p>
+<p>Starting from the timestamp of the test point, all time lags up to one day ahead, i.e. 96 time lags in total, were forecasted. Having 500 test points, in total, 48000 forecasts were made. To evaluate their performance, historical distance data for all forecasted time lags were retrieved from the database, and the forecast RMSE (see Section <a href="2-two.html#twofourtwosix">2.4.2.6</a>.6) was calculated for each test point separately.</p>
+<p>By using the approach described above, the reported overall forecast errors will be dominated by those made during peak hours, when obtaining accurate forecasts is generally harder, and in crowded areas, where obtaining accurate forecasts is generally harder. However, this is intended, because reporting a large amount of forecast errors made during off-peak hours, and in non-crowded areas, or, alternatively, using adjusted error metrics such as the RMSLE, may give results that look nicer, but do not reflect the real usefulness of the forecasting system.</p>
+<p>To examine the forecasting power of DBAFS in a relative manner, all test points were also forecasted 96 time lags ahead with a simple baseline method. The naïve method, as described in Section <a href="2-two.html#twofourthree">2.4.3</a>, was chosen for this task. Therefore, the baseline forecasting system will from now on be referred to as the Naïve Forecasting System (NFS). For each test point, the RMSE’s of the forecasts of NFS were calculated, and compared to those of DBAFS.</p>
+<div class="figure" style="text-align: center"><span id="fig:traintest"></span>
+<img src="Figures/traintest.png" alt="Training and test period" width="\textwidth" />
+<p class="caption">
+Figure 4.2: Training and test period
+</p>
+</div>
+<!-- ## 4.3.3 Benchmark -->
+<!-- In addition to the forecast errors, the average computation times of DBAFS and NFS forecasts were compared. For a DBAFS forecast of a single test point, two weeks of distance data need to be retrieved from the database, while for a NFS forecast of a single test point, only the last observation of the historical distance data is needed. The computation time of the data retrieval, averaged over all test points, and the computation time of the forecast itself, again averaged over all test points, were added together to get an average computation time for the complete process of forecasting a test point. The benchmark was done on an Asus F541U laptop with Windows 10 OS, an Intel Core i7 processor, 8 GB RAM and 256 GB SSD. When DBAFS is implemented in a real-world situation, computations will probably be done of a large server, wich can speed them up considerably. Therefore, the benchmark should mainly be interpreted in a relative way, rather than in an absolute one. -->
+</div>
+<div id="additional-software" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Additional software</h3>
+<p>On top of those mentioned in Section <a href="3-three.html#threetwo">3.2</a>, some additional R packages were used for reporting the results of the experiment, as listed below.</p>
+<ul>
+<li>The <code>feasts</code> package <span class="citation">(Hyndman, O’Hara-Wild, &amp; Wang, <a href="#ref-feasts">2019</a>)</span> was used to estimate the ACF (see Section <a href="2-two.html#twotwoone">2.2.1</a>) of time series.</li>
+<li>The <code>tsfeatures</code> package <span class="citation">(Hyndman, Kang, Talagala, Wang, &amp; Yang, <a href="#ref-tsfeatures">2019</a>)</span> was used to calculate the spectral entropy (see Section <a href="2-two.html#twotwothree">2.2.3</a>) of time series.</li>
+<li>Data and results were visualized graphically with the <code>ggplot2</code> package <span class="citation">(Wickham, <a href="#ref-ggplot">2016</a>)</span>. Additionally, the packages <code>tidyr</code> <span class="citation">(Wickham &amp; Henry, <a href="#ref-tidyr">2018</a>)</span>, <code>dplyr</code> <span class="citation">(Wickham, François, Henry, &amp; Müller, <a href="#ref-dplyr">2019</a>)</span> and <code>tibble</code> <span class="citation">(Müller &amp; Wickham, <a href="#ref-tibble">2019</a>)</span> were used to transform some data into formats that are compatible with <code>ggplot2</code>.</li>
+<li>Maps were created with the <code>ggspatial</code> package <span class="citation">(Dunnington, <a href="#ref-ggspatial">2018</a>)</span>. Besides, with the <code>rosm</code> package <span class="citation">(Dunnington, <a href="#ref-rosm">2017</a>)</span>, all basemap tiles were retrieved from CARTO <span class="citation">(CARTO, <a href="#ref-carto">2018</a>)</span>.</li>
+<li>For maps with a continuous color scheme, the <code>orange_material</code> color scheme from the <code>ggsci</code> package <span class="citation">(Xiao, <a href="#ref-ggsci">2018</a>)</span> was used.</li>
+</ul>
+<p>For the R code used in the experiment, see Appendix <a href="A-aa.html#aa">A</a>.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-brockwell2002">
+<p>Brockwell, P. J., &amp; Davis, R. A. (2002). <em>An Introduction to Time Series and Forecasting</em> (Vol. 39). <a href="http://doi.org/10.1007/978-1-4757-2526-1" class="uri">http://doi.org/10.1007/978-1-4757-2526-1</a></p>
+</div>
+<div id="ref-carto">
+<p>CARTO. (2018). Attribution: Powered by CARTO. Retrieved from <a href="https://carto.com/attribution/" class="uri">https://carto.com/attribution/</a></p>
+</div>
+<div id="ref-rosm">
+<p>Dunnington, D. (2017). <em>rosm: Plot Raster Map Tiles from Open Street Map and Other Sources</em>. Retrieved from <a href="https://cran.r-project.org/package=rosm" class="uri">https://cran.r-project.org/package=rosm</a></p>
+</div>
+<div id="ref-ggspatial">
+<p>Dunnington, D. (2018). <em>ggspatial: Spatial Data Framework for ggplot2</em>. Retrieved from <a href="https://cran.r-project.org/package=ggspatial" class="uri">https://cran.r-project.org/package=ggspatial</a></p>
+</div>
+<div id="ref-foley2018">
+<p>Foley, N. (2018, December). Getting more people on JUMP bikes with our new design. Retrieved from <a href="https://www.uber.com/newsroom/newbike/" class="uri">https://www.uber.com/newsroom/newbike/</a></p>
+</div>
+<div id="ref-harris2018">
+<p>Harris, D. (2018, June). The Complete San Francisco Bikeshare Review Guide. Retrieved from <a href="https://biketoeverything.com/2018/06/12/complete-san-francisco-bikeshare-review/" class="uri">https://biketoeverything.com/2018/06/12/complete-san-francisco-bikeshare-review/</a></p>
+</div>
+<div id="ref-tsfeatures">
+<p>Hyndman, R. J., Kang, Y., Talagala, T., Wang, E., &amp; Yang, Y. (2019). <em>tsfeatures: Time Series Feature Extraction</em>. Retrieved from <a href="https://pkg.robjhyndman.com/tsfeatures/" class="uri">https://pkg.robjhyndman.com/tsfeatures/</a></p>
+</div>
+<div id="ref-feasts">
+<p>Hyndman, R. J., O’Hara-Wild, M., &amp; Wang, E. (2019). <em>feasts: Feature Extraction And Statistics for Time Series</em>. Retrieved from <a href="https://github.com/tidyverts/feasts" class="uri">https://github.com/tidyverts/feasts</a></p>
+</div>
+<div id="ref-sfmta2018one">
+<p>Jose, B. (2018a, January). SFMTA Creates Pilot to Study Electric, Stationless Bike Sharing. Retrieved from <a href="https://www.sfmta.com/blog/sfmta-creates-pilot-study-electric-stationless-bike-sharing" class="uri">https://www.sfmta.com/blog/sfmta-creates-pilot-study-electric-stationless-bike-sharing</a></p>
+</div>
+<div id="ref-sfmta2018two">
+<p>Jose, B. (2018b, September). San Francisco’s Stationless Bikeshare Pilot Reaches Mid-Point Milestone. Retrieved from <a href="https://www.sfmta.com/blog/san-franciscos-stationless-bikeshare-pilot-reaches-mid-point-milestone" class="uri">https://www.sfmta.com/blog/san-franciscos-stationless-bikeshare-pilot-reaches-mid-point-milestone</a></p>
+</div>
+<div id="ref-uber2018">
+<p>Khosrowshahi, D. (2018, April). Welcome, JUMP! Retrieved from <a href="https://www.uber.com/newsroom/welcomejump/" class="uri">https://www.uber.com/newsroom/welcomejump/</a></p>
+</div>
+<div id="ref-tibble">
+<p>Müller, K., &amp; Wickham, H. (2019). <em>tibble: Simple Data Frames</em>. Retrieved from <a href="https://cran.r-project.org/package=tibble" class="uri">https://cran.r-project.org/package=tibble</a></p>
+</div>
+<div id="ref-jump2019">
+<p>Rzepecki, R. (2019, February). Celebrating One Year in San Francisco. Retrieved from <a href="https://medium.com/@jumpbikes/celebrating-one-year-in-san-francisco-28469d5dccaa" class="uri">https://medium.com/@jumpbikes/celebrating-one-year-in-san-francisco-28469d5dccaa</a></p>
+</div>
+<div id="ref-ggplot">
+<p>Wickham, H. (2016). <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. Retrieved from <a href="http://ggplot2.org" class="uri">http://ggplot2.org</a></p>
+</div>
+<div id="ref-tidyr">
+<p>Wickham, H., &amp; Henry, L. (2018). <em>tidyr: Easily Tidy Data with ’spread()’ and ’gather()’ Functions</em>. Retrieved from <a href="https://cran.r-project.org/package=tidyr" class="uri">https://cran.r-project.org/package=tidyr</a></p>
+</div>
+<div id="ref-dplyr">
+<p>Wickham, H., François, R., Henry, L., &amp; Müller, K. (2019). <em>dplyr: A Grammar of Data Manipulation</em>. Retrieved from <a href="https://cran.r-project.org/package=dplyr" class="uri">https://cran.r-project.org/package=dplyr</a></p>
+</div>
+<div id="ref-ggsci">
+<p>Xiao, N. (2018). <em>ggsci: Scientific Journal and Sci-Fi Themed Color Palettes for ’ggplot2’</em>. Retrieved from <a href="https://cran.r-project.org/package=ggsci" class="uri">https://cran.r-project.org/package=ggsci</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="3-three.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-five.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": [["VdMeerL-Thesis-DigitalVersion.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -34,6 +34,7 @@
 
 % Added by CII
 \usepackage{ifxetex,ifluatex}
+\usepackage{fontawesome}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -268,7 +269,7 @@
   \else
     \@restonecolfalse
   \fi
-  \chapter*{Dedication}
+  \chapter*{List of Acronyms}
   \fontsize{12}{14}\selectfont
 }{\clearpage \if@restonecol\twocolumn\fi}%
 
@@ -299,50 +300,70 @@
   \begin{center}
     \setcounter{page}{1}
     \null\vfil
-    {\fontsize{12}{14}\selectfont \@title}
-    \vfil
+    {\fontsize{12}{14}\selectfont \bf \LARGE \@title} \par
+    {\it Dissertation submitted in partial fulfillment of the requirements} \\
+    {\it for the Degree of Master of Science in Geospatial Technologies} \par
+    {\bf \@date}
+    \
+    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
+    \par
+    \par
+    {\bf Lucas van der Meer} \\
+    {\faEnvelope} \quad luukvandermeer@live.nl \\
+    {\faGithub} \quad https://github.com/luukvdmeer \par
+    {\bf Supervised by:} \\
+    Edzer Pebesma \\
+    Institute for Geoinformatics \\
+    University of Münster \par
+    {\bf Co-supervised by:} \\
+    Jorge Mateu \\
+    Department of Mathematics \\
+    Universidade Jaume I \par
+    {\bf Co-supervised by:} \\
+    Joel Silva \\
+    Information Management School \\
+    Universidade Nova de Lisboa \par
+    \par
+    \par
     \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
     \vfil
-    A Thesis \\
-    Presented to \\
-    \@thedivisionof \ \@division \\
-    \@institution
-    \vfil
-    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
-    \vfil
-    In Partial Fulfillment \\
-    of the Requirements for the Degree \\
-    \@degree
-    \vfil
-    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
-    \bigskip
-    \centerline{}
-    \bigskip
-    {\fontsize{12}{14}\selectfont \lineskip .75em
-    \begin{tabular}[t]{c}%
-      \@author
-    \end{tabular}\par}
-    \vskip 1.5em
-    {\fontsize{12}{14}\selectfont \@date \par}
+    \includegraphics[width=0.8\textwidth]{Figures/logos.png}
   \end{center}\par
   \end{titlepage}
+  
+  % \clearpage
+  %   \shipout\null
+  %   \stepcounter{page}
 
 %% Approved for the division page
   \cleardoublepage
-  {\fontsize{12}{14}
-  \setbox0=\hbox{Approved for the \@approvedforthe}
+  {\fontsize{12}{12}
+  \chapter*{Declaration of Academic Integrity}
   \thispagestyle{empty}
   \null\vfil		% just below center of page
-  \par\vskip 6cm	% below center, not center
+  I hereby confirm that this thesis on \textit{\@title} is solely my own work and that I have used no sources or aids other than the ones stated. \par
+  All passages in my thesis for which other sources, including electronic media, have been used, be it direct quotes or content references, have been acknowledged as such and the sources cited.
+  \par\vskip 1cm	% below center, not center
+  \today
   \centerline{\copy0}	% approved
-  \centerline{(\@department)} %major
-  \vskip 1cm		%space to sign
-  \centerline{\makebox[\wd0][c]{\hrulefill}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi}
-  \centerline{\makebox[\wd0][c]{\@advisor}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@altadvisor} \fi}
+%%  \centerline{(\@department)} %major
+  \vskip 2cm		%space to sign
+  \rule{4cm}{0.4pt}
+  \par\vskip 2cm
+  I agree to have my thesis checked in order to rule out potential similarities with other works and to have my thesis stored in a database for this purpose.
+  \par\vskip 1cm	% below center, not center
+  \today
+  \centerline{\copy0}	% approved
+  \vskip 2cm		%space to sign
+  \rule{4cm}{0.4pt}
+%%  \centerline{\makebox[\wd0][c]{\hrulefill}
+%%	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi}
+%%  \centerline{\makebox[\wd0][c]{\@advisor}
+%%	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@altadvisor} \fi}
   \par\vfil\null}
-  \cleardoublepage
+  % \cleardoublepage
+  % \shipout\null
+  % \stepcounter{page}
   }
 }
 
