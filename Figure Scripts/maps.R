@@ -141,7 +141,7 @@ clusters_map = ggplot() +
   theme(
     text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5),
-    legend.position = c(0.1, 0.2),
+    legend.position = c(0.15, 0.2),
     legend.background = element_blank()
   )
 
@@ -184,7 +184,7 @@ modelpoints_map = ggplot() +
   theme(
     text = element_text(family = 'sans'),
     plot.title = element_text(hjust = 0.5),
-    legend.position = c(0.1, 0.2),
+    legend.position = c(0.15, 0.2),
     legend.background = element_blank()
   ) +
   guides(
