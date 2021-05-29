@@ -4,7 +4,7 @@
 
 This repository contains my my master thesis **Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems**. The thesis is the final part of the master program in [Geospatial Technologies](http://mastergeotech.info/). I used the bookdown-based R package [thesisdown](https://github.com/ismayc/thesisdown) to create the document.
 
-The final document can be found [here](docs/thesis.pdf). An online gitbook version is available [here](https://luukvdmeer.github.io/msc-thesis/). However, the thesis was never intended for the gitbook format, so some style and reference errors may occur in there.
+The final document can be found [here](docs/thesis.pdf). An online gitbook version is available [here](https://luukvdmeer.github.io/msc-thesis/spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html). However, the thesis document is optimized for LateX knitting, and never intended to be in gitbook format. Therefore, style errors may occur in the gitbook version and references may not work. The PDF version is the official version!
 
 All code used in this thesis is bundled in the R package **dockless**, which GitHub repository can be found [here](https://github.com/luukvdmeer/dockless).
 

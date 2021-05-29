@@ -3,7 +3,7 @@
 *Lucas van der Meer*
 *February 25, 2019*
 
-This is the online version of my dissertation submitted in partial fulfillment of the requirements for the Degree of Master of Science in [Geospatial Technologies](https://mastergeotech.info/).
+This is the online gitbook version of my dissertation submitted in partial fulfillment of the requirements for the Degree of Master of Science in [Geospatial Technologies](https://mastergeotech.info/).
 
 It was supervised by:
 
@@ -11,7 +11,7 @@ It was supervised by:
   - Jorge Mateu (Department of Mathematics Universidade Jaume I)
   - Joel Silva (Information Management School Universidade Nova de Lisboa)
 
-The thesis was not intended to be in digital format, so the layout is not always optimized for it. The official document is in PDF format and can be downloaded [here](https://www.researchgate.net/publication/336922318_Spatio-Temporal_Forecasts_for_Bike_Availability_in_Dockless_Bike_Sharing_Systems).
+The thesis document is optimized for LateX knitting, and never intended to be in gitbook format. Therefore, style errors may occur in the gitbook version and references may not work. The official document is in PDF format and can be downloaded [here](https://www.researchgate.net/publication/336922318_Spatio-Temporal_Forecasts_for_Bike_Availability_in_Dockless_Bike_Sharing_Systems).
 
 ## Abstract {-}
 
