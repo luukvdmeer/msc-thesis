@@ -1,0 +1,179 @@
+`r if(knitr:::is_latex_output()) '\\appendix'`
+
+`r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'`
+
+# Code {#aa}
+
+\begin{wrapfigure}{R}{.35\textwidth}
+ \begin{center}
+    \includegraphics[width=.3\textwidth]{figures/hexagon.png}
+\end{center}
+\end{wrapfigure}
+
+All the R code used in this thesis, as well as the nested SQL code, is bundled in the `dockless` package [@dockless]. Its source code, including documentation for each function, can be found on GitHub, through the following link: https://github.com/luukvdmeer/dockless. An R version of at least 2.10 is required. The package is optimized for the case study in San Francisco, but can easily be adapted to other systems.
+
+The JUMP Bikes database is not openly accessible. Therefore, to query the data, and pre-process them on the database server, database credentials are needed. Please contact the author for more information. However, to enable reproducibility, all necessary pre-processed datasets have been included in the package. These are the following:
+
+* `distancedata_centroids`: an object of class `dockless_dfc` containing the distance data for all 249 grid cell centroids, during the training period.
+* `distancedata_modelpoints`: an object of class `dockless_dfc` containing the distance data for all 4 model points, during the training period.
+* `distancedata_testpoints`: an object of class `dockless_dfc` containing the distance data for all 500 test points, during the test period, and the two weeks before.
+* `usagedata_train`: an object of class `sf` with POINT geometry, containing all calculated pick-ups during the training period.
+* `usagedata_test`: an object of class `sf` with POINT geometry, containing all calculated pick-ups during the test period.
+* `testpoints`: an object of class `sf` with POINT geometry, containing all location-timestamp combinations of the 500 test points.
+* `systemarea`: an object of class `sf` with POLYGON geometry, containing the geographical outline of the JUMP Bikes system area in San Francisco.
+
+The `dockless` package can be downloaded from github with the following code. Please make sure that the `devtools` package is installed in advance.\
+
+```{r, echo = TRUE, eval = FALSE}
+devtools::install_github('luukvdmeer/dockless')
+```
+
+Then, the complete analysis can be reproduced as follows. Furthermore, reproducible scripts for all tables and figures in chapter 5 can be found through the following link: https://github.com/luukvdmeer/dockless/tree/master/scripts \
+
+```{r, echo = TRUE, eval = FALSE}
+require(dockless)
+require(sf)
+
+## ----------------------- CLUSTER LOOP --------------------------
+# Create grid
+gridcells = dockless::create_grid(
+  area = systemarea,
+  cellsize = c(500, 500)
+)
+
+# Calculate grid cell centroids
+gridcentroids = gridcells %>%
+  dockless::project_sf() %>%
+  sf::st_centroid() %>%
+  sf::st_transform(crs = 4326)
+
+# Usage intensity per grid cell
+gridcells$intensity = dockless::usage_intensity(
+  usage = usagedata_train,
+  grid = gridcells
+)
+
+# Add intensity information to grid cell centroids
+gridcentroids$intensity = gridcells$intensity
+
+# Cluster
+clusters = dockless::spatial_cluster(
+  data = distancedata_centroids,
+  grid = gridcells,
+  area = systemarea,
+  K = c(3:10),
+  omega = seq(0, 1, 0.1)
+)
+
+
+# Add cluster information to grid cells and grid cell centroids
+gridcells$cluster     = clusters$indices
+gridcentroids$cluster = clusters$indices
+
+# Create model points
+modelpoints = dockless::create_modelpoints(
+  centroids = gridcentroids
+)
+
+## ------------------------ MODEL LOOP ---------------------------
+# Build models
+models = dockless::build_models(
+  data = distancedata_modelpoints,
+  auto_seasonality = TRUE,
+  seasons = list(NULL, 96, 672, c(96, 672))
+)
+
+## ---------------------- FORECAST LOOP --------------------------
+# Forecast test points with DBAFS and NFS
+forecasts_dbafs = dockless::forecast_multiple(
+  data = distancedata_testpoints,
+  method = 'DBAFS',
+  points = testpoints,
+  models = models
+)
+
+forecasts_nfs = dockless::forecast_multiple(
+  data = distancedata_testpoints,
+  method = 'NFS',
+  points = testpoints
+)
+
+# Calculate RMSE's
+errors_dbafs = dockless::evaluate(
+  forecasts_dbafs,
+  type = 'RMSE',
+  clusters = testpoints$cluster
+)
+
+errors_nfs   = dockless::evaluate(
+  forecasts_nfs,
+  type = 'RMSE',
+  clusters = testpoints$cluster
+)
+```
+
+<!-- \clearpage -->
+<!-- \shipout\null -->
+<!-- \stepcounter{page} -->
+
+# Models {#ab}
+
+This appendix provides more detailed information about the models that were fitted to the non-seasonal historical data of each model point. This information includes parameter estimates, error variance, Gaussian log-likelihood, and information criteria such as AIC. For those model points where seasonality was detected, the decomposition plots are provided as well.
+
+## Bayview model point
+
+**Model**
+
+```{r, warning = FALSE, message = FALSE}
+require(forecast)
+
+(readRDS('data/models.rds'))[[1]]
+```
+
+\newpage
+
+## Downtown model point
+
+**Decomposition plot**
+
+```{r}
+knitr::include_graphics('figures/stlplot_model2.png', auto_pdf = TRUE)
+```
+
+**Model**
+
+```{r, warning = FALSE, message = FALSE}
+((readRDS('data/models.rds'))[[2]])$model
+```
+
+\newpage
+
+## Residential model point
+
+**Decomposition plot**
+
+```{r}
+knitr::include_graphics('figures/stlplot_model3.png', auto_pdf = TRUE)
+```
+
+**Model**
+
+```{r, warning = FALSE, message = FALSE}
+((readRDS('data/models.rds'))[[3]])$model
+```
+
+\newpage
+
+## Presidio model point
+
+**Decomposition plot**
+
+```{r, }
+knitr::include_graphics('figures/stlplot_model4.png', auto_pdf = TRUE)
+```
+
+**Model**
+
+```{r, warning = FALSE, message = FALSE}
+((readRDS('data/models.rds'))[[4]])$model
+```

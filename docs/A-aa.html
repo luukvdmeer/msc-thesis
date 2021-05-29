@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Code | thesis.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Code | thesis.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Code | thesis.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="6-six.html"/>
+<link rel="next" href="B-ab.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><i class="fa fa-check"></i>Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#keywords"><i class="fa fa-check"></i>Keywords</a></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#abbreviations"><i class="fa fa-check"></i>Abbreviations</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="1-introduction.html"><a href="1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-introduction.html"><a href="1-introduction.html#context"><i class="fa fa-check"></i><b>1.1</b> Context</a></li>
+<li class="chapter" data-level="1.2" data-path="1-introduction.html"><a href="1-introduction.html#objective"><i class="fa fa-check"></i><b>1.2</b> Objective</a></li>
+<li class="chapter" data-level="1.3" data-path="1-introduction.html"><a href="1-introduction.html#onethree"><i class="fa fa-check"></i><b>1.3</b> Related work</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="1-introduction.html"><a href="1-introduction.html#onethreeone"><i class="fa fa-check"></i><b>1.3.1</b> Forecasting in station-based systems</a></li>
+<li class="chapter" data-level="1.3.2" data-path="1-introduction.html"><a href="1-introduction.html#onethreetwo"><i class="fa fa-check"></i><b>1.3.2</b> Forecasting in dockless systems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="1-introduction.html"><a href="1-introduction.html#approach"><i class="fa fa-check"></i><b>1.4</b> Approach</a></li>
+<li class="chapter" data-level="1.5" data-path="1-introduction.html"><a href="1-introduction.html#outline"><i class="fa fa-check"></i><b>1.5</b> Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-two.html"><a href="2-two.html"><i class="fa fa-check"></i><b>2</b> Theoretical background</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-two.html"><a href="2-two.html#time-series-definition"><i class="fa fa-check"></i><b>2.1</b> Time series definition</a></li>
+<li class="chapter" data-level="2.2" data-path="2-two.html"><a href="2-two.html#time-series-characteristics"><i class="fa fa-check"></i><b>2.2</b> Time series characteristics</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="2-two.html"><a href="2-two.html#twotwoone"><i class="fa fa-check"></i><b>2.2.1</b> Autocorrelation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="2-two.html"><a href="2-two.html#stationarity"><i class="fa fa-check"></i><b>2.2.2</b> Stationarity</a></li>
+<li class="chapter" data-level="2.2.3" data-path="2-two.html"><a href="2-two.html#twotwothree"><i class="fa fa-check"></i><b>2.2.3</b> Spectral entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="2-two.html"><a href="2-two.html#time-series-components"><i class="fa fa-check"></i><b>2.3</b> Time series components</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="2-two.html"><a href="2-two.html#definitions"><i class="fa fa-check"></i><b>2.3.1</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="2-two.html"><a href="2-two.html#classical-decomposition"><i class="fa fa-check"></i><b>2.3.2</b> Classical decomposition</a></li>
+<li class="chapter" data-level="2.3.3" data-path="2-two.html"><a href="2-two.html#twothreethree"><i class="fa fa-check"></i><b>2.3.3</b> STL decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="2-two.html"><a href="2-two.html#twofour"><i class="fa fa-check"></i><b>2.4</b> Time series forecasting</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="2-two.html"><a href="2-two.html#twofourone"><i class="fa fa-check"></i><b>2.4.1</b> Forecasting models</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2-two.html"><a href="2-two.html#arima"><i class="fa fa-check"></i><b>2.4.2</b> ARIMA</a></li>
+<li class="chapter" data-level="2.4.3" data-path="2-two.html"><a href="2-two.html#twofourthree"><i class="fa fa-check"></i><b>2.4.3</b> Naïve forecasts</a></li>
+<li class="chapter" data-level="2.4.4" data-path="2-two.html"><a href="2-two.html#twofourfour"><i class="fa fa-check"></i><b>2.4.4</b> Seasonal forecasts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="2-two.html"><a href="2-two.html#time-series-clustering"><i class="fa fa-check"></i><b>2.5</b> Time series clustering</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="2-two.html"><a href="2-two.html#dissimilarity-measures"><i class="fa fa-check"></i><b>2.5.1</b> Dissimilarity measures</a></li>
+<li class="chapter" data-level="2.5.2" data-path="2-two.html"><a href="2-two.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.5.2</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.5.3" data-path="2-two.html"><a href="2-two.html#twofivethree"><i class="fa fa-check"></i><b>2.5.3</b> Spatial time series clustering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-three.html"><a href="3-three.html"><i class="fa fa-check"></i><b>3</b> System architecture</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-three.html"><a href="3-three.html#overall-design"><i class="fa fa-check"></i><b>3.1</b> Overall design</a></li>
+<li class="chapter" data-level="3.2" data-path="3-three.html"><a href="3-three.html#threetwo"><i class="fa fa-check"></i><b>3.2</b> Software</a></li>
+<li class="chapter" data-level="3.3" data-path="3-three.html"><a href="3-three.html#threethree"><i class="fa fa-check"></i><b>3.3</b> System area</a></li>
+<li class="chapter" data-level="3.4" data-path="3-three.html"><a href="3-three.html#threefour"><i class="fa fa-check"></i><b>3.4</b> Database</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="3-three.html"><a href="3-three.html#threefourone"><i class="fa fa-check"></i><b>3.4.1</b> Distance data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="3-three.html"><a href="3-three.html#threefourtwo"><i class="fa fa-check"></i><b>3.4.2</b> Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="3-three.html"><a href="3-three.html#threefive"><i class="fa fa-check"></i><b>3.5</b> Forecast request</a></li>
+<li class="chapter" data-level="3.6" data-path="3-three.html"><a href="3-three.html#threesix"><i class="fa fa-check"></i><b>3.6</b> Cluster loop</a></li>
+<li class="chapter" data-level="3.7" data-path="3-three.html"><a href="3-three.html#threeseven"><i class="fa fa-check"></i><b>3.7</b> Model loop</a></li>
+<li class="chapter" data-level="3.8" data-path="3-three.html"><a href="3-three.html#threeeight"><i class="fa fa-check"></i><b>3.8</b> Forecast loop</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-four.html"><a href="4-four.html"><i class="fa fa-check"></i><b>4</b> Data and experimental design</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-four.html"><a href="4-four.html#fourone"><i class="fa fa-check"></i><b>4.1</b> Data source</a></li>
+<li class="chapter" data-level="4.2" data-path="4-four.html"><a href="4-four.html#data-retrieval"><i class="fa fa-check"></i><b>4.2</b> Data retrieval</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4-four.html"><a href="4-four.html#distance-data"><i class="fa fa-check"></i><b>4.2.1</b> Distance data</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4-four.html"><a href="4-four.html#usage-data"><i class="fa fa-check"></i><b>4.2.2</b> Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="4-four.html"><a href="4-four.html#experimental-design"><i class="fa fa-check"></i><b>4.3</b> Experimental design</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-four.html"><a href="4-four.html#training-and-test-periods"><i class="fa fa-check"></i><b>4.3.1</b> Training and test periods</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-four.html"><a href="4-four.html#additional-software"><i class="fa fa-check"></i><b>4.3.2</b> Additional software</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-five.html"><a href="5-five.html"><i class="fa fa-check"></i><b>5</b> Results and discussion</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-five.html"><a href="5-five.html#clustering"><i class="fa fa-check"></i><b>5.1</b> Clustering</a></li>
+<li class="chapter" data-level="5.2" data-path="5-five.html"><a href="5-five.html#model-building"><i class="fa fa-check"></i><b>5.2</b> Model building</a></li>
+<li class="chapter" data-level="5.3" data-path="5-five.html"><a href="5-five.html#forecasting-1"><i class="fa fa-check"></i><b>5.3</b> Forecasting</a></li>
+<li class="chapter" data-level="5.4" data-path="5-five.html"><a href="5-five.html#limitations-and-recommendations"><i class="fa fa-check"></i><b>5.4</b> Limitations and recommendations</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-five.html"><a href="5-five.html#limits-of-forecastability"><i class="fa fa-check"></i><b>5.4.1</b> Limits of forecastability</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-five.html"><a href="5-five.html#exogenous-variables"><i class="fa fa-check"></i><b>5.4.2</b> Exogenous variables</a></li>
+<li class="chapter" data-level="5.4.3" data-path="5-five.html"><a href="5-five.html#residual-distributions-and-prediction-intervals"><i class="fa fa-check"></i><b>5.4.3</b> Residual distributions and prediction intervals</a></li>
+<li class="chapter" data-level="5.4.4" data-path="5-five.html"><a href="5-five.html#gps-accuracy"><i class="fa fa-check"></i><b>5.4.4</b> GPS accuracy</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-six.html"><a href="6-six.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="A-aa.html"><a href="A-aa.html"><i class="fa fa-check"></i><b>A</b> Code</a></li>
+<li class="chapter" data-level="B" data-path="B-ab.html"><a href="B-ab.html"><i class="fa fa-check"></i><b>B</b> Models</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="B-ab.html"><a href="B-ab.html#bayview-model-point"><i class="fa fa-check"></i><b>B.1</b> Bayview model point</a></li>
+<li class="chapter" data-level="B.2" data-path="B-ab.html"><a href="B-ab.html#downtown-model-point"><i class="fa fa-check"></i><b>B.2</b> Downtown model point</a></li>
+<li class="chapter" data-level="B.3" data-path="B-ab.html"><a href="B-ab.html#residential-model-point"><i class="fa fa-check"></i><b>B.3</b> Residential model point</a></li>
+<li class="chapter" data-level="B.4" data-path="B-ab.html"><a href="B-ab.html#presidio-model-point"><i class="fa fa-check"></i><b>B.4</b> Presidio model point</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="aa" class="section level1" number="7">
+<h1><span class="header-section-number">A</span> Code</h1>
+<p>All the R code used in this thesis, as well as the nested SQL code, is bundled in the <code>dockless</code> package <span class="citation">(<strong>dockless?</strong>)</span>. Its source code, including documentation for each function, can be found on GitHub, through the following link: <a href="https://github.com/luukvdmeer/dockless" class="uri">https://github.com/luukvdmeer/dockless</a>. An R version of at least 2.10 is required. The package is optimized for the case study in San Francisco, but can easily be adapted to other systems.</p>
+<p>The JUMP Bikes database is not openly accessible. Therefore, to query the data, and pre-process them on the database server, database credentials are needed. Please contact the author for more information. However, to enable reproducibility, all necessary pre-processed datasets have been included in the package. These are the following:</p>
+<ul>
+<li><code>distancedata_centroids</code>: an object of class <code>dockless_dfc</code> containing the distance data for all 249 grid cell centroids, during the training period.</li>
+<li><code>distancedata_modelpoints</code>: an object of class <code>dockless_dfc</code> containing the distance data for all 4 model points, during the training period.</li>
+<li><code>distancedata_testpoints</code>: an object of class <code>dockless_dfc</code> containing the distance data for all 500 test points, during the test period, and the two weeks before.</li>
+<li><code>usagedata_train</code>: an object of class <code>sf</code> with POINT geometry, containing all calculated pick-ups during the training period.</li>
+<li><code>usagedata_test</code>: an object of class <code>sf</code> with POINT geometry, containing all calculated pick-ups during the test period.</li>
+<li><code>testpoints</code>: an object of class <code>sf</code> with POINT geometry, containing all location-timestamp combinations of the 500 test points.</li>
+<li><code>systemarea</code>: an object of class <code>sf</code> with POLYGON geometry, containing the geographical outline of the JUMP Bikes system area in San Francisco.</li>
+</ul>
+<p>The <code>dockless</code> package can be downloaded from github with the following code. Please make sure that the <code>devtools</code> package is installed in advance.<br />
+</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="A-aa.html#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&#39;luukvdmeer/dockless&#39;</span>)</span></code></pre></div>
+<p>Then, the complete analysis can be reproduced as follows. Furthermore, reproducible scripts for all tables and figures in chapter 5 can be found through the following link: <a href="https://github.com/luukvdmeer/dockless/tree/master/scripts" class="uri">https://github.com/luukvdmeer/dockless/tree/master/scripts</a><br />
+</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="A-aa.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(dockless)</span>
+<span id="cb2-2"><a href="A-aa.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(sf)</span>
+<span id="cb2-3"><a href="A-aa.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="A-aa.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------- CLUSTER LOOP --------------------------</span></span>
+<span id="cb2-5"><a href="A-aa.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create grid</span></span>
+<span id="cb2-6"><a href="A-aa.html#cb2-6" aria-hidden="true" tabindex="-1"></a>gridcells <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">create_grid</span>(</span>
+<span id="cb2-7"><a href="A-aa.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">area =</span> systemarea,</span>
+<span id="cb2-8"><a href="A-aa.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">cellsize =</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">500</span>)</span>
+<span id="cb2-9"><a href="A-aa.html#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="A-aa.html#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="A-aa.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate grid cell centroids</span></span>
+<span id="cb2-12"><a href="A-aa.html#cb2-12" aria-hidden="true" tabindex="-1"></a>gridcentroids <span class="ot">=</span> gridcells <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="A-aa.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  dockless<span class="sc">::</span><span class="fu">project_sf</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-14"><a href="A-aa.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_centroid</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="A-aa.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb2-16"><a href="A-aa.html#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="A-aa.html#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage intensity per grid cell</span></span>
+<span id="cb2-18"><a href="A-aa.html#cb2-18" aria-hidden="true" tabindex="-1"></a>gridcells<span class="sc">$</span>intensity <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">usage_intensity</span>(</span>
+<span id="cb2-19"><a href="A-aa.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">usage =</span> usagedata_train,</span>
+<span id="cb2-20"><a href="A-aa.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> gridcells</span>
+<span id="cb2-21"><a href="A-aa.html#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-22"><a href="A-aa.html#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="A-aa.html#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Add intensity information to grid cell centroids</span></span>
+<span id="cb2-24"><a href="A-aa.html#cb2-24" aria-hidden="true" tabindex="-1"></a>gridcentroids<span class="sc">$</span>intensity <span class="ot">=</span> gridcells<span class="sc">$</span>intensity</span>
+<span id="cb2-25"><a href="A-aa.html#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="A-aa.html#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Cluster</span></span>
+<span id="cb2-27"><a href="A-aa.html#cb2-27" aria-hidden="true" tabindex="-1"></a>clusters <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">spatial_cluster</span>(</span>
+<span id="cb2-28"><a href="A-aa.html#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> distancedata_centroids,</span>
+<span id="cb2-29"><a href="A-aa.html#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> gridcells,</span>
+<span id="cb2-30"><a href="A-aa.html#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">area =</span> systemarea,</span>
+<span id="cb2-31"><a href="A-aa.html#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">K =</span> <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>),</span>
+<span id="cb2-32"><a href="A-aa.html#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">omega =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-33"><a href="A-aa.html#cb2-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-34"><a href="A-aa.html#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="A-aa.html#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="A-aa.html#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Add cluster information to grid cells and grid cell centroids</span></span>
+<span id="cb2-37"><a href="A-aa.html#cb2-37" aria-hidden="true" tabindex="-1"></a>gridcells<span class="sc">$</span>cluster     <span class="ot">=</span> clusters<span class="sc">$</span>indices</span>
+<span id="cb2-38"><a href="A-aa.html#cb2-38" aria-hidden="true" tabindex="-1"></a>gridcentroids<span class="sc">$</span>cluster <span class="ot">=</span> clusters<span class="sc">$</span>indices</span>
+<span id="cb2-39"><a href="A-aa.html#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="A-aa.html#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Create model points</span></span>
+<span id="cb2-41"><a href="A-aa.html#cb2-41" aria-hidden="true" tabindex="-1"></a>modelpoints <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">create_modelpoints</span>(</span>
+<span id="cb2-42"><a href="A-aa.html#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">centroids =</span> gridcentroids</span>
+<span id="cb2-43"><a href="A-aa.html#cb2-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-44"><a href="A-aa.html#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="A-aa.html#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------ MODEL LOOP ---------------------------</span></span>
+<span id="cb2-46"><a href="A-aa.html#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Build models</span></span>
+<span id="cb2-47"><a href="A-aa.html#cb2-47" aria-hidden="true" tabindex="-1"></a>models <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">build_models</span>(</span>
+<span id="cb2-48"><a href="A-aa.html#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> distancedata_modelpoints,</span>
+<span id="cb2-49"><a href="A-aa.html#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">auto_seasonality =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-50"><a href="A-aa.html#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">seasons =</span> <span class="fu">list</span>(<span class="cn">NULL</span>, <span class="dv">96</span>, <span class="dv">672</span>, <span class="fu">c</span>(<span class="dv">96</span>, <span class="dv">672</span>))</span>
+<span id="cb2-51"><a href="A-aa.html#cb2-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-52"><a href="A-aa.html#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="A-aa.html#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="do">## ---------------------- FORECAST LOOP --------------------------</span></span>
+<span id="cb2-54"><a href="A-aa.html#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast test points with DBAFS and NFS</span></span>
+<span id="cb2-55"><a href="A-aa.html#cb2-55" aria-hidden="true" tabindex="-1"></a>forecasts_dbafs <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">forecast_multiple</span>(</span>
+<span id="cb2-56"><a href="A-aa.html#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> distancedata_testpoints,</span>
+<span id="cb2-57"><a href="A-aa.html#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&#39;DBAFS&#39;</span>,</span>
+<span id="cb2-58"><a href="A-aa.html#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">points =</span> testpoints,</span>
+<span id="cb2-59"><a href="A-aa.html#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> models</span>
+<span id="cb2-60"><a href="A-aa.html#cb2-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-61"><a href="A-aa.html#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="A-aa.html#cb2-62" aria-hidden="true" tabindex="-1"></a>forecasts_nfs <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">forecast_multiple</span>(</span>
+<span id="cb2-63"><a href="A-aa.html#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> distancedata_testpoints,</span>
+<span id="cb2-64"><a href="A-aa.html#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&#39;NFS&#39;</span>,</span>
+<span id="cb2-65"><a href="A-aa.html#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">points =</span> testpoints</span>
+<span id="cb2-66"><a href="A-aa.html#cb2-66" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-67"><a href="A-aa.html#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="A-aa.html#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSE&#39;s</span></span>
+<span id="cb2-69"><a href="A-aa.html#cb2-69" aria-hidden="true" tabindex="-1"></a>errors_dbafs <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">evaluate</span>(</span>
+<span id="cb2-70"><a href="A-aa.html#cb2-70" aria-hidden="true" tabindex="-1"></a>  forecasts_dbafs,</span>
+<span id="cb2-71"><a href="A-aa.html#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;RMSE&#39;</span>,</span>
+<span id="cb2-72"><a href="A-aa.html#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">clusters =</span> testpoints<span class="sc">$</span>cluster</span>
+<span id="cb2-73"><a href="A-aa.html#cb2-73" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-74"><a href="A-aa.html#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="A-aa.html#cb2-75" aria-hidden="true" tabindex="-1"></a>errors_nfs   <span class="ot">=</span> dockless<span class="sc">::</span><span class="fu">evaluate</span>(</span>
+<span id="cb2-76"><a href="A-aa.html#cb2-76" aria-hidden="true" tabindex="-1"></a>  forecasts_nfs,</span>
+<span id="cb2-77"><a href="A-aa.html#cb2-77" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&#39;RMSE&#39;</span>,</span>
+<span id="cb2-78"><a href="A-aa.html#cb2-78" aria-hidden="true" tabindex="-1"></a>  <span class="at">clusters =</span> testpoints<span class="sc">$</span>cluster</span>
+<span id="cb2-79"><a href="A-aa.html#cb2-79" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<!-- \clearpage -->
+<!-- \shipout\null -->
+<!-- \stepcounter{page} -->
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="6-six.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="B-ab.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["thesis.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

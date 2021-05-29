@@ -1,0 +1,60 @@
+# Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems {-}
+
+*Lucas van der Meer*
+*February 25, 2019*
+
+This is the online version of my dissertation submitted in partial fulfillment of the requirements for the Degree of Master of Science in [Geospatial Technologies](https://mastergeotech.info/).
+
+It was supervised by:
+
+  - Edzer Pebesma (Institute for Geoinformatics, University of Münster)
+  - Jorge Mateu (Department of Mathematics Universidade Jaume I)
+  - Joel Silva (Information Management School Universidade Nova de Lisboa)
+
+The thesis was not intended to be in digital format, so the layout is not always optimized for it. The official document is in PDF format and can be downloaded [here](https://www.researchgate.net/publication/336922318_Spatio-Temporal_Forecasts_for_Bike_Availability_in_Dockless_Bike_Sharing_Systems).
+
+## Abstract {-}
+
+Forecasting bike availability is of great importance when turning the shared bike into a reliable, pleasant and uncomplicated mode of transport. Several approaches have been developed to forecast bike availability in station-based bike sharing systems. However, dockless bike sharing systems remain fairly unexplored in that sense, despite their rapid expansion over the world in recent years. To fill this gap, this thesis aims to develop a generally applicable methodology for bike availability forecasting in dockless bike sharing systems, that produces automated, fast and accurate forecasts.
+
+To balance speed and accuracy, an approach is taken in which the system area of a dockless bike sharing system is divided into spatially contiguous clusters that represent locations with the same temporal patterns in the historical data. Each cluster gets assigned a model point, for which an ARIMA($p$,$d$,$q$) forecasting model is fitted to the deseasonalized data. Each individual forecast will inherit the structure and parameters of one of those pre-build models, rather than building a new model on its own.
+
+The proposed system was tested through a case study in San Francisco, California. The results showed that the proposed system outperforms simple baseline methods. However, they also highlighted the limited forecastability of dockless bike sharing data.
+
+## Keywords {-}
+
+`dockless` `bike sharing systems` `bike availability` `forecasting` `time series analysis` `sustainable transport`
+
+## Acknowledgements {-}
+
+This thesis, and in the broader sense, my whole period as a student, would not have been possible without the help and support of others. It still feels somewhat strange, that by writing these words, a seven-year journey comes to an end. I want to thank my family, and in particular my parents, for their unconditional support, also in times when I made wrong decisions. Lore, thank you for cheering me up whenever I needed it, and my friends and classmates, thank you for being like a family!
+
+I want to thank all my teachers for sharing their knowledge, despite making me suffer with homework and assignments! In particular, I want to thank my supervisor, Edzer Pebesma, for providing guidance whenever necessary, but also constantly encouraging an independent way of working and thinking, in which own thoughts and ideas are important. Additionally, I want to thank my co-supervisors, Jorge Mateu and Joel Silva, for their valuable feedback. Thanks also to the whole r-spatial community, for providing open source tools, and encouraging involvement and contributions, within an environment that makes everyone feel equally valued.
+
+Finally, I owe gratitude to JUMP Bikes, and Alexander Tedeschi in particular, for providing me with very useful data.
+
+## Abbreviations {-}
+
+  - ACF: Autocorrelation Function
+  - AIC:  Aikake’s Information Criterion
+  - AR: Autoregressive
+  - ARIMA: Autoregressive Integrated Moving Average
+  - ARMA: Autoregressive Moving Average
+  - DBAFS: Dockless Bike Availability Forecasting System
+  - GPS:  Global Positioning System
+  - ID: Identification
+  - KPSS:  Kwiatkowski-Phillips-Schmidt-Shin
+  - MA: Moving Average
+  - MAE: Mean Absolute Error
+  - MLE: Maximum Likelihood Estimation
+  - NFS: Naïve Forecasting System
+  - PACF: Partial Autocorrelation Function
+  - PDT:  Pacific Daylight Saving Time
+  - PST: Pacific Standard Time
+  - PBSS: Public Bike Sharing Systems
+  - RMSE: Root Mean Squared Error
+  - RMSLE: Root Mean Squared Logarithmic Error
+  - SFMTA:  San Francisco Municipal Transportation Agency
+  - SQL:  Structured Query Language
+  - STL:  Seasonal Trend decomposition procedure based on Loess
+  - WGS84: World Geodetic System 1

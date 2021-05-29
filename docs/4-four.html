@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Data and experimental design | thesis.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Data and experimental design | thesis.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Data and experimental design | thesis.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="3-three.html"/>
+<link rel="next" href="5-five.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><i class="fa fa-check"></i>Spatio-Temporal Forecasts for Bike Availability in Dockless Bike Sharing Systems</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#keywords"><i class="fa fa-check"></i>Keywords</a></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html"><a href="spatio-temporal-forecasts-for-bike-availability-in-dockless-bike-sharing-systems.html#abbreviations"><i class="fa fa-check"></i>Abbreviations</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="1-introduction.html"><a href="1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-introduction.html"><a href="1-introduction.html#context"><i class="fa fa-check"></i><b>1.1</b> Context</a></li>
+<li class="chapter" data-level="1.2" data-path="1-introduction.html"><a href="1-introduction.html#objective"><i class="fa fa-check"></i><b>1.2</b> Objective</a></li>
+<li class="chapter" data-level="1.3" data-path="1-introduction.html"><a href="1-introduction.html#onethree"><i class="fa fa-check"></i><b>1.3</b> Related work</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="1-introduction.html"><a href="1-introduction.html#onethreeone"><i class="fa fa-check"></i><b>1.3.1</b> Forecasting in station-based systems</a></li>
+<li class="chapter" data-level="1.3.2" data-path="1-introduction.html"><a href="1-introduction.html#onethreetwo"><i class="fa fa-check"></i><b>1.3.2</b> Forecasting in dockless systems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="1-introduction.html"><a href="1-introduction.html#approach"><i class="fa fa-check"></i><b>1.4</b> Approach</a></li>
+<li class="chapter" data-level="1.5" data-path="1-introduction.html"><a href="1-introduction.html#outline"><i class="fa fa-check"></i><b>1.5</b> Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-two.html"><a href="2-two.html"><i class="fa fa-check"></i><b>2</b> Theoretical background</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-two.html"><a href="2-two.html#time-series-definition"><i class="fa fa-check"></i><b>2.1</b> Time series definition</a></li>
+<li class="chapter" data-level="2.2" data-path="2-two.html"><a href="2-two.html#time-series-characteristics"><i class="fa fa-check"></i><b>2.2</b> Time series characteristics</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="2-two.html"><a href="2-two.html#twotwoone"><i class="fa fa-check"></i><b>2.2.1</b> Autocorrelation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="2-two.html"><a href="2-two.html#stationarity"><i class="fa fa-check"></i><b>2.2.2</b> Stationarity</a></li>
+<li class="chapter" data-level="2.2.3" data-path="2-two.html"><a href="2-two.html#twotwothree"><i class="fa fa-check"></i><b>2.2.3</b> Spectral entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="2-two.html"><a href="2-two.html#time-series-components"><i class="fa fa-check"></i><b>2.3</b> Time series components</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="2-two.html"><a href="2-two.html#definitions"><i class="fa fa-check"></i><b>2.3.1</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="2-two.html"><a href="2-two.html#classical-decomposition"><i class="fa fa-check"></i><b>2.3.2</b> Classical decomposition</a></li>
+<li class="chapter" data-level="2.3.3" data-path="2-two.html"><a href="2-two.html#twothreethree"><i class="fa fa-check"></i><b>2.3.3</b> STL decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="2-two.html"><a href="2-two.html#twofour"><i class="fa fa-check"></i><b>2.4</b> Time series forecasting</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="2-two.html"><a href="2-two.html#twofourone"><i class="fa fa-check"></i><b>2.4.1</b> Forecasting models</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2-two.html"><a href="2-two.html#arima"><i class="fa fa-check"></i><b>2.4.2</b> ARIMA</a></li>
+<li class="chapter" data-level="2.4.3" data-path="2-two.html"><a href="2-two.html#twofourthree"><i class="fa fa-check"></i><b>2.4.3</b> Naïve forecasts</a></li>
+<li class="chapter" data-level="2.4.4" data-path="2-two.html"><a href="2-two.html#twofourfour"><i class="fa fa-check"></i><b>2.4.4</b> Seasonal forecasts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="2-two.html"><a href="2-two.html#time-series-clustering"><i class="fa fa-check"></i><b>2.5</b> Time series clustering</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="2-two.html"><a href="2-two.html#dissimilarity-measures"><i class="fa fa-check"></i><b>2.5.1</b> Dissimilarity measures</a></li>
+<li class="chapter" data-level="2.5.2" data-path="2-two.html"><a href="2-two.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.5.2</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.5.3" data-path="2-two.html"><a href="2-two.html#twofivethree"><i class="fa fa-check"></i><b>2.5.3</b> Spatial time series clustering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-three.html"><a href="3-three.html"><i class="fa fa-check"></i><b>3</b> System architecture</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-three.html"><a href="3-three.html#overall-design"><i class="fa fa-check"></i><b>3.1</b> Overall design</a></li>
+<li class="chapter" data-level="3.2" data-path="3-three.html"><a href="3-three.html#threetwo"><i class="fa fa-check"></i><b>3.2</b> Software</a></li>
+<li class="chapter" data-level="3.3" data-path="3-three.html"><a href="3-three.html#threethree"><i class="fa fa-check"></i><b>3.3</b> System area</a></li>
+<li class="chapter" data-level="3.4" data-path="3-three.html"><a href="3-three.html#threefour"><i class="fa fa-check"></i><b>3.4</b> Database</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="3-three.html"><a href="3-three.html#threefourone"><i class="fa fa-check"></i><b>3.4.1</b> Distance data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="3-three.html"><a href="3-three.html#threefourtwo"><i class="fa fa-check"></i><b>3.4.2</b> Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="3-three.html"><a href="3-three.html#threefive"><i class="fa fa-check"></i><b>3.5</b> Forecast request</a></li>
+<li class="chapter" data-level="3.6" data-path="3-three.html"><a href="3-three.html#threesix"><i class="fa fa-check"></i><b>3.6</b> Cluster loop</a></li>
+<li class="chapter" data-level="3.7" data-path="3-three.html"><a href="3-three.html#threeseven"><i class="fa fa-check"></i><b>3.7</b> Model loop</a></li>
+<li class="chapter" data-level="3.8" data-path="3-three.html"><a href="3-three.html#threeeight"><i class="fa fa-check"></i><b>3.8</b> Forecast loop</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-four.html"><a href="4-four.html"><i class="fa fa-check"></i><b>4</b> Data and experimental design</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-four.html"><a href="4-four.html#fourone"><i class="fa fa-check"></i><b>4.1</b> Data source</a></li>
+<li class="chapter" data-level="4.2" data-path="4-four.html"><a href="4-four.html#data-retrieval"><i class="fa fa-check"></i><b>4.2</b> Data retrieval</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4-four.html"><a href="4-four.html#distance-data"><i class="fa fa-check"></i><b>4.2.1</b> Distance data</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4-four.html"><a href="4-four.html#usage-data"><i class="fa fa-check"></i><b>4.2.2</b> Usage data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="4-four.html"><a href="4-four.html#experimental-design"><i class="fa fa-check"></i><b>4.3</b> Experimental design</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-four.html"><a href="4-four.html#training-and-test-periods"><i class="fa fa-check"></i><b>4.3.1</b> Training and test periods</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-four.html"><a href="4-four.html#additional-software"><i class="fa fa-check"></i><b>4.3.2</b> Additional software</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-five.html"><a href="5-five.html"><i class="fa fa-check"></i><b>5</b> Results and discussion</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-five.html"><a href="5-five.html#clustering"><i class="fa fa-check"></i><b>5.1</b> Clustering</a></li>
+<li class="chapter" data-level="5.2" data-path="5-five.html"><a href="5-five.html#model-building"><i class="fa fa-check"></i><b>5.2</b> Model building</a></li>
+<li class="chapter" data-level="5.3" data-path="5-five.html"><a href="5-five.html#forecasting-1"><i class="fa fa-check"></i><b>5.3</b> Forecasting</a></li>
+<li class="chapter" data-level="5.4" data-path="5-five.html"><a href="5-five.html#limitations-and-recommendations"><i class="fa fa-check"></i><b>5.4</b> Limitations and recommendations</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5-five.html"><a href="5-five.html#limits-of-forecastability"><i class="fa fa-check"></i><b>5.4.1</b> Limits of forecastability</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5-five.html"><a href="5-five.html#exogenous-variables"><i class="fa fa-check"></i><b>5.4.2</b> Exogenous variables</a></li>
+<li class="chapter" data-level="5.4.3" data-path="5-five.html"><a href="5-five.html#residual-distributions-and-prediction-intervals"><i class="fa fa-check"></i><b>5.4.3</b> Residual distributions and prediction intervals</a></li>
+<li class="chapter" data-level="5.4.4" data-path="5-five.html"><a href="5-five.html#gps-accuracy"><i class="fa fa-check"></i><b>5.4.4</b> GPS accuracy</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-six.html"><a href="6-six.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="A-aa.html"><a href="A-aa.html"><i class="fa fa-check"></i><b>A</b> Code</a></li>
+<li class="chapter" data-level="B" data-path="B-ab.html"><a href="B-ab.html"><i class="fa fa-check"></i><b>B</b> Models</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="B-ab.html"><a href="B-ab.html#bayview-model-point"><i class="fa fa-check"></i><b>B.1</b> Bayview model point</a></li>
+<li class="chapter" data-level="B.2" data-path="B-ab.html"><a href="B-ab.html#downtown-model-point"><i class="fa fa-check"></i><b>B.2</b> Downtown model point</a></li>
+<li class="chapter" data-level="B.3" data-path="B-ab.html"><a href="B-ab.html#residential-model-point"><i class="fa fa-check"></i><b>B.3</b> Residential model point</a></li>
+<li class="chapter" data-level="B.4" data-path="B-ab.html"><a href="B-ab.html#presidio-model-point"><i class="fa fa-check"></i><b>B.4</b> Presidio model point</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="four" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Data and experimental design</h1>
+<p>This chapter describes the case study that was done to test the performance of DBAFS. It is structured as follows. First, the characteristics of the bike sharing system that served as a data source for the experiment, are presented. The data retrieval process is described in section two. The third section explains into detail the methodology of the experiment itself. Finally, in the fourth section, the additional software packages used in the experiment are listed.</p>
+<div id="fourone" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Data source</h2>
+<p>DBAFS’ forecasting power was evaluated with data from the dockless PBSS of San Francisco, California. The system there is exploited by JUMP Bikes (<a href="https://jump.com/" class="uri">https://jump.com/</a>), an American company founded in 2010, that went through a rapid development after being acquired by ride hailing giant Uber in April 2018 <span class="citation">(<strong>uber2018?</strong>)</span>. In February 2019, JUMP was active in 16 cities in the United States, as well as in Berlin, Germany. All provided bicycles have electric pedal assistance, up to a maximum speed of 32 km per hour.</p>
+<p>In January 2018, the San Francisco Municipal Transportation Agency (SFMTA) offered JUMP Bikes the city’s first official, exclusive permit to operate a dockless PBSS, for an 18 month trial period, in order to “evaluate, collect data, and assess whether further increases would serve the public interest” <span class="citation">(<strong>sfmta2018one?</strong>)</span>. SFMTA allowed up to 250 bikes in a system area of approximately 47 km<span class="math inline">\(^2\)</span>, which is shown in Figure <a href="4-four.html#fig:systemarea">4.1</a>. After nine months, a mid-point evaluation lead to the allowance of expanding the fleet to 500 bikes <span class="citation">(<strong>sfmta2018two?</strong>)</span>.</p>
+<p>The JUMP Bikes system in San Francisco, works as follows. A user needs to download the JUMP mobile application and create an account. The app shows the real-time locations of all available bikes. An available bike can be unlocked with a unique code that is send to the user account. A single trip costs $2 for a total time of 30 minutes. For every minute that exceeds the 30 minute timeframe, $0.07 will be charged. Options for subscription pricing, with a fixed amount per month or year, are not available.</p>
+<p>It is possible to reserve a bike up to 30 minutes before unlocking it. In that case, the bike will not be labeled as available anymore, and can not be taken by another user. However, the trip clock starts ticking from the moment of reservation. When a user wants to stop somewhere during a ride, the bike can be put ‘on-hold’ for maximum an hour, meaning that the bike stays unavailable during the stop. Also in this case, the regular fee will be charged. When ending the ride, the bike needs to be locked legally to a fixed object. Not doing so, will result in a fee of $25. Additionally, leaving the bike outside of the system area, results in a $25 fee as well <span class="citation">(<strong>harris2018?</strong>)</span>.</p>
+<p>Since all JUMP bikes are electric, battery life forms an important issue. A fully charged bike can travel 48 to 64 kilometers with the pedal assist. Bikes with a battery level of less than 25% are collected, and charged. Furthermore, other bikes are regularly charged during nighttime. Charging takes in most cases about four to six hours, and is done in a JUMP Bikes depot. Some of the charged bikes are placed outside of the depot, where they can be picked up, while others are redistributed over the system area. In the near future, this process will change considerably, since the newly produced bikes, which will be introduced in the first months of this year, have swappable batteries, such that there is no need anymore to bring low-battery bikes to the depot <span class="citation">(<strong>foley2018?</strong>)</span>.</p>
+<p>In the first year of the trial period, 63000 users took over 625000 trips. On average, trips were 4.2 kilometers long, while around 1% of the trips, exceeded 24 kilometers. Each individual bike, was on average used seven times per day. In September 2018, this was over eight times per day. Even when the size of the fleet doubled in October 2018, the utilization remained consistent until the first half of November, when it started to decrease slightly, due to cold weather <span class="citation">(<strong>jump2019?</strong>)</span>. While the demand is high, the supply is still restricted by SFTMA, putting extra emphasis on the need for efficient rebalancing, and accurate bike availability forecasts.</p>
+<div class="figure" style="text-align: center"><span id="fig:systemarea"></span>
+<img src="figures/systemarea.png" alt="System area of JUMP Bikes in San Francisco" width="\textwidth" />
+<p class="caption">
+Figure 4.1: System area of JUMP Bikes in San Francisco
+</p>
+</div>
+</div>
+<div id="data-retrieval" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Data retrieval</h2>
+<p>JUMP Bikes provided access to a database containing the geographical locations of their available bikes in San Francisco. The database fulfilled all DBAFS requirements described in Section <a href="3-three.html#threefour">3.4</a>. Data collection started at September 9th, 2018, 15:41:08, Pacific Daylight Saving Time (PDT). The data had a temporal resolution of one minute, meaning that every minute, the location of each available bike in the system was recorded. Timestamps were stored with six-digit precision. Because of that, the time of recording was not exactly the same for each available bike, but could vary up to a few seconds. Therefore, before using the data in DBAFS, all timestamps were truncated to minute precision.</p>
+<div id="distance-data" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Distance data</h3>
+<p>When calculating distances, only the historical data at every quarter of an hour were used in the experiment. Hence, <span class="math inline">\(i_{s}\)</span> was set equal to 15 minutes. There were several reasons for this choice. Firstly, it is not expected that the data change drastically from minute to minute. That is, using data with a temporal resolution of one minute will probably not contain a lot more information than using data with a temporal resolution of 15 minutes. Consequently, if a forecast for a specific timestamp is in practice a forecast for a few minutes earlier, this will not be problematic. On the other hand, using only data every 15 minutes will decrease the size of the data with a factor 15, and speed up computations considerably. Furthermore, a lower order ARIMA(<span class="math inline">\(p\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(q\)</span>) model can be used to capture the same patterns in the data. This is important, since lower order models will result in lower errors arising from parameter estimation <span class="citation">(<strong>brockwell2002?</strong>)</span>. After defining <span class="math inline">\(i_{s}\)</span>, distance data pre-processing steps on the JUMP Bikes database server were taken as described in Section <a href="3-three.html#threefourone">3.4.1</a>.</p>
+</div>
+<div id="usage-data" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Usage data</h3>
+<p>Based on the specific knowledge of the JUMP Bikes system presented in Section <a href="4-four.html#fourone">4.1</a>, an extra restriction was added to the in Section <a href="3-three.html#threefourtwo">3.4.2</a> described process of retrieving pick-ups from the original data. If a feature that was initially considered to be a pick-up, was not followed by a drop-off within a two hour timeframe, the feature was removed from the usage data. Taking into account the average trip length of only 4.6 kilometers, the fact that trips become more expensive after half an hour, the maximum allowed reservation time of 30 minutes, and the maximum allowed ‘on-hold’-time of one hour, the threshold of two hours was considered to be a safe border. In this way, pick-ups that occur because the system operator is collecting bikes to be charged (i.e. pick-ups that do not reflect the usage intensity of the system), were taken out.</p>
+<p>Of course, there may have been some real trips that were longer than two hours. However, given that during the first year of the trial period only 1% of the trips exceeded a distance of 24 kilometers, and the electric pedal assistance allows a speed of more than 30 kilometers per hours, this was assumed to be a negligible share of the total number of trips.</p>
+</div>
+</div>
+<div id="experimental-design" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Experimental design</h2>
+<div id="training-and-test-periods" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Training and test periods</h3>
+<p>As mentioned in Section <a href="4-four.html#fourone">4.1</a>, usage of the JUMP Bikes system in San Francisco remained rather constant in September, October, and the start of November. An exploratory analysis on the distance data at several locations in the system area enabled to draw similar conclusions, with a sudden change in temporal patterns after mid-November. Recall that in DBAFS, parameter <span class="math inline">\(n_{w}\)</span>, the number of weeks between two passes through the model loop, should be chosen such that an ‘old’ model is not used anymore when the patterns in the historical data have changed considerably. Therefore, to test the performance of DBAFS in an adequate way, both the period used for model building, called the <em>training period</em>, and the period used for forecasting, called the <em>test period</em>, should preferably fall within a timeframe where no large changes in the data patterns occur. However, they should not overlap each other either, since the forecasting performance of a model can only be truly evaluated when forecasts are made for data that the model has not seen yet.</p>
+<p>The training period, used to query data for both the cluster and model loop, spanned the first four full weeks plus one observation (i.e. 2689 observations) in the data collection period, from Sunday September 16th, 2018, 23:45:00 PDT, up to and including Sunday October 13th, 2018, 23:45:00 PDT, as shown in Figure <a href="4-four.html#fig:traintest">4.2</a>. Hence, a situation was simulated in which the weeks of data used for clustering, i.e. <span class="math inline">\(m_{c}\)</span>, and the weeks of data used for model building, i.e. <span class="math inline">\(m_{m}\)</span>, were both set to be four weeks. <span class="math inline">\(p\)</span>, the side length of the square grid cells, was set to 500 meters. Taking into account the size and shape of the system area, along with some exploratory research on the demographic characteristics of San Francisco, <span class="math inline">\(K\)</span>, the set of integers containing all values considered as the number of desired clusters <span class="math inline">\(k\)</span>, was chosen to be {<span class="math inline">\(3, 4, 5, ..., 10\)</span>}.</p>
+<p>The obtained model structures and parameters resulting from the model loop, were used to make several forecasts during a test period of one week. For each forecast, two weeks of distance data, plus one observation, were retrieved from the database, such that in the case of a weekly seasonality, a sufficient amount of data would be present for decomposition. Hence, <span class="math inline">\(m_{f} = 2\)</span>. To make sure that in no case the data used for forecasting would overlap with the data used for model building, a two week period separated the training and test period. That is, the test week ranged from Monday October 29th, 00:00:00 PDT, up to and including Sunday November 4th, 2018, 23:45:00 PST, as shown in Figure <a href="4-four.html#fig:traintest">4.2</a>.</p>
+<p>Defining where and when to forecasts, was done by simulating real-world forecast requests, and sending them to the forecast loop. To do this in a realistic way, the following requirements had to be fulfilled.</p>
+<ul>
+<li>More forecast requests should occur at locations where the usage intensity of the system is higher.</li>
+<li>More forecast requests should occur at times when the usage intensity of the system is higher.</li>
+<li>It should be accounted for, that the times when the usage intensity is higher, can vary per location, and vice versa.</li>
+</ul>
+<p>Bearing these requirements in mind, the following approach was developed. All pick-ups during the test week were retrieved from the database. Ten pick-ups per cluster where randomly sampled, guaranteeing that each cluster was represented in the sample. Subsequently, <span class="math inline">\(500-10 \times k\)</span> pick-ups were randomly sampled from the remaining ones, regardless to which cluster they belonged. This lead to a dataset of 500 pick-ups in total, from which the location-timestamp combinations were retrieved. Pick-ups reflect the usage of the bike sharing system. That is, a random sample of them will contain more locations in areas where the usage intensity is high, and more timestamps at times when the usage intensity is high. Furthermore, the location and timestamp come as a combination, rather than as separate entities. In this way, the approach fulfills all three requirements mentioned above. The location-timestamp combinations in the sample will from now on be referred to as the <em>test points</em>.</p>
+<p>Starting from the timestamp of the test point, all time lags up to one day ahead, i.e. 96 time lags in total, were forecasted. Having 500 test points, in total, 48000 forecasts were made. To evaluate their performance, historical distance data for all forecasted time lags were retrieved from the database, and the forecast RMSE (see Section <a href="2-two.html#twofourtwosix">2.4.2.6</a>.6) was calculated for each test point separately.</p>
+<p>By using the approach described above, the reported overall forecast errors will be dominated by those made during peak hours, when obtaining accurate forecasts is generally harder, and in crowded areas, where obtaining accurate forecasts is generally harder. However, this is intended, because reporting a large amount of forecast errors made during off-peak hours, and in non-crowded areas, or, alternatively, using adjusted error metrics such as the RMSLE, may give results that look nicer, but do not reflect the real usefulness of the forecasting system.</p>
+<p>To examine the forecasting power of DBAFS in a relative manner, all test points were also forecasted 96 time lags ahead with a simple baseline method. The naïve method, as described in Section <a href="2-two.html#twofourthree">2.4.3</a>, was chosen for this task. Therefore, the baseline forecasting system will from now on be referred to as the Naïve Forecasting System (NFS). For each test point, the RMSE’s of the forecasts of NFS were calculated, and compared to those of DBAFS.</p>
+<div class="figure" style="text-align: center"><span id="fig:traintest"></span>
+<img src="figures/traintest.png" alt="Training and test period" width="\textwidth" />
+<p class="caption">
+Figure 4.2: Training and test period
+</p>
+</div>
+<!-- ## 4.3.3 Benchmark -->
+<!-- In addition to the forecast errors, the average computation times of DBAFS and NFS forecasts were compared. For a DBAFS forecast of a single test point, two weeks of distance data need to be retrieved from the database, while for a NFS forecast of a single test point, only the last observation of the historical distance data is needed. The computation time of the data retrieval, averaged over all test points, and the computation time of the forecast itself, again averaged over all test points, were added together to get an average computation time for the complete process of forecasting a test point. The benchmark was done on an Asus F541U laptop with Windows 10 OS, an Intel Core i7 processor, 8 GB RAM and 256 GB SSD. When DBAFS is implemented in a real-world situation, computations will probably be done of a large server, wich can speed them up considerably. Therefore, the benchmark should mainly be interpreted in a relative way, rather than in an absolute one. -->
+</div>
+<div id="additional-software" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Additional software</h3>
+<p>On top of those mentioned in Section <a href="3-three.html#threetwo">3.2</a>, some additional R packages were used for reporting the results of the experiment, as listed below.</p>
+<ul>
+<li>The <code>feasts</code> package <span class="citation">(<strong>feasts?</strong>)</span> was used to estimate the ACF (see Section <a href="2-two.html#twotwoone">2.2.1</a>) of time series.</li>
+<li>The <code>tsfeatures</code> package <span class="citation">(<strong>tsfeatures?</strong>)</span> was used to calculate the spectral entropy (see Section <a href="2-two.html#twotwothree">2.2.3</a>) of time series.</li>
+<li>Data and results were visualized graphically with the <code>ggplot2</code> package <span class="citation">(<strong>ggplot?</strong>)</span>. Additionally, the packages <code>tidyr</code> <span class="citation">(<strong>tidyr?</strong>)</span>, <code>dplyr</code> <span class="citation">(<strong>dplyr?</strong>)</span> and <code>tibble</code> <span class="citation">(<strong>tibble?</strong>)</span> were used to transform some data into formats that are compatible with <code>ggplot2</code>.</li>
+<li>Maps were created with the <code>ggspatial</code> package <span class="citation">(<strong>ggspatial?</strong>)</span>. Besides, with the <code>rosm</code> package <span class="citation">(<strong>rosm?</strong>)</span>, all basemap tiles were retrieved from CARTO <span class="citation">(<strong>carto?</strong>)</span>.</li>
+<li>For maps with a continuous color scheme, the <code>orange_material</code> color scheme from the <code>ggsci</code> package <span class="citation">(<strong>ggsci?</strong>)</span> was used.</li>
+</ul>
+<p>For the R code used in the experiment, see Appendix <a href="A-aa.html#aa">A</a>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="3-three.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-five.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["thesis.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
