@@ -224,7 +224,7 @@ background-position: 90% 4%
 # Overall design
 
 ```{r, echo = FALSE, cache = TRUE}
-knitr::include_graphics("../figures/workflow.png")
+knitr::include_graphics("../../figures/workflow.png")
 ```
 
 ---
@@ -240,8 +240,8 @@ require(leaflet)
 require(sf)
 require(jsonlite)
 
-systemarea = readRDS('../data/systemarea.rds')
-gridcells = readRDS('../data/gridcells.rds')
+systemarea = readRDS('../../data/systemarea.rds')
+gridcells = readRDS('../../data/gridcells.rds')
 
 json = fromJSON(
   "https://sf.jumpbikes.com/opendata/free_bike_status.json",
@@ -297,7 +297,7 @@ background-position: 90% 4%
 # Cluster loop
 
 ```{r, echo = FALSE, cache = TRUE}
-knitr::include_graphics("../figures/workflow.png")
+knitr::include_graphics("../../figures/workflow.png")
 ```
 
 ---
@@ -340,7 +340,7 @@ background-position: 90% 4%
 # Overlaying grid
 
 ```{r, echo = FALSE, cache = TRUE, message = FALSE, fig.width = 14}
-gridcentroids = readRDS('../data/gridcentroids.rds')
+gridcentroids = readRDS('../../data/gridcentroids.rds')
 
 leaflet() %>%
   addPolygons(
@@ -385,7 +385,7 @@ background-position: 90% 4%
 ```{r, echo = FALSE, cache = TRUE, message = FALSE, fig.width = 14}
 require(dockless)
 
-clusters = readRDS('../data/clusters.rds')
+clusters = readRDS('../../data/clusters.rds')
 clusters = clusters$outlines
 
 pal = colorFactor(
@@ -432,7 +432,7 @@ background-position: 90% 4%
 # Model points
 
 ```{r, echo = FALSE, cache = TRUE, message = FALSE, fig.width = 14}
-modelpoints = readRDS('../data/modelpoints.rds')
+modelpoints = readRDS('../../data/modelpoints.rds')
 
 pal = colorFactor(
   palette = dockless_colors(categorical = TRUE),
@@ -486,7 +486,7 @@ background-position: 90% 4%
 # Model loop
 
 ```{r, echo = FALSE, cache = TRUE}
-knitr::include_graphics("../figures/workflow.png")
+knitr::include_graphics("../../figures/workflow.png")
 ```
 
 ---
@@ -538,7 +538,7 @@ background-position: 90% 4%
 # Forecast loop
 
 ```{r, echo = FALSE, cache = TRUE, cache = TRUE}
-knitr::include_graphics("../figures/workflow.png")
+knitr::include_graphics("../../figures/workflow.png")
 ```
 
 ---
@@ -581,7 +581,7 @@ background-position: 90% 4%
 # Test points
 
 ```{r, echo = FALSE, cache = TRUE, cache = TRUE, message = FALSE, fig.width = 14}
-testpoints = readRDS('../data/testpoints.rds')
+testpoints = readRDS('../../data/testpoints.rds')
 
 leaflet() %>%
   addPolygons(
@@ -694,7 +694,7 @@ background-position: 90% 4%
 
 .center[
 ```{r, echo = FALSE, cache = TRUE, cache = TRUE, out.width = '70%'}
-knitr::include_graphics("../figures/jumpgo.png")
+knitr::include_graphics("../../figures/jumpgo.png")
 ```
 ]
 
@@ -803,45 +803,45 @@ knitr::kable(
 ```
 
 ---
-background-image: url('../figures/hourlag.png')
+background-image: url('../../figures/hourlag.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/clusterplots.png')
+background-image: url('../../figures/clusterplots.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/clusterloop.png')
+background-image: url('../../figures/clusterloop.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/modelloop.png')
+background-image: url('../../figures/modelloop.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/forecastloop.png')
+background-image: url('../../figures/forecastloop.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/pickups.png')
+background-image: url('../../figures/pickups.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/residual_timeplots.png')
+background-image: url('../../figures/residual_timeplots.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/residual_acfplots.png')
+background-image: url('../../figures/residual_acfplots.png')
 background-size: contain
 
 ---
 
-background-image: url('../figures/residual_histograms.png')
+background-image: url('../../figures/residual_histograms.png')
 background-size: contain

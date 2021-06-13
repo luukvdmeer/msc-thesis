@@ -8,7 +8,7 @@ The final document can be found [here](docs/thesis.pdf). An online gitbook versi
 
 All code used in this thesis is bundled in the R package **dockless**, which GitHub repository can be found [here](https://github.com/luukvdmeer/dockless).
 
-The presentation for the thesis defence can be found in the [defence folder](defence).
+The presentation slides for the thesis defence can be found [here](https://luukvdmeer.github.io/msc-thesis/defence/defence.html). These slides are created using RMarkdown and the [xaringan](https://github.com/yihui/xaringan) package. All related files are in the [defence folder](docs/defence).
 
 ## Abstract
 

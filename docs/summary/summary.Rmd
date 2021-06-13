@@ -79,7 +79,7 @@ mapview(box, alpha.regions = 0, alpha = 0, legend = FALSE)
 - For each forecast request (at time *t* and location *(x,y)*), obtain a time series for that point in space-time, but use pre-fitted model parameters to forecast it.
 
 ```{r, echo = FALSE, cache = TRUE}
-knitr::include_graphics("../figures/workflow.png")
+knitr::include_graphics("../../figures/workflow.png")
 ```
 
 ---
@@ -90,7 +90,7 @@ knitr::include_graphics("../figures/workflow.png")
 library(dockless)
 library(leaflet)
 
-clusters = readRDS('../data/clusters.rds')
+clusters = readRDS('../../data/clusters.rds')
 clusters = clusters$outlines
 
 pal = colorFactor(
@@ -133,7 +133,7 @@ background-size: contain
 # Modelling
 
 ```{r, echo = FALSE, cache = TRUE, message = FALSE, fig.width = 14}
-modelpoints = readRDS('../data/modelpoints.rds')
+modelpoints = readRDS('../../data/modelpoints.rds')
 
 pal = colorFactor(
   palette = dockless_colors(categorical = TRUE)[1:4],
@@ -182,8 +182,8 @@ background-size: contain
 # Forecasting
 
 ```{r, echo = FALSE, cache = TRUE, cache = TRUE, message = FALSE, fig.width = 14}
-systemarea = readRDS('../data/systemarea.rds')
-testpoints = readRDS('../data/testpoints.rds')
+systemarea = readRDS('../../data/systemarea.rds')
+testpoints = readRDS('../../data/testpoints.rds')
 
 leaflet() %>%
   addPolygons(
@@ -217,7 +217,7 @@ background-size: contain
 
 .center[
 ```{r, echo = FALSE, cache = TRUE, cache = TRUE, out.width = '70%'}
-knitr::include_graphics("../figures/jumpgo.png")
+knitr::include_graphics("../../figures/jumpgo.png")
 ```
 ]
 
