@@ -29,26 +29,12 @@ class: center, center, inverse
 # What do we need to make dockless bike sharing a success?
 
 - A lot of things!
-- Among those: a <span style = 'color:#fc8c01;'>reliable</span> system
+- Among those: a **reliable** system
 - Forecasting bike availability is important for this task
-
-.center[
-.pull-left[
-```{r, echo = FALSE, cache = TRUE, out.width='70%'}
-knitr::include_graphics("images/users.png")
-```
-]
-
-.pull-right[
-```{r, echo = FALSE, cache = TRUE, out.width='70%'}
-knitr::include_graphics("images/operators.png")
-```
-]
-]
 
 ---
 
-class: middle, center, inverse
+class: class: middle, center, inverse
 
 # For a given moment in time and a given location in space: will there be a bike available for me?
 
@@ -213,39 +199,10 @@ background-size: contain
 
 ---
 
-# Limitations
-
-.center[
-```{r, echo = FALSE, cache = TRUE, cache = TRUE, out.width = '70%'}
-knitr::include_graphics("../../figures/jumpgo.png")
-```
-]
-
----
-
-# Limitations
-
-.center[
-.pull-left[
-### Weather
-```{r, echo = FALSE, cache = TRUE, out.width='70%'}
-knitr::include_graphics("images/weather.png")
-```
-]
-
-.pull-right[
-### Special events
-```{r, echo = FALSE, cache = TRUE, out.width='70%'}
-knitr::include_graphics("images/specialevent.png")
-```
-]
-]
-
----
-
 class: middle, center, inverse
 
-# Created a generally applicable methodology to forecast bike availability in dockless bike sharing systems. It outperforms baseline methods, but also highlights the limited forecastability of dockless bike sharing data.
+# Summary:
+# I created a generally applicable methodology to forecast bike availability in dockless bike sharing systems. It outperformed baseline methods, but also highlighted the limited forecastability of dockless bike sharing data.
 
 ---
 
