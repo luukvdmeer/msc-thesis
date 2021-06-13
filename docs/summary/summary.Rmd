@@ -64,7 +64,7 @@ mapview(box, alpha.regions = 0, alpha = 0, legend = FALSE)
 - Fit a forecasting model (ARIMA in combination with seasonal decomposition) to a single time series within each cluster
 - For each forecast request (at time *t* and location *(x,y)*), obtain a time series for that point in space-time, but use pre-fitted model parameters to forecast it.
 
-```{r, echo = FALSE, cache = TRUE}
+```{r, echo = FALSE}
 knitr::include_graphics("../../figures/workflow.png")
 ```
 
@@ -72,7 +72,7 @@ knitr::include_graphics("../../figures/workflow.png")
 
 # Clustering
 
-```{r, echo = FALSE, cache = TRUE, message = FALSE, fig.width = 14}
+```{r, echo = FALSE, message = FALSE, fig.width = 14}
 library(dockless)
 library(leaflet)
 
@@ -118,7 +118,7 @@ background-size: contain
 
 # Modelling
 
-```{r, echo = FALSE, cache = TRUE, message = FALSE, fig.width = 14}
+```{r, echo = FALSE, message = FALSE, fig.width = 14}
 modelpoints = readRDS('../../data/modelpoints.rds')
 
 pal = colorFactor(
@@ -167,7 +167,7 @@ background-size: contain
 
 # Forecasting
 
-```{r, echo = FALSE, cache = TRUE, cache = TRUE, message = FALSE, fig.width = 14}
+```{r, echo = FALSE, message = FALSE, fig.width = 14}
 systemarea = readRDS('../../data/systemarea.rds')
 testpoints = readRDS('../../data/testpoints.rds')
 
@@ -208,7 +208,7 @@ class: middle, center, inverse
 
 class: middle, center
 
-```{r, echo = FALSE, cache = TRUE, out.width='20%'}
+```{r, echo = FALSE, out.width='20%'}
 knitr::include_graphics("images/hexagon.png")
 ```
 
