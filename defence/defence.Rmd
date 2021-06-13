@@ -224,7 +224,7 @@ background-position: 90% 4%
 # Overall design
 
 ```{r, echo = FALSE, cache = TRUE}
-knitr::include_graphics("../Document/Figures/Workflow.png")
+knitr::include_graphics("../figures/workflow.png")
 ```
 
 ---
