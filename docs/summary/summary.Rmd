@@ -58,18 +58,6 @@ mapview(box, alpha.regions = 0, alpha = 0, legend = FALSE)
 
 ---
 
-# Methodology
-
-- Create spatial clusters of areas that have similar temporal patterns
-- Fit a forecasting model (ARIMA in combination with seasonal decomposition) to a single time series within each cluster
-- For each forecast request (at time *t* and location *(x,y)*), obtain a time series for that point in space-time, but use pre-fitted model parameters to forecast it.
-
-```{r, echo = FALSE}
-knitr::include_graphics("../../figures/workflow.png")
-```
-
----
-
 # Clustering
 
 ```{r, echo = FALSE, message = FALSE, fig.width = 14}
